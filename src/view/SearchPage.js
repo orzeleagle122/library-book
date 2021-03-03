@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faSearch,faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import {connect} from 'react-redux';
 import SearchBookList from '../components/SearchBookList/SearchBookList';
-import {
-    searchBook
-} from '../actions';
 
 const SearchWrapper=styled.div`
     margin-right: 200px;
@@ -15,13 +12,23 @@ const SearchWrapper=styled.div`
 `;
 
 const SearchPage = ({books}) => {
-    const [valueForm,setValueForm]=useState("");
+    
+    const [searchFormValue,setSearchFormValue]=useState('');
 
-    const onChangeFormValue=(e)=>{
-        setValueForm(e.target.value);
+
+    const handleChangeSearchFormValue=(e)=>{
+        setSearchFormValue(e.target.value);
     }
 
-    console.log(books);
+    const titleFilter=books.filter(item=>{          
+        if(searchFormValue.length>=3){
+            return (
+                item.title.includes(searchFormValue)>-1
+            )
+        }
+    });
+
+    const map=titleFilter.map(item=><SearchBookList key={item.id} {...item}/>);
 
     return ( 
         <SearchWrapper>
@@ -29,17 +36,32 @@ const SearchPage = ({books}) => {
                 <p className="control has-icons-left has-icons-right">
                     <input className="input" 
                             type="text" 
-                            placeholder="Search book" 
-                            onChange={onChangeFormValue} 
-                            value={valueForm}
+                            placeholder="Search title book" 
+                            onChange={handleChangeSearchFormValue} 
+                            value={searchFormValue}
                         />
                     <span className="icon is-small is-left">
                         <FontAwesomeIcon icon={faSearch} />
                     </span>
                 </p>
-            </div>
-            
+            </div> 
+            {titleFilter.length<3&&(
+                <div className="notification is-warning">
+                        <FontAwesomeIcon icon={faExclamationCircle} /> Enter <strong>three</strong> characters to start searching for books.
+                </div>
+            )}
+            {map}
 
+            {/* {titleFilter.length<3?(
+                    <div className="notification is-warning">
+                    <FontAwesomeIcon icon={faExclamationCircle} /> Enter <strong>three</strong> characters to start searching for books.
+            </div>
+            ):(
+                <>
+                    {map}
+                </>
+            )}            */}
+            
         </SearchWrapper>
      );
 }

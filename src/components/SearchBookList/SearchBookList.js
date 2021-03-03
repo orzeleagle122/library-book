@@ -1,9 +1,7 @@
 import React from 'react';
-import {
-    removeBook
-} from '../../actions';
+import {connect} from 'react-redux';
 
-const SearchBookList = ({title,year,about,author,types}) => {
+const SearchBookList = ({title,year,about,author,types}) => {   
     return ( 
         <article className="message is-info">
             <div className="message-header">
@@ -19,4 +17,4 @@ const SearchBookList = ({title,year,about,author,types}) => {
 }
 
  
-export default SearchBookList;
+export default connect(null,null)(SearchBookList);

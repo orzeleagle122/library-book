@@ -2,13 +2,14 @@
  import {
    GET_TOTALS,
    REMOVE_BOOK,
-   SEARCH_BOOK
+   SEARCH_FORM_VALUE
  } from '../actions';
   
   //initial store
   const initialStore={
     books:book,
-    totalbooks:0
+    totalbooks:0,
+    searchFormValue:''
   }
   
   //reducer(old-state,action) return update or old state
@@ -26,11 +27,12 @@
         books:state.books.filter(item=>item.id!==action.payload.id),
       }
     }
-    if(action.type===SEARCH_BOOK){
-      return{
-        ...state,
-        books:state.books.title.include(`${action.payload.title}`)
-      }
+    if(action.type===SEARCH_FORM_VALUE){
+      console.log(action.payload.searchFormValue);
+      // return{
+      //   ...state,
+      //   books:state.books.title.include(action.payload.searchFormValue)
+      // }
     }
     
     return state;
