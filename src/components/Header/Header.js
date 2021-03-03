@@ -6,7 +6,7 @@ const Header = () => (
     <div className="hero-body">
       <div className="container has-text-centered">
         <h1 className="title is-1">Book Library</h1>
-        <h2 className="subtitle">subtitle</h2>
+        <h2 className="subtitle">front+back portfolio</h2>
       </div>
     </div>
     <div className="hero-foot">

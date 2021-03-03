@@ -1,5 +1,6 @@
 export const book=[
     {
+        id:'1',
         title: 'W pustyni i puszczy',
         types: 'horror',
         year: 2007,
@@ -8,6 +9,7 @@ export const book=[
         
     },
     {
+        id:'2',
         title: 'Harry Potter',
         types: 'fantasy',
         year: 2008,
@@ -16,6 +18,7 @@ export const book=[
         
     },
     {
+        id:'3',
         title: 'Dzieci w Bulerbyn  ',
         types: 'commedy',
         year: 2020,
@@ -24,6 +27,7 @@ export const book=[
         
     },
     {
+        id:'4',
         title: 'Sasha Grey carrier',
         types: 'romanse',
         year: 2019,
@@ -32,6 +36,7 @@ export const book=[
 
     },
     {
+        id:'5',
         title: 'title',
         types: 'type',
         year: 2007,

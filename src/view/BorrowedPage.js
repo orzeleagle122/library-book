@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import BookList from '../components/BookList/BookList';
-import {book} from '../data/book';
+//redux connect
+import {connect} from 'react-redux';
+import {
+    GET_TOTALS
+} from '../actions';
 
 const BorrowedWrapper=styled.div`
     margin-right: 200px;
@@ -9,16 +13,35 @@ const BorrowedWrapper=styled.div`
     margin-top:30px;
 `;
 
-const BorrowedPage = () => {
-    return ( 
-        <BorrowedWrapper>
-            {book.map(item=>(
-                <BookList key={item.title} {...item}/>
-            ))}
+const BorrowedPage = ({books=[],totalbooks,dispatch}) => {
+    useEffect(()=>{
+        dispatch({
+            type: GET_TOTALS
+        })
+    },[books,dispatch])
 
-            
-        </BorrowedWrapper>
+    if(books.length===0){
+        return (
+            <>
+                brak ksiazek
+            </>
+        )
+    }
+
+    return ( 
+        <> 
+            <h2>Number of books:{totalbooks}</h2>
+            <BorrowedWrapper>
+                {books.map(item=>(
+                    <BookList key={item.id} {...item}/>
+                ))}            
+            </BorrowedWrapper>
+        </>
      );
 }
+
+const mapStateToProps=({books,totalbooks})=>{
+    return {books,totalbooks}
+}
  
-export default BorrowedPage;
+export default connect(mapStateToProps)(BorrowedPage);
