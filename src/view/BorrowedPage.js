@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import BookList from '../components/BookList/BookList';
 //redux connect
@@ -7,7 +7,6 @@ import {
     GET_TOTALS,
     fetchBooks
 } from '../actions';
-import axios from 'axios';
 
 const BorrowedWrapper=styled.div`
     margin-right: 200px;
@@ -15,19 +14,13 @@ const BorrowedWrapper=styled.div`
     margin-top:30px;
 `;
 
-const BorrowedPage = ({books=[],totalbooks,dispatch,fetchBookData}) => {
-    const [book,setBook]=useState([])
-
-    // useEffect(()=>{
-    //     dispatch({
-    //         type: GET_TOTALS
-    //     })
-    // },[books,dispatch])
-
+const BorrowedPage = ({books=[],totalbooks,total,fetch}) => {
     useEffect(()=>{
-        fetchBookData();
-    });
-
+        fetch();  
+        total();              
+    },
+    [total,fetch]
+    )
 
     if(books.length===0){
         return (
@@ -53,10 +46,14 @@ const mapStateToProps=({books,totalbooks})=>{
     return {books,totalbooks}
 }
 
-const mapDispathToProps=(dispath)=>{
+const mapDispatchToProps=dispatch=>{
     return {
-        fetchBookData: ()=>dispath(fetchBooks())
+        
+        total:()=>dispatch({
+            type: GET_TOTALS
+        }),
+        fetch:()=>dispatch(fetchBooks()),
     }
 }
  
-export default connect(mapStateToProps,mapDispathToProps)(BorrowedPage);
+export default connect(mapStateToProps,mapDispatchToProps)(BorrowedPage);
