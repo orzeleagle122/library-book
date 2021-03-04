@@ -1,19 +1,24 @@
- import {book} from '../data/book';
+
  import {
    GET_TOTALS,
    REMOVE_BOOK,
-   SEARCH_FORM_VALUE
+   SEARCH_FORM_VALUE,
+   FETCH_BOOKS
  } from '../actions';
   
   //initial store
   const initialStore={
-    books:book,
+    books:[],
     totalbooks:0,
     searchFormValue:''
   }
   
   //reducer(old-state,action) return update or old state
   export const reducer=(state=initialStore,action)=>{
+
+    if(action.type===FETCH_BOOKS){
+      console.log(action.payload.books);
+    }
     
     if(action.type===GET_TOTALS){
       return {

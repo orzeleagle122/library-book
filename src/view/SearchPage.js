@@ -19,7 +19,7 @@ const SearchPage = ({books}) => {
     const handleChangeSearchFormValue=(e)=>{
         setSearchFormValue(e.target.value);
     }
-
+    // eslint-disable-next-line
     const titleFilter=books.filter(item=>{          
         if(searchFormValue.length>=3){
             return (
