@@ -1,9 +1,13 @@
 import axios from 'axios';
 
-export const GET_TOTALS='GET_TOTALS';
 export const REMOVE_BOOK='REMOVE_BOOK';
 export const SEARCH_BOOK='SEARCH_BOOK';
 export const SEARCH_FORM_VALUE='SEARCH_FORM_VALUE';
+
+export const AUTH_REQUEST='AUTH_REQUEST';
+export const AUTH_SUCCESS='AUTH_SUCCESS';
+export const AUTH_FAILURE='AUTH_FAILURE';
+
 
 export const FETCH_BOOKS_REQUEST='FETCH_BOOKS_REQUEST';
 export const FETCH_BOOKS_SUCCESS='FETCH_BOOKS_SUCCESS';
@@ -36,6 +40,32 @@ export const removeBook=(id)=>{
         }
     }
 }
+
+export const authUser=(email,password)=>(dispatch)=>{
+    dispatch({
+        type:AUTH_REQUEST
+    })
+    return axios.post('https://reqres.in/api/login',{
+        email,
+        password
+    })
+    .then(payload=>{
+        console.log(payload);
+        dispatch({
+            type:AUTH_SUCCESS,
+            payload
+        })
+    })
+    .catch(err=>{
+        console.log(err);
+        dispatch({
+            type:AUTH_FAILURE
+        })
+    })
+}
+
+
+// test below
 
 export const searchBook=(title)=>{
     return {

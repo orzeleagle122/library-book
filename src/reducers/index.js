@@ -1,16 +1,19 @@
 import {
-  GET_TOTALS,
   REMOVE_BOOK,
   SEARCH_FORM_VALUE,
-  FETCH_BOOKS_REQUEST,
+  // FETCH_BOOKS_REQUEST,
   FETCH_BOOKS_SUCCESS,
-  FETCH_BOOKS_FAILURE
+  // FETCH_BOOKS_FAILURE,
+  AUTH_SUCCESS
 } from '../actions';
  
  //initial store
  const initialStore={
    books:[],
    totalbooks:0,
+   user:{
+     userToken:''
+   },
    searchFormValue:''
  }
  
@@ -24,13 +27,22 @@ import {
       totalbooks: action.payload.data.length
     }
   }
+  if(action.type===AUTH_SUCCESS){
+    console.log(action.payload.data.token);
+    return {
+      ...state,
+      user:{
+        userToken: action.payload.data.token
+      }
+    }
+  }
    
-   if(action.type===GET_TOTALS){
-     return {
-       ...state,
-       totalbooks:state.books.length
-     }
-   }
+  //  if(action.type===GET_TOTALS){
+  //    return {
+  //      ...state,
+  //      totalbooks:state.books.length
+  //    }
+  //  }
    if(action.type===REMOVE_BOOK){
      return {
        ...state,

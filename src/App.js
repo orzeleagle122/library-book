@@ -7,6 +7,7 @@ import SearchPage from './view/SearchPage';
 //import store and Privider for redux
 import {store} from './store';
 import {Provider} from 'react-redux';
+import LoginPage from './view/LoginPage';
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
           <Route path="/" exact component={AccountPage} />
           <Route path="/borrowed" exact component={BorrowedPage} />
           <Route path="/search" exact component={SearchPage} />
+          <Route path="/login" exact component={LoginPage} />
         </Router>
       </Provider>    
     </>
