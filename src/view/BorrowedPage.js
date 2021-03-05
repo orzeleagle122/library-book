@@ -4,7 +4,7 @@ import BookList from '../components/BookList/BookList';
 //redux connect
 import {connect} from 'react-redux';
 import {
-    GET_TOTALS,
+    // GET_TOTALS,
     fetchBooks
 } from '../actions';
 
@@ -14,30 +14,27 @@ const BorrowedWrapper=styled.div`
     margin-top:30px;
 `;
 
-const BorrowedPage = ({books=[],totalbooks,total,fetch}) => {
+const BorrowedPage = ({books=[],totalbooks,fetch}) => {
     useEffect(()=>{
         fetch();  
-        total();              
+        // total();              
     },
-    [total,fetch]
+    [fetch]
     )
-
-    if(books.length===0){
-        return (
-            <>
-                brak ksiazek
-            </>
-        )
-    }
 
     return ( 
         <> 
             <h2>Number of books:{totalbooks}</h2>
-            <BorrowedWrapper>
+            {books.length?(
+                <BorrowedWrapper>
                 {books.map(item=>(
                     <BookList key={item.id} {...item}/>
                 ))}            
             </BorrowedWrapper>
+            ):(
+                <button className="button is-loading is-info is-large"/>
+            )}
+            
         </>
      );
 }
@@ -49,9 +46,9 @@ const mapStateToProps=({books,totalbooks})=>{
 const mapDispatchToProps=dispatch=>{
     return {
         
-        total:()=>dispatch({
-            type: GET_TOTALS
-        }),
+        // total:()=>dispatch({
+        //     type: GET_TOTALS
+        // }),
         fetch:()=>dispatch(fetchBooks()),
     }
 }

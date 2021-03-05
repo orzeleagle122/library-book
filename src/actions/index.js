@@ -12,10 +12,9 @@ export const FETCH_BOOKS_FAILURE='FETCH_BOOKS_FAILURE';
 export const fetchBooks=()=>(dispatch)=>{
     dispatch({
         type:FETCH_BOOKS_REQUEST
-    })
-    return axios.get("https://run.mocky.io/v3/ab9d6e35-04d4-4b52-8710-754180d4d6a6")
+    });
+    return axios.get("https://run.mocky.io/v3/ab9d6e35-04d4-4b52-8710-754180d4d6a6?mocky-delay=1000ms")
     .then(payload=>{
-        console.log(payload.data);
         dispatch({
             type:FETCH_BOOKS_SUCCESS,
             payload

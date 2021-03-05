@@ -17,14 +17,15 @@ import {
  //reducer(old-state,action) return update or old state
  export const reducer=(state=initialStore,action)=>{
   if(action.type===FETCH_BOOKS_SUCCESS){
+    console.log(action.payload.data);
     return {
       ...state,
-      books: action.payload.data
+      books: action.payload.data,
+      totalbooks: action.payload.data.length
     }
   }
    
    if(action.type===GET_TOTALS){
-     console.log(state.books.length);
      return {
        ...state,
        totalbooks:state.books.length
@@ -34,6 +35,7 @@ import {
      return {
        ...state,
        books:state.books.filter(item=>item.id!==action.payload.id),
+       totalbooks: state.books.length-1
      }
    }
    if(action.type===SEARCH_FORM_VALUE){
