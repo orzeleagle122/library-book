@@ -1,19 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
 import {connect} from 'react-redux';
+import {
+  logOut,
+} from '../../actions';
 
-const Header = ({isLogin,userToken}) => {
-
-  useEffect(()=>{
-    const localLogin=localStorage.getItem('loginToken')
-    console.log(`zalogowany: ${isLogin}`);
-    console.log(localLogin);
-
-    if(localLogin===userToken){
-      console.log("ok");
-    }
-
-  },[isLogin,userToken])
+const Header = ({isLogin,out}) => {
 
   return (
   <section className="hero is-primary">
@@ -28,7 +20,7 @@ const Header = ({isLogin,userToken}) => {
         <div className="container">
           <ul>
             <li>
-              <NavLink to="/">Your account</NavLink>
+              <NavLink to="/">Home Page</NavLink>
             </li>
             <li>
               <NavLink to="/borrowed">Borrowed book</NavLink>
@@ -37,9 +29,14 @@ const Header = ({isLogin,userToken}) => {
               <NavLink to="/search">Search books</NavLink>
             </li>
             {isLogin?(
-            <li>
-              <NavLink to="/login">Log out</NavLink>
-            </li>
+              <>
+                <li>
+                  <NavLink to='/account'>Your account</NavLink>
+                </li>
+                <li>
+                  <NavLink to='/login' onClick={out}>Log out</NavLink>
+                </li>
+              </>
             ):(
             <li>
               <NavLink to="/login">Log in</NavLink>
@@ -54,7 +51,7 @@ const Header = ({isLogin,userToken}) => {
 };
 
 
-const mapDispatchToProps=({user})=>{
+const mapStateToProps=({user})=>{
   const {isLogin,userToken}=user;
   return {
     userToken,
@@ -62,5 +59,11 @@ const mapDispatchToProps=({user})=>{
   }
 }
 
-export default connect(mapDispatchToProps)(Header);
+const mapDispatchToProps=dispatch=>{
+  return {
+    out:()=>dispatch(logOut())
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Header);
 

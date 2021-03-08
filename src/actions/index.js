@@ -13,7 +13,14 @@ export const FETCH_BOOKS_REQUEST='FETCH_BOOKS_REQUEST';
 export const FETCH_BOOKS_SUCCESS='FETCH_BOOKS_SUCCESS';
 export const FETCH_BOOKS_FAILURE='FETCH_BOOKS_FAILURE';
 
-export const fetchBooks=()=>(dispatch)=>{
+export const LOG_OUT='LOG_OUT';
+
+export const GET_CURRENT_USER_REQUEST='GET_CURRENT_USER_REQUEST';
+export const GET_CURRENT_USER_SUCCESS='GET_CURRENT_USER_SUCCESS';
+export const GET_CURRENT_USER_FAILURE='GET_CURRENT_USER_FAILURE';
+
+
+export const fetchBooks=()=>async(dispatch)=>{
     dispatch({
         type:FETCH_BOOKS_REQUEST
     });
@@ -32,6 +39,13 @@ export const fetchBooks=()=>(dispatch)=>{
     })
 }
 
+
+export const logOut=()=>{
+    return {
+        type: LOG_OUT
+    }
+}
+
 export const removeBook=(id)=>{
     return {
         type:REMOVE_BOOK,
@@ -39,6 +53,30 @@ export const removeBook=(id)=>{
             id
         }
     }
+}
+
+export const getUserLoginAction=(token)=>async(dispatch)=>{
+    dispatch({
+        type:GET_CURRENT_USER_REQUEST
+    });
+    return axios.get('https://reqres.in/api/login/',{
+        headers: {
+            "Authorization": "Bearer "+token
+        }
+    })
+    .then(payload=>{
+        console.log(payload);
+        dispatch({
+            type:GET_CURRENT_USER_SUCCESS,
+            payload
+        })
+    })
+    .catch(err=>{
+        console.log(err);
+        dispatch({
+            type:GET_CURRENT_USER_FAILURE
+        })
+    })
 }
 
 export const authUser=(email,password)=>async(dispatch)=>{
