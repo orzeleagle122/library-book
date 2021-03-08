@@ -1,7 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import {connect} from 'react-redux';
 
-const Header = () => (
+const Header = ({isLogin,userToken}) => {
+
+  useEffect(()=>{
+    const localLogin=localStorage.getItem('loginToken')
+    console.log(`zalogowany: ${isLogin}`);
+    console.log(localLogin);
+
+    if(localLogin===userToken){
+      console.log("ok");
+    }
+
+  },[isLogin,userToken])
+
+  return (
   <section className="hero is-primary">
     <div className="hero-body">
       <div className="container has-text-centered">
@@ -22,14 +36,31 @@ const Header = () => (
             <li>
               <NavLink to="/search">Search books</NavLink>
             </li>
+            {isLogin?(
+            <li>
+              <NavLink to="/login">Log out</NavLink>
+            </li>
+            ):(
             <li>
               <NavLink to="/login">Log in</NavLink>
             </li>
+            )}            
           </ul>
         </div>
       </nav>
     </div>
   </section>
-);
+  )
+};
 
-export default Header;
+
+const mapDispatchToProps=({user})=>{
+  const {isLogin,userToken}=user;
+  return {
+    userToken,
+    isLogin
+  }
+}
+
+export default connect(mapDispatchToProps)(Header);
+

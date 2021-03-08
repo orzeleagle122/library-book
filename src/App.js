@@ -1,29 +1,24 @@
 import 'bulma/css/bulma.css'
+import React from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Header from './components/Header/Header';
 import AccountPage from './view/AccountPage';
 import BorrowedPage from './view/BorrowedPage';
 import SearchPage from './view/SearchPage';
-//import store and Privider for redux
-import {store} from './store';
-import {Provider} from 'react-redux';
 import LoginPage from './view/LoginPage';
 
-
-function App() {
+const App=()=>{
   return (
     <>
-      <Provider store={store}>
         <Router>
           <Header/>
           <Route path="/" exact component={AccountPage} />
           <Route path="/borrowed" exact component={BorrowedPage} />
           <Route path="/search" exact component={SearchPage} />
           <Route path="/login" exact component={LoginPage} />
-        </Router>
-      </Provider>    
+        </Router>          
     </>
   );
 }
 
-export default App;
+export default (App);

@@ -41,7 +41,7 @@ export const removeBook=(id)=>{
     }
 }
 
-export const authUser=(email,password)=>(dispatch)=>{
+export const authUser=(email,password)=>async(dispatch)=>{
     dispatch({
         type:AUTH_REQUEST
     })

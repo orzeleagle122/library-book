@@ -12,7 +12,8 @@ import {
    books:[],
    totalbooks:0,
    user:{
-     userToken:''
+     userToken:'',
+     isLogin: false
    },
    searchFormValue:''
  }
@@ -29,10 +30,12 @@ import {
   }
   if(action.type===AUTH_SUCCESS){
     console.log(action.payload.data.token);
+    localStorage.setItem('loginToken', action.payload.data.token)
     return {
       ...state,
       user:{
-        userToken: action.payload.data.token
+        userToken: action.payload.data.token,
+        isLogin:true
       }
     }
   }
