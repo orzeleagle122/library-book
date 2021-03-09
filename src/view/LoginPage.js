@@ -66,7 +66,6 @@ const LoginPage = ({auth,userToken}) => {
                 </div>
 
                 <button className="button is-primary" type="submit">Sign in</button>
-                {userToken}
                 </form>
             )}
             }

@@ -6,9 +6,11 @@ import {
   // FETCH_BOOKS_FAILURE,
   AUTH_SUCCESS,
   LOG_OUT,
-  GET_CURRENT_USER_REQUEST,
+  // GET_CURRENT_USER_REQUEST,
   GET_CURRENT_USER_SUCCESS,
-  GET_CURRENT_USER_FAILURE
+  // GET_CURRENT_USER_FAILURE,
+  REGISTER_SUCCESS,
+  REGISTER_FAILURE
 } from '../actions';
  
  //initial store
@@ -18,7 +20,8 @@ import {
    user:{
      userToken:'',
      isLogin: false,
-     id:0
+     id:0,
+     err:null
    },
    searchFormValue:''
  }
@@ -59,6 +62,26 @@ import {
       ...state,
       user:{
         isLogin:true
+      }
+    }
+  }
+  if(action.type===REGISTER_SUCCESS){
+    localStorage.setItem('loginToken', action.payload.data.token)
+    return {
+      ...state,
+      user: {
+        id: action.payload.data.id,
+        userToken: action.payload.data.token,
+        isLogin: true
+      }
+    }
+  }
+  if(action.type===REGISTER_FAILURE){
+    return {
+      ...state,
+      user: {
+        err: 'action.payload.err',
+        isLogin: false
       }
     }
   }

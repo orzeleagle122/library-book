@@ -19,6 +19,10 @@ export const GET_CURRENT_USER_REQUEST='GET_CURRENT_USER_REQUEST';
 export const GET_CURRENT_USER_SUCCESS='GET_CURRENT_USER_SUCCESS';
 export const GET_CURRENT_USER_FAILURE='GET_CURRENT_USER_FAILURE';
 
+export const REGISTER_REQUEST='REGISTER_REQUEST';
+export const REGISTER_SUCCESS='REGISTER_SUCCESS';
+export const REGISTER_FAILURE='REGISTER_FAILURE';
+
 
 export const fetchBooks=()=>async(dispatch)=>{
     dispatch({
@@ -98,6 +102,31 @@ export const authUser=(email,password)=>async(dispatch)=>{
         console.log(err);
         dispatch({
             type:AUTH_FAILURE
+        })
+    })
+}
+
+export const registerUser=(email,password,name,lastname)=>async(dispatch)=>{
+    dispatch({
+        type:REGISTER_REQUEST
+    })
+    return axios.post('https://reqres.in/api/register', {
+        // name,
+        // lastname,
+        email,
+        password
+    })
+    .then(payload=>{
+        console.log(payload);
+        dispatch({
+            type:REGISTER_SUCCESS,
+            payload
+        })
+    })
+    .catch(err=>{
+        dispatch({
+            type:REGISTER_FAILURE,
+            err
         })
     })
 }
