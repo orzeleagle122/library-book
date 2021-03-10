@@ -10,7 +10,7 @@ import RegisterPage from './view/RegisterPage';
 import {connect} from 'react-redux';
 import {getUserLoginAction} from './actions';
 import MainPage from './view/MainPage';
-import Navbar from './components/Navbar/Navbar';
+import Sidebar from './components/organisms/Sidebar/Sidebar';
 
 const App=({getUserLogin})=>{
   useEffect(()=>{
@@ -22,7 +22,7 @@ const App=({getUserLogin})=>{
   return (
     <>
         <Router>
-          <Navbar/>
+          <Sidebar/>
           <Header/>
           <Route path="/" exact component={MainPage} />
           <Route path="/account" exact component={AccountPage} />
