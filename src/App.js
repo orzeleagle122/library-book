@@ -11,6 +11,7 @@ import {connect} from 'react-redux';
 import {getUserLoginAction} from './actions';
 import MainPage from './view/MainPage';
 import Sidebar from './components/organisms/Sidebar/Sidebar';
+import GlobalStyle from './globalStyles';
 
 const App=({getUserLogin})=>{
   useEffect(()=>{
@@ -21,6 +22,7 @@ const App=({getUserLogin})=>{
 
   return (
     <>
+        <GlobalStyle/>
         <Router>
           <Sidebar/>
           <Header/>

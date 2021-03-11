@@ -23,6 +23,8 @@ export const REGISTER_REQUEST='REGISTER_REQUEST';
 export const REGISTER_SUCCESS='REGISTER_SUCCESS';
 export const REGISTER_FAILURE='REGISTER_FAILURE';
 
+export const CLEAR_ERROR='CLEAR_ERROR';
+
 
 export const fetchBooks=()=>async(dispatch)=>{
     dispatch({
@@ -101,7 +103,8 @@ export const authUser=(email,password)=>async(dispatch)=>{
     .catch(err=>{
         console.log(err);
         dispatch({
-            type:AUTH_FAILURE
+            type:AUTH_FAILURE,
+            err
         })
     })
 }
@@ -129,6 +132,12 @@ export const registerUser=(email,password,name,lastname)=>async(dispatch)=>{
             err
         })
     })
+}
+
+export const cleanErrors=()=>{
+    return {
+        type:CLEAR_ERROR
+    }
 }
 
 

@@ -4,6 +4,7 @@ import NavbarButton from '../../atoms/NavbarButton/NavbarButton';
 import { BsFillPersonFill, BsFillBookmarkFill, BsSearch, BsHouseDoorFill } from 'react-icons/bs';
 
 export const Wrapper=styled.nav`
+    font-family: 'Poppins', sans-serif;
     position:fixed;
     left:0;
     top:0;

@@ -10,7 +10,9 @@ import {
   GET_CURRENT_USER_SUCCESS,
   // GET_CURRENT_USER_FAILURE,
   REGISTER_SUCCESS,
-  REGISTER_FAILURE
+  REGISTER_FAILURE,
+  AUTH_FAILURE,
+  CLEAR_ERROR
 } from '../actions';
  
  //initial store
@@ -85,7 +87,22 @@ import {
       }
     }
   }
-   
+  if(action.type===AUTH_FAILURE){
+    return {
+      ...state,
+      user:{
+        err: 'action.payload.err'
+      }
+    }
+  }
+  if(action.type===CLEAR_ERROR){
+    return {
+      ...state,
+      user:{
+        err:null
+      }
+    }
+  }
   //  if(action.type===GET_TOTALS){
   //    return {
   //      ...state,

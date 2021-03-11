@@ -16,6 +16,8 @@ export const StyledButton=styled.button`
     font-weight:700;
     color:white;
     cursor:pointer;
+    /* why here? later check globalstyle */
+    font-family: 'Poppins', sans-serif;
 
     &:hover{
         background-color: white;

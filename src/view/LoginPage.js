@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import {connect} from 'react-redux';
-import {authUser} from '../actions';
+import {
+    authUser,
+    cleanErrors
+} from '../actions';
 import {Formik} from 'formik';
 import {Redirect} from 'react-router-dom';
 
@@ -11,9 +14,19 @@ const LoginWrapper=styled.div`
     margin-top:30px;
 `;
 
-const LoginPage = ({auth,userToken}) => {
+const LoginPage = ({auth,userToken,err,errClean}) => {
+    useEffect(()=>{
+        return errClean
+    },[errClean]);
+
     return ( 
         <LoginWrapper>
+            {err && (
+                <div className="notification is-danger is-light">                    
+                    <strong>Email or password is wrong!</strong>
+                </div>
+            )}
+
             <Formik
                 initialValues={{ useremail: '', userpassword: '' }}
                 onSubmit={({useremail,userpassword})=>{
@@ -75,15 +88,17 @@ const LoginPage = ({auth,userToken}) => {
 }
 
 const mapStateToProps=({user})=>{
-    const {userToken}=user;
+    const {userToken,err}=user;
     return {
-        userToken
+        userToken,
+        err
     }
 }
 
 const mapDispatchToProps=(dispatch)=>{
     return {
-        auth:(useremail,userpassword)=>dispatch(authUser(useremail,userpassword))
+        auth:(useremail,userpassword)=>dispatch(authUser(useremail,userpassword)),
+        errClean:()=>dispatch(cleanErrors())
     }
 }
  

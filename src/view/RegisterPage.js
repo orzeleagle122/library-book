@@ -1,7 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import {connect} from 'react-redux';
-import {registerUser} from '../actions';
+import {
+    registerUser,
+    cleanErrors
+} from '../actions';
 import {Formik} from 'formik';
 import {Link} from 'react-router-dom';
 import { useEffect } from 'react';
@@ -12,11 +15,11 @@ const RegisterWrapper=styled.div`
     margin-top:30px;
 `;
 
-const RegisterPage = ({register,isLogin,err}) => {
+const RegisterPage = ({register,isLogin,err,errClean}) => {
 
     useEffect(()=>{
-
-    },[isLogin]);
+        return errClean;
+    },[isLogin,errClean]);
 
     return ( 
         <RegisterWrapper>
@@ -149,7 +152,8 @@ const mapDispatchToProps=(dispatch)=>{
         register:(
             useremail,
             userpassword
-            )=>dispatch(registerUser(useremail,userpassword))
+            )=>dispatch(registerUser(useremail,userpassword)),
+        errClean:()=>dispatch(cleanErrors())
     }
 }
  
