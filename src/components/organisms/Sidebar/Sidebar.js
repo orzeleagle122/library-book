@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import NavbarButton from '../../atoms/NavbarButton/NavbarButton';
 import {
     Wrapper,
@@ -10,15 +10,18 @@ import {
     BsFillPersonFillIcon, 
     BsFillBookmarkFillIcon,
     BsSearchIcon,
-    BsHouseDoorFillIcon
+    BsHouseDoorFillIcon,
+    RiLogoutBoxLineIcon
 } from './Sidebar.elements';
 
 const Sidebar = () => {
     return ( 
         <Wrapper>
-            <LogoLink>
-                {/* <LogoLink to='/'> */}
-            </LogoLink>
+            <Link to='/'>
+                <LogoLink>                
+                    <RiLogoutBoxLineIcon/>                
+                </LogoLink>
+            </Link>
             <LinkList>
                 <li>
                     <NavLink exact to='/'>
@@ -43,7 +46,7 @@ const Sidebar = () => {
             </LinkList>
             <LogoutButton>
                 <NavLink exact to='/logout'>
-                    <NavbarButton ><BsHouseDoorFillIcon/><SpanText>Logout</SpanText> </NavbarButton>
+                    <NavbarButton ><RiLogoutBoxLineIcon/><SpanText>Logout</SpanText> </NavbarButton>
                 </NavLink> 
             </LogoutButton>
         </Wrapper>

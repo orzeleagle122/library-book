@@ -2,6 +2,8 @@ import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import NavbarButton from '../../atoms/NavbarButton/NavbarButton';
 import { BsFillPersonFill, BsFillBookmarkFill, BsSearch, BsHouseDoorFill } from 'react-icons/bs';
+import { RiLogoutBoxLine } from "react-icons/ri";
+import { ImBooks } from "react-icons/im";
 
 export const Wrapper=styled.nav`
     font-family: 'Poppins', sans-serif;
@@ -20,12 +22,15 @@ export const Wrapper=styled.nav`
     border-bottom-right-radius: 50px;
 `;
 
-export const LogoLink=styled.a`
+export const LogoLink=styled(ImBooks)`
     display: block;
     width:68px;
     height:68px;
     border: none;
-    /* margin-bottom: 10vh; */
+    color:white;
+    cursor:pointer;
+    margin-top:15px;
+    margin-bottom: 10vh;
 `;
 
 export const LinkList=styled.ul`
@@ -49,6 +54,9 @@ export const BsSearchIcon=styled(BsSearch)`
 font-size:25px;
 `;
 export const BsFillPersonFillIcon=styled(BsFillPersonFill)`
+font-size:25px;
+`;
+export const RiLogoutBoxLineIcon=styled(RiLogoutBoxLine)`
 font-size:25px;
 `;
 
