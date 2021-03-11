@@ -15,7 +15,7 @@ const RegisterWrapper=styled.div`
     margin-top:30px;
 `;
 
-const RegisterPage = ({register,isLogin,err,errClean}) => {
+const RegisterPage = ({register,isLogin,applicationError,errClean}) => {
 
     useEffect(()=>{
         return errClean;
@@ -23,7 +23,7 @@ const RegisterPage = ({register,isLogin,err,errClean}) => {
 
     return ( 
         <RegisterWrapper>
-            {console.log(isLogin)}
+            {/* {console.log(isLogin)} */}
             <Formik
                 initialValues={{ name:'',lastname:'', useremail: '', userpassword: '',repeatuserpassword:'' }}
                 onSubmit={({useremail,userpassword})=>{
@@ -126,7 +126,7 @@ const RegisterPage = ({register,isLogin,err,errClean}) => {
 
                 <button className="button is-primary" type="submit">Sign in</button>
                 </form>
-                                {err && (
+                                {applicationError && (
                                     <div className="notification is-danger is-light">                    
                                     <strong>Something went wrong</strong>
                                     </div>
@@ -139,11 +139,11 @@ const RegisterPage = ({register,isLogin,err,errClean}) => {
      );
 }
 
-const mapStateToProps=({user})=>{
-    const {isLogin,err}=user;
+const mapStateToProps=({user,applicationError})=>{
+    const {isLogin}=user;
     return {
         isLogin,
-        err
+        applicationError
     }
 }
 

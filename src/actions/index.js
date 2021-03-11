@@ -38,7 +38,7 @@ export const fetchBooks=()=>async(dispatch)=>{
         })
     })
     .catch(err=>{
-        console.log(err);
+        // console.log(err);
         dispatch({
             type:FETCH_BOOKS_FAILURE
         })
@@ -71,14 +71,14 @@ export const getUserLoginAction=(token)=>async(dispatch)=>{
         }
     })
     .then(payload=>{
-        console.log(payload);
+        // console.log(payload);
         dispatch({
             type:GET_CURRENT_USER_SUCCESS,
             payload
         })
     })
     .catch(err=>{
-        console.log(err);
+        // console.log(err);
         dispatch({
             type:GET_CURRENT_USER_FAILURE
         })
@@ -94,14 +94,14 @@ export const authUser=(email,password)=>async(dispatch)=>{
         password
     })
     .then(payload=>{
-        console.log(payload);
+        // console.log(payload);
         dispatch({
             type:AUTH_SUCCESS,
             payload
         })
     })
     .catch(err=>{
-        console.log(err);
+        // console.log(err);
         dispatch({
             type:AUTH_FAILURE,
             err
@@ -120,7 +120,7 @@ export const registerUser=(email,password,name,lastname)=>async(dispatch)=>{
         password
     })
     .then(payload=>{
-        console.log(payload);
+        // console.log(payload);
         dispatch({
             type:REGISTER_SUCCESS,
             payload

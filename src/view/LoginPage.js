@@ -14,14 +14,14 @@ const LoginWrapper=styled.div`
     margin-top:30px;
 `;
 
-const LoginPage = ({auth,userToken,err,errClean}) => {
+const LoginPage = ({auth,userToken,applicationError,errClean}) => {
     useEffect(()=>{
         return errClean
     },[errClean]);
 
     return ( 
         <LoginWrapper>
-            {err && (
+            {applicationError && (
                 <div className="notification is-danger is-light">                    
                     <strong>Email or password is wrong!</strong>
                 </div>
@@ -87,11 +87,11 @@ const LoginPage = ({auth,userToken,err,errClean}) => {
      );
 }
 
-const mapStateToProps=({user})=>{
-    const {userToken,err}=user;
+const mapStateToProps=({user,applicationError})=>{
+    const {userToken}=user;
     return {
         userToken,
-        err
+        applicationError
     }
 }
 

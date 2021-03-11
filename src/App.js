@@ -18,7 +18,7 @@ const App=({getUserLogin})=>{
     if(localStorage.getItem('loginToken')){
       getUserLogin(localStorage.getItem('loginToken'));
     }
-  },[])
+  },[getUserLogin])
 
   return (
     <>

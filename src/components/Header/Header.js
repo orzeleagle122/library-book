@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import {connect} from 'react-redux';
 import {
@@ -6,6 +6,10 @@ import {
 } from '../../actions';
 
 const Header = ({isLogin,out}) => {
+
+  useEffect(()=>{
+
+  },[isLogin])
 
   return (
   <section className="hero is-primary">
@@ -28,6 +32,7 @@ const Header = ({isLogin,out}) => {
             <li>
               <NavLink to="/search">Search books</NavLink>
             </li>
+            {console.log(isLogin)}
             {isLogin?(
               <>
                 <li>

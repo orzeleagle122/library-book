@@ -21,17 +21,17 @@ import {
    totalbooks:0,
    user:{
      userToken:'',
-     isLogin: false,
-     id:0,
-     err:null
+     isLogin: null,
+     id:0
    },
+   applicationError:null,
    searchFormValue:''
  }
  
  //reducer(old-state,action) return update or old state
  export const reducer=(state=initialStore,action)=>{
   if(action.type===FETCH_BOOKS_SUCCESS){
-    console.log(action.payload.data);
+    // console.log(action.payload.data);
     return {
       ...state,
       books: action.payload.data,
@@ -39,7 +39,7 @@ import {
     }
   }
   if(action.type===AUTH_SUCCESS){
-    console.log(action.payload.data.token);
+    // console.log(action.payload.data.token);
     localStorage.setItem('loginToken', action.payload.data.token)
     return {
       ...state,
@@ -81,26 +81,19 @@ import {
   if(action.type===REGISTER_FAILURE){
     return {
       ...state,
-      user: {
-        err: 'action.payload.err',
-        isLogin: false
-      }
+      applicationError: 'action.payload.err'
     }
   }
   if(action.type===AUTH_FAILURE){
     return {
       ...state,
-      user:{
-        err: 'action.payload.err'
-      }
+      applicationError: 'action.payload.err'
     }
   }
   if(action.type===CLEAR_ERROR){
     return {
       ...state,
-      user:{
-        err:null
-      }
+      applicationError:null
     }
   }
   //  if(action.type===GET_TOTALS){
@@ -117,7 +110,7 @@ import {
      }
    }
    if(action.type===SEARCH_FORM_VALUE){
-     console.log(action.payload.searchFormValue);
+    //  console.log(action.payload.searchFormValue);
      // return{
      //   ...state,
      //   books:state.books.title.include(action.payload.searchFormValue)
