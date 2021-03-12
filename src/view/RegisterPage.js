@@ -10,9 +10,9 @@ import {Link} from 'react-router-dom';
 import { useEffect } from 'react';
 
 const RegisterWrapper=styled.div`
-    margin-right: 500px;
+    /* margin-right: 500px;
     margin-left:500px;
-    margin-top:30px;
+    margin-top:30px; */
 `;
 
 const RegisterPage = ({register,isLogin,applicationError,errClean}) => {

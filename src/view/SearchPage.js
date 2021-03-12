@@ -4,11 +4,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch,faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import {connect} from 'react-redux';
 import SearchBookList from '../components/SearchBookList/SearchBookList';
+import Input from '../components/atoms/Input/Input';
 
 const SearchWrapper=styled.div`
-    margin-right: 200px;
+    /* margin-right: 200px;
     margin-left:200px;
-    margin-top:30px;
+    margin-top:30px; */
 `;
 
 const SearchPage = ({books}) => {
@@ -34,7 +35,7 @@ const SearchPage = ({books}) => {
         <SearchWrapper>
             <div className="field">
                 <p className="control has-icons-left has-icons-right">
-                    <input className="input" 
+                    <Input className="input" 
                             type="text" 
                             placeholder="Search title book" 
                             onChange={handleChangeSearchFormValue} 

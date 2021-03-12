@@ -9,9 +9,9 @@ import {
 } from '../actions';
 
 const BorrowedWrapper=styled.div`
-    margin-right: 200px;
+    /* margin-right: 200px;
     margin-left:200px;
-    margin-top:30px;
+    margin-top:30px; */
 `;
 
 const BorrowedPage = ({books=[],totalbooks,fetch}) => {

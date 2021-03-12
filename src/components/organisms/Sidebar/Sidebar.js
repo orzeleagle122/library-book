@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import NavbarButton from '../../atoms/NavbarButton/NavbarButton';
+import {connect} from 'react-redux';
+import {logOut} from '../../../actions';
 import {
     Wrapper,
     LogoLink,
@@ -14,7 +16,12 @@ import {
     RiLogoutBoxLineIcon
 } from './Sidebar.elements';
 
-const Sidebar = () => {
+const Sidebar = ({isLogin,out}) => {
+
+    useEffect(()=>{
+  
+    },[isLogin])
+
     return ( 
         <Wrapper>
             <Link to='/'>
@@ -40,17 +47,33 @@ const Sidebar = () => {
                 </li>
                 <li>
                     <NavLink exact to='/login'>
-                        <NavbarButton ><BsFillPersonFillIcon/><SpanText>Profile</SpanText></NavbarButton>
+                        <NavbarButton ><BsFillPersonFillIcon/><SpanText>{isLogin?"Profile":"Sign in"}</SpanText></NavbarButton>
                     </NavLink>
                 </li>
             </LinkList>
             <LogoutButton>
-                <NavLink exact to='/logout'>
-                    <NavbarButton ><RiLogoutBoxLineIcon/><SpanText>Logout</SpanText> </NavbarButton>
-                </NavLink> 
+            {isLogin && (
+                <NavLink exact to='/login' onClick={out}>
+                    <NavbarButton><RiLogoutBoxLineIcon/><SpanText>Logout</SpanText> </NavbarButton>
+                </NavLink>
+            )} 
             </LogoutButton>
         </Wrapper>
      );
 }
  
-export default Sidebar;
+const mapStateToProps=({user})=>{
+    const {isLogin,userToken}=user;
+    return {
+      userToken,
+      isLogin
+    }
+  }
+  
+  const mapDispatchToProps=dispatch=>{
+    return {
+      out:()=>dispatch(logOut())
+    }
+  }
+  
+  export default connect(mapStateToProps,mapDispatchToProps)(Sidebar);

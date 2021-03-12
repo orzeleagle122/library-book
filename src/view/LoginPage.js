@@ -9,9 +9,9 @@ import {Formik} from 'formik';
 import {Redirect} from 'react-router-dom';
 
 const LoginWrapper=styled.div`
-    margin-right: 200px;
+    /* margin-right: 200px;
     margin-left:200px;
-    margin-top:30px;
+    margin-top:30px; */
 `;
 
 const LoginPage = ({auth,userToken,applicationError,errClean}) => {
