@@ -4,7 +4,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch,faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import {connect} from 'react-redux';
 import SearchBookList from '../components/SearchBookList/SearchBookList';
-import Input from '../components/atoms/Input/Input';
+// import Input from '../components/atoms/Input/Input';
+import { 
+    searchBook
+} from '../actions';
 
 const SearchWrapper=styled.div`
     /* margin-right: 200px;
@@ -12,30 +15,22 @@ const SearchWrapper=styled.div`
     margin-top:30px; */
 `;
 
-const SearchPage = ({books}) => {
+const SearchPage = ({searchbooks,search}) => {
     
     const [searchFormValue,setSearchFormValue]=useState('');
 
-
     const handleChangeSearchFormValue=(e)=>{
         setSearchFormValue(e.target.value);
+        search(e.target.value);
     }
-    // eslint-disable-next-line
-    const titleFilter=books.filter(item=>{          
-        if(searchFormValue.length>=3){
-            return (
-                item.title.includes(searchFormValue)>-1
-            )
-        }
-    });
 
-    const map=titleFilter.map(item=><SearchBookList key={item.id} {...item}/>);
+    const map=searchbooks.map(item=><SearchBookList key={item.id} {...item}/>);
 
     return ( 
         <SearchWrapper>
             <div className="field">
                 <p className="control has-icons-left has-icons-right">
-                    <Input className="input" 
+                    <input className="input" 
                             type="text" 
                             placeholder="Search title book" 
                             onChange={handleChangeSearchFormValue} 
@@ -46,29 +41,25 @@ const SearchPage = ({books}) => {
                     </span>
                 </p>
             </div> 
-            {titleFilter.length<3&&(
+
+            {searchFormValue.length<=2&&(
                 <div className="notification is-warning">
                         <FontAwesomeIcon icon={faExclamationCircle} /> Enter <strong>three</strong> characters to start searching for books.
                 </div>
             )}
-            {map}
-
-            {/* {titleFilter.length<3?(
-                    <div className="notification is-warning">
-                    <FontAwesomeIcon icon={faExclamationCircle} /> Enter <strong>three</strong> characters to start searching for books.
-            </div>
-            ):(
-                <>
-                    {map}
-                </>
-            )}            */}
-            
+            {map}            
         </SearchWrapper>
      );
 }
 
-const mapStateToProps=({books})=>{
-    return {books}
+const mapStateToProps=({searchbooks})=>{
+    return {searchbooks}
 }
 
-export default connect(mapStateToProps)(SearchPage);
+const mapDispatchToProps=dispatch=>{
+    return {
+        search:(phrase)=>dispatch(searchBook(phrase))
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(SearchPage);

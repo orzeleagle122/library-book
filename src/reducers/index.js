@@ -1,6 +1,6 @@
 import {
   REMOVE_BOOK,
-  SEARCH_FORM_VALUE,
+  // SEARCH_FORM_VALUE,
   // FETCH_BOOKS_REQUEST,
   FETCH_BOOKS_SUCCESS,
   // FETCH_BOOKS_FAILURE,
@@ -12,12 +12,15 @@ import {
   REGISTER_SUCCESS,
   REGISTER_FAILURE,
   AUTH_FAILURE,
-  CLEAR_ERROR
+  CLEAR_ERROR,
+  SEARCH_BOOK_SUCCESS,
+  SEARCH_BOOK_FAILURE
 } from '../actions';
  
  //initial store
  const initialStore={
    books:[],
+   searchbooks:[],
    totalbooks:0,
    user:{
      userToken:'',
@@ -30,6 +33,18 @@ import {
  
  //reducer(old-state,action) return update or old state
  export const reducer=(state=initialStore,action)=>{
+  if(action.type===SEARCH_BOOK_FAILURE){
+    return {
+      ...state,
+      searchbooks: []
+    }
+  }
+  if(action.type===SEARCH_BOOK_SUCCESS){
+    return {
+      ...state,
+      searchbooks: action.payload.data
+    }
+  }
   if(action.type===FETCH_BOOKS_SUCCESS){
     // console.log(action.payload.data);
     return {
@@ -109,13 +124,13 @@ import {
        totalbooks: state.books.length-1
      }
    }
-   if(action.type===SEARCH_FORM_VALUE){
+  //  if(action.type===SEARCH_FORM_VALUE){
     //  console.log(action.payload.searchFormValue);
      // return{
      //   ...state,
      //   books:state.books.title.include(action.payload.searchFormValue)
      // }
-   }
+  //  }
    
    return state;
 

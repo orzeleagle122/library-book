@@ -4,16 +4,16 @@ import {
     removeBook
 } from '../../actions';
 
-const BookList = ({title,year,about,author,types,remove}) => {
+const BookList = ({title,publisher,about,author,genres,remove}) => {
     return ( 
         <article className="message is-info">
             <div className="message-header">
-                {title} - {year}
+                {title} - {publisher}
                 <button onClick={remove} className="delete"></button>
             </div>
             <div className="message-body">
                 <strong>Author: {author}</strong><br/>
-                <strong>Types: {types}</strong><br/>                
+                <strong>Types: {genres}</strong><br/>                
                 {about}
             </div>
         </article>

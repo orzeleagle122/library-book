@@ -11,6 +11,7 @@ import {
     LeftPage,
     RightPage
 } from './MainTemplate.elements';
+import AddBook from '../view/AddBook';
 
 const MainTemplate = () => {
 
@@ -24,6 +25,7 @@ const MainTemplate = () => {
                     <Route path="/search" exact component={SearchPage} />
                     <Route path="/login" exact component={LoginPage} />
                     <Route path="/register" exact component={RegisterPage} />
+                    <Route path="/add" exact component={AddBook} />
                 </LeftPage>
                 <RightPage>
                             tytul nazwa ksiazki itp po kliknieciu w ksiązkę                    

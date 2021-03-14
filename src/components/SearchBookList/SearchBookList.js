@@ -1,15 +1,15 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-const SearchBookList = ({title,year,about,author,types}) => {   
+const SearchBookList = ({title,genres,about,author,amount}) => {   
     return ( 
         <article className="message is-info">
             <div className="message-header">
-                {title} - {year}
+                {title} - {amount} copies
             </div>
             <div className="message-body">
                 <strong>Author: {author}</strong><br/>
-                <strong>Types: {types}</strong><br/>                
+                <strong>Types: {genres}</strong><br/>                
                 {about}
             </div>
         </article>

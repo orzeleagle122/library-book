@@ -1,6 +1,4 @@
-import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
-import NavbarButton from '../../atoms/NavbarButton/NavbarButton';
 import { BsFillPersonFill, BsFillBookmarkFill, BsSearch, BsHouseDoorFill } from 'react-icons/bs';
 import { RiLogoutBoxLine } from "react-icons/ri";
 import { ImBooks } from "react-icons/im";

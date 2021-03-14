@@ -8,13 +8,13 @@ import BookPopular from '../components/molecules/BookPopular/BookPopular';
 const PopularBookWrapper=styled.div`
     display:flex;
     justify-content: space-between;
-    gap: 10px
+    gap: 10px;
 `;
 
 const MainPage = () => {
     return ( 
         <>
-            <Input placeholder="Search your favorite book and check if it is available"/>
+            <Input placeholder="Search your favorite book and check if it is available" />
             <Heading>Popular Books</Heading>
             <PopularBookWrapper>
                 {bookPopular.map(item=>(
