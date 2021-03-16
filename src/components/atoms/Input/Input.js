@@ -1,14 +1,16 @@
-import React from 'react';
-import {
-    StyledInput
-} from './Input.elements';
+import styled from 'styled-components';
 
-const Input = ({children,placeholder}) => {
-    return ( 
-        <StyledInput placeholder={placeholder}>
-            {children}
-        </StyledInput>
-     );
-}
- 
-export default Input;
+export const Input=styled.input`
+    height:56px;
+    width:100%;
+    padding: 10px 20px;
+    background-color:#ebedff;
+    border:none;
+    font-size:18px;
+    border-radius:15px;
+
+
+      ::placeholder {
+    
+  }
+`;
