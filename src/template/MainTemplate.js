@@ -8,8 +8,7 @@ import RegisterPage from '../view/RegisterPage';
 import MainPage from '../view/MainPage';
 import {
     GridContainer,
-    LeftPage,
-    RightPage
+    MainContent
 } from './MainTemplate.elements';
 import AddBook from '../view/AddBook';
 
@@ -18,7 +17,7 @@ const MainTemplate = () => {
     return ( 
         <>
             <GridContainer>
-                <LeftPage> 
+                <MainContent> 
                     <Route path="/" exact component={MainPage} />
                     <Route path="/account" exact component={AccountPage} />
                     <Route path="/borrowed" exact component={BorrowedPage} />
@@ -26,11 +25,7 @@ const MainTemplate = () => {
                     <Route path="/login" exact component={LoginPage} />
                     <Route path="/register" exact component={RegisterPage} />
                     <Route path="/add" exact component={AddBook} />
-                </LeftPage>
-                <RightPage>
-                            tytul nazwa ksiazki itp po kliknieciu w ksiązkę                    
-                </RightPage>
-
+                </MainContent>
             </GridContainer>
             
         </>

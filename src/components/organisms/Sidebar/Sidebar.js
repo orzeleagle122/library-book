@@ -11,7 +11,7 @@ import {
     SpanText,
     BsFillPersonFillIcon, 
     BsFillBookmarkFillIcon,
-    BsSearchIcon,
+    MdFavoriteIcon,
     BsHouseDoorFillIcon,
     RiLogoutBoxLineIcon
 } from './Sidebar.elements';
@@ -35,16 +35,25 @@ const Sidebar = ({isLogin,out}) => {
                         <NavbarButton ><BsHouseDoorFillIcon/><SpanText>Home</SpanText> </NavbarButton>
                     </NavLink>                    
                 </li>
-                <li>
+                {/* <li>
                     <NavLink exact to='/search'>
                         <NavbarButton><BsSearchIcon/><SpanText>Explore</SpanText></NavbarButton>
                     </NavLink> 
-                </li>
-                <li>
-                    <NavLink exact to='/borrowed'>
-                        <NavbarButton><BsFillBookmarkFillIcon/><SpanText>Trips</SpanText></NavbarButton>
-                    </NavLink>
-                </li>
+                </li> */}
+                {isLogin && (
+                    <>
+                    <li>
+                        <NavLink exact to='/borrowed'>
+                            <NavbarButton><BsFillBookmarkFillIcon/><SpanText>Borrowed</SpanText></NavbarButton>
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink exact to='/favorite'>
+                            <NavbarButton><MdFavoriteIcon/><SpanText>Favorite</SpanText></NavbarButton>
+                        </NavLink>
+                    </li>
+                    </>
+                )}
                 <li>
                     <NavLink exact to='/login'>
                         <NavbarButton ><BsFillPersonFillIcon/><SpanText>{isLogin?"Profile":"Sign in"}</SpanText></NavbarButton>

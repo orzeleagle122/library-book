@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { BsFillPersonFill, BsFillBookmarkFill, BsSearch, BsHouseDoorFill } from 'react-icons/bs';
+import { MdFavorite } from "react-icons/md";
 import { RiLogoutBoxLine } from "react-icons/ri";
 import { ImBooks } from "react-icons/im";
 
@@ -28,7 +29,7 @@ export const LogoLink=styled(ImBooks)`
     color:white;
     cursor:pointer;
     margin-top:15px;
-    margin-bottom: 10vh;
+    margin-bottom: 5vh;
 `;
 
 export const LinkList=styled.ul`
@@ -55,6 +56,9 @@ export const BsFillPersonFillIcon=styled(BsFillPersonFill)`
 font-size:25px;
 `;
 export const RiLogoutBoxLineIcon=styled(RiLogoutBoxLine)`
+font-size:25px;
+`;
+export const MdFavoriteIcon=styled(MdFavorite)`
 font-size:25px;
 `;
 
