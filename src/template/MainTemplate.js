@@ -27,9 +27,9 @@ const MainTemplate = () => {
                     <Route path="/register" exact component={RegisterPage} />
                     <Route path="/add" exact component={AddBook} />
                 </LeftPage>
-                {/* <RightPage>
+                <RightPage>
                             tytul nazwa ksiazki itp po kliknieciu w ksiązkę                    
-                </RightPage> */}
+                </RightPage>
 
             </GridContainer>
             
