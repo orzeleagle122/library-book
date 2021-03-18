@@ -10,7 +10,8 @@ const GlobalStyle=createGlobalStyle`
 
     body {
         font-family: 'Poppins', sans-serif;
-        margin-left: 157px;
+        /* margin-left: 157px; */
+        /* max-width: 2200px; */
     }
 
     /* 

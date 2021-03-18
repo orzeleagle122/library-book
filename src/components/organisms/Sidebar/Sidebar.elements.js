@@ -19,6 +19,7 @@ export const Wrapper=styled.nav`
     align-items:center;
     border-top-right-radius: 50px;
     border-bottom-right-radius: 50px;
+    z-index:9999;
 `;
 
 export const LogoLink=styled(ImBooks)`

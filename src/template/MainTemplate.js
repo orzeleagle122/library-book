@@ -8,26 +8,49 @@ import RegisterPage from '../view/RegisterPage';
 import MainPage from '../view/MainPage';
 import {
     GridContainer,
-    MainContent
+    MainContent,
+    ImageWrapper,
+    Image,
+    MainTemplateWrapper,
+    ImageTextContainer,
+    HeaderOne,
+    SpanText,
+    StyledButton
 } from './MainTemplate.elements';
 import AddBook from '../view/AddBook';
+import main_img from '../assets/layout/main_img.jpg';
 
 const MainTemplate = () => {
 
     return ( 
         <>
-            <GridContainer>
-                <MainContent> 
-                    <Route path="/" exact component={MainPage} />
-                    <Route path="/account" exact component={AccountPage} />
-                    <Route path="/borrowed" exact component={BorrowedPage} />
-                    <Route path="/search" exact component={SearchPage} />
-                    <Route path="/login" exact component={LoginPage} />
-                    <Route path="/register" exact component={RegisterPage} />
-                    <Route path="/add" exact component={AddBook} />
-                </MainContent>
-            </GridContainer>
-            
+            <MainTemplateWrapper>
+                <ImageWrapper>
+                    <Image src={main_img} />
+                    <ImageTextContainer>
+                        <HeaderOne>
+                            Welcome to the lending library!
+                        </HeaderOne>
+                        <SpanText>
+                            Reading books is the most beautiful fun humanity has ever imagined
+                        </SpanText>
+                        <StyledButton>
+                            Register now!
+                        </StyledButton>
+                    </ImageTextContainer>
+                </ImageWrapper>
+                <GridContainer>
+                    <MainContent> 
+                        <Route path="/" exact component={MainPage} />
+                        <Route path="/account" exact component={AccountPage} />
+                        <Route path="/borrowed" exact component={BorrowedPage} />
+                        <Route path="/search" exact component={SearchPage} />
+                        <Route path="/login" exact component={LoginPage} />
+                        <Route path="/register" exact component={RegisterPage} />
+                        <Route path="/add" exact component={AddBook} />
+                    </MainContent>
+                </GridContainer>
+            </MainTemplateWrapper>
         </>
      );
 }
