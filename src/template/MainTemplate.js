@@ -19,6 +19,7 @@ import {
 } from './MainTemplate.elements';
 import AddBook from '../view/AddBook';
 import main_img from '../assets/layout/main_img.jpg';
+import FavoritePage from '../view/FavoritePage';
 
 const MainTemplate = () => {
 
@@ -47,6 +48,7 @@ const MainTemplate = () => {
                         <Route path="/search" exact component={SearchPage} />
                         <Route path="/login" exact component={LoginPage} />
                         <Route path="/register" exact component={RegisterPage} />
+                        <Route path="/favorite" exact component={FavoritePage} />
                         <Route path="/add" exact component={AddBook} />
                     </MainContent>
                 </GridContainer>
