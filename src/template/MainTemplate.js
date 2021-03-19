@@ -20,6 +20,8 @@ import {
 import AddBook from '../view/AddBook';
 import main_img from '../assets/layout/main_img.jpg';
 import FavoritePage from '../view/FavoritePage';
+import {routers} from '../data/routers';
+import BookDetails from '../view/BookDetails';
 
 const MainTemplate = () => {
 
@@ -42,14 +44,17 @@ const MainTemplate = () => {
                 </ImageWrapper>
                 <GridContainer>
                     <MainContent> 
-                        <Route path="/" exact component={MainPage} />
-                        <Route path="/account" exact component={AccountPage} />
-                        <Route path="/borrowed" exact component={BorrowedPage} />
-                        <Route path="/search" exact component={SearchPage} />
-                        <Route path="/login" exact component={LoginPage} />
-                        <Route path="/register" exact component={RegisterPage} />
-                        <Route path="/favorite" exact component={FavoritePage} />
-                        <Route path="/add" exact component={AddBook} />
+                        <Route path={routers.home} exact component={MainPage} />
+                        <Route path={routers.account} exact component={AccountPage} />
+                        <Route path={routers.borrowed} exact component={BorrowedPage} />
+                        <Route path={routers.search} exact component={SearchPage} />
+                        <Route path={routers.login} exact component={LoginPage} />
+                        <Route path={routers.register} exact component={RegisterPage} />
+                        <Route path={routers.favorite} exact component={FavoritePage} />
+                        <Route path={routers.add} exact component={AddBook} />
+
+                        <Route path={routers.book} exact component={BookDetails} />
+                        
                     </MainContent>
                 </GridContainer>
             </MainTemplateWrapper>

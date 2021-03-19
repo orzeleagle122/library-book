@@ -18,6 +18,7 @@ import SearchBookList from '../components/SearchBookList/SearchBookList';
 
 import './slider-arrow.css'
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 
 const BookPopularWrapper=styled.div`
@@ -40,7 +41,7 @@ const MainPage = ({searchbooks,search}) => {
       }
   
       const map=searchbooks.map(item=><SearchBookList key={item.id} {...item}/>);
-    
+  
 
     return ( 
         <>
@@ -66,10 +67,15 @@ const MainPage = ({searchbooks,search}) => {
                 <Heading>Popular Books</Heading>
                 <Slider {...carouselSettings}>
                 {bookPopular.map(item=>(
-                        <BookPopularWrapper key={item.id}>
-                            <img src={harry} alt={item.title}/>
-                            {item.title}
-                        </BookPopularWrapper>
+                        <>
+                          
+                          <BookPopularWrapper key={item.id}>
+                          <Link to={{ pathname: `/book/${item.title}`, query: {...item}}}>
+                              <img src={harry} alt={item.title}/>
+                              {/* {item.title}*/}
+                          </Link>
+                          </BookPopularWrapper>
+                        </>
                     ))} 
                 </Slider>  
               </>
