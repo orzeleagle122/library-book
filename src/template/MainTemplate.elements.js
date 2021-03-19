@@ -17,6 +17,10 @@ export const GridContainer=styled.div`
     flex-wrap:nowrap;
     margin-left:157px;
     border-top-left-radius: 50px;
+
+    @media screen and (max-width: 480px){
+        margin-left:0px;
+    }
 `;
 
 export const MainContent=styled.div`
@@ -45,6 +49,13 @@ export const ImageTextContainer=styled.div`
     position: relative;
     top: 155px;
     left: 245px;
+
+    @media screen and (max-width: 480px){
+        top: 80px;
+        left: 25px;
+    }
+
+
 `;
 
 export const HeaderOne=styled.h1`
@@ -53,6 +64,7 @@ export const HeaderOne=styled.h1`
     font-weight: 700;
     letter-spacing:1px;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+
 `;
 
 export const SpanText=styled.span`

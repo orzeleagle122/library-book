@@ -20,6 +20,20 @@ export const Wrapper=styled.nav`
     border-top-right-radius: 50px;
     border-bottom-right-radius: 50px;
     z-index:9999;
+
+    @media screen and (max-width: 480px){
+        margin-top:auto;
+        height:100px;
+        position: fixed;
+        left: 0;
+        bottom: -1px;
+        width: 100%;
+        border-top-right-radius: 50px;
+        border-top-left-radius: 50px;
+        border-bottom-right-radius: 0px;
+        display: flex;
+        flex-direction:row;
+    }
 `;
 
 export const LogoLink=styled(ImBooks)`
@@ -31,38 +45,88 @@ export const LogoLink=styled(ImBooks)`
     cursor:pointer;
     margin-top:15px;
     margin-bottom: 5vh;
+
+    @media screen and (max-width: 480px){
+        /* margin-top:0;
+        margin-bottom: 0;
+        margin-left:25px;
+        margin-right: 5px;
+        display: block;
+        width:58px;
+        height:58px; */
+        display:none;
+    }
 `;
 
 export const LinkList=styled.ul`
     margin:0;
     padding:0;
     list-style:none;
+
+    @media screen and (max-width: 480px){
+        display: flex;
+    }
+
+`;
+
+export const ItemList=styled.li`
+    margin-top: 50px;
+    @media screen and (max-width: 480px){
+        margin-top: 0px;
+        margin-left: 15px;
+    }
 `;
 
 export const LogoutButton=styled.div`
-    margin-top: auto;
+    margin-top: auto;    
+    @media screen and (max-width: 480px){
+        margin-top: 0; 
+        margin-left: auto; 
+        margin-right:25px;
+    }
 `;
 
 export const BsHouseDoorFillIcon=styled(BsHouseDoorFill)`
-    font-size:25px;
+    font-size:25px;    
+    @media screen and (max-width: 480px){
+        font-size:15px;
+    }
 `;
 
 export const BsFillBookmarkFillIcon=styled(BsFillBookmarkFill)`
-font-size:25px;
+font-size:25px;    
+    @media screen and (max-width: 480px){
+
+    }
 `;
 export const BsSearchIcon=styled(BsSearch)`
-font-size:25px;
+font-size:25px;    
+    @media screen and (max-width: 480px){
+
+    }
 `;
 export const BsFillPersonFillIcon=styled(BsFillPersonFill)`
-font-size:25px;
+font-size:25px;    
+    @media screen and (max-width: 480px){
+
+    }
 `;
 export const RiLogoutBoxLineIcon=styled(RiLogoutBoxLine)`
-font-size:25px;
+font-size:25px;    
+    @media screen and (max-width: 480px){
+
+    }
 `;
 export const MdFavoriteIcon=styled(MdFavorite)`
-font-size:25px;
+font-size:25px;    
+    @media screen and (max-width: 480px){
+
+    }
 `;
 
 export const SpanText=styled.span`
-    display:block;
+    display:block;    
+    @media screen and (max-width: 480px){
+
+    }
 `;

@@ -9,7 +9,6 @@ export const StyledButton=styled.button`
     display:flex;
     align-items: center;
     border:none;
-    margin-top: 50px;
     flex-direction:column;
     justify-content:center;
     align-items:center;
@@ -30,19 +29,10 @@ export const StyledButton=styled.button`
         color: #2d3ddf;
     }
 
-  /* display: flex;
-  justify-content: center;
-  align-items: center;
-  color: black;
-  text-decoration: none;
-  padding: 0;
-  background-color: red;
-  width: 220px;
-  height: 47px;
-  border: none;
-  border-radius: 50px;
-  font-family: 'Montserrat';
-  font-weight: 600;
-  font-size: 16px;
-  text-transform: uppercase; */
+    @media screen and (max-width: 480px){
+        width:58px;
+        height:58px;
+        font-weight:400;
+        font-size: 10px;
+    }
 `;

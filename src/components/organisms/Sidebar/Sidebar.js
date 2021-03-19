@@ -13,7 +13,8 @@ import {
     BsFillBookmarkFillIcon,
     MdFavoriteIcon,
     BsHouseDoorFillIcon,
-    RiLogoutBoxLineIcon
+    RiLogoutBoxLineIcon,
+    ItemList
 } from './Sidebar.elements';
 
 const Sidebar = ({isLogin,out}) => {
@@ -30,11 +31,11 @@ const Sidebar = ({isLogin,out}) => {
                 </LogoLink>
             </Link>
             <LinkList>
-                <li>
+                <ItemList>
                     <NavLink exact to='/'>
                         <NavbarButton ><BsHouseDoorFillIcon/><SpanText>Home</SpanText> </NavbarButton>
                     </NavLink>                    
-                </li>
+                </ItemList>
                 {/* <li>
                     <NavLink exact to='/search'>
                         <NavbarButton><BsSearchIcon/><SpanText>Explore</SpanText></NavbarButton>
@@ -42,23 +43,23 @@ const Sidebar = ({isLogin,out}) => {
                 </li> */}
                 {isLogin && (
                     <>
-                    <li>
+                    <ItemList>
                         <NavLink exact to='/borrowed'>
                             <NavbarButton><BsFillBookmarkFillIcon/><SpanText>Borrowed</SpanText></NavbarButton>
                         </NavLink>
-                    </li>
-                    <li>
+                    </ItemList>
+                    <ItemList>
                         <NavLink exact to='/favorite'>
                             <NavbarButton><MdFavoriteIcon/><SpanText>Favorite</SpanText></NavbarButton>
                         </NavLink>
-                    </li>
+                    </ItemList>
                     </>
                 )}
-                <li>
+                <ItemList>
                     <NavLink exact to='/login'>
                         <NavbarButton ><BsFillPersonFillIcon/><SpanText>{isLogin?"Profile":"Sign in"}</SpanText></NavbarButton>
                     </NavLink>
-                </li>
+                </ItemList>
             </LinkList>
             <LogoutButton>
             {isLogin && (
