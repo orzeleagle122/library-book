@@ -22,12 +22,19 @@ export const Wrapper=styled.nav`
     z-index:9999;
 
     @media screen and (max-width: 480px){
-        margin-top:auto;
-        height:100px;
         position: fixed;
-        left: 0;
-        bottom: -1px;
+  bottom: 0;
+  right: 0;
+    margin-top:auto;
+    
+-webkit-backface-visibility: hidden;
+-webkit-perspective: 1000;
+-webkit-transform: translate3d(0, 0, 0);
+transform: translateZ(0);
+    -webkit-transform: translateZ(0);
         width: 100%;
+        height: 80px;
+
         border-top-right-radius: 50px;
         border-top-left-radius: 50px;
         border-bottom-right-radius: 0px;

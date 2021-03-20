@@ -17,6 +17,8 @@ export const GridContainer=styled.div`
     flex-wrap:nowrap;
     margin-left:157px;
     border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    border:1px solid black;
 
     @media screen and (max-width: 480px){
         margin-left:0px;
@@ -34,6 +36,7 @@ export const ImageWrapper=styled.div`
     margin:0;
     padding:0;
     position:relative;
+    display:flex;
     /* background-image: url(${img});
     background-color: #2d3ddf;
     background-size: cover;
@@ -41,18 +44,21 @@ export const ImageWrapper=styled.div`
 `;
 
 export const ImageTextContainer=styled.div`
+    /* max-width: 480px; */
     height:149px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items:flex-start;
-    position: relative;
+    position: absolute;
     top: 155px;
     left: 245px;
 
     @media screen and (max-width: 480px){
+        /* max-width: 100px; */
         top: 80px;
         left: 25px;
+        padding-top:10px;
     }
 
 

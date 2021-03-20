@@ -6,10 +6,12 @@ import {
     ImHeartBroken
  } from "react-icons/im";
 import Heading from '../components/atoms/Heading/Heading';
+import {bookPopular} from '../data/bookPopular';
 
 const FavoritePageWrapper=styled.div`
     display:flex;
-    flex-direction:column;
+    flex-direction:row;
+    flex-wrap:wrap;
     width:100%;
 `;
 
@@ -25,16 +27,27 @@ const FavoriteItem=styled.div`
     border-bottom-right-radius: 10px;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
+
+    @media screen and (max-width: 480px){
+        align-items:flex-start;
+        border-right: 1px solid #D1D1D1;
+        border-left: 1px solid #D1D1D1;
+    }
 `;
 
 const BookImages=styled.div`
     width:200px;
-    height:300px;
+    /* height:300px; */
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
     position:relative;
+
+    @media screen and (max-width: 480px){
+        width:100px;
+        height:auto;
+    }
 `;
 
 const BookImage=styled.img`
@@ -42,6 +55,7 @@ const BookImage=styled.img`
     border-bottom-right-radius: 10px;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
+    object-fit: cover;
 `;
 
 const BookContent=styled.div`
@@ -50,13 +64,13 @@ const BookContent=styled.div`
     flex-direction:column;
     justify-content:flex-start;
     align-items:flex-start;
-    height:300px;
+    /* height:300px; */
 
 `;
 
 const BookTitle=styled.h1`
     font-size:18px;
-    letter-spacing:1px;
+    letter-spacing:0px;
     font-weight:700;
     margin-bottom: 15px;
 
@@ -97,7 +111,7 @@ const BookInfo=styled.p`
 
 const BookOrderButton=styled.button`
     width:64px;
-    height:300px;
+    height:100%;
     background-color:#2d3ddf;
     margin-left: auto;
     display:flex;
@@ -113,6 +127,34 @@ const BookOrderButton=styled.button`
     border-bottom-right-radius: 10px;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
+
+    @media screen and (max-width: 480px){
+        display:none;
+    }
+`;
+const BookOrderButtonMobile=styled.button`
+    display:none;
+
+    @media screen and (max-width: 480px){
+        display:block;
+        width:100%;
+    height:50px;
+    background-color:#2d3ddf;
+    margin-left: auto;
+    display:flex;
+    justify-content: center;
+    align-items:center;
+    color:white;
+    font-size:18px;
+    letter-spacing:1px;
+    font-weight:700;
+    cursor:pointer;
+    border:none;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    }
 `;
 
 const VerticalText=styled.p`
@@ -156,18 +198,23 @@ const FavoritePage = () => {
                 Favorite Books
             </Heading>
             <FavoritePageWrapper>
+            {bookPopular.map(item=>(
+                <>
                 <FavoriteItem>
                     <BookImages>
                         <BookImage src={harry} alt="id" />
                         <FavoriteHearth />
                         {/* <FavoriteHearthBroken /> */}
+                        <BookOrderButtonMobile>
+                            Book                       
+                        </BookOrderButtonMobile> 
                     </BookImages>
                     <BookContent>
                         <BookTitle>
-                            Harry Potter i czara ognia
+                            {item.title}
                         </BookTitle>
                         <BookAuthor>
-                            Adam Mickiewicz
+                            {item.author}
                         </BookAuthor>
                         <BookGenres>
                             <Genres>
@@ -178,86 +225,21 @@ const FavoritePage = () => {
                             </Genres>
                         </BookGenres>
                         <BookInfo>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                            {/* Lorem ipsum dolor sit amet, consectetur adipiscing elit.  */}
                         </BookInfo>
                         <Available>
                             15 / 20 pieces of book
-                        </Available>
-                    </BookContent>
+                        </Available>                        
+                    </BookContent>                    
                     <BookOrderButton>
                         <VerticalText>
                            Boooking Book 
                         </VerticalText>                        
                     </BookOrderButton>
-                </FavoriteItem>               
-                <FavoriteItem>
-                    <BookImages>
-                        <BookImage src={harry} alt="id" />
-                        <FavoriteHearth />
-                        {/* <FavoriteHearthBroken /> */}
-                    </BookImages>
-                    <BookContent>
-                        <BookTitle>
-                            Harry Potter i czara ognia
-                        </BookTitle>
-                        <BookAuthor>
-                            Adam Mickiewicz
-                        </BookAuthor>
-                        <BookGenres>
-                            <Genres>
-                               #Fantasy 
-                            </Genres>
-                            <Genres>
-                                #Romanse
-                            </Genres>
-                        </BookGenres>
-                        <BookInfo>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                        </BookInfo>
-                        <Available>
-                            15 / 20 pieces of book
-                        </Available>
-                    </BookContent>
-                    <BookOrderButton>
-                        <VerticalText>
-                           Boooking Book 
-                        </VerticalText>                        
-                    </BookOrderButton>
-                </FavoriteItem>               
-                <FavoriteItem>
-                    <BookImages>
-                        <BookImage src={harry} alt="id" />
-                        <FavoriteHearth />
-                        {/* <FavoriteHearthBroken /> */}
-                    </BookImages>
-                    <BookContent>
-                        <BookTitle>
-                            Harry Potter i czara ognia
-                        </BookTitle>
-                        <BookAuthor>
-                            Adam Mickiewicz
-                        </BookAuthor>
-                        <BookGenres>
-                            <Genres>
-                               #Fantasy 
-                            </Genres>
-                            <Genres>
-                                #Romanse
-                            </Genres>
-                        </BookGenres>
-                        <BookInfo>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                        </BookInfo>
-                        <Available>
-                            15 / 20 pieces of book
-                        </Available>
-                    </BookContent>
-                    <BookOrderButton>
-                        <VerticalText>
-                           Boooking Book 
-                        </VerticalText>                        
-                    </BookOrderButton>
-                </FavoriteItem>               
+                </FavoriteItem>
+                </>
+                ))}
+                           
             </FavoritePageWrapper>
         </>
      );

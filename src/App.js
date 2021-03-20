@@ -18,8 +18,9 @@ const App=({getUserLogin})=>{
     <>
         <GlobalStyle/>
         <Router>
-          <Sidebar/>
+          
           <MainTemplate />
+          <Sidebar/>
         </Router>          
     </>
   );
