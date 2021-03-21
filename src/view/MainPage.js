@@ -3,7 +3,6 @@ import {Input} from '../components/atoms/Input/Input';
 import Heading from '../components/atoms/Heading/Heading';
 import styled from 'styled-components';
 import {bookPopular} from '../data/bookPopular.js';
-import harry from '../assets/img/harry.jpg';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
@@ -14,11 +13,11 @@ import { faSearch,faExclamationCircle } from '@fortawesome/free-solid-svg-icons'
 import { 
   searchBook
 } from '../actions';
-import SearchBookList from '../components/SearchBookList/SearchBookList';
 
 import './slider-arrow.css'
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import BookList from '../components/organisms/BookList/BookList';
 
 
 const BookPopularWrapper=styled.div`
@@ -40,7 +39,7 @@ const MainPage = ({searchbooks,search}) => {
           search(e.target.value);
       }
   
-      const map=searchbooks.map(item=><SearchBookList key={item.id} {...item}/>);
+      const map=searchbooks.map(item=><BookList key={item.id} {...item}/>);
   
 
     return ( 
@@ -67,11 +66,10 @@ const MainPage = ({searchbooks,search}) => {
                 <Heading>Popular Books</Heading>
                 <Slider {...carouselSettings}>
                 {bookPopular.map(item=>(
-                        <>
-                          
+                        <>                          
                           <BookPopularWrapper key={item.id}>
                           <Link to={{ pathname: `/book/${item.title}`, query: {...item}}}>
-                              <img src={harry} alt={item.title}/>
+                              <img style={{width:"100%"}} src={`/assets/bookImages/${item.id}.jpg`} alt={item.title}/>
                               {/* {item.title}*/}
                           </Link>
                           </BookPopularWrapper>

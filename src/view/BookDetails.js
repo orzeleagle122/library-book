@@ -1,6 +1,7 @@
 import React from 'react';
 
 const BookDetails = ({location}) => {
+    console.log(location);
     const {query} = location;
     if(!query) {
         return (

@@ -9,11 +9,12 @@ import {
     searchBook
 } from '../actions';
 
-const SearchWrapper=styled.div`
-    /* margin-right: 200px;
-    margin-left:200px;
-    margin-top:30px; */
+const FavoritePageWrapper=styled.div`
+    display:flex;
+    flex-direction:row;
+    flex-wrap:wrap;
 `;
+    
 
 const SearchPage = ({searchbooks,search}) => {
     
@@ -27,7 +28,7 @@ const SearchPage = ({searchbooks,search}) => {
     const map=searchbooks.map(item=><SearchBookList key={item.id} {...item}/>);
 
     return ( 
-        <SearchWrapper>
+        <>
             <div className="field">
                 <p className="control has-icons-left has-icons-right">
                     <Input className="input" 
@@ -47,8 +48,9 @@ const SearchPage = ({searchbooks,search}) => {
                         <FontAwesomeIcon icon={faExclamationCircle} /> Enter <strong>three</strong> characters to start searching for books.
                 </div>
             )}
-            {map}            
-        </SearchWrapper>
+            <FavoritePageWrapper>{map}</FavoritePageWrapper>
+                       
+        </>
      );
 }
 

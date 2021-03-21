@@ -18,7 +18,6 @@ export const GridContainer=styled.div`
     margin-left:157px;
     border-top-left-radius: 50px;
     border-top-right-radius: 50px;
-    border:1px solid black;
 
     @media screen and (max-width: 480px){
         margin-left:0px;
