@@ -18,11 +18,18 @@ export const FavoriteItem=styled.div`
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
 
+    transition: 0.15s linear;
+
+    &:hover {
+        box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+    }
+
     @media screen and (max-width: 480px){
         align-items:flex-start;
         border-right: 1px solid #D1D1D1;
         border-left: 1px solid #D1D1D1;
         margin-left: 0px;
+        height:100%;
     }
 `;
 
@@ -81,6 +88,10 @@ export const BookGenres=styled.div`
     flex-direction:row;
     justify-content:flex-start;
     align-items:flex-start;
+
+    @media screen and (max-width: 480px){
+        flex-direction:row;
+    }
 `;
 
 export const Genres=styled.div`
@@ -127,6 +138,11 @@ export const BookOrderButton=styled.button`
     border-bottom-right-radius: 10px;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
+    transition: background-color 0.25s linear;
+
+    &:hover {
+        background-color:#2CBC63;
+    }
 
     @media screen and (max-width: 480px){
         display:none;
@@ -175,7 +191,7 @@ export const FavoriteHearth=styled(ImHeartBroken)`
     transition: color 0.5s linear;
 
     &:hover {
-    color:red;
+    color:#46A941;
     opacity: 1;
   }
 `;

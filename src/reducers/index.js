@@ -14,12 +14,15 @@ import {
   AUTH_FAILURE,
   CLEAR_ERROR,
   SEARCH_BOOK_SUCCESS,
-  SEARCH_BOOK_FAILURE
+  SEARCH_BOOK_FAILURE,
+  BOOK_DETAILS_FAILURE,
+  BOOK_DETAILS_SUCCESS
 } from '../actions';
  
  //initial store
  const initialStore={
    books:[],
+   bookDetails:[],
    searchbooks:[],
    totalbooks:0,
    user:{
@@ -33,6 +36,24 @@ import {
  
  //reducer(old-state,action) return update or old state
  export const reducer=(state=initialStore,action)=>{
+  if(action.type===BOOK_DETAILS_SUCCESS){
+    return {
+      ...state,
+      bookDetails: action.payload.data
+    }
+  }
+  if(action.type===BOOK_DETAILS_FAILURE){
+    return {
+      ...state,
+      bookDetails: action.err.response.data
+    }
+  }
+  if(action.type===BOOK_DETAILS_FAILURE){
+    return {
+      ...state,
+      // bookDetails: action.payload.data
+    }
+  }
   if(action.type===SEARCH_BOOK_FAILURE){
     return {
       ...state,

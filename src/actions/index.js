@@ -32,7 +32,12 @@ export const ADD_BOOK_REQUEST='ADD_BOOK_REQUEST';
 export const ADD_BOOK_SUCCESS='ADD_BOOK_SUCCESS';
 export const ADD_BOOK_FAILURE='ADD_BOOK_FAILURE';
 
-const API='http://192.168.1.32:8080/api';
+export const BOOK_DETAILS_REQUEST='BOOK_DETAILS_REQUEST';
+export const BOOK_DETAILS_SUCCESS='BOOK_DETAILS_SUCCESS';
+export const BOOK_DETAILS_FAILURE='BOOK_DETAILS_FAILURE';
+
+
+const API='http://localhost:8080/api';
 
 
 export const fetchBooks=()=>async(dispatch)=>{
@@ -179,6 +184,49 @@ export const cleanErrors=()=>{
 }
 
 
+export const bookRequest=(id,title)=>async(dispatch)=>{
+    dispatch({
+        type:BOOK_DETAILS_REQUEST
+    })
+    return axios.get(API+`/book/${id}/${title}`)
+    .then(payload=>{
+        console.log(payload);
+        dispatch({
+            type:BOOK_DETAILS_SUCCESS,
+            payload
+        })        
+    })
+    .catch(err=>{
+        console.log(err.response.data.message);
+        console.log(err.response.data.details);
+        dispatch({
+            type:BOOK_DETAILS_FAILURE,
+            err
+        })
+    })
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // test below
 
 export const searchBook=(phrase)=>async(dispatch)=>{
@@ -205,6 +253,7 @@ export const searchBook=(phrase)=>async(dispatch)=>{
         })
     }
 }
+
 
 // export const addBook=(title,author,publisher,bookType,amount)=>async(dispatch)=>{
 //     dispatch({

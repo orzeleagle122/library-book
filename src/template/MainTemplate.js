@@ -2,7 +2,6 @@ import React from 'react';
 import { Route } from 'react-router';
 import AccountPage from '../view/AccountPage';
 import BorrowedPage from '../view/BorrowedPage';
-import SearchPage from '../view/SearchPage';
 import LoginPage from '../view/LoginPage';
 import RegisterPage from '../view/RegisterPage';
 import MainPage from '../view/MainPage';
@@ -47,12 +46,10 @@ const MainTemplate = () => {
                         <Route path={routers.home} exact component={MainPage} />
                         <Route path={routers.account} exact component={AccountPage} />
                         <Route path={routers.borrowed} exact component={BorrowedPage} />
-                        <Route path={routers.search} exact component={SearchPage} />
                         <Route path={routers.login} exact component={LoginPage} />
                         <Route path={routers.register} exact component={RegisterPage} />
                         <Route path={routers.favorite} exact component={FavoritePage} />
                         <Route path={routers.add} exact component={AddBook} />
-
                         <Route path={routers.book} exact component={BookDetails} />
                         
                     </MainContent>

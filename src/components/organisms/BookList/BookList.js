@@ -15,7 +15,6 @@ import {
     VerticalText,
     BookImage
 } from './BookList.elements';
-import harry from '../../../assets/img/harry.jpg';
 import { Link } from 'react-router-dom';
 
 const BookList = (props) => {
@@ -23,7 +22,7 @@ const BookList = (props) => {
     return (        
                 <FavoriteItem>
                     <BookImages>
-                        <Link to={{ pathname: `/book/${props.title}`, query: {...props}}}> 
+                        <Link to={{ pathname: `/book/${props.id}/${props.title}`, query: {...props}}}> 
                             <BookImage src={`/assets/bookImages/${props.id}.jpg`} alt={props.title} />
                             <FavoriteHearth />
                             {/* <FavoriteHearthBroken /> */}                            

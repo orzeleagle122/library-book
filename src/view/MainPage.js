@@ -27,6 +27,13 @@ const BookPopularWrapper=styled.div`
     /* min-width: 200px;
     min-height:300px; */
     margin-right:10px;
+    margin-bottom: 20px;
+`;
+
+const FavoritePageWrapper=styled.div`
+    display:flex;
+    flex-direction:row;
+    flex-wrap:wrap;
 `;
 
 
@@ -68,7 +75,7 @@ const MainPage = ({searchbooks,search}) => {
                 {bookPopular.map(item=>(
                         <>                          
                           <BookPopularWrapper key={item.id}>
-                          <Link to={{ pathname: `/book/${item.title}`, query: {...item}}}>
+                          <Link to={{ pathname: `/book/${item.id}/${item.title}`, query: {...item}}}>
                               <img style={{width:"100%"}} src={`/assets/bookImages/${item.id}.jpg`} alt={item.title}/>
                               {/* {item.title}*/}
                           </Link>
@@ -78,7 +85,7 @@ const MainPage = ({searchbooks,search}) => {
                 </Slider>  
               </>
             )}
-            {map}
+            <FavoritePageWrapper>{map}</FavoritePageWrapper>
 
         </>
      );

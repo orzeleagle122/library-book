@@ -8,7 +8,7 @@ export const routers={
     login: "/login",
     register: "/register",
     favorite: "/favorite",
-    book: "/book/:title",
+    book: "/book/:id/:title",
 
     add: "/add",
  
