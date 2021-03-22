@@ -44,7 +44,7 @@ export const fetchBooks=()=>async(dispatch)=>{
     dispatch({
         type:FETCH_BOOKS_REQUEST
     });
-    return axios.get(API+"/book/search/all")
+    return axios.get(API+"/book/search/random",{ params: { number: 10 } })
     .then(payload=>{
         console.log(payload);
         dispatch({
@@ -190,15 +190,12 @@ export const bookRequest=(id,title)=>async(dispatch)=>{
     })
     return axios.get(API+`/book/${id}/${title}`)
     .then(payload=>{
-        console.log(payload);
         dispatch({
             type:BOOK_DETAILS_SUCCESS,
             payload
         })        
     })
     .catch(err=>{
-        console.log(err.response.data.message);
-        console.log(err.response.data.details);
         dispatch({
             type:BOOK_DETAILS_FAILURE,
             err

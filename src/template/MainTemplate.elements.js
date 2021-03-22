@@ -15,7 +15,7 @@ export const GridContainer=styled.div`
     justify-content:flex-start;
     min-height:100vh;
     flex-wrap:nowrap;
-    margin-left:157px;
+    margin-left:87px;
     border-top-left-radius: 50px;
     border-top-right-radius: 50px;
 

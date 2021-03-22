@@ -10,7 +10,7 @@ export const Wrapper=styled.nav`
     left:0;
     top:0;
     padding:25px 0;
-    width:157px;
+    width:87px;
     height: 100vh;
     background-color:#2d3ddf;
     display:flex;
@@ -45,8 +45,8 @@ transform: translateZ(0);
 
 export const LogoLink=styled(ImBooks)`
     display: block;
-    width:68px;
-    height:68px;
+    width:56px;
+    height:56px;
     border: none;
     color:white;
     cursor:pointer;

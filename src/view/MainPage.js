@@ -34,6 +34,7 @@ const FavoritePageWrapper=styled.div`
     display:flex;
     flex-direction:row;
     flex-wrap:wrap;
+    justify-content:space-around;
 `;
 
 
@@ -59,6 +60,18 @@ const MainPage = ({searchbooks,search}) => {
                             onChange={handleChangeSearchFormValue} 
                             value={searchFormValue}
                         />
+                        <label class="container">title
+                          <input type="checkbox"/>
+                          <span class="checkmark"></span>
+                        </label>
+                        <label class="container">author
+                          <input type="checkbox"/>
+                          <span class="checkmark"></span>
+                        </label>
+                        <label class="container">genre
+                          <input type="checkbox"/>
+                          <span class="checkmark"></span>
+                        </label>
                     <span className="icon is-small is-left">
                         <FontAwesomeIcon icon={faSearch} />
                     </span>

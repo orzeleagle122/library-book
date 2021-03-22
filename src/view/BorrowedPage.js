@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import BookList from '../components/BookList/BookList';
+import BookList from '../components/organisms/BookList/BookList';
 //redux connect
 import {connect} from 'react-redux';
 import {
     // GET_TOTALS,
     fetchBooks
 } from '../actions';
+import Loader from '../components/molecules/Loader/Loader';
 
 const BorrowedWrapper=styled.div`
     /* margin-right: 200px;
@@ -17,14 +18,15 @@ const BorrowedWrapper=styled.div`
 const BorrowedPage = ({books=[],totalbooks,fetch}) => {
     useEffect(()=>{
         fetch();  
-        // total();              
+        // total(); 
+
+
     },
     [fetch]
     )
-
     return ( 
         <> 
-            <h2>Number of books:{totalbooks}</h2>
+            <h2>Number of all books:{totalbooks}</h2>
             {books.length?(
                 <BorrowedWrapper>
                 {books.map(item=>(
@@ -32,7 +34,7 @@ const BorrowedPage = ({books=[],totalbooks,fetch}) => {
                 ))}            
             </BorrowedWrapper>
             ):(
-                <button className="button is-loading is-info is-large"/>
+                <Loader/>
             )}
             
         </>

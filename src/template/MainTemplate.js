@@ -20,7 +20,7 @@ import AddBook from '../view/AddBook';
 import main_img from '../assets/layout/main_img.jpg';
 import FavoritePage from '../view/FavoritePage';
 import {routers} from '../data/routers';
-import BookDetails from '../view/BookDetails';
+import BookDetailsPage from '../view/BookDetailsPage';
 
 const MainTemplate = () => {
 
@@ -50,8 +50,7 @@ const MainTemplate = () => {
                         <Route path={routers.register} exact component={RegisterPage} />
                         <Route path={routers.favorite} exact component={FavoritePage} />
                         <Route path={routers.add} exact component={AddBook} />
-                        <Route path={routers.book} exact component={BookDetails} />
-                        
+                        <Route path={routers.book} exact component={BookDetailsPage} />                        
                     </MainContent>
                 </GridContainer>
             </MainTemplateWrapper>

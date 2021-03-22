@@ -40,7 +40,7 @@ const flip = keyframes`
 `
 
 export const Book=styled.div`
-  top: 50%;
+  top: 10%;
   transform: translateY(-50%);
   position:relative;
   margin:0 auto;

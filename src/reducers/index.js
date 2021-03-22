@@ -30,9 +30,18 @@ import {
      isLogin: null,
      id:0
    },
+   loading:true,
    applicationError:null,
    searchFormValue:''
  }
+
+//  const newStore={
+//   test:[]
+// }
+
+// export const newreducer=(state=newStore,action)=>{
+//   return state;
+// }
  
  //reducer(old-state,action) return update or old state
  export const reducer=(state=initialStore,action)=>{

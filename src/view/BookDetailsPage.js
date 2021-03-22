@@ -37,19 +37,23 @@ const BookDetails = ({location,bookInfo,bookDetails}) => {
             </>
         )
     }
-
-    if(!bookDetails){
-        return <Loader/>
-    }
     
-    // dodać loader gdy dane sa pobieranie, zrobic do tego osobny komponent
     return (
         <>
-        after Refresh <br/>
-        <Heading>{bookDetails.title} </Heading>
-        <h3>{bookDetails.author}</h3>
-        {bookDetails.amount}, 
-        {bookDetails.id}
+        {bookDetails.id >= 1 ? (
+            <>
+                after Refresh <br/>
+                <Heading>{bookDetails.title} </Heading>
+                <h3>{bookDetails.author}</h3>
+                {bookDetails.amount}, 
+                {bookDetails.id}
+            </>
+        ):(
+            <>
+                <Loader/>
+            </>
+        )}
+
 
     </>
     )

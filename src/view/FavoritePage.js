@@ -7,6 +7,7 @@ import BookList from '../components/organisms/BookList/BookList';
 const FavoritePageWrapper=styled.div`
     display:flex;
     flex-direction:row;
+    justify-content:space-around;
     flex-wrap:wrap;
     width:100%;
 `;
@@ -28,5 +29,16 @@ const FavoritePage = () => {
         </>
      );
 }
+
+//future - delete favorite book - should be in BookList component
+// const mapDispatchToProps=(dispatch,ownProps)=>{
+//     //ownProps - all props transferred to component
+//     // console.log(ownProps);
+//     const {id}=ownProps;
+//     return {
+//         //action creator
+//         remove:()=>dispatch(removeBook(id)),
+//     }
+// }
  
 export default FavoritePage;
