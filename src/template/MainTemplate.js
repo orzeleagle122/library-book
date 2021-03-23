@@ -21,6 +21,7 @@ import main_img from '../assets/layout/main_img.jpg';
 import FavoritePage from '../view/FavoritePage';
 import {routers} from '../data/routers';
 import BookDetailsPage from '../view/BookDetailsPage';
+import AddGenre from '../view/AddGenre';
 
 const MainTemplate = () => {
 
@@ -49,7 +50,9 @@ const MainTemplate = () => {
                         <Route path={routers.login} exact component={LoginPage} />
                         <Route path={routers.register} exact component={RegisterPage} />
                         <Route path={routers.favorite} exact component={FavoritePage} />
-                        <Route path={routers.add} exact component={AddBook} />
+                        <Route path={routers.addBook} exact component={AddBook} />
+                        <Route path={routers.addBook} exact component={AddBook} />
+                        <Route path={routers.addGenre} exact component={AddGenre} />
                         <Route path={routers.book} exact component={BookDetailsPage} />                        
                     </MainContent>
                 </GridContainer>

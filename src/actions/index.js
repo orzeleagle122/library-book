@@ -36,9 +36,23 @@ export const BOOK_DETAILS_REQUEST='BOOK_DETAILS_REQUEST';
 export const BOOK_DETAILS_SUCCESS='BOOK_DETAILS_SUCCESS';
 export const BOOK_DETAILS_FAILURE='BOOK_DETAILS_FAILURE';
 
+export const GET_GENRE_REQUEST='GET_GENRE_REQUEST';
+export const GET_GENRE_SUCCESS='GET_GENRE_SUCCESS';
+export const GET_GENRE_FAILURE='GET_GENRE_FAILURE';
+export const REMOVE_GENRE='REMOVE_GENRE';
+
 
 const API='http://localhost:8080/api';
 
+export const removeGenre=(item)=>{
+    console.log(item);
+    return {
+        type:REMOVE_GENRE,
+        payload:{
+            item
+        }
+    }
+}
 
 export const fetchBooks=()=>async(dispatch)=>{
     dispatch({
@@ -59,7 +73,6 @@ export const fetchBooks=()=>async(dispatch)=>{
         })
     })
 }
-
 
 export const logOut=()=>{
     return {

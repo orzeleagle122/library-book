@@ -31,7 +31,7 @@ const BookList = (props) => {
                         </BookOrderButtonMobile> 
                     </BookImages>
                     <BookContent>
-                        <Link to={{ pathname: `/book/${props.title}`, query: {...props}}}> 
+                        <Link to={{ pathname: `/book/${props.id}/${props.title}`, query: {...props}}}> 
                             <BookTitle>
                                 {props.title} 
                                 
@@ -43,9 +43,7 @@ const BookList = (props) => {
                                     <>
                                         <FavoriteHearthAdd/>    
                                     </>
-                                )}                                                                                              
-                                
-                            {/* <FavoriteHearthBroken /> */}    
+                                )}
                             </BookTitle>
                             <BookAuthor>
                                 {props.author}
@@ -67,7 +65,11 @@ const BookList = (props) => {
                                         (here space for status: borrowed or close) <br/><br/>
                                     </>
                                 )}
-                                status: available or unavailable
+                                {!props.borrowed && (
+                                    <>
+                                        status: available or unavailable
+                                    </>
+                                )}                                
                             </Available> 
                         </Link>                       
                     </BookContent>                    

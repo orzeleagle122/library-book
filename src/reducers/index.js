@@ -17,7 +17,8 @@ import {
   SEARCH_BOOK_FAILURE,
   BOOK_DETAILS_FAILURE,
   BOOK_DETAILS_SUCCESS,
-  MIN_THREE_CHAR
+  MIN_THREE_CHAR,
+  REMOVE_GENRE
 } from '../actions';
  
  //initial store
@@ -25,6 +26,46 @@ import {
    books:[],
    bookDetails:[],
    searchbooks:[],
+   genreList:[
+      {
+          "id": 1,
+          "genre": "Horror",
+          "books": []
+      },
+      {
+          "id": 2,
+          "genre": "Comedy",
+          "books": []
+      },
+      {
+          "id": 3,
+          "genre": "Dokumentalny",
+          "books": []
+      },
+      {
+          "id": 4,
+          "genre": "Mlodzieżowy",
+          "books": []
+      },
+      {
+          "id": 5,
+          "genre": "Autobiofrafia",
+          "books": []
+      },
+      {
+          "id": 6,
+          "genre": "co badz",
+          "books": []
+      }
+    ],
+   genreRemoved:[
+    {
+      "id": 2,
+      "genre": "Comedy",
+      "books": []
+  }
+   ],
+   genreNews:[],
    totalbooks:0,
    user:{
      userToken:'',
@@ -46,6 +87,18 @@ import {
  
  //reducer(old-state,action) return update or old state
  export const reducer=(state=initialStore,action)=>{
+   if(action.type===REMOVE_GENRE){
+     return {
+       ...state,
+       genreList: [
+         ...state.genreList.filter(item=>item.id!==action.payload.item)
+       ],
+      //  genreRemoved: [
+      //    ...state.genreRemoved,
+      //    action.type.item
+      //  ]
+     }
+   }
    if(action.type===MIN_THREE_CHAR){
      return {
        ...state,

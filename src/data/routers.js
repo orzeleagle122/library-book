@@ -10,6 +10,7 @@ export const routers={
     favorite: "/favorite",
     book: "/book/:id/:title",
 
-    add: "/add",
+    addBook: "/admin/add",
+    addGenre: "/admin/genre",
  
 }
