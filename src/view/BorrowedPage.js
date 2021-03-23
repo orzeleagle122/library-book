@@ -10,9 +10,11 @@ import {
 import Loader from '../components/molecules/Loader/Loader';
 
 const BorrowedWrapper=styled.div`
-    /* margin-right: 200px;
-    margin-left:200px;
-    margin-top:30px; */
+    display:flex;
+    flex-direction:row;
+    justify-content:space-around;
+    flex-wrap:wrap;
+    width:100%;
 `;
 
 const BorrowedPage = ({books=[],totalbooks,fetch}) => {
@@ -24,15 +26,16 @@ const BorrowedPage = ({books=[],totalbooks,fetch}) => {
     },
     [fetch]
     )
+
     return ( 
         <> 
             <h2>Number of all books:{totalbooks}</h2>
             {books.length?(
                 <BorrowedWrapper>
-                {books.map(item=>(
-                    <BookList key={item.id} {...item}/>
-                ))}            
-            </BorrowedWrapper>
+                    {books.map(item=>(
+                        <BookList key={item.id} {...item} borrowed/>
+                    ))}            
+                </BorrowedWrapper>
             ):(
                 <Loader/>
             )}
@@ -41,7 +44,7 @@ const BorrowedPage = ({books=[],totalbooks,fetch}) => {
      );
 }
 
-const mapStateToProps=({books,totalbooks})=>{
+const mapStateToProps=({books,totalbooks,user})=>{
     return {books,totalbooks}
 }
 

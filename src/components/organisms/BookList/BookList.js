@@ -2,7 +2,7 @@ import React from 'react';
 import {
     FavoriteItem,
     BookImages,
-    FavoriteHearth,
+    FavoriteHearthBroken,
     BookOrderButtonMobile,
     BookContent,
     BookTitle,
@@ -13,19 +13,18 @@ import {
     Available,
     BookOrderButton,
     VerticalText,
-    BookImage
+    BookImage,
+    FavoriteHearthAdd
 } from './BookList.elements';
 import { Link } from 'react-router-dom';
 
 const BookList = (props) => {
-
+    // console.log("to: "+props.borrowed);
     return (        
                 <FavoriteItem>
                     <BookImages>
                         <Link to={{ pathname: `/book/${props.id}/${props.title}`, query: {...props}}}> 
-                            <BookImage src={`/assets/bookImages/${props.id}.jpg`} alt={props.title} />
-                            <FavoriteHearth />
-                            {/* <FavoriteHearthBroken /> */}                            
+                            <BookImage src={`/assets/bookImages/${props.id}.jpg`} alt={props.title} />                        
                         </Link>
                         <BookOrderButtonMobile>
                             Book                       
@@ -34,7 +33,19 @@ const BookList = (props) => {
                     <BookContent>
                         <Link to={{ pathname: `/book/${props.title}`, query: {...props}}}> 
                             <BookTitle>
-                                {props.title}
+                                {props.title} 
+                                
+                                {props.favorite ? (
+                                    <>                                        
+                                        <FavoriteHearthBroken /> 
+                                    </>
+                                ):(
+                                    <>
+                                        <FavoriteHearthAdd/>    
+                                    </>
+                                )}                                                                                              
+                                
+                            {/* <FavoriteHearthBroken /> */}    
                             </BookTitle>
                             <BookAuthor>
                                 {props.author}
@@ -51,17 +62,29 @@ const BookList = (props) => {
                                 {/* Lorem ipsum dolor sit amet, consectetur adipiscing elit.  */}
                             </BookInfo>
                             <Available>
-                                15 / 20 pieces of book
+                                {props.borrowed && (
+                                    <>
+                                        (here space for status: borrowed or close) <br/><br/>
+                                    </>
+                                )}
+                                status: available or unavailable
                             </Available> 
                         </Link>                       
                     </BookContent>                    
-                    <BookOrderButton>
-                        <VerticalText>
+                    <BookOrderButton isLogin={props.isLogin}>
+                        <VerticalText >
                            Borrow a book 
                         </VerticalText>                        
                     </BookOrderButton>
                 </FavoriteItem>
      );
 }
+
+// const mapStateToProps=({user})=>{
+//     const {isLogin}=user;
+//     return {
+//         isLogin
+//     }
+// }
  
 export default BookList;

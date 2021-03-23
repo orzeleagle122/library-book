@@ -16,7 +16,8 @@ import {
   SEARCH_BOOK_SUCCESS,
   SEARCH_BOOK_FAILURE,
   BOOK_DETAILS_FAILURE,
-  BOOK_DETAILS_SUCCESS
+  BOOK_DETAILS_SUCCESS,
+  MIN_THREE_CHAR
 } from '../actions';
  
  //initial store
@@ -27,7 +28,7 @@ import {
    totalbooks:0,
    user:{
      userToken:'',
-     isLogin: null,
+     isLogin: false,
      id:0
    },
    loading:true,
@@ -45,6 +46,12 @@ import {
  
  //reducer(old-state,action) return update or old state
  export const reducer=(state=initialStore,action)=>{
+   if(action.type===MIN_THREE_CHAR){
+     return {
+       ...state,
+       searchbooks: []
+     }
+   }
   if(action.type===BOOK_DETAILS_SUCCESS){
     return {
       ...state,
@@ -90,7 +97,7 @@ import {
       ...state,
       user:{
         userToken: action.payload.data.token,
-        isLogin:true
+        isLogin: true
       }
     }
   }
@@ -100,7 +107,7 @@ import {
       ...state,
       user:{
         userToken:'',
-        isLogin:false
+        isLogin: false
       }
     }
   }
@@ -108,7 +115,7 @@ import {
     return {
       ...state,
       user:{
-        isLogin:true
+        isLogin: true
       }
     }
   }

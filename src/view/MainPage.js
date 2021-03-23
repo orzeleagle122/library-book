@@ -38,7 +38,7 @@ const FavoritePageWrapper=styled.div`
 `;
 
 
-const MainPage = ({searchbooks,search}) => {
+const MainPage = ({searchbooks,search,isLogin}) => {
 
       const [searchFormValue,setSearchFormValue]=useState('');
 
@@ -47,7 +47,7 @@ const MainPage = ({searchbooks,search}) => {
           search(e.target.value);
       }
   
-      const map=searchbooks.map(item=><BookList key={item.id} {...item}/>);
+      const map=searchbooks.map(item=><BookList key={item.id} {...item} isLogin={isLogin}/> );
   
 
     return ( 
@@ -60,29 +60,30 @@ const MainPage = ({searchbooks,search}) => {
                             onChange={handleChangeSearchFormValue} 
                             value={searchFormValue}
                         />
-                        <label class="container">title
+                        <label className="container">title
                           <input type="checkbox"/>
-                          <span class="checkmark"></span>
+                          <span className="checkmark"></span>
                         </label>
-                        <label class="container">author
+                        <label className="container">author
                           <input type="checkbox"/>
-                          <span class="checkmark"></span>
+                          <span className="checkmark"></span>
                         </label>
-                        <label class="container">genre
+                        <label className="container">genre
                           <input type="checkbox"/>
-                          <span class="checkmark"></span>
+                          <span className="checkmark"></span>
                         </label>
                     <span className="icon is-small is-left">
                         <FontAwesomeIcon icon={faSearch} />
                     </span>
                 </p>
             </div> 
-
+            <FavoritePageWrapper>{map}</FavoritePageWrapper>
             {searchFormValue.length<=2&&(
               <>
                 <div className="notification is-warning">
                         <FontAwesomeIcon icon={faExclamationCircle} /> Enter <strong>three</strong> characters to start searching for books.
                 </div>
+                
                 <Heading>Popular Books</Heading>
                 <Slider {...carouselSettings}>
                 {bookPopular.map(item=>(
@@ -98,14 +99,15 @@ const MainPage = ({searchbooks,search}) => {
                 </Slider>  
               </>
             )}
-            <FavoritePageWrapper>{map}</FavoritePageWrapper>
+            
 
         </>
      );
 }
  
-const mapStateToProps=({searchbooks})=>{
-  return {searchbooks}
+const mapStateToProps=({searchbooks,user})=>{
+  const {isLogin}=user;
+  return {searchbooks,isLogin}
 }
 
 const mapDispatchToProps=dispatch=>{

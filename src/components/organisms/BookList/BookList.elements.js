@@ -1,6 +1,6 @@
-import styled from 'styled-components';
+import styled,{css} from 'styled-components';
 import { 
-    // ImHeart,
+    ImHeart,
     ImHeartBroken
  } from "react-icons/im";
 
@@ -17,12 +17,16 @@ export const FavoriteItem=styled.div`
     border-bottom-right-radius: 10px;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
-
     transition: 0.15s linear;
+
+    ${({isLogin}) => !isLogin && css`
+        border-right: 1px solid #D1D1D1;
+    `}
 
     &:hover {
         box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
     }
+
 
     @media screen and (max-width: 480px){
         align-items:flex-start;
@@ -34,7 +38,7 @@ export const FavoriteItem=styled.div`
 `;
 
 export const BookImages=styled.div`
-    width:200px;
+    width:100px;
     /* height:300px; */
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
@@ -66,6 +70,7 @@ export const BookContent=styled.div`
     align-items:flex-start;
     height:100%;
 
+
     /* height:300px; */
     @media screen and (max-width: 480px){
         width:100%;
@@ -80,6 +85,7 @@ export const BookTitle=styled.h1`
     margin-bottom: 15px;
     text-decoration:none;
     color:black !important;
+    position:relative;
 
 `;
 
@@ -121,6 +127,7 @@ export const BookInfo=styled.p`
 `;
 
 export const BookOrderButton=styled.button`
+
     width:64px;
     height:100%;
     background-color:#2d3ddf;
@@ -139,6 +146,12 @@ export const BookOrderButton=styled.button`
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
     transition: background-color 0.25s linear;
+
+    ${({isLogin}) => !isLogin && css`
+        display:none;
+    `}
+
+
 
     &:hover {
         background-color:#2CBC63;
@@ -179,19 +192,33 @@ export const VerticalText=styled.p`
     writing-mode: vertical-rl;
 `;
 
-export const FavoriteHearth=styled(ImHeartBroken)`
-    color:white;
-    position:absolute;
+export const FavoriteHearthBroken=styled(ImHeartBroken)`
+    color:black;
+    font-size:20px !important;
+    margin-left: 5px;
     z-index:999;
-    right:150px;
-    bottom: 20px;
     font-size: 30px;
     opacity: 0.7;
     transition: opacity 0.5s linear;
     transition: color 0.5s linear;
 
     &:hover {
-    color:#46A941;
+    color:red;
+    opacity: 1;
+  }
+`;
+export const FavoriteHearthAdd=styled(ImHeart)`
+    color:black;
+    font-size:20px !important;
+    margin-left: 5px;
+    z-index:999;
+    font-size: 30px;
+    opacity: 0.7;
+    transition: opacity 0.5s linear;
+    transition: color 0.5s linear;
+
+    &:hover {
+    color:red;
     opacity: 1;
   }
 `;

@@ -14,7 +14,7 @@ const LoginWrapper=styled.div`
     margin-top:30px; */
 `;
 
-const LoginPage = ({auth,userToken,applicationError,errClean}) => {
+const LoginPage = ({auth,isLogin,applicationError,errClean}) => {
     useEffect(()=>{
         return errClean
     },[errClean]);
@@ -43,7 +43,7 @@ const LoginPage = ({auth,userToken,applicationError,errClean}) => {
                 // isSubmitting,
                 /* and other goodies */
             }) => {
-                if(userToken){
+                if(isLogin){
                     return <Redirect to='/' />
                 }
 
@@ -88,9 +88,9 @@ const LoginPage = ({auth,userToken,applicationError,errClean}) => {
 }
 
 const mapStateToProps=({user,applicationError})=>{
-    const {userToken}=user;
+    const {isLogin}=user;
     return {
-        userToken,
+        isLogin,
         applicationError
     }
 }

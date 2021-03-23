@@ -21,7 +21,7 @@ const FavoritePage = () => {
             <FavoritePageWrapper>
             {bookPopular.map(item=>(
                 <>
-                    <BookList {...item}/>
+                    <BookList key={item.id} {...item} isLogin={true} favorite/>
                 </>
                 ))}
                            
