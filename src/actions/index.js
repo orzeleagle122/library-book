@@ -39,19 +39,87 @@ export const BOOK_DETAILS_FAILURE='BOOK_DETAILS_FAILURE';
 export const GET_GENRE_REQUEST='GET_GENRE_REQUEST';
 export const GET_GENRE_SUCCESS='GET_GENRE_SUCCESS';
 export const GET_GENRE_FAILURE='GET_GENRE_FAILURE';
+export const SEND_REMOVE_GENRELIST='SEND_REMOVE_GENRELIST';
+export const SEND_ADD_GENRELIST='SEND_ADD_GENRELIST';
 export const REMOVE_GENRE='REMOVE_GENRE';
+export const REMOVE_GENRE2='REMOVE_GENRE2';
+export const REMOVE_GENRE3='REMOVE_GENRE3';
+export const ADD_GENRE='ADD_GENRE';
 
 
 const API='http://localhost:8080/api';
 
+export const addGenre=(id,genre)=>{
+    console.log(genre);
+    return {
+        type: ADD_GENRE,
+        payload: {
+            id,
+            genre
+        }
+    }
+}
+
 export const removeGenre=(item)=>{
-    console.log(item);
     return {
         type:REMOVE_GENRE,
         payload:{
             item
         }
     }
+}
+
+// usuwanie usunietych gatunków
+export const removeGenre2=(item)=>{
+    return {
+        type:REMOVE_GENRE2,
+        payload:{
+            item
+        }
+    }
+}
+// usuwanie dodanych gatunków
+export const removeGenre3=(item)=>{
+    return {
+        type:REMOVE_GENRE3,
+        payload:{
+            item
+        }
+    }
+}
+
+export const sendRemoveListGenre=(removeList)=>async(dispatch)=>{
+    dispatch({
+        type: SEND_REMOVE_GENRELIST
+    })
+    return axios.delete(API+"/book/genre/delete", {data:{removeList}})
+}
+export const sendNewsListGenre=(addList)=>async(dispatch)=>{
+    dispatch({
+        type: SEND_ADD_GENRELIST
+    })
+    return axios.post(API+"/book/genre/add", {
+        addList
+    })
+}
+
+export const fetchGenres=()=>async(dispatch)=>{
+    dispatch({
+        type:GET_GENRE_REQUEST
+    });
+    return axios.get(API+"/bookGenre/search/all")
+    .then(payload=>{
+        dispatch({
+            type:GET_CURRENT_USER_SUCCESS,
+            payload
+        })
+    })
+    .catch(err=>{
+        dispatch({
+            type: GET_GENRE_FAILURE,
+            err
+        })
+    })
 }
 
 export const fetchBooks=()=>async(dispatch)=>{

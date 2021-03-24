@@ -1,16 +1,48 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Input } from '../components/atoms/Input/Input';
 import GenreList from '../components/organisms/GenreList/GenreList';
+import {connect} from 'react-redux';
+import {
+    addGenre
+} from '../actions';
 
-const AddGenre = () => {
+
+
+const AddGenre = ({genre}) => {
+    const [value,setValue]=useState('');
+
+    const handleOnChangeValueForm=(e)=>{
+        setValue(e.target.value);
+    }
+
+    const handleSubmitAddGende=(e)=>{
+        e.preventDefault();
+        const randomId = Math.floor(Math.random() * 1000);
+        genre(randomId,value);
+        setValue('');
+    }
+
     return ( 
         <>
-            <Input placeholder="Enter here genre type to add"/>
+            <form onSubmit={handleSubmitAddGende}>
+            <Input 
+                placeholder="Enter here genre type to add"
+                onChange={handleOnChangeValueForm}
+                value={value}
+                />
+            </form>
 
             <GenreList/>
 
         </>
      );
 }
+
+
+const mapDispatchToProps=(dispatch)=>{
+    return {
+        genre:(randomId,genre)=>dispatch(addGenre(randomId,genre))
+    }
+}
  
-export default AddGenre;
+export default connect(null,mapDispatchToProps)(AddGenre);

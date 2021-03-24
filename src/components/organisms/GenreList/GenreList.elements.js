@@ -67,19 +67,23 @@ export const DeleteButton=styled.button`
 `;
 
 export const AcceptButton=styled.button`
+    margin-top:20px;
     border:none;
     padding: 10px 50px;
-    background-color: #3ACE3A;
+    background-color: #77DD77;
     border-radius: 10px;
     font-size:20px;
     margin-right: 10px;
+    font-family: 'Poppins',sans-serif;
 
 `;
 export const CancelButton=styled.button`
+    margin-top:20px;
     border:none;
     padding: 10px 30px;
-    background-color: #DD7777;
+    background-color: #FFB2AE;
     border-radius: 10px;
     font-size:20px;
+    font-family: 'Poppins',sans-serif;
 
 `;
