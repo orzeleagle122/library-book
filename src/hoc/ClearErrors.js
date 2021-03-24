@@ -5,9 +5,9 @@ import {
 } from '../actions';
 
 const ClearErros = (WrappedComponent,{clean}) => {
-    useEffect(()=>{
-        return clean();
-    })
+    // useEffect(()=>{
+    //     return clean();
+    // })
 
     return ()=>(
         <WrappedComponent/>

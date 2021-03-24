@@ -1,9 +1,7 @@
 import styled, { css } from 'styled-components';
 import {
-    RiDeleteBin2Fill,
-    RiRecycleFill
+    RiDeleteBin2Fill
 } from "react-icons/ri";
-
 import { VscDebugStepOver } from "react-icons/vsc";
 
 
@@ -38,6 +36,7 @@ export const Genre=styled.div`
 `;
 
 export const RiDeleteBin2FillIcon=styled(RiDeleteBin2Fill)`
+    cursor: pointer;
     ${({remove})=>remove && css`
     display:none;
     `}
@@ -46,11 +45,13 @@ export const RiDeleteBin2FillIcon=styled(RiDeleteBin2Fill)`
     display:none;
     `}
 `;
+
 export const VscDebugStepOverIcon=styled(VscDebugStepOver)`
     display:none;
 
     ${({remove})=>remove && css`
     display:inline-block;
+    cursor: pointer;
     `}
 `;
 
@@ -77,6 +78,7 @@ export const AcceptButton=styled.button`
     font-size:20px;
     margin-right: 10px;
     font-family: 'Poppins',sans-serif;
+    cursor: pointer;
 
 `;
 export const CancelButton=styled.button`
@@ -87,5 +89,6 @@ export const CancelButton=styled.button`
     border-radius: 10px;
     font-size:20px;
     font-family: 'Poppins',sans-serif;
+    cursor: pointer;
 
 `;

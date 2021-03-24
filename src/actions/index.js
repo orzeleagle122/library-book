@@ -135,7 +135,8 @@ export const fetchBooks=()=>async(dispatch)=>{
         })
     })
     .catch(err=>{
-        // console.log(err);
+        console.log(err.response.data.message);
+        console.log(err.response.data.details);
         dispatch({
             type:FETCH_BOOKS_FAILURE
         })
@@ -284,6 +285,31 @@ export const bookRequest=(id,title)=>async(dispatch)=>{
     })
 }
 
+export const searchBook=(phrase)=>async(dispatch)=>{
+    dispatch({
+        type:SEARCH_BOOK_REQUEST
+    })
+    if(phrase.length>=3){
+        return axios.get(API+"/book/search",{ params: { phrase } })
+        .then(payload=>{
+            console.log(payload);
+            dispatch({
+                type:SEARCH_BOOK_SUCCESS,
+                payload
+            })
+        })
+        .catch(err=>{
+            dispatch({
+                type:SEARCH_BOOK_FAILURE
+            })
+        })
+    } else {
+        return dispatch({
+            type: MIN_THREE_CHAR
+        })
+    }
+}
+
 
 
 
@@ -307,30 +333,7 @@ export const bookRequest=(id,title)=>async(dispatch)=>{
 
 // test below
 
-export const searchBook=(phrase)=>async(dispatch)=>{
-    dispatch({
-        type:SEARCH_BOOK_REQUEST
-    })
-    if(phrase.length>=3){
-        return axios.get(API+"/book/search/phrase",{ params: { phrase } })
-        .then(payload=>{
-            console.log(payload);
-            dispatch({
-                type:SEARCH_BOOK_SUCCESS,
-                payload
-            })
-        })
-        .catch(err=>{
-            dispatch({
-                type:SEARCH_BOOK_FAILURE
-            })
-        })
-    } else {
-        return dispatch({
-            type: MIN_THREE_CHAR
-        })
-    }
-}
+
 
 
 // export const addBook=(title,author,publisher,bookType,amount)=>async(dispatch)=>{

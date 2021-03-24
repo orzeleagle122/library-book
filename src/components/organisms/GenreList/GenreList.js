@@ -29,7 +29,7 @@ const GenreList = ({genreList,genreRemoved,genreNews,remove,remove2,remove3,fetc
     const buttonView=genreNews.length>=1 || genreRemoved.length>=1;
 
     const handleSubmitChanges=()=>{
-        alert('wysylam wszystko :D');        
+        alert('wysylam wszystko :D');
         sendRemove(genreRemoved);
         sendAdd(genreNews);
         fetch();
@@ -99,7 +99,6 @@ const GenreList = ({genreList,genreRemoved,genreNews,remove,remove2,remove3,fetc
                 </Genre>
                 ))} 
             </GenreListWrapper>
-
         </>
      );
 }
