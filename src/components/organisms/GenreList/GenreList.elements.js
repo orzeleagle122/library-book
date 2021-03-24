@@ -4,6 +4,8 @@ import {
     RiRecycleFill
 } from "react-icons/ri";
 
+import { VscDebugStepOver } from "react-icons/vsc";
+
 
 export const GenreListWrapper=styled.div`
     display:flex;
@@ -44,7 +46,7 @@ export const RiDeleteBin2FillIcon=styled(RiDeleteBin2Fill)`
     display:none;
     `}
 `;
-export const RiRecycleFillIcon=styled(RiRecycleFill)`
+export const VscDebugStepOverIcon=styled(VscDebugStepOver)`
     display:none;
 
     ${({remove})=>remove && css`

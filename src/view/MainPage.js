@@ -19,6 +19,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import BookList from '../components/organisms/BookList/BookList';
 
+import ClearErros from '../hoc/ClearErrors';
+
 
 const BookPopularWrapper=styled.div`
     max-width: 200px;
@@ -116,4 +118,5 @@ const mapDispatchToProps=dispatch=>{
   }
 }
 
+// export default connect(mapStateToProps,mapDispatchToProps)(ClearErros(MainPage));
 export default connect(mapStateToProps,mapDispatchToProps)(MainPage);

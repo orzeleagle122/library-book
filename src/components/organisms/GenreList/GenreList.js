@@ -8,7 +8,7 @@ import {
     Title,
     RiDeleteBin2FillIcon,
     CancelButton,
-    RiRecycleFillIcon
+    VscDebugStepOverIcon
 } from './GenreList.elements';
 import {connect} from 'react-redux';
 import {
@@ -77,7 +77,7 @@ const GenreList = ({genreList,genreRemoved,genreNews,remove,remove2,remove3,fetc
                                 </Title>
                                 <DeleteButton onClick={()=>remove2(item)}>
                                     <RiDeleteBin2FillIcon remove/> 
-                                    <RiRecycleFillIcon remove/> 
+                                    <VscDebugStepOverIcon remove/> 
                                 </DeleteButton>                     
                             </Genre>
                             ))} 

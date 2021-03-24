@@ -70,7 +70,9 @@ import {
    },
    loading:true,
    applicationError:null,
-   searchFormValue:''
+   searchFormValue:'',
+
+   showErrors:[]
  }
 
 //  const newStore={
@@ -243,7 +245,7 @@ import {
   if(action.type===CLEAR_ERROR){
     return {
       ...state,
-      applicationError:null
+      showErrors:[]
     }
   }
   //  if(action.type===GET_TOTALS){
