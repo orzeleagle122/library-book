@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {Input} from '../components/atoms/Input/Input';
 import Heading from '../components/atoms/Heading/Heading';
 import styled from 'styled-components';
@@ -11,7 +11,8 @@ import {carouselSettings} from '../data/carouselSettings';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch,faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import { 
-  searchBook
+  searchBook,
+  cleanErrors
 } from '../actions';
 
 import './slider-arrow.css'
@@ -19,7 +20,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import BookList from '../components/organisms/BookList/BookList';
 
-import ClearErros from '../hoc/ClearErrors';
+// import ClearErros from '../hoc/ClearErrors';
 
 
 const BookPopularWrapper=styled.div`
@@ -36,11 +37,15 @@ const FavoritePageWrapper=styled.div`
     display:flex;
     flex-direction:row;
     flex-wrap:wrap;
-    justify-content:space-around;
+    justify-content:flex-start;
 `;
 
 
-const MainPage = ({searchbooks,search,isLogin}) => {
+const MainPage = ({searchbooks,search,isLogin,clean}) => {
+
+      useEffect(()=>{
+        return ()=>clean();
+      })
 
       const [searchFormValue,setSearchFormValue]=useState('');
 
@@ -79,6 +84,7 @@ const MainPage = ({searchbooks,search,isLogin}) => {
                     </span>
                 </p>
             </div> 
+
             <FavoritePageWrapper>{map}</FavoritePageWrapper>
             {searchFormValue.length<=2&&(
               <>
@@ -114,9 +120,10 @@ const mapStateToProps=({searchbooks,user})=>{
 
 const mapDispatchToProps=dispatch=>{
   return {
-      search:(phrase)=>dispatch(searchBook(phrase))
+      search:(phrase)=>dispatch(searchBook(phrase)),
+      clean:()=>dispatch(cleanErrors())
   }
 }
 
-// export default connect(mapStateToProps,mapDispatchToProps)(ClearErros(MainPage));
+// export default ClearErros(MainPage);
 export default connect(mapStateToProps,mapDispatchToProps)(MainPage);

@@ -18,6 +18,14 @@ export const FavoriteItem=styled.div`
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
     transition: 0.15s linear;
+    /* flex-basis: 500px; */
+
+    /* stosunek wzrostu dzieci contenera wzgledem siebie */
+    flex-grow: 1;
+
+    &:last-child {
+        flex-grow: 0;
+    }
 
     ${({isLogin}) => !isLogin && css`
         border-right: 1px solid #D1D1D1;
@@ -38,7 +46,7 @@ export const FavoriteItem=styled.div`
 `;
 
 export const BookImages=styled.div`
-    width:100px;
+    max-width:100px;
     /* height:300px; */
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
@@ -63,7 +71,7 @@ export const BookImage=styled.img`
 
 export const BookContent=styled.div`
     padding:10px 15px;
-    width:400px;
+    /* width:400px; */
     display:flex;
     flex-direction:column;
     justify-content:flex-start;

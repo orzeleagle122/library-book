@@ -7,7 +7,7 @@ import BookList from '../components/organisms/BookList/BookList';
 const FavoritePageWrapper=styled.div`
     display:flex;
     flex-direction:row;
-    justify-content:space-around;
+    justify-content:flex-start;
     flex-wrap:wrap;
     width:100%;
 `;

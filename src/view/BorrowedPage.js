@@ -12,7 +12,7 @@ import Loader from '../components/molecules/Loader/Loader';
 const BorrowedWrapper=styled.div`
     display:flex;
     flex-direction:row;
-    justify-content:space-around;
+    justify-content:flex-start;
     flex-wrap:wrap;
     width:100%;
 `;
