@@ -19,7 +19,6 @@ import {
 import {Link} from "react-router-dom";
 
 const BookList = (props) => {
-  // console.log("to: "+props.borrowed);
   return (
     <FavoriteItem>
       <BookImages>
