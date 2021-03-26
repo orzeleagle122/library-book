@@ -1,48 +1,42 @@
-import React, { useState } from 'react';
-import { Input } from '../components/atoms/Input/Input';
-import GenreList from '../components/organisms/GenreList/GenreList';
-import {connect} from 'react-redux';
-import {
-    addGenre
-} from '../actions';
-
-
+import React, {useState} from "react";
+import {Input} from "../components/atoms/Input/Input";
+import GenreList from "../components/organisms/GenreList/GenreList";
+import {connect} from "react-redux";
+import {addGenre} from "../actions";
 
 const AddGenre = ({genre}) => {
-    const [value,setValue]=useState('');
+  const [value, setValue] = useState("");
 
-    const handleOnChangeValueForm=(e)=>{
-        setValue(e.target.value);
-    }
+  const handleOnChangeValueForm = (e) => {
+    setValue(e.target.value);
+  };
 
-    const handleSubmitAddGende=(e)=>{
-        e.preventDefault();
-        const randomId = Math.floor(Math.random() * 1000);
-        genre(randomId,value);
-        setValue('');
-    }
+  const handleSubmitAddGende = (e) => {
+    e.preventDefault();
+    const randomId = Math.floor(Math.random() * 1000);
+    genre(randomId, value);
+    setValue("");
+  };
 
-    return ( 
-        <>
-            <form onSubmit={handleSubmitAddGende}>
-            <Input 
-                placeholder="Enter here genre type to add"
-                onChange={handleOnChangeValueForm}
-                value={value}
-                />
-            </form>
+  return (
+    <>
+      <form onSubmit={handleSubmitAddGende}>
+        <Input
+          placeholder="Enter here genre type to add"
+          onChange={handleOnChangeValueForm}
+          value={value}
+        />
+      </form>
 
-            <GenreList/>
+      <GenreList />
+    </>
+  );
+};
 
-        </>
-     );
-}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    genre: (randomId, genre) => dispatch(addGenre(randomId, genre)),
+  };
+};
 
-
-const mapDispatchToProps=(dispatch)=>{
-    return {
-        genre:(randomId,genre)=>dispatch(addGenre(randomId,genre))
-    }
-}
- 
-export default connect(null,mapDispatchToProps)(AddGenre);
+export default connect(null, mapDispatchToProps)(AddGenre);

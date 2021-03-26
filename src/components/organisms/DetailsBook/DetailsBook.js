@@ -1,11 +1,7 @@
-import React from 'react';
+import React from "react";
 
 const DetailsBook = () => {
-    return ( 
-        <>
-            
-        </>
-     );
-}
- 
+  return <></>;
+};
+
 export default DetailsBook;

@@ -1,7 +1,7 @@
-import React from 'react';
-import Heading from './Heading';
-import {storiesOf} from '@storybook/react';
+import React from "react";
+import Heading from "./Heading";
+import {storiesOf} from "@storybook/react";
 
-
-storiesOf("Atoms/Heading", module)
-.add('Primary',()=><Heading>Hello Patrick</Heading>)
+storiesOf("Atoms/Heading", module).add("Primary", () => (
+  <Heading>Hello Patrick</Heading>
+));

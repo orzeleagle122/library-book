@@ -1,33 +1,37 @@
-.slick-prev, .slick-next{
-    width: 44px;
-    height: 44px;
-    color: #2d3ddf;
-    border-radius: 50%;
-    /* border:1px solid black; */
-    z-index: 99999;
-    background-color: white;
-    box-shadow: 5px 10px 18px #505050
+.slick-prev,
+.slick-next {
+  width: 44px;
+  height: 44px;
+  color: #2d3ddf;
+  border-radius: 50%;
+  /* border:1px solid black; */
+  z-index: 99999;
+  background-color: white;
+  box-shadow: 5px 10px 18px #505050;
 }
 
-.slick-prev:hover, .slick-prev:focus, .slick-next:hover, .slick-next:focus {
-    background-color: white;
-    outline:none;
-    color: #2d3ddf;
+.slick-prev:hover,
+.slick-prev:focus,
+.slick-next:hover,
+.slick-next:focus {
+  background-color: white;
+  outline: none;
+  color: #2d3ddf;
 }
 
-.slick-prev:before{
-    color: #2d3ddf;
-    content: url("../assets/layout/prev.png");
-} 
-
-.slick-next:before{
-    color: #2d3ddf;
-    content: url("../assets/layout/next.png");
+.slick-prev:before {
+  color: #2d3ddf;
+  content: url("../assets/layout/prev.png");
 }
 
-.slick-prev{
-    left:-20px;
+.slick-next:before {
+  color: #2d3ddf;
+  content: url("../assets/layout/next.png");
+}
+
+.slick-prev {
+  left: -20px;
 }
 .slick-next {
-    right: 15px;
+  right: 15px;
 }
