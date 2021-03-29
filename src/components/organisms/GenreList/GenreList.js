@@ -19,6 +19,7 @@ import {
   sendRemoveListGenre,
   sendNewsListGenre,
 } from "../../../actions";
+import PropTypes from "prop-types";
 
 const GenreList = ({
   genreList,
@@ -101,6 +102,18 @@ const GenreList = ({
       </GenreListWrapper>
     </>
   );
+};
+
+GenreList.propTypes = {
+  genreList: PropTypes.object,
+  genreRemoved: PropTypes.object,
+  genreNews: PropTypes.object,
+  remove: PropTypes.func.isRequired,
+  remove2: PropTypes.func.isRequired,
+  remove3: PropTypes.func.isRequired,
+  fetch: PropTypes.func.isRequired,
+  sendRemove: PropTypes.func.isRequired,
+  sendAdd: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({genreList, genreRemoved, genreNews}) => {

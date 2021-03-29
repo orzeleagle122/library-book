@@ -2,6 +2,7 @@ import {Formik} from "formik";
 import React from "react";
 import {connect} from "react-redux";
 import {addBook} from "../actions";
+import PropTypes from "prop-types";
 
 const BookAdd = ({addBooks}) => {
   return (
@@ -108,6 +109,10 @@ const BookAdd = ({addBooks}) => {
       }}
     </Formik>
   );
+};
+
+BookAdd.propTypes = {
+  addBooks: PropTypes.func.isRequired,
 };
 
 const mapDispathToProps = (dispatch) => {

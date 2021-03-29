@@ -16,6 +16,7 @@ import "./slider-arrow.css";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import BookList from "../components/organisms/BookList/BookList";
+import PropTypes from "prop-types";
 
 // import ClearErros from '../hoc/ClearErrors';
 
@@ -118,6 +119,13 @@ const MainPage = ({searchbooks, search, isLogin, clean}) => {
       )}
     </>
   );
+};
+
+MainPage.propTypes = {
+  searchbooks: PropTypes.object,
+  search: PropTypes.func.isRequired,
+  isLogin: PropTypes.bool.isRequired,
+  clean: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({searchbooks, user}) => {

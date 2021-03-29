@@ -179,6 +179,7 @@ export const getUserLoginAction = (token) => async (dispatch) => {
       // console.log(err);
       dispatch({
         type: GET_CURRENT_USER_FAILURE,
+        err,
       });
     });
 };
@@ -247,8 +248,8 @@ export const registerUser = (email, password, name, lastname) => async (
   });
   return axios
     .post("https://reqres.in/api/register", {
-      // name,
-      // lastname,
+      name,
+      lastname,
       email,
       password,
     })
@@ -310,6 +311,7 @@ export const searchBook = (phrase) => async (dispatch) => {
       .catch((err) => {
         dispatch({
           type: SEARCH_BOOK_FAILURE,
+          err,
         });
       });
   } else {

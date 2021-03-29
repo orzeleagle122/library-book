@@ -8,6 +8,7 @@ import {
   fetchBooks,
 } from "../actions";
 import Loader from "../components/molecules/Loader/Loader";
+import PropTypes from "prop-types";
 
 const BorrowedWrapper = styled.div`
   display: flex;
@@ -39,7 +40,13 @@ const BorrowedPage = ({books = [], totalbooks, fetch}) => {
   );
 };
 
-const mapStateToProps = ({books, totalbooks, user}) => {
+BorrowedPage.propTypes = {
+  books: PropTypes.array,
+  totalbooks: PropTypes.number.isRequired,
+  fetch: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = ({books, totalbooks}) => {
   return {books, totalbooks};
 };
 

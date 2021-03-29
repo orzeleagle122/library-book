@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import {bookRequest} from "../actions";
 import Heading from "../components/atoms/Heading/Heading";
 import Loader from "../components/molecules/Loader/Loader";
+import PropTypes from "prop-types";
 
 const BookDetails = ({location, bookInfo, bookDetails}) => {
   const {query} = location;
@@ -14,7 +15,6 @@ const BookDetails = ({location, bookInfo, bookDetails}) => {
     }
 
     return bookInfo;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [bookInfo]);
 
   // po odmontowaniu compomentu wywolaj akcje czyszczenia bookdetails
@@ -51,6 +51,14 @@ const BookDetails = ({location, bookInfo, bookDetails}) => {
       )}
     </>
   );
+};
+
+BookDetails.propTypes = {
+  location: PropTypes.node,
+  bookInfo: PropTypes.func.isRequired,
+  bookDetails: PropTypes.object,
+  title: PropTypes.string,
+  author: PropTypes.string,
 };
 
 const mapStateToProps = ({bookDetails}) => {

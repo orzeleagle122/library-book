@@ -6,6 +6,7 @@ import {getUserLoginAction} from "./actions";
 import Sidebar from "./components/organisms/Sidebar/Sidebar";
 import GlobalStyle from "./globalStyles";
 import MainTemplate from "./template/MainTemplate";
+import PropTypes from "prop-types";
 
 const App = ({getUserLogin}) => {
   useEffect(() => {
@@ -23,6 +24,10 @@ const App = ({getUserLogin}) => {
       </Router>
     </>
   );
+};
+
+App.propTypes = {
+  getUserLogin: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => {

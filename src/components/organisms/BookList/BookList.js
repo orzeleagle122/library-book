@@ -17,6 +17,7 @@ import {
   FavoriteHearthAdd,
 } from "./BookList.elements";
 import {Link} from "react-router-dom";
+import PropTypes from "prop-types";
 
 const BookList = (props) => {
   return (
@@ -73,6 +74,15 @@ const BookList = (props) => {
       </BookOrderButton>
     </FavoriteItem>
   );
+};
+
+BookList.propTypes = {
+  id: PropTypes.string,
+  title: PropTypes.string,
+  author: PropTypes.string,
+  isLogin: PropTypes.bool.isRequired,
+  favorite: PropTypes.bool.isRequired,
+  borrowed: PropTypes.node,
 };
 
 // const mapStateToProps=({user})=>{

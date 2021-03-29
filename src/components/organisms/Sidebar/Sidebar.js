@@ -16,6 +16,7 @@ import {
   RiLogoutBoxLineIcon,
   ItemList,
 } from "./Sidebar.elements";
+import PropTypes from "prop-types";
 
 const Sidebar = ({isLogin, out}) => {
   useEffect(() => {}, [isLogin]);
@@ -82,6 +83,11 @@ const Sidebar = ({isLogin, out}) => {
       </LogoutButton>
     </Wrapper>
   );
+};
+
+Sidebar.propTypes = {
+  isLogin: PropTypes.bool.isRequired,
+  out: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({user}) => {

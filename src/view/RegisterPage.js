@@ -5,6 +5,7 @@ import {registerUser, cleanErrors} from "../actions";
 import {Formik} from "formik";
 import {Link} from "react-router-dom";
 import {useEffect} from "react";
+import PropTypes from "prop-types";
 
 const RegisterWrapper = styled.div`
   /* margin-right: 500px;
@@ -149,6 +150,13 @@ const RegisterPage = ({register, isLogin, applicationError, errClean}) => {
       </Formik>
     </RegisterWrapper>
   );
+};
+
+RegisterPage.propTypes = {
+  register: PropTypes.func.isRequired,
+  isLogin: PropTypes.bool.isRequired,
+  applicationError: PropTypes.node,
+  errClean: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({user, applicationError}) => {

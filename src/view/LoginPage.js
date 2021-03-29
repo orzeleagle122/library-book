@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import {authUser, cleanErrors} from "../actions";
 import {Formik} from "formik";
 import {Redirect} from "react-router-dom";
+import PropTypes from "prop-types";
 
 const LoginWrapper = styled.div`
   /* margin-right: 200px;
@@ -85,6 +86,13 @@ const LoginPage = ({auth, isLogin, applicationError, errClean}) => {
       </Formik>
     </LoginWrapper>
   );
+};
+
+LoginPage.propTypes = {
+  auth: PropTypes.func.isRequired,
+  isLogin: PropTypes.bool.isRequired,
+  applicationError: PropTypes.node,
+  errClean: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({user, applicationError}) => {
