@@ -40,7 +40,7 @@ const FavoritePageWrapper = styled.div`
 const MainPage = ({searchbooks, search, isLogin, clean}) => {
   useEffect(() => {
     return () => clean();
-  });
+  }, []);
 
   const [searchFormValue, setSearchFormValue] = useState("");
 
@@ -122,7 +122,7 @@ const MainPage = ({searchbooks, search, isLogin, clean}) => {
 };
 
 MainPage.propTypes = {
-  searchbooks: PropTypes.object,
+  searchbooks: PropTypes.array,
   search: PropTypes.func.isRequired,
   isLogin: PropTypes.bool.isRequired,
   clean: PropTypes.func.isRequired,

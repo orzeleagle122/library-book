@@ -13,10 +13,10 @@ const RegisterWrapper = styled.div`
     margin-top:30px; */
 `;
 
-const RegisterPage = ({register, isLogin, applicationError, errClean}) => {
+const RegisterPage = ({register, isLogin, showErrors, clean}) => {
   useEffect(() => {
-    return errClean;
-  }, [isLogin, errClean]);
+    return () => clean();
+  }, [isLogin]);
 
   return (
     <RegisterWrapper>
@@ -29,8 +29,8 @@ const RegisterPage = ({register, isLogin, applicationError, errClean}) => {
           userpassword: "",
           repeatuserpassword: "",
         }}
-        onSubmit={({useremail, userpassword}) => {
-          register(useremail, userpassword);
+        onSubmit={({name, lastname, useremail, userpassword}) => {
+          register(name, lastname, useremail, userpassword);
         }}
       >
         {({
@@ -139,9 +139,9 @@ const RegisterPage = ({register, isLogin, applicationError, errClean}) => {
                   Sign in
                 </button>
               </form>
-              {applicationError && (
+              {showErrors && (
                 <div className="notification is-danger is-light">
-                  <strong>Something went wrong</strong>
+                  <strong>{showErrors}</strong>
                 </div>
               )}
             </>
@@ -155,23 +155,23 @@ const RegisterPage = ({register, isLogin, applicationError, errClean}) => {
 RegisterPage.propTypes = {
   register: PropTypes.func.isRequired,
   isLogin: PropTypes.bool.isRequired,
-  applicationError: PropTypes.node,
-  errClean: PropTypes.func.isRequired,
+  showErrors: PropTypes.node,
+  clean: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({user, applicationError}) => {
+const mapStateToProps = ({user, showErrors}) => {
   const {isLogin} = user;
   return {
     isLogin,
-    applicationError,
+    showErrors,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    register: (useremail, userpassword) =>
-      dispatch(registerUser(useremail, userpassword)),
-    errClean: () => dispatch(cleanErrors()),
+    register: (name, lastname, useremail, userpassword) =>
+      dispatch(registerUser(name, lastname, useremail, userpassword)),
+    clean: () => dispatch(cleanErrors()),
   };
 };
 

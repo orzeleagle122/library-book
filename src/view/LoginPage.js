@@ -12,10 +12,10 @@ const LoginWrapper = styled.div`
     margin-top:30px; */
 `;
 
-const LoginPage = ({auth, isLogin, applicationError, errClean}) => {
+const LoginPage = ({auth, isLogin, applicationError, clean}) => {
   useEffect(() => {
-    return errClean;
-  }, [errClean]);
+    return () => clean();
+  }, []);
 
   return (
     <LoginWrapper>
@@ -92,7 +92,7 @@ LoginPage.propTypes = {
   auth: PropTypes.func.isRequired,
   isLogin: PropTypes.bool.isRequired,
   applicationError: PropTypes.node,
-  errClean: PropTypes.func.isRequired,
+  clean: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({user, applicationError}) => {
@@ -107,7 +107,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     auth: (useremail, userpassword) =>
       dispatch(authUser(useremail, userpassword)),
-    errClean: () => dispatch(cleanErrors()),
+    clean: () => dispatch(cleanErrors()),
   };
 };
 

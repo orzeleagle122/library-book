@@ -64,14 +64,12 @@ const initialStore = {
   genreNews: [],
   totalbooks: 0,
   user: {
-    userToken: "",
+    userToken: null,
     isLogin: false,
-    id: 0,
   },
   loading: true,
   applicationError: null,
   searchFormValue: "",
-
   showErrors: [],
 };
 
@@ -184,12 +182,12 @@ export const reducer = (state = initialStore, action) => {
     };
   }
   if (action.type === AUTH_SUCCESS) {
-    // console.log(action.payload.data.token);
-    localStorage.setItem("loginToken", action.payload.data.token);
+    localStorage.setItem("loginToken", action.payload.data.id);
     return {
       ...state,
       user: {
-        userToken: action.payload.data.token,
+        userinfo: action.payload.data,
+        userToken: action.payload.data.id,
         isLogin: true,
       },
     };
@@ -199,7 +197,8 @@ export const reducer = (state = initialStore, action) => {
     return {
       ...state,
       user: {
-        userToken: "",
+        userinfo: null,
+        userToken: null,
         isLogin: false,
       },
     };
@@ -208,6 +207,8 @@ export const reducer = (state = initialStore, action) => {
     return {
       ...state,
       user: {
+        userinfo: action.payload.data,
+        userToken: action.payload.data.id,
         isLogin: true,
       },
     };
@@ -217,8 +218,8 @@ export const reducer = (state = initialStore, action) => {
     return {
       ...state,
       user: {
-        id: action.payload.data.id,
-        userToken: action.payload.data.token,
+        userinfo: action.payload.data,
+        userToken: action.payload.data.id,
         isLogin: true,
       },
     };
@@ -226,7 +227,7 @@ export const reducer = (state = initialStore, action) => {
   if (action.type === REGISTER_FAILURE) {
     return {
       ...state,
-      applicationError: "action.payload.err",
+      showErrors: action.err.response.data.details,
     };
   }
   if (action.type === AUTH_FAILURE) {
@@ -239,6 +240,7 @@ export const reducer = (state = initialStore, action) => {
     return {
       ...state,
       showErrors: [],
+      applicationError: null,
     };
   }
   //  if(action.type===GET_TOTALS){

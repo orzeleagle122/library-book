@@ -126,7 +126,7 @@ export const fetchBooks = () => async (dispatch) => {
     type: FETCH_BOOKS_REQUEST,
   });
   return axios
-    .get(API + "/book/search/random", {params: {number: 10}})
+    .get(API + "/book/search/random", {params: {number: 0}})
     .then((payload) => {
       console.log(payload);
       dispatch({
@@ -158,16 +158,37 @@ export const removeBook = (id) => {
   };
 };
 
+// export const getUserLoginAction = (token) => async (dispatch) => {
+//   dispatch({
+//     type: GET_CURRENT_USER_REQUEST,
+//   });
+//   return axios
+//     .get(API + "/user/sign-in", {
+//       headers: {
+//         Authorization: "Bearer " + token,
+//       },
+//     })
+//     .then((payload) => {
+//       // console.log(payload);
+//       dispatch({
+//         type: GET_CURRENT_USER_SUCCESS,
+//         payload,
+//       });
+//     })
+//     .catch((err) => {
+//       // console.log(err);
+//       dispatch({
+//         type: GET_CURRENT_USER_FAILURE,
+//         err,
+//       });
+//     });
+// };
 export const getUserLoginAction = (token) => async (dispatch) => {
   dispatch({
     type: GET_CURRENT_USER_REQUEST,
   });
   return axios
-    .get("https://reqres.in/api/login/", {
-      headers: {
-        Authorization: "Bearer " + token,
-      },
-    })
+    .get(API + "/user/search", {params: {id: token}})
     .then((payload) => {
       // console.log(payload);
       dispatch({
@@ -176,7 +197,7 @@ export const getUserLoginAction = (token) => async (dispatch) => {
       });
     })
     .catch((err) => {
-      // console.log(err);
+      console.log(err.response);
       dispatch({
         type: GET_CURRENT_USER_FAILURE,
         err,
@@ -189,10 +210,7 @@ export const authUser = (email, password) => async (dispatch) => {
     type: AUTH_REQUEST,
   });
   return axios
-    .post("https://reqres.in/api/login", {
-      email,
-      password,
-    })
+    .get(API + "/user/sign-in", {params: {email, password}})
     .then((payload) => {
       // console.log(payload);
       dispatch({
@@ -201,7 +219,7 @@ export const authUser = (email, password) => async (dispatch) => {
       });
     })
     .catch((err) => {
-      // console.log(err);
+      console.log(err.response);
       dispatch({
         type: AUTH_FAILURE,
         err,
@@ -240,27 +258,28 @@ export const addBook = (title, author, publisher, genres, amount) => async (
     });
 };
 
-export const registerUser = (email, password, name, lastname) => async (
+export const registerUser = (firstName, lastName, email, password) => async (
   dispatch
 ) => {
   dispatch({
     type: REGISTER_REQUEST,
   });
   return axios
-    .post("https://reqres.in/api/register", {
-      name,
-      lastname,
+    .post(API + "/user/sign-up", {
+      firstName,
+      lastName,
       email,
       password,
     })
     .then((payload) => {
-      // console.log(payload);
+      console.log(payload);
       dispatch({
         type: REGISTER_SUCCESS,
         payload,
       });
     })
     .catch((err) => {
+      console.log(err.response.data.details);
       dispatch({
         type: REGISTER_FAILURE,
         err,
@@ -300,7 +319,7 @@ export const searchBook = (phrase) => async (dispatch) => {
   });
   if (phrase.length >= 3) {
     return axios
-      .get(API + "/book/search", {params: {phrase}})
+      .get(API + "/book/search/phrase", {params: {phrase}})
       .then((payload) => {
         console.log(payload);
         dispatch({

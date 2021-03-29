@@ -105,9 +105,9 @@ const GenreList = ({
 };
 
 GenreList.propTypes = {
-  genreList: PropTypes.object,
-  genreRemoved: PropTypes.object,
-  genreNews: PropTypes.object,
+  genreList: PropTypes.array,
+  genreRemoved: PropTypes.array,
+  genreNews: PropTypes.array,
   remove: PropTypes.func.isRequired,
   remove2: PropTypes.func.isRequired,
   remove3: PropTypes.func.isRequired,
