@@ -46,7 +46,6 @@ const MainTemplate = () => {
             <Route path={routers.register} exact component={RegisterPage} />
             <Route path={routers.favorite} exact component={FavoritePage} />
             <Route path={routers.addBook} exact component={AddBook} />
-            <Route path={routers.addBook} exact component={AddBook} />
             <Route path={routers.addGenre} exact component={AddGenre} />
             <Route path={routers.book} exact component={BookDetailsPage} />
           </MainContent>

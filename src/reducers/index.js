@@ -34,32 +34,7 @@ const initialStore = {
   books: [],
   bookDetails: [],
   searchbooks: [],
-  genreList: [
-    {
-      id: 1,
-      genre: "Horror",
-    },
-    {
-      id: 2,
-      genre: "Comedy",
-    },
-    {
-      id: 3,
-      genre: "Dokumentalny",
-    },
-    {
-      id: 4,
-      genre: "Mlodzieżowy",
-    },
-    {
-      id: 5,
-      genre: "Autobiofrafia",
-    },
-    {
-      id: 6,
-      genre: "co badz",
-    },
-  ],
+  genreList: [],
   genreRemoved: [],
   genreNews: [],
   totalbooks: 0,
@@ -68,9 +43,8 @@ const initialStore = {
     isLogin: false,
   },
   loading: true,
-  applicationError: null,
   searchFormValue: "",
-  showErrors: [],
+  showErrors: null,
 };
 
 //  const newStore={
@@ -175,7 +149,7 @@ export const reducer = (state = initialStore, action) => {
     };
   }
   if (action.type === GET_GENRE_SUCCESS) {
-    // console.log(action.payload.data);
+    console.log(action.payload.data);
     return {
       ...state,
       genreList: action.payload.data,
@@ -233,14 +207,13 @@ export const reducer = (state = initialStore, action) => {
   if (action.type === AUTH_FAILURE) {
     return {
       ...state,
-      applicationError: "action.payload.err",
+      showErrors: action.err.response.data.details,
     };
   }
   if (action.type === CLEAR_ERROR) {
     return {
       ...state,
-      showErrors: [],
-      applicationError: null,
+      showErrors: null,
     };
   }
   //  if(action.type===GET_TOTALS){

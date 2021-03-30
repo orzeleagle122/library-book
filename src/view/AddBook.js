@@ -1,17 +1,23 @@
-import {Formik} from "formik";
-import React from "react";
+import {Formik, Field} from "formik";
+import React, {useEffect} from "react";
 import {connect} from "react-redux";
 import {addBook} from "../actions";
 import PropTypes from "prop-types";
+import {fetchGenres} from "../actions";
+import {Input} from "../components/atoms/Input/Input";
 
-const BookAdd = ({addBooks}) => {
+const BookAdd = ({addBooks, fetch, genreList}) => {
+  useEffect(() => {
+    fetch();
+  }, []);
   return (
     <Formik
       initialValues={{
         title: "",
         author: "",
         publisher: "",
-        genres: "",
+        genres: {},
+        checkbox: false,
         amount: "",
       }}
       onSubmit={({title, author, publisher, genres, amount}) => {
@@ -33,7 +39,7 @@ const BookAdd = ({addBooks}) => {
             <div className="field">
               <label className="label">Title</label>
               <div className="control">
-                <input
+                <Input
                   className="input"
                   type="text"
                   name="title"
@@ -47,7 +53,7 @@ const BookAdd = ({addBooks}) => {
             <div className="field">
               <label className="label">Author</label>
               <div className="control">
-                <input
+                <Input
                   className="input"
                   type="text"
                   name="author"
@@ -61,7 +67,7 @@ const BookAdd = ({addBooks}) => {
             <div className="field">
               <label className="label">Publisher</label>
               <div className="control">
-                <input
+                <Input
                   className="input"
                   type="text"
                   name="publisher"
@@ -72,10 +78,10 @@ const BookAdd = ({addBooks}) => {
                 />
               </div>
             </div>
-            <div className="field">
+            {/* <div className="field">
               <label className="label">Genres</label>
               <div className="control">
-                <input
+                <Input
                   className="input"
                   type="text"
                   name="genres"
@@ -85,11 +91,24 @@ const BookAdd = ({addBooks}) => {
                   onBlur={handleBlur}
                 />
               </div>
+            </div> */}
+            <div role="group" aria-labelledby="checkbox-group">
+              {genreList.map((item) => (
+                <label key={item.id}>
+                  <Field
+                    type="checkbox"
+                    name="genres"
+                    value={(item.id, item.genre)}
+                  />
+                  {item.genre}
+                </label>
+              ))}
             </div>
+
             <div className="field">
               <label className="label">Amount</label>
               <div className="control">
-                <input
+                <Input
                   className="input"
                   type="number"
                   name="amount"
@@ -113,13 +132,22 @@ const BookAdd = ({addBooks}) => {
 
 BookAdd.propTypes = {
   addBooks: PropTypes.func.isRequired,
+  fetch: PropTypes.func.isRequired,
+  genreList: PropTypes.array.isRequired,
+};
+
+const mapStateToProps = ({genreList}) => {
+  return {
+    genreList,
+  };
 };
 
 const mapDispathToProps = (dispatch) => {
   return {
     addBooks: (title, author, publisher, genres, amount) =>
       dispatch(addBook(title, author, publisher, genres, amount)),
+    fetch: () => dispatch(fetchGenres()),
   };
 };
 
-export default connect(null, mapDispathToProps)(BookAdd);
+export default connect(mapStateToProps, mapDispathToProps)(BookAdd);

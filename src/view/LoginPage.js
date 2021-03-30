@@ -5,6 +5,9 @@ import {authUser, cleanErrors} from "../actions";
 import {Formik} from "formik";
 import {Redirect} from "react-router-dom";
 import PropTypes from "prop-types";
+import {routers} from "../data/routers";
+import {Link} from "react-router-dom";
+import {Input} from "../components/atoms/Input/Input";
 
 const LoginWrapper = styled.div`
   /* margin-right: 200px;
@@ -12,19 +15,18 @@ const LoginWrapper = styled.div`
     margin-top:30px; */
 `;
 
-const LoginPage = ({auth, isLogin, applicationError, clean}) => {
+const LoginPage = ({auth, isLogin, showErrors, clean}) => {
   useEffect(() => {
     return () => clean();
   }, []);
 
   return (
     <LoginWrapper>
-      {applicationError && (
+      {showErrors && (
         <div className="notification is-danger is-light">
-          <strong>Email or password is wrong!</strong>
+          <strong>{showErrors}</strong>
         </div>
       )}
-
       <Formik
         initialValues={{useremail: "", userpassword: ""}}
         onSubmit={({useremail, userpassword}) => {
@@ -50,7 +52,7 @@ const LoginPage = ({auth, isLogin, applicationError, clean}) => {
               <div className="field">
                 <label className="label">Email</label>
                 <div className="control">
-                  <input
+                  <Input
                     className="input"
                     type="email"
                     name="useremail"
@@ -65,7 +67,7 @@ const LoginPage = ({auth, isLogin, applicationError, clean}) => {
               <div className="field">
                 <label className="label">Password</label>
                 <div className="control">
-                  <input
+                  <Input
                     className="input"
                     type="password"
                     name="userpassword"
@@ -84,6 +86,7 @@ const LoginPage = ({auth, isLogin, applicationError, clean}) => {
           );
         }}
       </Formik>
+      New customer? <Link to={routers.register}>Start here.</Link>
     </LoginWrapper>
   );
 };
@@ -91,15 +94,15 @@ const LoginPage = ({auth, isLogin, applicationError, clean}) => {
 LoginPage.propTypes = {
   auth: PropTypes.func.isRequired,
   isLogin: PropTypes.bool.isRequired,
-  applicationError: PropTypes.node,
+  showErrors: PropTypes.node,
   clean: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({user, applicationError}) => {
+const mapStateToProps = ({user, showErrors}) => {
   const {isLogin} = user;
   return {
     isLogin,
-    applicationError,
+    showErrors,
   };
 };
 

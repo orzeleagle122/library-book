@@ -14,8 +14,8 @@ const AddGenre = ({genre}) => {
 
   const handleSubmitAddGende = (e) => {
     e.preventDefault();
-    const randomId = Math.floor(Math.random() * 1000);
-    genre(randomId, value);
+    // const randomId = Math.floor(Math.random() * 1000);
+    genre(value);
     setValue("");
   };
 
@@ -40,7 +40,7 @@ AddGenre.propTypes = {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    genre: (randomId, genre) => dispatch(addGenre(randomId, genre)),
+    genre: (genre) => dispatch(addGenre(genre)),
   };
 };
 

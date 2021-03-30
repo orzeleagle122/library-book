@@ -45,14 +45,34 @@ export const REMOVE_GENRE2 = "REMOVE_GENRE2";
 export const REMOVE_GENRE3 = "REMOVE_GENRE3";
 export const ADD_GENRE = "ADD_GENRE";
 
+export const REMOVE_FAVORITE = "REMOVE_FAVORITE";
+export const ADD_FAVORITE = "ADD_FAVORITE";
+
 const API = "http://localhost:8080/api";
 
-export const addGenre = (id, genre) => {
+export const removeFavorite = (user_id, book_id) => async (dispatch) => {
+  dispatch({
+    type: REMOVE_FAVORITE,
+  });
+  return axios.delete(API + "/user/favorite/subtract", {
+    params: {user_id, book_id},
+  });
+};
+
+export const addFavorite = (user_id, book_id) => async (dispatch) => {
+  dispatch({
+    type: ADD_FAVORITE,
+  });
+  return axios.put(API + "/user/favorite/add", {
+    params: {user_id, book_id},
+  });
+};
+
+export const addGenre = (genre) => {
   console.log(genre);
   return {
     type: ADD_GENRE,
     payload: {
-      id,
       genre,
     },
   };
@@ -87,16 +107,19 @@ export const removeGenre3 = (item) => {
 };
 
 export const sendRemoveListGenre = (removeList) => async (dispatch) => {
+  console.log(removeList);
   dispatch({
     type: SEND_REMOVE_GENRELIST,
   });
-  return axios.delete(API + "/book/genre/delete", {data: {removeList}});
+  return axios.delete(API + "/bookGenre/delete", {data: {removeList}});
 };
+
 export const sendNewsListGenre = (addList) => async (dispatch) => {
+  console.log(addList);
   dispatch({
     type: SEND_ADD_GENRELIST,
   });
-  return axios.post(API + "/book/genre/add", {
+  return axios.post(API + "/bookGenre/add", {
     addList,
   });
 };
@@ -109,11 +132,12 @@ export const fetchGenres = () => async (dispatch) => {
     .get(API + "/bookGenre/search/all")
     .then((payload) => {
       dispatch({
-        type: GET_CURRENT_USER_SUCCESS,
+        type: GET_GENRE_SUCCESS,
         payload,
       });
     })
     .catch((err) => {
+      console.log(err.response);
       dispatch({
         type: GET_GENRE_FAILURE,
         err,
@@ -219,7 +243,6 @@ export const authUser = (email, password) => async (dispatch) => {
       });
     })
     .catch((err) => {
-      console.log(err.response);
       dispatch({
         type: AUTH_FAILURE,
         err,
@@ -233,6 +256,7 @@ export const addBook = (title, author, publisher, genres, amount) => async (
   dispatch({
     type: ADD_BOOK_REQUEST,
   });
+  console.log(genres);
   return axios
     .post(API + "/book/add", {
       title,
@@ -319,7 +343,7 @@ export const searchBook = (phrase) => async (dispatch) => {
   });
   if (phrase.length >= 3) {
     return axios
-      .get(API + "/book/search/phrase", {params: {phrase}})
+      .get(API + "/book/search", {params: {phrase}})
       .then((payload) => {
         console.log(payload);
         dispatch({

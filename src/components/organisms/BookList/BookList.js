@@ -18,8 +18,12 @@ import {
 } from "./BookList.elements";
 import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {removeFavorite, addFavorite} from "../../../actions";
 
-const BookList = (props) => {
+const BookList = (props, {remove, add}) => {
+  // useEffect jesli zalogowany to od nowa pobierz listę
+
   return (
     <FavoriteItem>
       <BookImages>
@@ -34,22 +38,28 @@ const BookList = (props) => {
         <BookOrderButtonMobile>Book</BookOrderButtonMobile>
       </BookImages>
       <BookContent>
+        <BookTitle>
+          <Link
+            to={{
+              pathname: `/book/${props.id}/${props.title}`,
+              query: {...props},
+            }}
+          >
+            {props.title}
+          </Link>
+          {props.favorite ? (
+            <>
+              <FavoriteHearthBroken onClick={() => remove()} />
+            </>
+          ) : (
+            <>
+              <FavoriteHearthAdd onClick={() => add()} />
+            </>
+          )}
+        </BookTitle>
         <Link
           to={{pathname: `/book/${props.id}/${props.title}`, query: {...props}}}
         >
-          <BookTitle>
-            {props.title}
-
-            {props.favorite ? (
-              <>
-                <FavoriteHearthBroken />
-              </>
-            ) : (
-              <>
-                <FavoriteHearthAdd />
-              </>
-            )}
-          </BookTitle>
           <BookAuthor>{props.author}</BookAuthor>
           <BookGenres>
             <Genres>#Fantasy</Genres>
@@ -83,13 +93,19 @@ BookList.propTypes = {
   isLogin: PropTypes.bool.isRequired,
   favorite: PropTypes.bool.isRequired,
   borrowed: PropTypes.node,
+  remove: PropTypes.func.isRequired,
+  add: PropTypes.func.isRequired,
 };
 
-// const mapStateToProps=({user})=>{
-//     const {isLogin}=user;
-//     return {
-//         isLogin
-//     }
-// }
+const mapStateToProps = () => {
+  return {};
+};
 
-export default BookList;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    remove: (user_id, book_id) => dispatch(removeFavorite(user_id, book_id)),
+    add: (user_id, book_id) => dispatch(addFavorite(user_id, book_id)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(BookList);
