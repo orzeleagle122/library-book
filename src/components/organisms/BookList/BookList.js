@@ -21,19 +21,27 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {removeFavorite, addFavorite} from "../../../actions";
 
-const BookList = (props, {remove, add, id}) => {
+const BookList = (props) => {
+  const {
+    id,
+    title,
+    favorite,
+    author,
+    genres,
+    borrowed,
+    isLogin,
+    add,
+    remove,
+    id_user,
+  } = props;
+
   // useEffect jesli zalogowany to od nowa pobierz listę
 
   return (
     <FavoriteItem>
       <BookImages>
-        <Link
-          to={{pathname: `/book/${props.id}/${props.title}`, query: {...props}}}
-        >
-          <BookImage
-            src={`/assets/bookImages/${props.id}.jpg`}
-            alt={props.title}
-          />
+        <Link to={{pathname: `/book/${id}/${title}`, query: {...props}}}>
+          <BookImage src={`/assets/bookImages/${id}.jpg`} alt={title} />
         </Link>
         <BookOrderButtonMobile>Book</BookOrderButtonMobile>
       </BookImages>
@@ -41,33 +49,34 @@ const BookList = (props, {remove, add, id}) => {
         <BookTitle>
           <Link
             to={{
-              pathname: `/book/${props.id}/${props.title}`,
+              pathname: `/book/${id}/${title}`,
               query: {...props},
             }}
           >
-            {props.title}
+            {title}
           </Link>
-          {props.favorite ? (
+          {favorite ? (
             <>
-              <FavoriteHearthBroken onClick={() => remove(id, props.id)} />
+              <FavoriteHearthBroken
+                onClick={() => {
+                  remove(id_user, id);
+                }}
+              />
             </>
           ) : (
             <>
               <FavoriteHearthAdd
                 onClick={() => {
-                  console.log("co tam");
-                  add(id, props.id);
+                  add(id_user, id);
                 }}
               />
             </>
           )}
         </BookTitle>
-        <Link
-          to={{pathname: `/book/${props.id}/${props.title}`, query: {...props}}}
-        >
-          <BookAuthor>{props.author}</BookAuthor>
+        <Link to={{pathname: `/book/${id}/${title}`, query: {...props}}}>
+          <BookAuthor>{author}</BookAuthor>
           <BookGenres>
-            {props.genres.map((item) => (
+            {genres.map((item) => (
               <Genres key={item.id}>{item.genre}</Genres>
             ))}
           </BookGenres>
@@ -75,17 +84,17 @@ const BookList = (props, {remove, add, id}) => {
             {/* Lorem ipsum dolor sit amet, consectetur adipiscing elit.  */}
           </BookInfo>
           <Available>
-            {props.borrowed && (
+            {borrowed && (
               <>
                 (status: borrowed/close) <br />
                 <br />
               </>
             )}
-            {!props.borrowed && <>status: available/unavailable</>}
+            {!borrowed && <>status: available/unavailable</>}
           </Available>
         </Link>
       </BookContent>
-      <BookOrderButton isLogin={props.isLogin}>
+      <BookOrderButton isLogin={isLogin}>
         <VerticalText>Borrow a book</VerticalText>
       </BookOrderButton>
     </FavoriteItem>
@@ -94,6 +103,7 @@ const BookList = (props, {remove, add, id}) => {
 
 BookList.propTypes = {
   id: PropTypes.number,
+  id_user: PropTypes.number,
   title: PropTypes.string,
   author: PropTypes.string,
   isLogin: PropTypes.bool.isRequired,
@@ -106,8 +116,9 @@ BookList.propTypes = {
 
 const mapStateToProps = ({user}) => {
   const {id} = user.userinfo;
+  const id_user = id;
   return {
-    id,
+    id_user,
   };
 };
 

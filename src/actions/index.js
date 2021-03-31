@@ -63,9 +63,9 @@ export const addFavorite = (user_id, book_id) => async (dispatch) => {
   dispatch({
     type: ADD_FAVORITE,
   });
-  return axios.put(API + "/user/favorite/add", {
-    params: {user_id, book_id},
-  });
+  return axios.put(
+    API + `/user/favorite/add?user_id=${user_id}&book_id=${book_id}`
+  );
 };
 
 export const addGenre = (genre) => {

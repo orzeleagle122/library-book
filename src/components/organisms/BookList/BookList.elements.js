@@ -22,7 +22,7 @@ export const FavoriteItem = styled.div`
   flex-grow: 1;
 
   &:nth-last-child(2) {
-    max-width: 550px;
+    max-width: 750px;
   }
 
   &:last-child {
