@@ -21,7 +21,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {removeFavorite, addFavorite} from "../../../actions";
 
-const BookList = (props, {remove, add}) => {
+const BookList = (props, {remove, add, id}) => {
   // useEffect jesli zalogowany to od nowa pobierz listę
 
   return (
@@ -49,11 +49,16 @@ const BookList = (props, {remove, add}) => {
           </Link>
           {props.favorite ? (
             <>
-              <FavoriteHearthBroken onClick={() => remove()} />
+              <FavoriteHearthBroken onClick={() => remove(id, props.id)} />
             </>
           ) : (
             <>
-              <FavoriteHearthAdd onClick={() => add()} />
+              <FavoriteHearthAdd
+                onClick={() => {
+                  console.log("co tam");
+                  add(id, props.id);
+                }}
+              />
             </>
           )}
         </BookTitle>
@@ -62,8 +67,9 @@ const BookList = (props, {remove, add}) => {
         >
           <BookAuthor>{props.author}</BookAuthor>
           <BookGenres>
-            <Genres>#Fantasy</Genres>
-            <Genres>#Romanse</Genres>
+            {props.genres.map((item) => (
+              <Genres key={item.id}>{item.genre}</Genres>
+            ))}
           </BookGenres>
           <BookInfo>
             {/* Lorem ipsum dolor sit amet, consectetur adipiscing elit.  */}
@@ -71,11 +77,11 @@ const BookList = (props, {remove, add}) => {
           <Available>
             {props.borrowed && (
               <>
-                (here space for status: borrowed or close) <br />
+                (status: borrowed/close) <br />
                 <br />
               </>
             )}
-            {!props.borrowed && <>status: available or unavailable</>}
+            {!props.borrowed && <>status: available/unavailable</>}
           </Available>
         </Link>
       </BookContent>
@@ -87,18 +93,22 @@ const BookList = (props, {remove, add}) => {
 };
 
 BookList.propTypes = {
-  id: PropTypes.string,
+  id: PropTypes.number,
   title: PropTypes.string,
   author: PropTypes.string,
   isLogin: PropTypes.bool.isRequired,
-  favorite: PropTypes.bool.isRequired,
+  favorite: PropTypes.bool,
   borrowed: PropTypes.node,
   remove: PropTypes.func.isRequired,
   add: PropTypes.func.isRequired,
+  genres: PropTypes.array,
 };
 
-const mapStateToProps = () => {
-  return {};
+const mapStateToProps = ({user}) => {
+  const {id} = user.userinfo;
+  return {
+    id,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {

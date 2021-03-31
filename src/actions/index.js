@@ -150,7 +150,7 @@ export const fetchBooks = () => async (dispatch) => {
     type: FETCH_BOOKS_REQUEST,
   });
   return axios
-    .get(API + "/book/search/random", {params: {number: 0}})
+    .get(API + "/book/search/random", {params: {number: 10}})
     .then((payload) => {
       console.log(payload);
       dispatch({
@@ -273,6 +273,7 @@ export const addBook = (title, author, publisher, genres, amount) => async (
       });
     })
     .catch((err) => {
+      console.log(err.response);
       console.log(err.response.data.message);
       console.log(err.response.data.details);
       dispatch({

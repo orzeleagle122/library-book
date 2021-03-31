@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import Heading from "../components/atoms/Heading/Heading";
-import {bookPopular} from "../data/bookPopular";
 import BookList from "../components/organisms/BookList/BookList";
+import {connect} from "react-redux";
+import PropTypes from "prop-types";
 
 const FavoritePageWrapper = styled.div`
   display: flex;
@@ -12,19 +13,31 @@ const FavoritePageWrapper = styled.div`
   width: 100%;
 `;
 
-const FavoritePage = () => {
+const FavoritePage = ({favoriteBooks}) => {
   return (
     <>
       <Heading>Favorite Books</Heading>
       <FavoritePageWrapper>
-        {bookPopular.map((item) => (
+        {favoriteBooks.map((item) => (
           <>
             <BookList key={item.id} {...item} isLogin={true} favorite />
           </>
         ))}
+        {favoriteBooks.length === 0 && <>You dont like any books yet!</>}
       </FavoritePageWrapper>
     </>
   );
+};
+
+FavoritePage.propTypes = {
+  favoriteBooks: PropTypes.array,
+};
+
+const mapDispatchToProps = ({user}) => {
+  const {favoriteBooks} = user.userinfo;
+  return {
+    favoriteBooks,
+  };
 };
 
 //future - delete favorite book - should be in BookList component
@@ -38,4 +51,4 @@ const FavoritePage = () => {
 //     }
 // }
 
-export default FavoritePage;
+export default connect(mapDispatchToProps)(FavoritePage);

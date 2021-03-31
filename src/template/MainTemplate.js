@@ -30,7 +30,7 @@ const MainTemplate = () => {
         <ImageWrapper>
           <Image src={main_img} />
           <ImageTextContainer>
-            <HeaderOne>Welcome to the lending library!</HeaderOne>
+            <HeaderOne>Welcome to the library!</HeaderOne>
             <SpanText>
               Reading books is the most beautiful fun humanity has ever imagined
             </SpanText>

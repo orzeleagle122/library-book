@@ -7,6 +7,7 @@ import {Link} from "react-router-dom";
 import {useEffect} from "react";
 import PropTypes from "prop-types";
 import {Input} from "../components/atoms/Input/Input";
+import Button from "../components/atoms/Button/Button";
 
 const RegisterWrapper = styled.div`
   /* margin-right: 500px;
@@ -129,10 +130,9 @@ const RegisterPage = ({register, isLogin, showErrors, clean}) => {
                     />
                   </div>
                 </div>
-
-                <button className="button is-primary" type="submit">
-                  Sign in
-                </button>
+                <Button type="submit" value="submit">
+                  Create account
+                </Button>
               </form>
               {showErrors && (
                 <div className="notification is-danger is-light">

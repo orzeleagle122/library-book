@@ -39,6 +39,11 @@ const initialStore = {
   genreNews: [],
   totalbooks: 0,
   user: {
+    userinfo: {
+      id: 0,
+      favoriteBooks: [],
+      borrows: [],
+    },
     userToken: null,
     isLogin: false,
   },

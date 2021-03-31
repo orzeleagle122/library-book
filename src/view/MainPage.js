@@ -96,23 +96,21 @@ const MainPage = ({searchbooks, search, isLogin, clean}) => {
           <Heading>Popular Books</Heading>
           <Slider {...carouselSettings}>
             {bookPopular.map((item) => (
-              <>
-                <BookPopularWrapper key={item.id}>
-                  <Link
-                    to={{
-                      pathname: `/book/${item.id}/${item.title}`,
-                      query: {...item},
-                    }}
-                  >
-                    <img
-                      style={{width: "100%"}}
-                      src={`/assets/bookImages/${item.id}.jpg`}
-                      alt={item.title}
-                    />
-                    {/* {item.title}*/}
-                  </Link>
-                </BookPopularWrapper>
-              </>
+              <BookPopularWrapper key={item.id}>
+                <Link
+                  to={{
+                    pathname: `/book/${item.id}/${item.title}`,
+                    query: {...item},
+                  }}
+                >
+                  <img
+                    style={{width: "100%"}}
+                    src={`/assets/bookImages/${item.id}.jpg`}
+                    alt={item.title}
+                  />
+                  {/* {item.title}*/}
+                </Link>
+              </BookPopularWrapper>
             ))}
           </Slider>
         </>

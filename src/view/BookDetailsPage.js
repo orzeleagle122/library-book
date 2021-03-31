@@ -54,7 +54,7 @@ const BookDetails = ({location, bookInfo, bookDetails}) => {
 };
 
 BookDetails.propTypes = {
-  location: PropTypes.node,
+  location: PropTypes.element,
   bookInfo: PropTypes.func.isRequired,
   bookDetails: PropTypes.object,
   title: PropTypes.string,

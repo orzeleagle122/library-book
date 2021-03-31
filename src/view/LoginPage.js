@@ -8,6 +8,7 @@ import PropTypes from "prop-types";
 import {routers} from "../data/routers";
 import {Link} from "react-router-dom";
 import {Input} from "../components/atoms/Input/Input";
+import Button from "../components/atoms/Button/Button";
 
 const LoginWrapper = styled.div`
   /* margin-right: 200px;
@@ -78,10 +79,9 @@ const LoginPage = ({auth, isLogin, showErrors, clean}) => {
                   />
                 </div>
               </div>
-
-              <button className="button is-primary" type="submit">
+              <Button type="submit" value="submit">
                 Sign in
-              </button>
+              </Button>
             </form>
           );
         }}
