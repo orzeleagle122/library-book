@@ -48,6 +48,8 @@ export const ADD_GENRE = "ADD_GENRE";
 export const REMOVE_FAVORITE = "REMOVE_FAVORITE";
 export const ADD_FAVORITE = "ADD_FAVORITE";
 
+export const FAILURE_MESSAGE = "FAILURE_MESSAGE";
+
 const API = "http://localhost:8080/api";
 
 export const removeFavorite = (user_id, book_id) => async (dispatch) => {
@@ -59,13 +61,13 @@ export const removeFavorite = (user_id, book_id) => async (dispatch) => {
   });
 };
 
-export const addFavorite = (user_id, book_id) => async (dispatch) => {
+export const addFavorite = (user_id, props) => async (dispatch) => {
+  const {id} = props;
   dispatch({
     type: ADD_FAVORITE,
+    payload: props,
   });
-  return axios.put(
-    API + `/user/favorite/add?user_id=${user_id}&book_id=${book_id}`
-  );
+  return axios.put(API + `/user/favorite/add?user_id=${user_id}&book_id=${id}`);
 };
 
 export const addGenre = (genre) => {
@@ -139,7 +141,7 @@ export const fetchGenres = () => async (dispatch) => {
     .catch((err) => {
       console.log(err.response);
       dispatch({
-        type: GET_GENRE_FAILURE,
+        type: FAILURE_MESSAGE,
         err,
       });
     });
@@ -159,10 +161,9 @@ export const fetchBooks = () => async (dispatch) => {
       });
     })
     .catch((err) => {
-      console.log(err.response.data.message);
-      console.log(err.response.data.details);
       dispatch({
-        type: FETCH_BOOKS_FAILURE,
+        type: FAILURE_MESSAGE,
+        err,
       });
     });
 };
@@ -221,9 +222,8 @@ export const getUserLoginAction = (token) => async (dispatch) => {
       });
     })
     .catch((err) => {
-      console.log(err.response);
       dispatch({
-        type: GET_CURRENT_USER_FAILURE,
+        type: FAILURE_MESSAGE,
         err,
       });
     });
@@ -244,15 +244,20 @@ export const authUser = (email, password) => async (dispatch) => {
     })
     .catch((err) => {
       dispatch({
-        type: AUTH_FAILURE,
+        type: FAILURE_MESSAGE,
         err,
       });
     });
 };
 
-export const addBook = (title, author, publisher, genres, amount) => async (
-  dispatch
-) => {
+export const addBook = (
+  title,
+  author,
+  publisher,
+  genres,
+  amount,
+  description
+) => async (dispatch) => {
   dispatch({
     type: ADD_BOOK_REQUEST,
   });
@@ -264,6 +269,7 @@ export const addBook = (title, author, publisher, genres, amount) => async (
       publisher,
       genres,
       amount,
+      description,
     })
     .then((payload) => {
       console.log(payload);
@@ -273,11 +279,8 @@ export const addBook = (title, author, publisher, genres, amount) => async (
       });
     })
     .catch((err) => {
-      console.log(err.response);
-      console.log(err.response.data.message);
-      console.log(err.response.data.details);
       dispatch({
-        type: ADD_BOOK_FAILURE,
+        type: FAILURE_MESSAGE,
         err,
       });
     });
@@ -304,9 +307,8 @@ export const registerUser = (firstName, lastName, email, password) => async (
       });
     })
     .catch((err) => {
-      console.log(err.response.data.details);
       dispatch({
-        type: REGISTER_FAILURE,
+        type: FAILURE_MESSAGE,
         err,
       });
     });
@@ -332,7 +334,7 @@ export const bookRequest = (id, title) => async (dispatch) => {
     })
     .catch((err) => {
       dispatch({
-        type: BOOK_DETAILS_FAILURE,
+        type: FAILURE_MESSAGE,
         err,
       });
     });

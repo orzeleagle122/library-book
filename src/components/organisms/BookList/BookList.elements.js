@@ -231,6 +231,20 @@ export const FavoriteHearthAdd = styled(ImHeart)`
   }
 `;
 
+export const AvailableBook = styled.span`
+  padding: 5px 10px;
+  background-color: #c03822;
+  color: white;
+  font-size: 10px;
+  border-radius: 20px;
+
+  ${({available}) =>
+    available &&
+    css`
+      background-color: #008040;
+    `}
+`;
+
 // export const FavoriteHearthBroken=styled(ImHeartBroken)`
 //     display:none;
 

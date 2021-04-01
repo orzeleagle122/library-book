@@ -1,11 +1,11 @@
 import React, {useEffect} from "react";
 import {connect} from "react-redux";
-import {bookRequest} from "../actions";
+import {bookRequest, cleanErrors} from "../actions";
 import Heading from "../components/atoms/Heading/Heading";
 import Loader from "../components/molecules/Loader/Loader";
 import PropTypes from "prop-types";
 
-const BookDetails = ({location, bookInfo, bookDetails}) => {
+const BookDetails = ({location, bookInfo, bookDetails, showErrors, clean}) => {
   const {query} = location;
   const url = location.pathname.split("/");
 
@@ -13,9 +13,8 @@ const BookDetails = ({location, bookInfo, bookDetails}) => {
     if (!query) {
       bookInfo(url[2], url[3]);
     }
-
-    return bookInfo;
-  }, [bookInfo]);
+    return () => clean();
+  }, []);
 
   // po odmontowaniu compomentu wywolaj akcje czyszczenia bookdetails
   // dodać setTimeOut i sprawdzić loader
@@ -31,7 +30,7 @@ const BookDetails = ({location, bookInfo, bookDetails}) => {
     );
   }
 
-  if (bookDetails.message) {
+  if (showErrors) {
     return <>404: {bookDetails.message}</>;
   }
 
@@ -54,22 +53,26 @@ const BookDetails = ({location, bookInfo, bookDetails}) => {
 };
 
 BookDetails.propTypes = {
-  location: PropTypes.element,
+  location: PropTypes.any,
   bookInfo: PropTypes.func.isRequired,
-  bookDetails: PropTypes.object,
+  bookDetails: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   title: PropTypes.string,
   author: PropTypes.string,
+  clean: PropTypes.func.isRequired,
+  showErrors: PropTypes.node,
 };
 
-const mapStateToProps = ({bookDetails}) => {
+const mapStateToProps = ({bookDetails, showErrors}) => {
   return {
     bookDetails,
+    showErrors,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     bookInfo: (id, title) => dispatch(bookRequest(id, title)),
+    clean: () => dispatch(cleanErrors()),
   };
 };
 
