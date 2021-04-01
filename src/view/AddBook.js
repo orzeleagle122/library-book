@@ -117,7 +117,7 @@ const BookAdd = ({
         <GenresDiv>
           Genres:{" "}
           {genres.map((item) => (
-            <b key={item.id}>{item.genre}, </b>
+            <b key={item.id}>{item.name}, </b>
           ))}
           <br />
           {genreList.map((item) => (
@@ -129,7 +129,7 @@ const BookAdd = ({
                 setGenres((prevState) => [...prevState, item]);
               }}
             >
-              {item.genre}
+              {item.name}
             </GenresButton>
           ))}
           <br />
@@ -140,6 +140,7 @@ const BookAdd = ({
           name="amount"
           value={amount}
           onChange={handleChange}
+          min="1"
         />
         <br />
         <TextareaBook
@@ -173,8 +174,8 @@ BookAdd.propTypes = {
   showErrors: PropTypes.node,
 };
 
-const mapStateToProps = ({genreList}) => {
-  return {genreList};
+const mapStateToProps = ({genreList, showErrors}) => {
+  return {genreList, showErrors};
 };
 
 const mapDispathToProps = (dispatch) => {

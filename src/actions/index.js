@@ -63,15 +63,17 @@ export const removeFavorite = (user_id, book_id) => async (dispatch) => {
 
 export const addFavorite = (user_id, props) => async (dispatch) => {
   const {id} = props;
-  dispatch({
-    type: ADD_FAVORITE,
-    payload: props,
-  });
-  return axios.put(API + `/user/favorite/add?user_id=${user_id}&book_id=${id}`);
+  return axios
+    .put(API + `/user/favorite/add?user_id=${user_id}&book_id=${id}`)
+    .then((payload) => {
+      dispatch({
+        type: ADD_FAVORITE,
+        payload,
+      });
+    });
 };
 
 export const addGenre = (genre) => {
-  console.log(genre);
   return {
     type: ADD_GENRE,
     payload: {
@@ -108,22 +110,28 @@ export const removeGenre3 = (item) => {
   };
 };
 
-export const sendRemoveListGenre = (removeList) => async (dispatch) => {
-  console.log(removeList);
+export const sendRemoveListGenre = (idList) => async (dispatch) => {
+  const ids = idList.map((item) => item.id);
   dispatch({
     type: SEND_REMOVE_GENRELIST,
   });
-  return axios.delete(API + "/bookGenre/delete", {data: {removeList}});
+  return axios.delete(API + "/bookGenre/delete", {data: {ids}});
 };
 
-export const sendNewsListGenre = (addList) => async (dispatch) => {
-  console.log(addList);
+export const sendNewsListGenre = (genres) => async (dispatch) => {
   dispatch({
     type: SEND_ADD_GENRELIST,
   });
-  return axios.post(API + "/bookGenre/add", {
-    addList,
-  });
+  return axios
+    .post(API + "/bookGenre/add", {
+      genres,
+    })
+    .then((payload) => {
+      console.log(payload);
+    })
+    .catch((err) => {
+      console.log(err.response);
+    });
 };
 
 export const fetchGenres = () => async (dispatch) => {
@@ -139,7 +147,6 @@ export const fetchGenres = () => async (dispatch) => {
       });
     })
     .catch((err) => {
-      console.log(err.response);
       dispatch({
         type: FAILURE_MESSAGE,
         err,
@@ -152,9 +159,9 @@ export const fetchBooks = () => async (dispatch) => {
     type: FETCH_BOOKS_REQUEST,
   });
   return axios
-    .get(API + "/book/search/random", {params: {number: 10}})
+    .get(API + "/book/search/random", {params: {number: 1}})
     .then((payload) => {
-      console.log(payload);
+      // console.log(payload);
       dispatch({
         type: FETCH_BOOKS_SUCCESS,
         payload,
@@ -261,7 +268,6 @@ export const addBook = (
   dispatch({
     type: ADD_BOOK_REQUEST,
   });
-  console.log(genres);
   return axios
     .post(API + "/book/add", {
       title,
@@ -272,7 +278,6 @@ export const addBook = (
       description,
     })
     .then((payload) => {
-      console.log(payload);
       dispatch({
         type: ADD_BOOK_SUCCESS,
         payload,
@@ -300,7 +305,7 @@ export const registerUser = (firstName, lastName, email, password) => async (
       password,
     })
     .then((payload) => {
-      console.log(payload);
+      // console.log(payload);
       dispatch({
         type: REGISTER_SUCCESS,
         payload,
@@ -348,7 +353,7 @@ export const searchBook = (phrase) => async (dispatch) => {
     return axios
       .get(API + "/book/search", {params: {phrase}})
       .then((payload) => {
-        console.log(payload);
+        // console.log(payload);
         dispatch({
           type: SEARCH_BOOK_SUCCESS,
           payload,

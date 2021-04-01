@@ -1,10 +1,9 @@
-import React, {useEffect} from "react";
+import React from "react";
 import styled from "styled-components";
 import Heading from "../components/atoms/Heading/Heading";
 import BookList from "../components/organisms/BookList/BookList";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
-import {getUserLoginAction} from "../actions";
 
 const FavoritePageWrapper = styled.div`
   display: flex;
@@ -14,13 +13,7 @@ const FavoritePageWrapper = styled.div`
   width: 100%;
 `;
 
-const FavoritePage = ({favoriteBooks, getUserLogin}) => {
-  useEffect(() => {
-    if (localStorage.getItem("loginToken")) {
-      getUserLogin(localStorage.getItem("loginToken"));
-    }
-  }, []);
-
+const FavoritePage = ({favoriteBooks}) => {
   return (
     <>
       <Heading>Favorite Books</Heading>
@@ -46,12 +39,6 @@ const mapStatetoProps = ({user}) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    getUserLogin: (token) => dispatch(getUserLoginAction(token)),
-  };
-};
-
 //future - delete favorite book - should be in BookList component
 // const mapDispatchToProps=(dispatch,ownProps)=>{
 //     //ownProps - all props transferred to component
@@ -63,4 +50,4 @@ const mapDispatchToProps = (dispatch) => {
 //     }
 // }
 
-export default connect(mapStatetoProps, mapDispatchToProps)(FavoritePage);
+export default connect(mapStatetoProps, null)(FavoritePage);

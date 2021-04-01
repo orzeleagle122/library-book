@@ -23,7 +23,7 @@ import {
   SEND_ADD_GENRELIST,
   SEND_REMOVE_GENRELIST,
   FAILURE_MESSAGE,
-  // ADD_FAVORITE,
+  ADD_FAVORITE,
 } from "../actions";
 
 //initial store
@@ -59,20 +59,23 @@ const initialStore = {
 
 //reducer(old-state,action) return update or old state
 export const reducer = (state = initialStore, action) => {
-  // if (action.type === ADD_FAVORITE) {
-  //   // nie działa bo nie moge zwrocic informacji o userze
-  //   console.log(action.payload);
-  //   return {
-  //     ...state,
-  //     user: {
-  //       userinfo: {
-  //         favoriteBooks: action.payload,
-  //       },
-  //     },
-  //   };
-  // }
+  if (action.type === ADD_FAVORITE) {
+    console.log(action.payload);
+    return {
+      ...state,
+      user: {
+        userToken: action.payload.data.id,
+        isLogin: true,
+        userinfo: action.payload.data,
+      },
+    };
+  }
   if (action.type === FAILURE_MESSAGE) {
-    console.log(action.err.response);
+    console.log(action.err.response.data);
+    if (action.err.response === undefined) {
+      alert("no backend connect");
+      return {...state};
+    }
     return {
       ...state,
       showErrors: action.err.response.data.details,
@@ -80,7 +83,7 @@ export const reducer = (state = initialStore, action) => {
   }
 
   if (action.type === ADD_GENRE) {
-    console.log(action.payload);
+    // console.log(action.payload);
     return {
       ...state,
       genreNews: [...state.genreNews, action.payload.genre],
@@ -159,7 +162,7 @@ export const reducer = (state = initialStore, action) => {
     };
   }
   if (action.type === GET_GENRE_SUCCESS) {
-    console.log(action.payload.data);
+    // console.log(action.payload.data);
     return {
       ...state,
       genreList: action.payload.data,

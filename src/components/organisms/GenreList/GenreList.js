@@ -30,18 +30,18 @@ const GenreList = ({
   remove3,
   fetch,
   sendRemove,
-  sendAdd,
+  // sendAdd,
 }) => {
   useEffect(() => {
     fetch();
-  }, [fetch]);
+  }, []);
 
   const buttonView = genreNews.length >= 1 || genreRemoved.length >= 1;
 
   const handleSubmitChanges = () => {
-    alert("wysylam wszystko :D");
+    // alert("wysylam wszystko :D");
     sendRemove(genreRemoved);
-    sendAdd(genreNews);
+    // sendAdd(genreNews);
     fetch();
   };
 
@@ -78,7 +78,7 @@ const GenreList = ({
           <GenreListWrapper>
             {genreRemoved.map((item) => (
               <Genre key={item.id} remove>
-                <Title>{item.genre}</Title>
+                <Title>{item.name}</Title>
                 <DeleteButton onClick={() => remove2(item)}>
                   <RiDeleteBin2FillIcon remove />
                   <VscDebugStepOverIcon remove />
@@ -93,7 +93,7 @@ const GenreList = ({
       <GenreListWrapper>
         {genreList.map((item) => (
           <Genre key={item.id}>
-            <Title>{item.genre}</Title>
+            <Title>{item.name}</Title>
             <DeleteButton onClick={() => remove(item)}>
               <RiDeleteBin2FillIcon />
             </DeleteButton>

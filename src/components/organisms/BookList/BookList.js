@@ -40,9 +40,10 @@ const BookList = (props) => {
     id_user,
     available,
     getUserLogin,
+    item,
   } = props;
-
   // useEffect jesli zalogowany to od nowa pobierz listę
+  console.log(props);
 
   return (
     <FavoriteItem>
@@ -73,11 +74,18 @@ const BookList = (props) => {
             </>
           ) : (
             <>
-              <FavoriteHearthAdd
-                onClick={() => {
-                  add(id_user, props);
-                }}
-              />
+              {console.log(id)}
+              {console.log(item)}
+
+              {/* {id !== item.id && ( */}
+              <>
+                <FavoriteHearthAdd
+                  onClick={() => {
+                    add(id_user, props);
+                  }}
+                />
+              </>
+              {/* )} */}
             </>
           )}
         </BookTitle>
@@ -85,7 +93,7 @@ const BookList = (props) => {
           <BookAuthor>{author}</BookAuthor>
           <BookGenres>
             {genres.map((item) => (
-              <Genres key={item.id}>{item.genre}</Genres>
+              <Genres key={item.id}>{item.name}</Genres>
             ))}
           </BookGenres>
           <BookInfo>
@@ -133,6 +141,7 @@ BookList.propTypes = {
   genres: PropTypes.array,
   available: PropTypes.number,
   getUserLogin: PropTypes.func.isRequired,
+  item: PropTypes.node,
 };
 
 const mapStateToProps = ({user}) => {
