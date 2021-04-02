@@ -24,6 +24,8 @@ import {
   SEND_REMOVE_GENRELIST,
   FAILURE_MESSAGE,
   ADD_FAVORITE,
+  ADD_BOOK_SUCCESS,
+  CLOSE_SUCCESS_MESSAGE,
 } from "../actions";
 
 //initial store
@@ -47,6 +49,7 @@ const initialStore = {
   loading: true,
   searchFormValue: "",
   showErrors: null,
+  succesMessage: false,
 };
 
 //  const newStore={
@@ -59,10 +62,29 @@ const initialStore = {
 
 //reducer(old-state,action) return update or old state
 export const reducer = (state = initialStore, action) => {
-  if (action.type === ADD_FAVORITE) {
-    console.log(action.payload);
+  if (action.type === CLOSE_SUCCESS_MESSAGE) {
     return {
       ...state,
+      succesMessage: false,
+    };
+  }
+  if (action.type === ADD_BOOK_SUCCESS) {
+    return {
+      ...state,
+      succesMessage: "The book has been added to the database!",
+      showErrors: null,
+    };
+  }
+
+  if (action.type === ADD_FAVORITE) {
+    console.log(action.payload);
+    const lastLiked =
+      action.payload.data.favoriteBooks[
+        action.payload.data.favoriteBooks.length - 1
+      ];
+    return {
+      ...state,
+      succesMessage: `${lastLiked.title} was liked!`,
       user: {
         userToken: action.payload.data.id,
         isLogin: true,
@@ -71,7 +93,6 @@ export const reducer = (state = initialStore, action) => {
     };
   }
   if (action.type === FAILURE_MESSAGE) {
-    console.log(action.err.response.data);
     if (action.err.response === undefined) {
       alert("no backend connect");
       return {...state};
@@ -127,6 +148,7 @@ export const reducer = (state = initialStore, action) => {
     return {
       ...state,
       genreNews: [],
+      showErrors: null,
     };
   }
   if (action.type === MIN_THREE_CHAR) {
@@ -166,12 +188,14 @@ export const reducer = (state = initialStore, action) => {
     return {
       ...state,
       genreList: action.payload.data,
+      succesMessage: "Genre list updated!",
     };
   }
   if (action.type === AUTH_SUCCESS) {
     localStorage.setItem("loginToken", action.payload.data.id);
     return {
       ...state,
+      succesMessage: `Welcome ${action.payload.data.firstName}!`,
       user: {
         userinfo: action.payload.data,
         userToken: action.payload.data.id,
@@ -183,6 +207,7 @@ export const reducer = (state = initialStore, action) => {
     localStorage.removeItem("loginToken");
     return {
       ...state,
+      succesMessage: `You have been logged out!`,
       user: {
         userinfo: null,
         userToken: null,
@@ -204,6 +229,7 @@ export const reducer = (state = initialStore, action) => {
     localStorage.setItem("loginToken", action.payload.data.token);
     return {
       ...state,
+      succesMessage: `Account created on email  ${action.payload.data.email}!`,
       user: {
         userinfo: action.payload.data,
         userToken: action.payload.data.id,

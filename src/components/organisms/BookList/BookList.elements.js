@@ -136,7 +136,7 @@ export const BookInfo = styled.p`
 `;
 
 export const BookOrderButton = styled.button`
-  width: 64px;
+  width: 50px;
   height: 100%;
   background-color: #2d3ddf;
   margin-left: auto;

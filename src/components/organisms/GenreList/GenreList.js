@@ -16,8 +16,7 @@ import {
   removeGenre2,
   removeGenre3,
   fetchGenres,
-  sendRemoveListGenre,
-  sendNewsListGenre,
+  removeaddfetchGenre,
 } from "../../../actions";
 import PropTypes from "prop-types";
 
@@ -29,8 +28,8 @@ const GenreList = ({
   remove2,
   remove3,
   fetch,
-  sendRemove,
-  // sendAdd,
+  removeaddfetch,
+  showErrors,
 }) => {
   useEffect(() => {
     fetch();
@@ -39,10 +38,7 @@ const GenreList = ({
   const buttonView = genreNews.length >= 1 || genreRemoved.length >= 1;
 
   const handleSubmitChanges = () => {
-    // alert("wysylam wszystko :D");
-    sendRemove(genreRemoved);
-    // sendAdd(genreNews);
-    fetch();
+    removeaddfetch(genreRemoved, genreNews);
   };
 
   return (
@@ -99,6 +95,7 @@ const GenreList = ({
             </DeleteButton>
           </Genre>
         ))}
+        {showErrors}
       </GenreListWrapper>
     </>
   );
@@ -112,15 +109,16 @@ GenreList.propTypes = {
   remove2: PropTypes.func.isRequired,
   remove3: PropTypes.func.isRequired,
   fetch: PropTypes.func.isRequired,
-  sendRemove: PropTypes.func.isRequired,
-  sendAdd: PropTypes.func.isRequired,
+  removeaddfetch: PropTypes.func.isRequired,
+  showErrors: PropTypes.array,
 };
 
-const mapStateToProps = ({genreList, genreRemoved, genreNews}) => {
+const mapStateToProps = ({genreList, genreRemoved, genreNews, showErrors}) => {
   return {
     genreList,
     genreRemoved,
     genreNews,
+    showErrors,
   };
 };
 
@@ -130,8 +128,8 @@ const mapDispatchToProps = (dispatch) => {
     remove2: (item) => dispatch(removeGenre2(item)),
     remove3: (item) => dispatch(removeGenre3(item)),
     fetch: () => dispatch(fetchGenres()),
-    sendRemove: (genreRemoved) => dispatch(sendRemoveListGenre(genreRemoved)),
-    sendAdd: (genreNews) => dispatch(sendNewsListGenre(genreNews)),
+    removeaddfetch: (genreRemoved, genreNews) =>
+      dispatch(removeaddfetchGenre(genreRemoved, genreNews)),
     // listGenre: ()=>dispatch(listGenre),
     // addGenre: ()=>dispatch(genre)
   };

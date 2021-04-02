@@ -116,7 +116,7 @@ const BookList = (props) => {
       </BookContent>
       {available >= 1 && (
         <BookOrderButton isLogin={isLogin}>
-          <VerticalText>Borrow a book</VerticalText>
+          <VerticalText>Borrow</VerticalText>
         </BookOrderButton>
       )}
     </FavoriteItem>

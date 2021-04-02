@@ -49,8 +49,15 @@ export const REMOVE_FAVORITE = "REMOVE_FAVORITE";
 export const ADD_FAVORITE = "ADD_FAVORITE";
 
 export const FAILURE_MESSAGE = "FAILURE_MESSAGE";
+export const CLOSE_SUCCESS_MESSAGE = "CLOSE_SUCCESS_MESSAGE";
 
 const API = "http://localhost:8080/api";
+
+export const closeSuccessMessage = () => {
+  return {
+    type: CLOSE_SUCCESS_MESSAGE,
+  };
+};
 
 export const removeFavorite = (user_id, book_id) => async (dispatch) => {
   dispatch({
@@ -108,6 +115,40 @@ export const removeGenre3 = (item) => {
       item,
     },
   };
+};
+
+export const removeaddfetchGenre = (idList, genres) => async (dispatch) => {
+  const ids = idList.map((item) => item.id);
+  dispatch({
+    type: SEND_REMOVE_GENRELIST,
+  });
+  dispatch({
+    type: SEND_ADD_GENRELIST,
+  });
+  dispatch({
+    type: GET_GENRE_REQUEST,
+  });
+  return axios
+    .delete(API + "/bookGenre/delete", {data: {ids}})
+    .then(async () => {
+      return axios.post(API + "/bookGenre/add", {
+        genres,
+      });
+    })
+    .then(async () => {
+      return axios.get(API + "/bookGenre/search/all").then((payload) => {
+        dispatch({
+          type: GET_GENRE_SUCCESS,
+          payload,
+        });
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: FAILURE_MESSAGE,
+        err,
+      });
+    });
 };
 
 export const sendRemoveListGenre = (idList) => async (dispatch) => {
