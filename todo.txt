@@ -1,5 +1,11 @@
 -nie mozna dodać dwóch tych samych gatunków
--sukces powiadomienia timeout
 -serduszko na wyszukiwarce ksiazek 
+-szary przycisk gdy ksiazka niedostepna 
+-lista gatunków ksiezki zeby bylo column jak nie ma miejsca
+=book detail zrobic 
+- user page z edycja profilu 
+-nowa strona do szukania tak jak na allegro
 
+
+-paginacja
 -rwd

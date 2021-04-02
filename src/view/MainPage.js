@@ -34,7 +34,7 @@ const FavoritePageWrapper = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: space-around;
 `;
 
 const MainPage = ({searchbooks, search, isLogin, clean}) => {
@@ -138,5 +138,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-// export default ClearErros(MainPage);
 export default connect(mapStateToProps, mapDispatchToProps)(MainPage);

@@ -16,10 +16,10 @@ export const FavoriteItem = styled.div`
   border-bottom-left-radius: 10px;
   transition: 0.15s linear;
 
-  /* flex-basis: 500px; */
+  flex-basis: 500px;
 
   /* stosunek wzrostu dzieci contenera wzgledem siebie */
-  flex-grow: 1;
+  /* flex-grow: 1; */
 
   &:nth-last-child(2) {
     max-width: 750px;
