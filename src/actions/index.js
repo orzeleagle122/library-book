@@ -5,7 +5,7 @@ export const REMOVE_BOOK = "REMOVE_BOOK";
 export const SEARCH_BOOK_REQUEST = "SEARCH_BOOK_REQUEST";
 export const SEARCH_BOOK_SUCCESS = "SEARCH_BOOK_SUCCESS";
 export const SEARCH_BOOK_FAILURE = "SEARCH_BOOK_FAILURE";
-export const MIN_THREE_CHAR = "MIN_THREE_CHAR";
+export const CLEAR_SEARCH_BOOK_LIST = "CLEAR_SEARCH_BOOK_LIST";
 
 export const AUTH_REQUEST = "AUTH_REQUEST";
 export const AUTH_SUCCESS = "AUTH_SUCCESS";
@@ -394,7 +394,9 @@ export const searchBook = (phrase) => async (dispatch) => {
     return axios
       .get(API + "/book/search", {params: {phrase}})
       .then((payload) => {
-        // console.log(payload);
+        dispatch({
+          type: CLEAR_SEARCH_BOOK_LIST,
+        });
         dispatch({
           type: SEARCH_BOOK_SUCCESS,
           payload,
@@ -408,7 +410,7 @@ export const searchBook = (phrase) => async (dispatch) => {
       });
   } else {
     return dispatch({
-      type: MIN_THREE_CHAR,
+      type: CLEAR_SEARCH_BOOK_LIST,
     });
   }
 };

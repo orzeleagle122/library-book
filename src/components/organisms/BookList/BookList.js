@@ -49,7 +49,7 @@ const BookList = (props) => {
     <FavoriteItem>
       <BookImages>
         <Link to={{pathname: `/book/${id}/${title}`, query: {...props}}}>
-          <BookImage src={`/assets/bookImages/${id}.jpg`} alt={title} />
+          <BookImage src={`/assets/bookImages/book2.jpg`} alt={title} />
         </Link>
         <BookOrderButtonMobile>Book</BookOrderButtonMobile>
       </BookImages>
@@ -114,11 +114,9 @@ const BookList = (props) => {
           </Available>
         </Link>
       </BookContent>
-      {available >= 1 && (
-        <BookOrderButton isLogin={isLogin}>
-          <VerticalText>Borrow</VerticalText>
-        </BookOrderButton>
-      )}
+      <BookOrderButton isLogin={isLogin} available={available >= 1}>
+        <VerticalText>Borrow</VerticalText>
+      </BookOrderButton>
     </FavoriteItem>
   );
 };

@@ -12,7 +12,7 @@ import {
   SEARCH_BOOK_SUCCESS,
   SEARCH_BOOK_FAILURE,
   BOOK_DETAILS_SUCCESS,
-  MIN_THREE_CHAR,
+  CLEAR_SEARCH_BOOK_LIST,
   REMOVE_GENRE,
   REMOVE_GENRE2,
   REMOVE_GENRE3,
@@ -151,7 +151,7 @@ export const reducer = (state = initialStore, action) => {
       showErrors: null,
     };
   }
-  if (action.type === MIN_THREE_CHAR) {
+  if (action.type === CLEAR_SEARCH_BOOK_LIST) {
     return {
       ...state,
       searchbooks: [],

@@ -136,7 +136,7 @@ export const BookInfo = styled.p`
 `;
 
 export const BookOrderButton = styled.button`
-  width: 50px;
+  min-width: 50px;
   height: 100%;
   background-color: #2d3ddf;
   margin-left: auto;
@@ -161,8 +161,20 @@ export const BookOrderButton = styled.button`
       display: none;
     `}
 
+  ${({available}) =>
+    !available &&
+    css`
+      background-color: #525356;
+    `}
+
   &:hover {
     background-color: #2cbc63;
+
+    ${({available}) =>
+      !available &&
+      css`
+        background-color: #525356;
+      `}
   }
 
   @media screen and (max-width: 480px) {
