@@ -1,9 +1,9 @@
 import React, {useEffect} from "react";
 import {connect} from "react-redux";
 import {bookRequest, cleanErrors} from "../actions";
-import Heading from "../components/atoms/Heading/Heading";
 import Loader from "../components/molecules/Loader/Loader";
 import PropTypes from "prop-types";
+import DetailsBook from "../components/organisms/DetailsBook/DetailsBook";
 
 const BookDetails = ({location, bookInfo, bookDetails, showErrors, clean}) => {
   const {query} = location;
@@ -22,10 +22,9 @@ const BookDetails = ({location, bookInfo, bookDetails, showErrors, clean}) => {
   if (query) {
     return (
       <>
-        after Search form <br />
-        <Heading>{query.title}</Heading>
-        {query.author}
+        <DetailsBook {...query} />
         <br />
+        *after Search form*
       </>
     );
   }
@@ -38,10 +37,9 @@ const BookDetails = ({location, bookInfo, bookDetails, showErrors, clean}) => {
     <>
       {bookDetails.id >= 1 ? (
         <>
-          after Refresh <br />
-          <Heading>{bookDetails.title} </Heading>
-          <h3>{bookDetails.author}</h3>
-          {bookDetails.amount},{bookDetails.id}
+          <DetailsBook {...bookDetails} />
+          <br />
+          *after Refresh*
         </>
       ) : (
         <>
@@ -56,8 +54,6 @@ BookDetails.propTypes = {
   location: PropTypes.any,
   bookInfo: PropTypes.func.isRequired,
   bookDetails: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
-  title: PropTypes.string,
-  author: PropTypes.string,
   clean: PropTypes.func.isRequired,
   showErrors: PropTypes.node,
 };

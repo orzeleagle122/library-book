@@ -45,6 +45,10 @@ const BookList = (props) => {
   // useEffect jesli zalogowany to od nowa pobierz listę
   console.log(props);
 
+  // if (title.length > 5) {
+  //   var smalltitle = title.substring(0, 5);
+  // }
+
   return (
     <FavoriteItem>
       <BookImages>
@@ -61,6 +65,9 @@ const BookList = (props) => {
               query: {...props},
             }}
           >
+            {/* {smalltitle} */}
+            {/* {title.length < 10 ? {title} : `${title}...`} */}
+            {/* {title.substring(0, 5)} */}
             {title}
           </Link>
           {favorite ? (
@@ -125,6 +132,7 @@ BookList.propTypes = {
   id: PropTypes.number,
   id_user: PropTypes.number,
   title: PropTypes.string,
+  smalltitle: PropTypes.string,
   author: PropTypes.string,
   isLogin: PropTypes.bool,
   favorite: PropTypes.bool,

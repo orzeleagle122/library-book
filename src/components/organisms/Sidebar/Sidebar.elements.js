@@ -82,9 +82,14 @@ export const LinkList = styled.ul`
 
 export const ItemList = styled.li`
   margin-top: 50px;
+
   @media screen and (max-width: 480px) {
     margin-top: 0px;
     margin-left: 15px;
+  }
+
+  @media screen and (max-height: 750px) {
+    margin-top: 15px;
   }
 `;
 

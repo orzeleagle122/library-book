@@ -96,6 +96,7 @@ export const BookTitle = styled.h1`
   text-decoration: none;
   color: black !important;
   position: relative;
+  overflow: hidden;
 `;
 
 export const BookGenres = styled.div`
