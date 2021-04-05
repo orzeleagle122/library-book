@@ -8,7 +8,6 @@ export const DetailsWrapper = styled.div`
 
   @media screen and (max-width: 480px) {
     flex-direction: column;
-    align-items: center;
   }
 `;
 
@@ -17,12 +16,23 @@ export const BookImages = styled.div`
   margin-right: 30px;
   @media screen and (max-width: 480px) {
     margin-right: 0px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 `;
 
-export const BookContent = styled.div``;
+export const BookContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+`;
 export const ImgBook = styled.img`
   width: 100%;
+  @media screen and (max-width: 480px) {
+    width: 250px;
+  }
 `;
 
 export const HeadingAuthor = styled.h2`

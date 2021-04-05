@@ -28,12 +28,12 @@ const Sidebar = ({isLogin, out}) => {
           <RiLogoutBoxLineIcon />
         </LogoLink>
       </Link>
-      <LinkList>
+      <LinkList isLogin={isLogin}>
         <ItemList>
           <NavLink exact to="/">
             <NavbarButton>
               <BsHouseDoorFillIcon />
-              <SpanText>Home</SpanText>{" "}
+              <SpanText>Home</SpanText>
             </NavbarButton>
           </NavLink>
         </ItemList>

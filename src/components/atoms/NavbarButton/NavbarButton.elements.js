@@ -30,9 +30,9 @@ export const StyledButton = styled.button`
   }
 
   @media screen and (max-width: 480px) {
-    width: 58px;
-    height: 58px;
+    width: 38px;
+    height: 38px;
     font-weight: 400;
-    font-size: 10px;
+    font-size: 0px;
   }
 `;

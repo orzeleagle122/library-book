@@ -55,7 +55,6 @@ const BookList = (props) => {
         <Link to={{pathname: `/book/${id}/${title}`, query: {...props}}}>
           <BookImage src={`/assets/bookImages/book2.jpg`} alt={title} />
         </Link>
-        <BookOrderButtonMobile>Book</BookOrderButtonMobile>
       </BookImages>
       <BookContent>
         <BookTitle>
@@ -120,6 +119,7 @@ const BookList = (props) => {
             )}
           </Available>
         </Link>
+        <BookOrderButtonMobile>Book</BookOrderButtonMobile>
       </BookContent>
       <BookOrderButton isLogin={isLogin} available={available >= 1}>
         <VerticalText>Borrow</VerticalText>

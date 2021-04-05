@@ -2,8 +2,8 @@ import React from "react";
 import {StyledButton} from "./NavbarButton.elements";
 import PropTypes from "prop-types";
 
-const NavbarButton = ({children}) => {
-  return <StyledButton>{children}</StyledButton>;
+const NavbarButton = (props) => {
+  return <StyledButton {...props}>{props.children}</StyledButton>;
 };
 
 NavbarButton.propTypes = {

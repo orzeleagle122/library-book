@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, {css} from "styled-components";
 import {
   BsFillPersonFill,
   BsFillBookmarkFill,
@@ -31,6 +31,7 @@ export const Wrapper = styled.nav`
     bottom: 0;
     right: 0;
     margin-top: auto;
+    padding: 0 0;
 
     -webkit-backface-visibility: hidden;
     -webkit-perspective: 1000;
@@ -38,7 +39,7 @@ export const Wrapper = styled.nav`
     transform: translateZ(0);
     -webkit-transform: translateZ(0);
     width: 100%;
-    height: 80px;
+    height: 50px;
 
     border-top-right-radius: 50px;
     border-top-left-radius: 50px;
@@ -77,6 +78,18 @@ export const LinkList = styled.ul`
 
   @media screen and (max-width: 480px) {
     display: flex;
+    margin-left: 25px;
+    margin-right: 25px;
+    width: 100%;
+    justify-content: space-around;
+
+    ${({isLogin}) =>
+      !isLogin &&
+      css`
+        width: 100%;
+        justify-content: center;
+        gap: 50px;
+      `}
   }
 `;
 
@@ -86,9 +99,13 @@ export const ItemList = styled.li`
   @media screen and (max-width: 480px) {
     margin-top: 0px;
     margin-left: 15px;
+
+    @media screen and (max-height: 750px) {
+      margin-top: 0;
+    }
   }
 
-  @media screen and (max-height: 750px) {
+  @media screen and (max-height: 750px) and (min-width: 481px) {
     margin-top: 15px;
   }
 `;
@@ -96,42 +113,45 @@ export const ItemList = styled.li`
 export const LogoutButton = styled.div`
   margin-top: auto;
   @media screen and (max-width: 480px) {
-    margin-top: 0;
-    margin-left: auto;
-    margin-right: 25px;
+    display: none;
   }
 `;
 
 export const BsHouseDoorFillIcon = styled(BsHouseDoorFill)`
   font-size: 25px;
   @media screen and (max-width: 480px) {
-    font-size: 15px;
+    font-size: 30px;
   }
 `;
 
 export const BsFillBookmarkFillIcon = styled(BsFillBookmarkFill)`
   font-size: 25px;
   @media screen and (max-width: 480px) {
+    font-size: 30px;
   }
 `;
 export const BsSearchIcon = styled(BsSearch)`
   font-size: 25px;
   @media screen and (max-width: 480px) {
+    font-size: 30px;
   }
 `;
 export const BsFillPersonFillIcon = styled(BsFillPersonFill)`
   font-size: 25px;
   @media screen and (max-width: 480px) {
+    font-size: 30px;
   }
 `;
 export const RiLogoutBoxLineIcon = styled(RiLogoutBoxLine)`
   font-size: 25px;
   @media screen and (max-width: 480px) {
+    font-size: 30px;
   }
 `;
 export const MdFavoriteIcon = styled(MdFavorite)`
   font-size: 25px;
   @media screen and (max-width: 480px) {
+    font-size: 30px;
   }
 `;
 

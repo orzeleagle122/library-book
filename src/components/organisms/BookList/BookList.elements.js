@@ -59,8 +59,7 @@ export const BookImages = styled.div`
   position: relative;
 
   @media screen and (max-width: 480px) {
-    width: 100px;
-    height: auto;
+    display: none;
   }
 `;
 
@@ -85,6 +84,7 @@ export const BookContent = styled.div`
   /* height:300px; */
   @media screen and (max-width: 480px) {
     width: 100%;
+    padding: 0 0;
   }
 `;
 
@@ -97,6 +97,11 @@ export const BookTitle = styled.h1`
   color: black !important;
   position: relative;
   overflow: hidden;
+
+  @media screen and (max-width: 480px) {
+    width: 100%;
+    padding: 10px 15px 0 15px;
+  }
 `;
 
 export const BookGenres = styled.div`
@@ -124,11 +129,18 @@ export const Genres = styled.div`
 
 export const BookAuthor = styled.span`
   font-size: 14px;
+  @media screen and (max-width: 480px) {
+    padding: 0px 15px 0 15px;
+  }
 `;
 
 export const Available = styled.div`
   color: blue;
   margin-top: auto;
+  @media screen and (max-width: 480px) {
+    width: 100%;
+    padding: 0 0;
+  }
 `;
 
 export const BookInfo = styled.p`
