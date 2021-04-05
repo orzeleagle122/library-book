@@ -5,6 +5,7 @@
 =book detail zrobic 
 - user page z edycja profilu 
 -nowa strona do szukania tak jak na allegro
+-loader https://reactjs.org/docs/concurrent-mode-suspense.html
 
 
 -paginacja

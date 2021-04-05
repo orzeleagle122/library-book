@@ -59,11 +59,12 @@ export const Publisherspan = styled.span`
 `;
 
 export const ButtonBB = styled(Button)`
-  margin-bottom: 100px;
+  margin-bottom: 10px;
+
   ${({isLogin}) =>
     !isLogin &&
     css`
-      display: none;
+      display: none !important;
     `}
 
   ${({available}) =>

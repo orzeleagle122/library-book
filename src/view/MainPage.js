@@ -46,7 +46,10 @@ const MainPage = ({searchbooks, search, isLogin, clean}) => {
 
   const handleChangeSearchFormValue = (e) => {
     setSearchFormValue(e.target.value);
-    search(e.target.value);
+    setTimeout(phrase, 2000);
+    function phrase() {
+      search(e.target.value);
+    }
   };
 
   const map = searchbooks.map((item) => (

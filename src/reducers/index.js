@@ -77,7 +77,7 @@ export const reducer = (state = initialStore, action) => {
   }
 
   if (action.type === ADD_FAVORITE) {
-    console.log(action.payload);
+    // console.log(action.payload);
     const lastLiked =
       action.payload.data.favoriteBooks[
         action.payload.data.favoriteBooks.length - 1
@@ -99,7 +99,7 @@ export const reducer = (state = initialStore, action) => {
     }
     return {
       ...state,
-      showErrors: action.err.response.data.details,
+      showErrors: action.err.response.data.message,
     };
   }
 
@@ -209,7 +209,11 @@ export const reducer = (state = initialStore, action) => {
       ...state,
       succesMessage: `You have been logged out!`,
       user: {
-        userinfo: null,
+        userinfo: {
+          id: 0,
+          favoriteBooks: [],
+          borrows: [],
+        },
         userToken: null,
         isLogin: false,
       },

@@ -40,10 +40,10 @@ const BookList = (props) => {
     id_user,
     available,
     getUserLogin,
-    item,
+    // item,
   } = props;
   // useEffect jesli zalogowany to od nowa pobierz listę
-  console.log(props);
+  // console.log(props);
 
   // if (title.length > 5) {
   //   var smalltitle = title.substring(0, 5);
@@ -81,8 +81,8 @@ const BookList = (props) => {
             </>
           ) : (
             <>
-              {console.log(id)}
-              {console.log(item)}
+              {/* {console.log(id)}
+              {console.log(item)} */}
 
               {/* {id !== item.id && ( */}
               <>

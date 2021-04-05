@@ -24,6 +24,7 @@ const DetailsBook = ({
   available,
   isLogin,
 }) => {
+  console.log(isLogin);
   return (
     <>
       <DetailsWrapper>
@@ -39,6 +40,7 @@ const DetailsBook = ({
             ))}
           </BookGenres>
           <Publisherspan>Publisher: {publisher}</Publisherspan>
+          <br />
           <ButtonBB isLogin={isLogin} available={available >= 1}>
             Borrow Book
           </ButtonBB>

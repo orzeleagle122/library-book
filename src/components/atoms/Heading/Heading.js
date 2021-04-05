@@ -2,8 +2,8 @@ import React from "react";
 import {StyledHeading} from "./Heading.elements";
 import PropTypes from "prop-types";
 
-const Heading = ({children}) => {
-  return <StyledHeading>{children}</StyledHeading>;
+const Heading = (props) => {
+  return <StyledHeading {...props}>{props.children}</StyledHeading>;
 };
 
 Heading.propTypes = {
