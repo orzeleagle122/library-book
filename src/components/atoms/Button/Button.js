@@ -12,6 +12,7 @@ const ButtonWrapper = styled.button`
   font-size: 15px;
   margin-top: 20px;
   border-radius: 10px;
+  border: #2d3ddf;
   cursor: pointer;
   transition: background-color 0.25s ease-in-out, color 0.25s ease-in-out;
 

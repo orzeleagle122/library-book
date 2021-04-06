@@ -27,6 +27,7 @@ export const GridContainer = styled.div`
 export const MainContent = styled.div`
   padding: 43px 40px;
   width: 100%;
+  max-width: 2560px;
 `;
 
 export const ImageWrapper = styled.div`
@@ -51,7 +52,7 @@ export const ImageTextContainer = styled.div`
   align-items: flex-start;
   position: absolute;
   top: 155px;
-  left: 245px;
+  left: 145px;
 
   @media screen and (max-width: 480px) {
     /* max-width: 100px; */

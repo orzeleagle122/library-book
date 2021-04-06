@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Heading from "../../atoms/Heading/Heading";
-import img from "../../../assets/img/book2.jpg";
+import img from "../../../assets/img/book2.png";
 import {
   DetailsWrapper,
   BookImages,
@@ -13,6 +13,9 @@ import {
   Description,
   ImgBook,
   ButtonBB,
+  ButtonsWrapper,
+  LikedButton,
+  RiHeartAddFillIcon,
 } from "./DetailsBook.elements";
 import {connect} from "react-redux";
 
@@ -41,9 +44,15 @@ const DetailsBook = ({
           </BookGenres>
           <Publisherspan>Publisher: {publisher}</Publisherspan>
           <br />
-          <ButtonBB isLogin={isLogin} available={available >= 1}>
-            Borrow Book
-          </ButtonBB>
+          <ButtonsWrapper>
+            <ButtonBB isLogin={isLogin} available={available >= 1}>
+              Borrow Book
+            </ButtonBB>
+            <LikedButton>
+              {/* jeśli jest polajkowany to wyswietlic dislike :) */}
+              <RiHeartAddFillIcon />
+            </LikedButton>
+          </ButtonsWrapper>
         </BookContent>
       </DetailsWrapper>
       <Description>

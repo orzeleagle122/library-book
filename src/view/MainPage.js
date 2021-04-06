@@ -7,10 +7,10 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import {carouselSettings} from "../data/carouselSettings";
-
+import Loader from "../components/molecules/Loader/Loader";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSearch, faExclamationCircle} from "@fortawesome/free-solid-svg-icons";
-import {searchBook, cleanErrors} from "../actions";
+import {searchBook, cleanErrors, clearBookSearchList} from "../actions";
 
 import "./slider-arrow.css";
 import {connect} from "react-redux";
@@ -37,15 +37,19 @@ const FavoritePageWrapper = styled.div`
   justify-content: space-around;
 `;
 
-const MainPage = ({searchbooks, search, isLogin, clean}) => {
+const MainPage = ({searchbooks, search, isLogin, clean, cleanSearch}) => {
   useEffect(() => {
     return () => clean();
-  }, []);
+  }, [searchbooks]);
 
   const [searchFormValue, setSearchFormValue] = useState("");
 
   const handleChangeSearchFormValue = (e) => {
     setSearchFormValue(e.target.value);
+
+    // need fix!!!!!
+    cleanSearch();
+
     setTimeout(phrase, 2000);
     function phrase() {
       search(e.target.value);
@@ -55,6 +59,10 @@ const MainPage = ({searchbooks, search, isLogin, clean}) => {
   const map = searchbooks.map((item) => (
     <BookList key={item.id} {...item} isLogin={isLogin} />
   ));
+
+  const loader = searchFormValue.length >= 3 && searchbooks.length === 0;
+
+  console.log(searchbooks.length);
 
   return (
     <>
@@ -67,7 +75,7 @@ const MainPage = ({searchbooks, search, isLogin, clean}) => {
             onChange={handleChangeSearchFormValue}
             value={searchFormValue}
           />
-          <label className="container">
+          {/* <label className="container">
             title
             <input type="checkbox" />
             <span className="checkmark"></span>
@@ -81,13 +89,13 @@ const MainPage = ({searchbooks, search, isLogin, clean}) => {
             genre
             <input type="checkbox" />
             <span className="checkmark"></span>
-          </label>
+          </label> */}
           <span className="icon is-small is-left">
             <FontAwesomeIcon icon={faSearch} />
           </span>
         </p>
       </div>
-
+      {loader && <Loader />}
       <FavoritePageWrapper>{map}</FavoritePageWrapper>
       {searchFormValue.length <= 2 && (
         <>
@@ -127,6 +135,7 @@ MainPage.propTypes = {
   search: PropTypes.func.isRequired,
   isLogin: PropTypes.bool.isRequired,
   clean: PropTypes.func.isRequired,
+  cleanSearch: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({searchbooks, user}) => {
@@ -138,6 +147,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     search: (phrase) => dispatch(searchBook(phrase)),
     clean: () => dispatch(cleanErrors()),
+    cleanSearch: () => dispatch(clearBookSearchList()),
   };
 };
 

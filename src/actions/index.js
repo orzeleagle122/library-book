@@ -422,6 +422,12 @@ export const searchBook = (phrase) => async (dispatch) => {
   }
 };
 
+export const clearBookSearchList = () => {
+  return {
+    type: SEARCH_BOOK_REQUEST,
+  };
+};
+
 // test below
 
 // export const addBook=(title,author,publisher,bookType,amount)=>async(dispatch)=>{

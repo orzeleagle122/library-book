@@ -15,7 +15,11 @@ import {
   VerticalText,
   BookImage,
   FavoriteHearthAdd,
-  AvailableBook,
+  // AvailableBook,
+  RiRadioButtonLineIcon,
+  ButtonMobileWrapper,
+  BookFavoriteMobile,
+  RiHeartAddFillIcon,
 } from "./BookList.elements";
 import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
@@ -50,10 +54,10 @@ const BookList = (props) => {
   // }
 
   return (
-    <FavoriteItem>
+    <FavoriteItem available={available >= 1 ? true : false}>
       <BookImages>
         <Link to={{pathname: `/book/${id}/${title}`, query: {...props}}}>
-          <BookImage src={`/assets/bookImages/book2.jpg`} alt={title} />
+          <BookImage src={`/assets/bookImages/book2.png`} alt={title} />
         </Link>
       </BookImages>
       <BookContent>
@@ -94,6 +98,9 @@ const BookList = (props) => {
               {/* )} */}
             </>
           )}
+          {!borrowed && (
+            <RiRadioButtonLineIcon available={available >= 1 ? true : false} />
+          )}
         </BookTitle>
         <Link to={{pathname: `/book/${id}/${title}`, query: {...props}}}>
           <BookAuthor>{author}</BookAuthor>
@@ -112,14 +119,25 @@ const BookList = (props) => {
                 <br />
               </>
             )}
-            {!borrowed && (
+            {/* {!borrowed && (
               <AvailableBook available={available >= 1 ? true : false}>
                 {available >= 1 ? "available" : "unavailable"}
               </AvailableBook>
-            )}
+            )} */}
           </Available>
         </Link>
-        <BookOrderButtonMobile>Book</BookOrderButtonMobile>
+        <ButtonMobileWrapper>
+          <BookOrderButtonMobile
+            // borrowed={borrowed ? 0 : 1}
+            available={available >= 1 ? true : false}
+          >
+            Book
+          </BookOrderButtonMobile>
+          <BookFavoriteMobile available={available >= 1 ? true : false}>
+            {/* jeśli to serce znajduje sie u uzytkownika w mapstatetopropt to daj serce usunięte */}
+            <RiHeartAddFillIcon />
+          </BookFavoriteMobile>
+        </ButtonMobileWrapper>
       </BookContent>
       <BookOrderButton isLogin={isLogin} available={available >= 1}>
         <VerticalText>Borrow</VerticalText>
