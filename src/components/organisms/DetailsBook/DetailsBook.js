@@ -18,6 +18,7 @@ import {
   RiHeartAddFillIcon,
 } from "./DetailsBook.elements";
 import {connect} from "react-redux";
+import {addFavorite} from "../../../actions";
 
 const DetailsBook = ({
   title,
@@ -26,6 +27,8 @@ const DetailsBook = ({
   publisher,
   available,
   isLogin,
+  id,
+  add,
 }) => {
   console.log(isLogin);
   return (
@@ -48,9 +51,10 @@ const DetailsBook = ({
             <ButtonBB isLogin={isLogin} available={available >= 1}>
               Borrow Book
             </ButtonBB>
-            <LikedButton>
+            <LikedButton isLogin={isLogin}>
               {/* jeśli jest polajkowany to wyswietlic dislike :) */}
-              <RiHeartAddFillIcon />
+              <RiHeartAddFillIcon onClick={() => add(id)} />
+              {/* naprawić favoritsy */}
             </LikedButton>
           </ButtonsWrapper>
         </BookContent>
@@ -72,19 +76,29 @@ const DetailsBook = ({
 };
 
 DetailsBook.propTypes = {
+  id: PropTypes.number,
   title: PropTypes.string,
   author: PropTypes.string,
   publisher: PropTypes.string,
   genres: PropTypes.array,
   isLogin: PropTypes.bool,
   available: PropTypes.number,
+  add: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({user}) => {
   const {isLogin} = user;
+  const {id} = user.userinfo;
   return {
     isLogin,
+    id,
   };
 };
 
-export default connect(mapStateToProps)(DetailsBook);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    add: (user_id, id) => dispatch(addFavorite(user_id, id)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(DetailsBook);

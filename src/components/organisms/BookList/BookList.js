@@ -16,7 +16,7 @@ import {
   BookImage,
   FavoriteHearthAdd,
   // AvailableBook,
-  RiRadioButtonLineIcon,
+  // RiRadioButtonLineIcon,
   ButtonMobileWrapper,
   BookFavoriteMobile,
   RiHeartAddFillIcon,
@@ -98,9 +98,9 @@ const BookList = (props) => {
               {/* )} */}
             </>
           )}
-          {!borrowed && (
+          {/* {!borrowed && (
             <RiRadioButtonLineIcon available={available >= 1 ? true : false} />
-          )}
+          )} */}
         </BookTitle>
         <Link to={{pathname: `/book/${id}/${title}`, query: {...props}}}>
           <BookAuthor>{author}</BookAuthor>

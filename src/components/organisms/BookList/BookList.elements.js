@@ -9,7 +9,7 @@ export const FavoriteItem = styled.div`
   justify-content: flex-start;
   align-items: center;
   margin-bottom: 20px;
-  margin-left: 20px;
+  /* margin-left: 20px; */
   border-top: 1px solid #d1d1d1;
   border-bottom: 1px solid #d1d1d1;
   border-top-right-radius: 10px;
@@ -148,10 +148,11 @@ export const Genres = styled.div`
   margin: 10px 10px;
 `;
 
-export const BookAuthor = styled.span`
+export const BookAuthor = styled.div`
   font-size: 14px;
   @media screen and (max-width: 480px) {
     padding: 0px 15px 0 15px;
+    /* margin-left: 5px; */
   }
 `;
 
@@ -240,6 +241,7 @@ export const BookFavoriteMobile = styled.button`
   display: none;
 
   @media screen and (max-width: 480px) {
+    opacity: 1;
     display: block;
     width: 20%;
     background-color: #ff6861;

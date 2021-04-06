@@ -50,6 +50,12 @@ export const LikedButton = styled.button`
     color: #7f001d;
     border: 5px solid #7f001d;
   }
+
+  ${({isLogin}) =>
+    !isLogin &&
+    css`
+      display: none;
+    `}
 `;
 
 export const BookContent = styled.div`
@@ -110,7 +116,7 @@ export const ButtonBB = styled(Button)`
   ${({isLogin}) =>
     !isLogin &&
     css`
-      display: none !important;
+      display: none;
     `}
 
   ${({available}) =>

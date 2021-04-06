@@ -78,6 +78,9 @@ export const addFavorite = (user_id, props) => async (dispatch) => {
         type: ADD_FAVORITE,
         payload,
       });
+    })
+    .catch((err) => {
+      console.log(err.response);
     });
 };
 
