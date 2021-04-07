@@ -54,7 +54,10 @@ const BookList = (props) => {
   // if (title.length > 5) {
   //   var smalltitle = title.substring(0, 5);
   // }
+  console.log(isFavorite);
   const isLiked = favoriteBooks.findIndex((item2) => item2.id === id);
+  const smalltitle = title.substring(0, 50);
+  const smallauthor = author.substring(0, 50);
 
   return (
     <FavoriteItem available={available >= 1 ? true : false}>
@@ -74,16 +77,25 @@ const BookList = (props) => {
             {/* {smalltitle} */}
             {/* {title.length < 10 ? {title} : `${title}...`} */}
             {/* {title.substring(0, 5)} */}
-            {title}
+            {title.length > 50 ? `${smalltitle}...` : title}
+            {/* {title} */}
           </Link>
           <FavoriteHearthAdd
-            add={isFavorite.length > 0 ? true : false}
+            add={
+              favoriteBooks.findIndex((item2) => item2.id === id) >= 0
+                ? true
+                : false
+            }
             onClick={() => {
               add(id_user, id);
             }}
           />
           <FavoriteHearthBroken
-            add={isFavorite.length > 0 ? true : false}
+            add={
+              favoriteBooks.findIndex((item2) => item2.id === id) >= 0
+                ? true
+                : false
+            }
             onClick={() => {
               remove(id_user, id);
               // zwracam liste aktualych
@@ -92,7 +104,9 @@ const BookList = (props) => {
           />
         </BookTitle>
         <Link to={{pathname: `/book/${id}/${title}`, query: {...props}}}>
-          <BookAuthor>{author}</BookAuthor>
+          <BookAuthor>
+            {author.length > 50 ? `${smallauthor}...` : author}
+          </BookAuthor>
           <BookGenres>
             {genres.map((item) => (
               <Genres key={item.id}>{item.name}</Genres>

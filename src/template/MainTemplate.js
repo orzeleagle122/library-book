@@ -77,6 +77,7 @@ class MainTemplate extends React.Component {
               <Route path={routers.addBook} exact component={AddBook} />
               <Route path={routers.addGenre} exact component={AddGenre} />
               <Route path={routers.book} exact component={BookDetailsPage} />
+              <Route path={routers.user} exact component={AccountPage} />
             </MainContent>
           </GridContainer>
         </MainTemplateWrapper>

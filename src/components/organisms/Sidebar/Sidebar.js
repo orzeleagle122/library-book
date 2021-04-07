@@ -1,8 +1,9 @@
-import React, {useEffect} from "react";
-import {Link, NavLink} from "react-router-dom";
+import React from "react";
+import {Link, NavLink, useLocation} from "react-router-dom";
 import NavbarButton from "../../atoms/NavbarButton/NavbarButton";
 import {connect} from "react-redux";
 import {logOut} from "../../../actions";
+import {routers} from "../../../data/routers";
 import {
   Wrapper,
   LogoLink,
@@ -19,7 +20,8 @@ import {
 import PropTypes from "prop-types";
 
 const Sidebar = ({isLogin, out}) => {
-  useEffect(() => {}, [isLogin]);
+  // useEffect(() => {}, [isLogin]);
+  const {pathname} = useLocation();
 
   return (
     <Wrapper>
@@ -30,7 +32,7 @@ const Sidebar = ({isLogin, out}) => {
       </Link>
       <LinkList isLogin={isLogin}>
         <ItemList>
-          <NavLink exact to="/">
+          <NavLink exact to={routers.home}>
             <NavbarButton>
               <BsHouseDoorFillIcon />
               <SpanText>Home</SpanText>
@@ -45,7 +47,7 @@ const Sidebar = ({isLogin, out}) => {
         {isLogin && (
           <>
             <ItemList>
-              <NavLink exact to="/borrowed">
+              <NavLink exact to={routers.borrowed}>
                 <NavbarButton>
                   <BsFillBookmarkFillIcon />
                   <SpanText>Borrowed</SpanText>
@@ -53,7 +55,7 @@ const Sidebar = ({isLogin, out}) => {
               </NavLink>
             </ItemList>
             <ItemList>
-              <NavLink exact to="/favorite">
+              <NavLink exact to={routers.favorite}>
                 <NavbarButton>
                   <MdFavoriteIcon />
                   <SpanText>Favorite</SpanText>
@@ -63,7 +65,17 @@ const Sidebar = ({isLogin, out}) => {
           </>
         )}
         <ItemList>
-          <NavLink exact to="/login">
+          <NavLink
+            exact
+            to="/login"
+            isActive={() =>
+              [
+                `${routers.user}`,
+                `${routers.login}`,
+                `${routers.register}`,
+              ].includes(pathname)
+            }
+          >
             <NavbarButton>
               <BsFillPersonFillIcon />
               <SpanText>{isLogin ? "Profile" : "Sign in"}</SpanText>
@@ -73,7 +85,7 @@ const Sidebar = ({isLogin, out}) => {
       </LinkList>
       <LogoutButton>
         {isLogin && (
-          <NavLink exact to="/login" onClick={out}>
+          <NavLink exact to={routers.login} onClick={out}>
             <NavbarButton>
               <RiLogoutBoxLineIcon />
               <SpanText>Logout</SpanText>{" "}

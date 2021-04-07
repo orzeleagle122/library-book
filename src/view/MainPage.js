@@ -42,7 +42,7 @@ const MainPage = ({
   search,
   isLogin,
   clean,
-  favoriteBooks /* cleanSearch */,
+  /* cleanSearch */
 }) => {
   useEffect(() => {
     console.log("update");
@@ -107,19 +107,15 @@ const MainPage = ({
       {loader && <Loader />}
       <FavoritePageWrapper>
         {searchbooks.map((item) => (
-          <BookList
-            key={item.id}
-            {...item}
-            isLogin={isLogin}
-            isFavorite={favoriteBooks.filter((item2) => item2.id === item.id)}
-          />
+          <BookList key={item.id} {...item} isLogin={isLogin} />
         ))}
       </FavoritePageWrapper>
       {searchFormValue.length <= 2 && (
         <>
           <div className="notification is-warning">
-            <FontAwesomeIcon icon={faExclamationCircle} /> Enter{" "}
-            <strong>three</strong> characters to start searching for books.
+            <FontAwesomeIcon icon={faExclamationCircle} />
+            Enter <strong>three</strong> characters to start searching for
+            books.
           </div>
 
           <Heading>Popular Books</Heading>
@@ -150,7 +146,6 @@ const MainPage = ({
 
 MainPage.propTypes = {
   searchbooks: PropTypes.array,
-  favoriteBooks: PropTypes.array,
   search: PropTypes.func.isRequired,
   isLogin: PropTypes.bool.isRequired,
   clean: PropTypes.func.isRequired,
@@ -159,8 +154,7 @@ MainPage.propTypes = {
 
 const mapStateToProps = ({searchbooks, user}) => {
   const {isLogin} = user;
-  const {favoriteBooks} = user.userinfo;
-  return {searchbooks, isLogin, favoriteBooks};
+  return {searchbooks, isLogin};
 };
 
 const mapDispatchToProps = (dispatch) => {

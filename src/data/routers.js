@@ -9,7 +9,7 @@ export const routers = {
   register: "/register",
   favorite: "/favorite",
   book: "/book/:id/:title",
-
+  user: "/user",
   addBook: "/admin/add",
   addGenre: "/admin/genre",
 };

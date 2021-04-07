@@ -45,7 +45,7 @@ const LoginPage = ({auth, isLogin, showErrors, clean}) => {
           /* and other goodies */
         }) => {
           if (isLogin) {
-            return <Redirect to="/" />;
+            return <Redirect to={routers.user} />;
           }
 
           return (
