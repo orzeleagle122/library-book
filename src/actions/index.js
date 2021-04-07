@@ -69,8 +69,7 @@ export const removeFavorite = (user_id, book_id) => async (dispatch) => {
   // });
 };
 
-export const addFavorite = (user_id, props) => async (dispatch) => {
-  const {id} = props;
+export const addFavorite = (user_id, id) => async (dispatch) => {
   return axios
     .put(API + `/user/favorite/add/${user_id}/${id}`)
     .then((payload) => {
@@ -380,7 +379,7 @@ export const bookRequest = (id, title) => async (dispatch) => {
     type: BOOK_DETAILS_REQUEST,
   });
   return axios
-    .get(API + `/book/${id}`, {params: {title}})
+    .get(API + `/book/${id}/${title}`)
     .then((payload) => {
       dispatch({
         type: BOOK_DETAILS_SUCCESS,
@@ -404,9 +403,9 @@ export const searchBook = (phrase) => async (dispatch) => {
     return axios
       .get(API + "/book/search", {params: {phrase}})
       .then((payload) => {
-        dispatch({
-          type: CLEAR_SEARCH_BOOK_LIST,
-        });
+        // dispatch({
+        //   type: CLEAR_SEARCH_BOOK_LIST,
+        // });
         dispatch({
           type: SEARCH_BOOK_SUCCESS,
           payload,
@@ -418,11 +417,12 @@ export const searchBook = (phrase) => async (dispatch) => {
           err,
         });
       });
-  } else {
-    return dispatch({
-      type: CLEAR_SEARCH_BOOK_LIST,
-    });
   }
+  // else {
+  //   return dispatch({
+  //     type: CLEAR_SEARCH_BOOK_LIST,
+  //   });
+  // }
 };
 
 export const clearBookSearchList = () => {

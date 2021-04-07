@@ -18,7 +18,7 @@ const BorrowedWrapper = styled.div`
   width: 100%;
 `;
 
-const BorrowedPage = ({books = [], totalbooks, fetch}) => {
+const BorrowedPage = ({books = [], totalbooks, fetch, favoriteBooks}) => {
   useEffect(() => {
     fetch();
     // total();
@@ -30,7 +30,12 @@ const BorrowedPage = ({books = [], totalbooks, fetch}) => {
       {books.length ? (
         <BorrowedWrapper>
           {books.map((item) => (
-            <BookList key={item.id} {...item} borrowed />
+            <BookList
+              key={item.id}
+              {...item}
+              isFavorite={favoriteBooks.filter((item2) => item2.id === item.id)}
+              borrowed
+            />
           ))}
         </BorrowedWrapper>
       ) : (
@@ -42,12 +47,14 @@ const BorrowedPage = ({books = [], totalbooks, fetch}) => {
 
 BorrowedPage.propTypes = {
   books: PropTypes.array,
+  favoriteBooks: PropTypes.array,
   totalbooks: PropTypes.number.isRequired,
   fetch: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({books, totalbooks}) => {
-  return {books, totalbooks};
+const mapStateToProps = ({books, totalbooks, user}) => {
+  const {favoriteBooks} = user.userinfo;
+  return {books, totalbooks, favoriteBooks};
 };
 
 const mapDispatchToProps = (dispatch) => {

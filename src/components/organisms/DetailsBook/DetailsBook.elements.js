@@ -1,6 +1,7 @@
 import styled, {css} from "styled-components";
 import Button from "../../atoms/Button/Button";
 import {RiHeartAddFill} from "react-icons/ri";
+import {IoHeartDislikeSharp} from "react-icons/io5";
 
 export const DetailsWrapper = styled.div`
   display: flex;
@@ -74,6 +75,9 @@ export const ImgBook = styled.img`
 `;
 
 export const RiHeartAddFillIcon = styled(RiHeartAddFill)`
+  font-size: 30px;
+`;
+export const IoHeartDislikeSharpIcon = styled(IoHeartDislikeSharp)`
   font-size: 30px;
 `;
 

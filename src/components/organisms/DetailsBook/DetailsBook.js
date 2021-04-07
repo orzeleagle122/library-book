@@ -16,9 +16,14 @@ import {
   ButtonsWrapper,
   LikedButton,
   RiHeartAddFillIcon,
+  IoHeartDislikeSharpIcon,
 } from "./DetailsBook.elements";
 import {connect} from "react-redux";
-import {addFavorite} from "../../../actions";
+import {
+  addFavorite,
+  getUserLoginAction,
+  removeFavorite,
+} from "../../../actions";
 
 const DetailsBook = ({
   title,
@@ -29,8 +34,17 @@ const DetailsBook = ({
   isLogin,
   id,
   add,
+  user_id,
+  favoriteBooks,
+  getUserLogin,
+  remove,
 }) => {
-  console.log(isLogin);
+  console.log(favoriteBooks);
+  console.log(id);
+
+  const isLiked = favoriteBooks.findIndex((item2) => item2.id === id);
+  console.log(isLiked);
+
   return (
     <>
       <DetailsWrapper>
@@ -52,9 +66,17 @@ const DetailsBook = ({
               Borrow Book
             </ButtonBB>
             <LikedButton isLogin={isLogin}>
-              {/* jeśli jest polajkowany to wyswietlic dislike :) */}
-              <RiHeartAddFillIcon onClick={() => add(id)} />
-              {/* naprawić favoritsy */}
+              {isLiked < 0 ? (
+                <RiHeartAddFillIcon onClick={() => add(user_id, id)} />
+              ) : (
+                <IoHeartDislikeSharpIcon
+                  onClick={() => {
+                    remove(user_id, id);
+                    // zwracam liste aktualych
+                    getUserLogin(localStorage.getItem("loginToken"));
+                  }}
+                />
+              )}
             </LikedButton>
           </ButtonsWrapper>
         </BookContent>
@@ -77,27 +99,35 @@ const DetailsBook = ({
 
 DetailsBook.propTypes = {
   id: PropTypes.number,
+  user_id: PropTypes.number,
   title: PropTypes.string,
   author: PropTypes.string,
   publisher: PropTypes.string,
   genres: PropTypes.array,
+  favoriteBooks: PropTypes.array,
   isLogin: PropTypes.bool,
   available: PropTypes.number,
   add: PropTypes.func.isRequired,
+  remove: PropTypes.func.isRequired,
+  getUserLogin: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({user}) => {
   const {isLogin} = user;
-  const {id} = user.userinfo;
+  const {id, favoriteBooks} = user.userinfo;
+  const user_id = id;
   return {
     isLogin,
-    id,
+    user_id,
+    favoriteBooks,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     add: (user_id, id) => dispatch(addFavorite(user_id, id)),
+    remove: (user_id, book_id) => dispatch(removeFavorite(user_id, book_id)),
+    getUserLogin: (token) => dispatch(getUserLoginAction(token)),
   };
 };
 

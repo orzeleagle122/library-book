@@ -8,9 +8,8 @@ import PropTypes from "prop-types";
 const FavoritePageWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
   flex-wrap: wrap;
-  width: 100%;
+  justify-content: space-around;
 `;
 
 const FavoritePage = ({favoriteBooks}) => {
@@ -19,7 +18,13 @@ const FavoritePage = ({favoriteBooks}) => {
       <Heading>Favorite Books</Heading>
       <FavoritePageWrapper>
         {favoriteBooks.map((item) => (
-          <BookList key={item.id} {...item} isLogin={true} favorite />
+          <BookList
+            key={item.id}
+            {...item}
+            isLogin={true}
+            isFavorite={favoriteBooks.filter((item2) => item2.id === item.id)}
+            favorite
+          />
         ))}
         {favoriteBooks.length === 0 && <>You dont like any books yet!</>}
       </FavoritePageWrapper>

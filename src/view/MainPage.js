@@ -37,28 +37,37 @@ const FavoritePageWrapper = styled.div`
   justify-content: space-around;
 `;
 
-const MainPage = ({searchbooks, search, isLogin, clean, cleanSearch}) => {
+const MainPage = ({
+  searchbooks,
+  search,
+  isLogin,
+  clean,
+  favoriteBooks /* cleanSearch */,
+}) => {
   useEffect(() => {
+    console.log("update");
     return () => clean();
-  }, [searchbooks]);
+  }, []);
 
   const [searchFormValue, setSearchFormValue] = useState("");
 
   const handleChangeSearchFormValue = (e) => {
     setSearchFormValue(e.target.value);
 
-    // need fix!!!!!
-    cleanSearch();
+    // need fix all below!!!!!
+    // cleanSearch();
+    let timeout = true;
+    if (timeout) {
+      console.log("usuwam time out");
+      clearTimeout(timeout);
+    }
 
-    setTimeout(phrase, 2000);
+    timeout = setTimeout(phrase, 2000);
+
     function phrase() {
-      search(e.target.value);
+      return search(e.target.value);
     }
   };
-
-  const map = searchbooks.map((item) => (
-    <BookList key={item.id} {...item} isLogin={isLogin} />
-  ));
 
   const loader = searchFormValue.length >= 3 && searchbooks.length === 0;
 
@@ -96,7 +105,16 @@ const MainPage = ({searchbooks, search, isLogin, clean, cleanSearch}) => {
         </p>
       </div>
       {loader && <Loader />}
-      <FavoritePageWrapper>{map}</FavoritePageWrapper>
+      <FavoritePageWrapper>
+        {searchbooks.map((item) => (
+          <BookList
+            key={item.id}
+            {...item}
+            isLogin={isLogin}
+            isFavorite={favoriteBooks.filter((item2) => item2.id === item.id)}
+          />
+        ))}
+      </FavoritePageWrapper>
       {searchFormValue.length <= 2 && (
         <>
           <div className="notification is-warning">
@@ -132,6 +150,7 @@ const MainPage = ({searchbooks, search, isLogin, clean, cleanSearch}) => {
 
 MainPage.propTypes = {
   searchbooks: PropTypes.array,
+  favoriteBooks: PropTypes.array,
   search: PropTypes.func.isRequired,
   isLogin: PropTypes.bool.isRequired,
   clean: PropTypes.func.isRequired,
@@ -140,7 +159,8 @@ MainPage.propTypes = {
 
 const mapStateToProps = ({searchbooks, user}) => {
   const {isLogin} = user;
-  return {searchbooks, isLogin};
+  const {favoriteBooks} = user.userinfo;
+  return {searchbooks, isLogin, favoriteBooks};
 };
 
 const mapDispatchToProps = (dispatch) => {

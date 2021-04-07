@@ -20,6 +20,7 @@ import {
   ButtonMobileWrapper,
   BookFavoriteMobile,
   RiHeartAddFillIcon,
+  IoHeartDislikeSharpIcon,
 } from "./BookList.elements";
 import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
@@ -34,7 +35,7 @@ const BookList = (props) => {
   const {
     id,
     title,
-    favorite,
+    // favorite,
     author,
     genres,
     borrowed,
@@ -44,14 +45,16 @@ const BookList = (props) => {
     id_user,
     available,
     getUserLogin,
+    isFavorite,
+    favoriteBooks,
     // item,
   } = props;
   // useEffect jesli zalogowany to od nowa pobierz listę
-  // console.log(props);
 
   // if (title.length > 5) {
   //   var smalltitle = title.substring(0, 5);
   // }
+  const isLiked = favoriteBooks.findIndex((item2) => item2.id === id);
 
   return (
     <FavoriteItem available={available >= 1 ? true : false}>
@@ -73,34 +76,20 @@ const BookList = (props) => {
             {/* {title.substring(0, 5)} */}
             {title}
           </Link>
-          {favorite ? (
-            <>
-              <FavoriteHearthBroken
-                onClick={() => {
-                  remove(id_user, id);
-                  getUserLogin(localStorage.getItem("loginToken"));
-                }}
-              />
-            </>
-          ) : (
-            <>
-              {/* {console.log(id)}
-              {console.log(item)} */}
-
-              {/* {id !== item.id && ( */}
-              <>
-                <FavoriteHearthAdd
-                  onClick={() => {
-                    add(id_user, props);
-                  }}
-                />
-              </>
-              {/* )} */}
-            </>
-          )}
-          {/* {!borrowed && (
-            <RiRadioButtonLineIcon available={available >= 1 ? true : false} />
-          )} */}
+          <FavoriteHearthAdd
+            add={isFavorite.length > 0 ? true : false}
+            onClick={() => {
+              add(id_user, id);
+            }}
+          />
+          <FavoriteHearthBroken
+            add={isFavorite.length > 0 ? true : false}
+            onClick={() => {
+              remove(id_user, id);
+              // zwracam liste aktualych
+              getUserLogin(localStorage.getItem("loginToken"));
+            }}
+          />
         </BookTitle>
         <Link to={{pathname: `/book/${id}/${title}`, query: {...props}}}>
           <BookAuthor>{author}</BookAuthor>
@@ -135,7 +124,17 @@ const BookList = (props) => {
           </BookOrderButtonMobile>
           <BookFavoriteMobile available={available >= 1 ? true : false}>
             {/* jeśli to serce znajduje sie u uzytkownika w mapstatetopropt to daj serce usunięte */}
-            <RiHeartAddFillIcon />
+            {isLiked < 0 ? (
+              <RiHeartAddFillIcon onClick={() => add(id_user, id)} />
+            ) : (
+              <IoHeartDislikeSharpIcon
+                onClick={() => {
+                  remove(id_user, id);
+                  // zwracam liste aktualych
+                  getUserLogin(localStorage.getItem("loginToken"));
+                }}
+              />
+            )}
           </BookFavoriteMobile>
         </ButtonMobileWrapper>
       </BookContent>
@@ -163,23 +162,26 @@ BookList.propTypes = {
   remove: PropTypes.func.isRequired,
   add: PropTypes.func.isRequired,
   genres: PropTypes.array,
+  favoriteBooks: PropTypes.array,
   available: PropTypes.number,
   getUserLogin: PropTypes.func.isRequired,
   item: PropTypes.node,
+  isFavorite: PropTypes.node,
 };
 
 const mapStateToProps = ({user}) => {
-  const {id} = user.userinfo;
+  const {id, favoriteBooks} = user.userinfo;
   const id_user = id;
   return {
     id_user,
+    favoriteBooks,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     remove: (user_id, book_id) => dispatch(removeFavorite(user_id, book_id)),
-    add: (user_id, props) => dispatch(addFavorite(user_id, props)),
+    add: (user_id, id) => dispatch(addFavorite(user_id, id)),
     getUserLogin: (token) => dispatch(getUserLoginAction(token)),
   };
 };

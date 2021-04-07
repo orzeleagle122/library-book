@@ -35,12 +35,10 @@ class MainTemplate extends React.Component {
       if (notification) {
         notification.style.display = "none";
       }
-
       const {close} = this.props;
       close();
       // notification.style.display = "flex";
     };
-
     if (this.props.succesMessage) {
       setTimeout(changeDisplayNotification, 3000);
     }

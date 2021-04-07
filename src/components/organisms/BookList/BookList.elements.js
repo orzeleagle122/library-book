@@ -2,6 +2,7 @@ import styled, {css} from "styled-components";
 import {ImHeart, ImHeartBroken} from "react-icons/im";
 import notavailable from "../../../assets/layout/notavailable.png";
 import {RiRadioButtonLine, RiHeartAddFill} from "react-icons/ri";
+import {IoHeartDislikeSharp} from "react-icons/io5";
 
 export const FavoriteItem = styled.div`
   display: flex;
@@ -266,6 +267,9 @@ export const BookFavoriteMobile = styled.button`
 export const RiHeartAddFillIcon = styled(RiHeartAddFill)`
   font-size: 30px;
 `;
+export const IoHeartDislikeSharpIcon = styled(IoHeartDislikeSharp)`
+  font-size: 30px;
+`;
 
 export const BookOrderButtonMobile = styled.button`
   display: none;
@@ -313,7 +317,7 @@ export const VerticalText = styled.p`
 `;
 
 export const FavoriteHearthBroken = styled(ImHeartBroken)`
-  color: black;
+  color: red;
   font-size: 20px !important;
   margin-left: 5px;
   z-index: 999;
@@ -323,9 +327,15 @@ export const FavoriteHearthBroken = styled(ImHeartBroken)`
   transition: color 0.5s linear;
 
   &:hover {
-    color: red;
+    color: black;
     opacity: 1;
   }
+
+  ${({add}) =>
+    !add &&
+    css`
+      display: none;
+    `}
 
   @media screen and (max-width: 480px) {
     display: none;
@@ -340,6 +350,12 @@ export const FavoriteHearthAdd = styled(ImHeart)`
   opacity: 0.7;
   transition: opacity 0.5s linear;
   transition: color 0.5s linear;
+
+  ${({add}) =>
+    add &&
+    css`
+      display: none;
+    `}
 
   &:hover {
     color: red;

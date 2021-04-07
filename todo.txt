@@ -1,5 +1,7 @@
--serduszko na wyszukiwarce ksiazek 
--book detail zrobic (tylko szczegóły)
+-serduszko na wyszukiwarce ksiazek; zmienić na jednokowo
+const isLiked = favoriteBooks.findIndex((item2) => item2.id === id);
+add={isFavorite.length > 0 ? true : false}
+
 - user page z edycja profilu 
 -nowa strona do szukania tak jak na allegro
 -loader https://reactjs.org/docs/concurrent-mode-suspense.html
@@ -8,4 +10,4 @@ https://hashnode.com/post/how-to-add-loader-or-spinner-using-react-hooks-while-f
 
 
 -paginacja
--rwd
+-rwd zawsze sprawdzać

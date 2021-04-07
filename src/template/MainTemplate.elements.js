@@ -27,7 +27,7 @@ export const GridContainer = styled.div`
 export const MainContent = styled.div`
   padding: 43px 40px;
   width: 100%;
-  max-width: 2560px;
+  /* max-width: 2560px; */
 `;
 
 export const ImageWrapper = styled.div`
@@ -114,5 +114,5 @@ export const SuccessMessage = styled.div`
 export const SuccessMessageHeader = styled.div`
   width: 100%;
   border-radius: 20px;
-  padding: 10px 70px;
+  /* padding: 10px 70px; */
 `;
