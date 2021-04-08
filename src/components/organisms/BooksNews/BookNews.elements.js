@@ -13,6 +13,10 @@ export const TheBestBook = styled.div`
 
   box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px,
     rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+
+  @media screen and (max-width: 1021px) {
+    display: none;
+  }
 `;
 
 export const ListBookWrapper = styled.div`
@@ -22,11 +26,47 @@ export const ListBookWrapper = styled.div`
 `;
 
 export const Book = styled.div`
-  width: 300px;
+  max-width: 300px;
   flex: 1 0 21%;
 
   box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px,
     rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+
+  @media screen and (max-width: 1573px) {
+    &:nth-last-child(8) {
+      display: none;
+    }
+    &:nth-last-child(7) {
+      display: none;
+    }
+  }
+
+  @media screen and (max-width: 1320px) {
+    &:nth-last-child(6) {
+      display: none;
+    }
+    &:nth-last-child(5) {
+      display: none;
+    }
+  }
+
+  @media screen and (max-width: 1021px) {
+    &:nth-last-child(6) {
+      display: block;
+    }
+    &:nth-last-child(5) {
+      display: block;
+    }
+  }
+
+  @media screen and (max-width: 946px) {
+    /* &:nth-last-child(6) {
+      display: block;
+    } */
+    /* &:nth-last-child(5) {
+      display: none;
+    } */
+  }
 `;
 
 export const BookWrapper = styled.div`
