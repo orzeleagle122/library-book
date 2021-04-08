@@ -40,28 +40,34 @@ const AccountPage = ({firstName, isLogin}) => {
           <Button>Edit profil</Button>
         </InfoSection>
       </AccountWrapper>
-      <div className="tabs is-toggle is-fullwidth">
+      <div className="tabs is-boxed">
         <ul>
           <li className="is-active">
             <a>
-              <span>TAB 1</span>
+              <span>Notifications</span>
             </a>
           </li>
           <li>
             <a>
-              <span>TAB 2</span>
+              <span>Your statistic</span>
+            </a>
+          </li>
+          {/* <li>
+            <a>
+              <span className="icon is-small">
+                <i className="fas fa-film" aria-hidden="true"></i>
+              </span>
+              <span>Videos</span>
             </a>
           </li>
           <li>
             <a>
-              <span>TAB 3</span>
+              <span className="icon is-small">
+                <i className="far fa-file-alt" aria-hidden="true"></i>
+              </span>
+              <span>Documents</span>
             </a>
-          </li>
-          <li>
-            <a>
-              <span>TAB 4</span>
-            </a>
-          </li>
+          </li> */}
         </ul>
       </div>
       <Heading>Notifications</Heading>

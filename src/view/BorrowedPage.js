@@ -20,7 +20,7 @@ const BorrowedWrapper = styled.div`
 
 const BorrowedPage = ({books = [], totalbooks, fetch}) => {
   useEffect(() => {
-    fetch();
+    fetch(1);
     // total();
   }, [fetch]);
 
@@ -56,7 +56,7 @@ const mapDispatchToProps = (dispatch) => {
     // total:()=>dispatch({
     //     type: GET_TOTALS
     // }),
-    fetch: () => dispatch(fetchBooks()),
+    fetch: (number) => dispatch(fetchBooks(number)),
   };
 };
 

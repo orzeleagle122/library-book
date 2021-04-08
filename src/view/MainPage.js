@@ -11,12 +11,14 @@ import Loader from "../components/molecules/Loader/Loader";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSearch, faExclamationCircle} from "@fortawesome/free-solid-svg-icons";
 import {searchBook, cleanErrors, clearBookSearchList} from "../actions";
-
+// import {Redirect} from "react-router-dom";
 import "./slider-arrow.css";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import BookList from "../components/organisms/BookList/BookList";
 import PropTypes from "prop-types";
+import BookNews from "../components/organisms/BooksNews/BookNews";
+// import {routers} from "../data/routers";
 
 // import ClearErros from '../hoc/ClearErrors';
 
@@ -44,12 +46,11 @@ const MainPage = ({
   clean,
   /* cleanSearch */
 }) => {
+  const [searchFormValue, setSearchFormValue] = useState("");
   useEffect(() => {
     console.log("update");
     return () => clean();
-  }, []);
-
-  const [searchFormValue, setSearchFormValue] = useState("");
+  }, [searchFormValue]);
 
   const handleChangeSearchFormValue = (e) => {
     setSearchFormValue(e.target.value);
@@ -70,8 +71,6 @@ const MainPage = ({
   };
 
   const loader = searchFormValue.length >= 3 && searchbooks.length === 0;
-
-  console.log(searchbooks.length);
 
   return (
     <>
@@ -112,13 +111,15 @@ const MainPage = ({
       </FavoritePageWrapper>
       {searchFormValue.length <= 2 && (
         <>
+          {/* {searchFormValue.length === 0 && ( */}
           <div className="notification is-warning">
             <FontAwesomeIcon icon={faExclamationCircle} />
             Enter <strong>three</strong> characters to start searching for
             books.
           </div>
-
-          <Heading>Popular Books</Heading>
+          {/* )} */}
+          <Heading>Premieres and news</Heading>
+          <BookNews />
           <Slider {...carouselSettings}>
             {bookPopular.map((item) => (
               <BookPopularWrapper key={item.id}>

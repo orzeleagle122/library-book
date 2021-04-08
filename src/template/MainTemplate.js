@@ -27,6 +27,8 @@ import AddGenre from "../view/AddGenre";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import {closeSuccessMessage} from "../actions";
+import {Link} from "react-router-dom";
+import SearchPage from "../view/SearchPage";
 
 class MainTemplate extends React.Component {
   componentDidUpdate() {
@@ -63,7 +65,11 @@ class MainTemplate extends React.Component {
                 Reading books is the most beautiful fun humanity has ever
                 imagined
               </SpanText>
-              <StyledButton>Register now!</StyledButton>
+              {!this.props.isLogin && (
+                <Link to={routers.register}>
+                  <StyledButton>Register now!</StyledButton>
+                </Link>
+              )}
             </ImageTextContainer>
           </ImageWrapper>
           <GridContainer>
@@ -78,6 +84,7 @@ class MainTemplate extends React.Component {
               <Route path={routers.addGenre} exact component={AddGenre} />
               <Route path={routers.book} exact component={BookDetailsPage} />
               <Route path={routers.user} exact component={AccountPage} />
+              <Route path={routers.search} exact component={SearchPage} />
             </MainContent>
           </GridContainer>
         </MainTemplateWrapper>
@@ -89,11 +96,14 @@ class MainTemplate extends React.Component {
 MainTemplate.propTypes = {
   succesMessage: PropTypes.bool.isRequired,
   close: PropTypes.func.isRequired,
+  isLogin: PropTypes.bool,
 };
 
-const mapStateToProps = ({succesMessage}) => {
+const mapStateToProps = ({succesMessage, user}) => {
+  const {isLogin} = user;
   return {
     succesMessage,
+    isLogin,
   };
 };
 
