@@ -12,12 +12,15 @@ import {
   ButtonView,
   TinyAuthor,
   ButtonWrapper,
+  ImgBestBook,
+  StyledLink,
 } from "./BookNews.elements";
 import {connect} from "react-redux";
 // import PropTypes from "prop-types";
 import axios from "axios";
-import {routers} from "../../../data/routers";
-// import {Link} from "react-router-dom";
+// import {routers} from "../../../data/routers";
+
+import Heading from "../../atoms/Heading/Heading";
 
 const BookNews = () => {
   const [randomBook, setRandomBook] = useState([]);
@@ -31,13 +34,29 @@ const BookNews = () => {
       });
   }, []);
 
+  console.log(randomBook[0]);
+
   return (
     <>
       <BookNewsWrapper>
-        <TheBestBook>tutaj bedzie promowana książka :D </TheBestBook>
+        <TheBestBook>
+          <ImgBestBook src={`/assets/bookImages/book2.png`} alt="alt" />
+          {randomBook.slice(0, 1).map((item) => (
+            <>
+              <Heading>{item.title}</Heading>
+              <Heading>{item.author}</Heading>
+              <GenresWrapper>
+                {item.genres.map((item2) => (
+                  <Genre key={item2.id}>{item2.name}</Genre>
+                ))}
+              </GenresWrapper>
+            </>
+          ))}
+        </TheBestBook>
         <ListBookWrapper>
           {randomBook.slice(0, 8).map((item) => (
             <Book key={item.id}>
+              {/* <Link to={`/book/${item.id}/${item.title}`}> */}
               <BookWrapper>
                 <BookImg>
                   <img src={`/assets/bookImages/book2.png`} alt={item.title} />
@@ -51,9 +70,12 @@ const BookNews = () => {
                 </GenresWrapper>
 
                 <ButtonWrapper>
-                  <ButtonView asto={routers.book}>View book</ButtonView>
+                  <StyledLink to={`/book/${item.id}/${item.title}`}>
+                    <ButtonView>View book</ButtonView>
+                  </StyledLink>
                 </ButtonWrapper>
               </BookWrapper>
+              {/* </Link> */}
             </Book>
           ))}
         </ListBookWrapper>

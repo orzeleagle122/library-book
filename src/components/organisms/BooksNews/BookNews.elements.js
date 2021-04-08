@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Button from "../../atoms/Button/Button";
+import {Link} from "react-router-dom";
 
 export const BookNewsWrapper = styled.div`
   display: flex;
@@ -8,8 +9,10 @@ export const BookNewsWrapper = styled.div`
 `;
 
 export const TheBestBook = styled.div`
-  min-width: 500px;
-  border: 1px solid black;
+  flex-basis: 700px;
+
+  box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px,
+    rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
 `;
 
 export const ListBookWrapper = styled.div`
@@ -20,10 +23,10 @@ export const ListBookWrapper = styled.div`
 
 export const Book = styled.div`
   width: 300px;
-  &:hover {
-    box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px,
-      rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
-  }
+  flex: 1 0 21%;
+
+  box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px,
+    rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
 `;
 
 export const BookWrapper = styled.div`
@@ -93,4 +96,14 @@ export const ButtonView = styled(Button)`
   height: 38px;
   width: 100%;
   padding: 5px 10px;
+`;
+
+export const ImgBestBook = styled.img`
+  width: 100%;
+  object-fit: cover;
+`;
+
+export const StyledLink = styled(Link)`
+  /* display: block; */
+  width: 100%;
 `;
