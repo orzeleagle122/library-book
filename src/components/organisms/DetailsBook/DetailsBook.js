@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import PropTypes from "prop-types";
 import Heading from "../../atoms/Heading/Heading";
 import img from "../../../assets/img/book2.png";
@@ -17,6 +17,7 @@ import {
   LikedButton,
   RiHeartAddFillIcon,
   IoHeartDislikeSharpIcon,
+  RecomendedWrapper,
 } from "./DetailsBook.elements";
 import {connect} from "react-redux";
 import {
@@ -24,6 +25,8 @@ import {
   getUserLoginAction,
   removeFavorite,
 } from "../../../actions";
+import OneBook from "../../molecules/OneBook/OneBook";
+import axios from "axios";
 
 const DetailsBook = ({
   title,
@@ -42,6 +45,22 @@ const DetailsBook = ({
 }) => {
   const isLiked = favoriteBooks.findIndex((item2) => item2.id === id);
   console.log(isLiked);
+
+  const [recommended, setRecommended] = useState([]);
+
+  const recommendedBook = () => {
+    axios
+      .get("http://localhost:8080/api/book/search/random", {
+        params: {number: 3},
+      })
+      .then((payload) => {
+        setRecommended(payload.data);
+      });
+  };
+
+  useEffect(() => {
+    recommendedBook();
+  }, []);
 
   return (
     <>
@@ -80,6 +99,12 @@ const DetailsBook = ({
         </BookContent>
       </DetailsWrapper>
       <Description>{description}</Description>
+      <Heading>Recommended:</Heading>
+      <RecomendedWrapper>
+        {recommended.map((item) => (
+          <OneBook key={item.id} {...item} recommendedBook={recommendedBook} />
+        ))}
+      </RecomendedWrapper>
     </>
   );
 };

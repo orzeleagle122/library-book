@@ -19,6 +19,7 @@ import {
   removeaddfetchGenre,
 } from "../../../actions";
 import PropTypes from "prop-types";
+import Loader from "../../molecules/Loader/Loader";
 
 const GenreList = ({
   genreList,
@@ -30,6 +31,7 @@ const GenreList = ({
   fetch,
   removeaddfetch,
   showErrors,
+  loader,
 }) => {
   useEffect(() => {
     fetch();
@@ -43,6 +45,7 @@ const GenreList = ({
 
   return (
     <>
+      {loader && <Loader />}
       {buttonView && (
         <>
           <AcceptButton onClick={handleSubmitChanges}>
@@ -86,6 +89,7 @@ const GenreList = ({
       )}
 
       <Heading>List of available genre:</Heading>
+
       <GenreListWrapper>
         {genreList.map((item) => (
           <Genre key={item.id}>
@@ -111,14 +115,22 @@ GenreList.propTypes = {
   fetch: PropTypes.func.isRequired,
   removeaddfetch: PropTypes.func.isRequired,
   showErrors: PropTypes.array,
+  loader: PropTypes.bool.isRequired,
 };
 
-const mapStateToProps = ({genreList, genreRemoved, genreNews, showErrors}) => {
+const mapStateToProps = ({
+  genreList,
+  genreRemoved,
+  genreNews,
+  showErrors,
+  loader,
+}) => {
   return {
     genreList,
     genreRemoved,
     genreNews,
     showErrors,
+    loader,
   };
 };
 

@@ -39,6 +39,14 @@ const flip = keyframes`
   }
 `;
 
+export const LoaderWrapper = styled.div`
+  height: 100%;
+  width: 100%;
+  background-color: white;
+  position: absolute;
+  z-index: 9999;
+`;
+
 export const Book = styled.div`
   top: 10%;
   transform: translateY(-50%);
@@ -47,6 +55,7 @@ export const Book = styled.div`
   border: 5px solid #3498db;
   width: 100px;
   height: 60px;
+  z-index: 9999;
 `;
 
 export const BookPage = styled.div`

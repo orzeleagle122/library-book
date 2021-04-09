@@ -111,13 +111,13 @@ const MainPage = ({
       </FavoritePageWrapper>
       {searchFormValue.length <= 2 && (
         <>
-          {/* {searchFormValue.length === 0 && ( */}
-          <div className="notification is-warning">
-            <FontAwesomeIcon icon={faExclamationCircle} />
-            Enter <strong>three</strong> characters to start searching for
-            books.
-          </div>
-          {/* )} */}
+          {!searchFormValue.length === 0 && (
+            <div className="notification is-warning">
+              <FontAwesomeIcon icon={faExclamationCircle} />
+              Enter <strong>three</strong> characters to start searching for
+              books.
+            </div>
+          )}
           <Heading>Premieres and news</Heading>
           <BookNews />
           <Slider {...carouselSettings}>

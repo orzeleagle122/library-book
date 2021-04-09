@@ -17,7 +17,7 @@ import {
   REMOVE_GENRE2,
   REMOVE_GENRE3,
   ADD_GENRE,
-  // GET_GENRE_REQUEST,
+  GET_GENRE_REQUEST,
   GET_GENRE_SUCCESS,
   // GET_GENRE_FAILURE
   SEND_ADD_GENRELIST,
@@ -26,6 +26,8 @@ import {
   ADD_FAVORITE,
   ADD_BOOK_SUCCESS,
   CLOSE_SUCCESS_MESSAGE,
+  REQUEST_START,
+  REQUEST_END,
 } from "../actions";
 
 //initial store
@@ -46,7 +48,7 @@ const initialStore = {
     userToken: null,
     isLogin: false,
   },
-  loading: true,
+  loader: false,
   searchFormValue: "",
   showErrors: null,
   succesMessage: false,
@@ -62,6 +64,19 @@ const initialStore = {
 
 //reducer(old-state,action) return update or old state
 export const reducer = (state = initialStore, action) => {
+  if (action.type === REQUEST_START) {
+    return {
+      ...state,
+      loader: true,
+    };
+  }
+  if (action.type === REQUEST_END) {
+    return {
+      ...state,
+      loader: false,
+    };
+  }
+
   if (action.type === CLOSE_SUCCESS_MESSAGE) {
     return {
       ...state,
@@ -73,6 +88,13 @@ export const reducer = (state = initialStore, action) => {
       ...state,
       succesMessage: "The book has been added to the database!",
       showErrors: null,
+    };
+  }
+
+  if (action.type === GET_GENRE_REQUEST) {
+    return {
+      ...state,
+      loader: true,
     };
   }
 
@@ -100,6 +122,7 @@ export const reducer = (state = initialStore, action) => {
     return {
       ...state,
       showErrors: action.err.response.data.message,
+      loader: false,
     };
   }
 
@@ -189,6 +212,7 @@ export const reducer = (state = initialStore, action) => {
       ...state,
       genreList: action.payload.data,
       succesMessage: "Genre list updated!",
+      loader: false,
     };
   }
   if (action.type === AUTH_SUCCESS) {

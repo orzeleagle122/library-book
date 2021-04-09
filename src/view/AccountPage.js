@@ -42,12 +42,12 @@ const AccountPage = ({firstName, isLogin}) => {
       </AccountWrapper>
       <div className="tabs is-boxed">
         <ul>
-          <li className="is-active">
+          <li className="is-active" data-tab="1">
             <a>
               <span>Notifications</span>
             </a>
           </li>
-          <li>
+          <li data-tab="2">
             <a>
               <span>Your statistic</span>
             </a>

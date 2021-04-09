@@ -1,13 +1,15 @@
 import React from "react";
-import {Book, BookPage} from "./Loader.elements";
+import {Book, BookPage, LoaderWrapper} from "./Loader.elements";
 
 const Loader = () => {
   return (
-    <Book>
-      <BookPage />
-      <BookPage />
-      <BookPage />
-    </Book>
+    <LoaderWrapper>
+      <Book>
+        <BookPage />
+        <BookPage />
+        <BookPage />
+      </Book>
+    </LoaderWrapper>
   );
 };
 

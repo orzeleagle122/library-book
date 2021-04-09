@@ -2,39 +2,6 @@ import styled from "styled-components";
 import Button from "../../atoms/Button/Button";
 import {Link} from "react-router-dom";
 
-export const BookNewsWrapper = styled.div`
-  display: flex;
-  gap: 10px;
-  margin-bottom: 100px;
-  max-width: 2140px;
-  position: relative;
-`;
-
-export const TheBestBook = styled.div`
-  flex-basis: 400px;
-  background-color: #1172c4;
-  color: white;
-
-  box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px,
-    rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
-
-  @media screen and (max-width: 1021px) {
-    display: none;
-  }
-`;
-
-export const ListBookWrapper = styled.div`
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  justify-content: space-around;
-`;
-
-export const TheBestBookWrapperInfo = styled.div`
-  padding-left: 25px;
-  padding-right: 25px;
-`;
-
 export const Book = styled.div`
   max-width: 300px;
   flex: 1 0 21%;
