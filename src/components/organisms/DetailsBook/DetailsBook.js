@@ -80,7 +80,7 @@ const DetailsBook = ({
           <br />
           <ButtonsWrapper>
             <ButtonBB isLogin={isLogin} available={available >= 1}>
-              Borrow Book
+              {available >= 1 ? "Borrow Book" : "Not available"}
             </ButtonBB>
             <LikedButton isLogin={isLogin}>
               {isLiked < 0 ? (

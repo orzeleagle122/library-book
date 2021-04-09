@@ -126,7 +126,14 @@ export const ButtonBB = styled(Button)`
   ${({available}) =>
     !available &&
     css`
+      cursor: not-allowed;
       background-color: #525356;
+
+      &:hover {
+        background-color: #525356;
+        color: white;
+        border: 5px solid #525356;
+      }
     `}
 `;
 

@@ -85,7 +85,7 @@ export const BookWrapper = styled.div`
   align-items: center;
   justify-content: center;
   padding: 20px 35px;
-  height: 100%;
+  /* height: 100%; */
 `;
 
 export const BookImg = styled.div`
