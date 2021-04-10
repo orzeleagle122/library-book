@@ -74,11 +74,7 @@ const BookList = (props) => {
               query: {...props},
             }}
           >
-            {/* {smalltitle} */}
-            {/* {title.length < 10 ? {title} : `${title}...`} */}
-            {/* {title.substring(0, 5)} */}
             {title.length > 50 ? `${smalltitle}...` : title}
-            {/* {title} */}
           </Link>
           <FavoriteHearthAdd
             add={

@@ -28,6 +28,7 @@ import {
   CLOSE_SUCCESS_MESSAGE,
   REQUEST_START,
   REQUEST_END,
+  BOOK_BORROW_SUKCESS,
 } from "../actions";
 
 //initial store
@@ -113,6 +114,9 @@ export const reducer = (state = initialStore, action) => {
         userinfo: action.payload.data,
       },
     };
+  }
+  if (action.type === BOOK_BORROW_SUKCESS) {
+    console.log("borrow success!");
   }
   if (action.type === FAILURE_MESSAGE) {
     if (action.err.response === undefined) {

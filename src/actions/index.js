@@ -54,7 +54,37 @@ export const CLOSE_SUCCESS_MESSAGE = "CLOSE_SUCCESS_MESSAGE";
 export const REQUEST_START = "REQUEST_START";
 export const REQUEST_END = "REQUEST_END";
 
+export const BOOK_BORROW_REQUEST = "BOOK_BORROW_REQUEST";
+export const BOOK_BORROW_SUKCESS = "BOOK_BORROW_SUKCESS";
+export const BOOK_BORROW_FAILURE = "BOOK_BORROW_FAILURE";
+
 const API = "http://localhost:8080/api";
+
+export const borrowBook = (user, book) => async (dispatch) => {
+  dispatch({
+    type: BOOK_BORROW_REQUEST,
+  });
+  const userObj = {
+    id: user.id,
+  };
+  const bookObj = {
+    id: book,
+  };
+  return axios
+    .post(API + "/borrow/add", {
+      user: userObj,
+      book: bookObj,
+    })
+    .then((payload) => {
+      dispatch({
+        type: BOOK_BORROW_SUKCESS,
+        payload,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+    });
+};
 
 export const closeSuccessMessage = () => {
   return {

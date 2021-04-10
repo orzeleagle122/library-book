@@ -24,6 +24,7 @@ import {
   addFavorite,
   getUserLoginAction,
   removeFavorite,
+  borrowBook,
 } from "../../../actions";
 import OneBook from "../../molecules/OneBook/OneBook";
 import axios from "axios";
@@ -42,9 +43,15 @@ const DetailsBook = ({
   getUserLogin,
   remove,
   description,
+  borrow,
+  userinfo,
+  // borrows,
 }) => {
   const isLiked = favoriteBooks.findIndex((item2) => item2.id === id);
-  console.log(isLiked);
+  // console.log(borrows);
+  // const bor = borrows.book;
+  // console.log(bor);
+  // const isBorrowed = book.findIndex((item2) => item2.id === id);
 
   const [recommended, setRecommended] = useState([]);
 
@@ -79,12 +86,20 @@ const DetailsBook = ({
           <Publisherspan>Publisher: {publisher}</Publisherspan>
           <br />
           <ButtonsWrapper>
-            <ButtonBB isLogin={isLogin} available={available >= 1}>
+            <ButtonBB
+              onClick={() => {
+                borrow(userinfo, id);
+                getUserLogin(localStorage.getItem("loginToken"));
+              }}
+              isLogin={isLogin}
+              available={available >= 1}
+            >
+              {/* {isBorrowed < 0 ? "niewypozyczona " : "wypozyczona "} */}
               {available >= 1 ? "Borrow Book" : "Not available"}
             </ButtonBB>
             <LikedButton isLogin={isLogin}>
               {isLiked < 0 ? (
-                <RiHeartAddFillIcon onClick={() => add(user_id, id)} />
+                <RiHeartAddFillIcon onClick={() => add(userinfo.id, id)} />
               ) : (
                 <IoHeartDislikeSharpIcon
                   onClick={() => {
@@ -116,23 +131,32 @@ DetailsBook.propTypes = {
   author: PropTypes.string,
   publisher: PropTypes.string,
   genres: PropTypes.array,
+  userinfo: PropTypes.array,
   favoriteBooks: PropTypes.array,
+  // borrows: PropTypes.array,
   isLogin: PropTypes.bool,
   available: PropTypes.number,
   add: PropTypes.func.isRequired,
   remove: PropTypes.func.isRequired,
   getUserLogin: PropTypes.func.isRequired,
+  borrow: PropTypes.func.isRequired,
   description: PropTypes.string,
 };
 
 const mapStateToProps = ({user}) => {
-  const {isLogin} = user;
-  const {id, favoriteBooks} = user.userinfo;
+  const {isLogin, userinfo} = user;
+  const {
+    id,
+    favoriteBooks,
+    // borrows
+  } = user.userinfo;
   const user_id = id;
   return {
     isLogin,
     user_id,
     favoriteBooks,
+    userinfo,
+    // borrows,
   };
 };
 
@@ -141,6 +165,7 @@ const mapDispatchToProps = (dispatch) => {
     add: (user_id, id) => dispatch(addFavorite(user_id, id)),
     remove: (user_id, book_id) => dispatch(removeFavorite(user_id, book_id)),
     getUserLogin: (token) => dispatch(getUserLoginAction(token)),
+    borrow: (user, book) => dispatch(borrowBook(user, book)),
   };
 };
 
