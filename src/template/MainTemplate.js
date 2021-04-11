@@ -1,10 +1,10 @@
 import React from "react";
 import {Route} from "react-router";
-import AccountPage from "../view/AccountPage";
-import BorrowedPage from "../view/BorrowedPage";
-import LoginPage from "../view/LoginPage";
-import RegisterPage from "../view/RegisterPage";
-import MainPage from "../view/MainPage";
+import AccountPage from "../view/user/AccountPage";
+import BorrowedPage from "../view/user/BorrowedPage";
+import LoginPage from "../view/user/LoginPage";
+import RegisterPage from "../view/user/RegisterPage";
+import MainPage from "../view/user/MainPage";
 import {
   GridContainer,
   MainContent,
@@ -18,17 +18,18 @@ import {
   SuccessMessage,
   SuccessMessageHeader,
 } from "./MainTemplate.elements";
-import AddBook from "../view/AddBook";
+import AddBook from "../view/admin/AddBook";
 import main_img from "../assets/layout/main_img.jpg";
-import FavoritePage from "../view/FavoritePage";
+import FavoritePage from "../view/user/FavoritePage";
 import {routers} from "../data/routers";
-import BookDetailsPage from "../view/BookDetailsPage";
-import AddGenre from "../view/AddGenre";
+import BookDetailsPage from "../view/user/BookDetailsPage";
+import AddGenre from "../view/admin/AddGenre";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import {closeSuccessMessage} from "../actions";
 import {Link} from "react-router-dom";
-import SearchPage from "../view/SearchPage";
+import SearchPage from "../view/user/SearchPage";
+import BorrowedStatusPage from "../view/admin/BorrowedStatusPage";
 
 class MainTemplate extends React.Component {
   componentDidUpdate() {
@@ -85,6 +86,11 @@ class MainTemplate extends React.Component {
               <Route path={routers.book} exact component={BookDetailsPage} />
               <Route path={routers.user} exact component={AccountPage} />
               <Route path={routers.search} exact component={SearchPage} />
+              <Route
+                path={routers.changeStatus}
+                exact
+                component={BorrowedStatusPage}
+              />
             </MainContent>
           </GridContainer>
         </MainTemplateWrapper>

@@ -1,15 +1,15 @@
 import React from "react";
-import avatar from "../assets/layout/avatar.svg";
-import stat from "../assets/layout/stat.svg";
+import avatar from "../../assets/layout/avatar.svg";
+import stat from "../../assets/layout/stat.svg";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import Heading from "../components/atoms/Heading/Heading";
+import Heading from "../../components/atoms/Heading/Heading";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faExclamationCircle} from "@fortawesome/free-solid-svg-icons";
-import Button from "../components/atoms/Button/Button";
+import Button from "../../components/atoms/Button/Button";
 import {Redirect} from "react-router-dom";
-import {routers} from "../data/routers";
+import {routers} from "../../data/routers";
 
 const AccountWrapper = styled.div`
   display: flex;

@@ -58,6 +58,9 @@ export const BOOK_BORROW_REQUEST = "BOOK_BORROW_REQUEST";
 export const BOOK_BORROW_SUKCESS = "BOOK_BORROW_SUKCESS";
 export const BOOK_BORROW_FAILURE = "BOOK_BORROW_FAILURE";
 
+export const USER_EMAIL_SEARCH_SUCCESS = "USER_EMAIL_SEARCH_SUCCESS";
+export const USER_EMAIL_SEARCH_FAILURE = "USER_EMAIL_SEARCH_FAILURE";
+
 const API = "http://localhost:8080/api";
 
 export const borrowBook = (user, book) => async (dispatch) => {
@@ -441,7 +444,7 @@ export const bookRequest = (id, title) => async (dispatch) => {
 
 export const searchBook = (phrase) => async (dispatch) => {
   dispatch({
-    type: SEARCH_BOOK_REQUEST,
+    type: REQUEST_START,
   });
   if (phrase.length >= 3) {
     return axios
@@ -467,6 +470,29 @@ export const searchBook = (phrase) => async (dispatch) => {
   //     type: CLEAR_SEARCH_BOOK_LIST,
   //   });
   // }
+};
+
+export const searchEmailUser = (email) => async (dispatch) => {
+  dispatch({
+    type: REQUEST_START,
+  });
+  if (email.length >= 3) {
+    return axios
+      .get(API + "/user/search", {params: {email}})
+      .then((payload) => {
+        dispatch({
+          type: USER_EMAIL_SEARCH_SUCCESS,
+          payload,
+        });
+      })
+      .catch((err) => {
+        console.log(err.response);
+        dispatch({
+          type: USER_EMAIL_SEARCH_FAILURE,
+          err,
+        });
+      });
+  }
 };
 
 export const clearBookSearchList = () => {

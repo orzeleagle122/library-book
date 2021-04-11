@@ -21,12 +21,12 @@
 
 .slick-prev:before {
   color: #2d3ddf;
-  content: url("../assets/layout/prev.png");
+  content: url("../../assets/layout/prev.png");
 }
 
 .slick-next:before {
   color: #2d3ddf;
-  content: url("../assets/layout/next.png");
+  content: url("../../assets/layout/next.png");
 }
 
 .slick-prev {

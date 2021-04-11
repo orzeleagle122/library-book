@@ -29,6 +29,8 @@ import {
   REQUEST_START,
   REQUEST_END,
   BOOK_BORROW_SUKCESS,
+  USER_EMAIL_SEARCH_SUCCESS,
+  USER_EMAIL_SEARCH_FAILURE,
 } from "../actions";
 
 //initial store
@@ -40,6 +42,7 @@ const initialStore = {
   genreRemoved: [],
   genreNews: [],
   totalbooks: 0,
+  searchUsers: [],
   user: {
     userinfo: {
       id: 0,
@@ -121,7 +124,7 @@ export const reducer = (state = initialStore, action) => {
   if (action.type === FAILURE_MESSAGE) {
     if (action.err.response === undefined) {
       alert("no backend connect");
-      return {...state};
+      return {...state, loader: true};
     }
     return {
       ...state,
@@ -200,6 +203,18 @@ export const reducer = (state = initialStore, action) => {
     return {
       ...state,
       searchbooks: action.payload.data,
+    };
+  }
+  if (action.type === USER_EMAIL_SEARCH_FAILURE) {
+    return {
+      ...state,
+      searchUsers: [],
+    };
+  }
+  if (action.type === USER_EMAIL_SEARCH_SUCCESS) {
+    return {
+      ...state,
+      searchUsers: action.payload.data,
     };
   }
   if (action.type === FETCH_BOOKS_SUCCESS) {

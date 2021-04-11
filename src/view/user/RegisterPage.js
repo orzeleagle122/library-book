@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 import {connect} from "react-redux";
-import {registerUser, cleanErrors} from "../actions";
+import {registerUser, cleanErrors} from "../../actions";
 import {Formik} from "formik";
 import {Link} from "react-router-dom";
 import {useEffect} from "react";
 import PropTypes from "prop-types";
-import {Input} from "../components/atoms/Input/Input";
-import Button from "../components/atoms/Button/Button";
+import {Input} from "../../components/atoms/Input/Input";
+import Button from "../../components/atoms/Button/Button";
 
 const RegisterWrapper = styled.div`
   /* margin-right: 500px;

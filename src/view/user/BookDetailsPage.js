@@ -1,9 +1,9 @@
 import React, {useEffect} from "react";
 import {connect} from "react-redux";
-import {bookRequest, cleanErrors} from "../actions";
-import Loader from "../components/molecules/Loader/Loader";
+import {bookRequest, cleanErrors} from "../../actions";
+import Loader from "../../components/molecules/Loader/Loader";
 import PropTypes from "prop-types";
-import DetailsBook from "../components/organisms/DetailsBook/DetailsBook";
+import DetailsBook from "../../components/organisms/DetailsBook/DetailsBook";
 
 const BookDetails = ({location, bookInfo, bookDetails, showErrors, clean}) => {
   const {query} = location;

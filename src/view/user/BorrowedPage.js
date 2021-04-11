@@ -5,7 +5,7 @@ import React, {useEffect} from "react";
 import {connect} from "react-redux";
 import // GET_TOTALS,
 
-"../actions";
+"../../actions";
 // import Loader from "../components/molecules/Loader/Loader";
 import PropTypes from "prop-types";
 
@@ -17,14 +17,17 @@ import PropTypes from "prop-types";
 //   width: 100%;
 // `;
 
-const BorrowedPage = ({borrows = [], totalbooks}) => {
+const BorrowedPage = ({borrows = []}) => {
   useEffect(() => {}, []);
-
+  console.log(borrows);
   return (
     <>
-      <h2>Number of all books: {totalbooks}</h2>
+      <h2>Number of all books: {borrows.length}</h2>
       {borrows.map((item) => (
-        <div key={item.id}>createdAt: {item.createdAt}</div>
+        <div key={item.id}>
+          createdAt: {item.createdAt}, expired: {item.expired}, status:{" "}
+          {item.status}, book title: {item.book.title}
+        </div>
       ))}
     </>
   );
@@ -32,12 +35,11 @@ const BorrowedPage = ({borrows = [], totalbooks}) => {
 
 BorrowedPage.propTypes = {
   borrows: PropTypes.array,
-  totalbooks: PropTypes.number.isRequired,
 };
 
-const mapStateToProps = ({user, totalbooks}) => {
+const mapStateToProps = ({user}) => {
   const {borrows} = user.userinfo;
-  return {borrows, totalbooks};
+  return {borrows};
 };
 
 // const mapDispatchToProps = (dispatch) => {

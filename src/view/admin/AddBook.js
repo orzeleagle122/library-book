@@ -1,13 +1,12 @@
 // import {Formik, Field} from "formik";
 import React, {useEffect, useState} from "react";
 import {connect} from "react-redux";
-import {addBook, cleanErrors} from "../actions";
+import {addBook, cleanErrors, fetchGenres, removeGenre} from "../../actions";
 import PropTypes from "prop-types";
-import {fetchGenres, removeGenre} from "../actions";
-import {Input} from "../components/atoms/Input/Input";
-import {Textarea} from "../components/atoms/Textarea/Textarea";
-import Heading from "../components/atoms/Heading/Heading";
-import Button from "../components/atoms/Button/Button";
+import {Input} from "../../components/atoms/Input/Input";
+import {Textarea} from "../../components/atoms/Textarea/Textarea";
+import Heading from "../../components/atoms/Heading/Heading";
+import Button from "../../components/atoms/Button/Button";
 import styled from "styled-components";
 
 const GenresButton = styled.button`

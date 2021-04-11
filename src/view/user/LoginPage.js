@@ -1,14 +1,14 @@
 import React, {useEffect} from "react";
 import styled from "styled-components";
 import {connect} from "react-redux";
-import {authUser, cleanErrors} from "../actions";
+import {authUser, cleanErrors} from "../../actions";
 import {Formik} from "formik";
 import {Redirect} from "react-router-dom";
 import PropTypes from "prop-types";
-import {routers} from "../data/routers";
+import {routers} from "../../data/routers";
 import {Link} from "react-router-dom";
-import {Input} from "../components/atoms/Input/Input";
-import Button from "../components/atoms/Button/Button";
+import {Input} from "../../components/atoms/Input/Input";
+import Button from "../../components/atoms/Button/Button";
 
 const LoginWrapper = styled.div`
   /* margin-right: 200px;
