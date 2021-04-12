@@ -17,7 +17,6 @@ import {
   REMOVE_GENRE2,
   REMOVE_GENRE3,
   ADD_GENRE,
-  GET_GENRE_REQUEST,
   GET_GENRE_SUCCESS,
   // GET_GENRE_FAILURE
   SEND_ADD_GENRELIST,
@@ -28,7 +27,7 @@ import {
   CLOSE_SUCCESS_MESSAGE,
   REQUEST_START,
   REQUEST_END,
-  BOOK_BORROW_SUKCESS,
+  BOOK_BORROW_SUCCESS,
   USER_EMAIL_SEARCH_SUCCESS,
   USER_EMAIL_SEARCH_FAILURE,
 } from "../actions";
@@ -95,13 +94,6 @@ export const reducer = (state = initialStore, action) => {
     };
   }
 
-  if (action.type === GET_GENRE_REQUEST) {
-    return {
-      ...state,
-      loader: true,
-    };
-  }
-
   if (action.type === ADD_FAVORITE) {
     // console.log(action.payload);
     const lastLiked =
@@ -118,8 +110,11 @@ export const reducer = (state = initialStore, action) => {
       },
     };
   }
-  if (action.type === BOOK_BORROW_SUKCESS) {
-    console.log("borrow success!");
+  if (action.type === BOOK_BORROW_SUCCESS) {
+    return {
+      ...state,
+      succesMessage: "The book has been borrowed!",
+    };
   }
   if (action.type === FAILURE_MESSAGE) {
     if (action.err.response === undefined) {
@@ -209,6 +204,7 @@ export const reducer = (state = initialStore, action) => {
     return {
       ...state,
       searchUsers: [],
+      showErrors: action.err.response.data.message,
     };
   }
   if (action.type === USER_EMAIL_SEARCH_SUCCESS) {
@@ -231,7 +227,6 @@ export const reducer = (state = initialStore, action) => {
       ...state,
       genreList: action.payload.data,
       succesMessage: "Genre list updated!",
-      loader: false,
     };
   }
   if (action.type === AUTH_SUCCESS) {

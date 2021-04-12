@@ -1,16 +1,32 @@
 import React from "react";
 import {Book, BookPage, LoaderWrapper} from "./Loader.elements";
+import {connect} from "react-redux";
+import PropTypes from "prop-types";
 
-const Loader = () => {
+const Loader = ({loader}) => {
   return (
-    <LoaderWrapper>
-      <Book>
-        <BookPage />
-        <BookPage />
-        <BookPage />
-      </Book>
-    </LoaderWrapper>
+    <>
+      {loader && (
+        <LoaderWrapper>
+          <Book>
+            <BookPage />
+            <BookPage />
+            <BookPage />
+          </Book>
+        </LoaderWrapper>
+      )}
+    </>
   );
 };
 
-export default Loader;
+Loader.propTypes = {
+  loader: PropTypes.bool.isRequired,
+};
+
+const mapStateToProps = ({loader}) => {
+  return {
+    loader,
+  };
+};
+
+export default connect(mapStateToProps, null)(Loader);

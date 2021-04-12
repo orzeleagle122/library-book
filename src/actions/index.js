@@ -55,7 +55,7 @@ export const REQUEST_START = "REQUEST_START";
 export const REQUEST_END = "REQUEST_END";
 
 export const BOOK_BORROW_REQUEST = "BOOK_BORROW_REQUEST";
-export const BOOK_BORROW_SUKCESS = "BOOK_BORROW_SUKCESS";
+export const BOOK_BORROW_SUCCESS = "BOOK_BORROW_SUCCESS";
 export const BOOK_BORROW_FAILURE = "BOOK_BORROW_FAILURE";
 
 export const USER_EMAIL_SEARCH_SUCCESS = "USER_EMAIL_SEARCH_SUCCESS";
@@ -80,7 +80,7 @@ export const borrowBook = (user, book) => async (dispatch) => {
     })
     .then((payload) => {
       dispatch({
-        type: BOOK_BORROW_SUKCESS,
+        type: BOOK_BORROW_SUCCESS,
         payload,
       });
     })
@@ -176,7 +176,7 @@ export const removeaddfetchGenre = (idList, genres) => async (dispatch) => {
     type: SEND_ADD_GENRELIST,
   });
   dispatch({
-    type: GET_GENRE_REQUEST,
+    type: REQUEST_START,
   });
   return axios
     .delete(API + "/bookGenre/delete", {data: {ids}})
@@ -198,7 +198,12 @@ export const removeaddfetchGenre = (idList, genres) => async (dispatch) => {
         type: FAILURE_MESSAGE,
         err,
       });
-    });
+    })
+    .finally(() =>
+      dispatch({
+        type: REQUEST_END,
+      })
+    );
 };
 
 export const sendRemoveListGenre = (idList) => async (dispatch) => {
@@ -227,7 +232,7 @@ export const sendNewsListGenre = (genres) => async (dispatch) => {
 
 export const fetchGenres = () => async (dispatch) => {
   dispatch({
-    type: GET_GENRE_REQUEST,
+    type: REQUEST_START,
   });
   return axios
     .get(API + "/bookGenre/search/all")
@@ -242,7 +247,12 @@ export const fetchGenres = () => async (dispatch) => {
         type: FAILURE_MESSAGE,
         err,
       });
-    });
+    })
+    .finally(() =>
+      dispatch({
+        type: REQUEST_END,
+      })
+    );
 };
 
 export const fetchBooks = (number) => async (dispatch) => {
@@ -473,10 +483,10 @@ export const searchBook = (phrase) => async (dispatch) => {
 };
 
 export const searchEmailUser = (email) => async (dispatch) => {
-  dispatch({
-    type: REQUEST_START,
-  });
   if (email.length >= 3) {
+    dispatch({
+      type: REQUEST_START,
+    });
     return axios
       .get(API + "/user/search", {params: {email}})
       .then((payload) => {
@@ -491,7 +501,12 @@ export const searchEmailUser = (email) => async (dispatch) => {
           type: USER_EMAIL_SEARCH_FAILURE,
           err,
         });
-      });
+      })
+      .finally(() =>
+        dispatch({
+          type: REQUEST_END,
+        })
+      );
   }
 };
 

@@ -15,5 +15,5 @@ export const routers = {
   addBook: "/admin/add",
   addGenre: "/admin/genre",
   changeStatus: "/admin/status",
-  userborrowed: "/admin/user/:user",
+  // userborrowed: "/admin/user/:user",
 };

@@ -31,7 +31,6 @@ const GenreList = ({
   fetch,
   removeaddfetch,
   showErrors,
-  loader,
 }) => {
   useEffect(() => {
     fetch();
@@ -45,7 +44,7 @@ const GenreList = ({
 
   return (
     <>
-      {loader && <Loader />}
+      <Loader />
       {buttonView && (
         <>
           <AcceptButton onClick={handleSubmitChanges}>
@@ -115,22 +114,14 @@ GenreList.propTypes = {
   fetch: PropTypes.func.isRequired,
   removeaddfetch: PropTypes.func.isRequired,
   showErrors: PropTypes.array,
-  loader: PropTypes.bool.isRequired,
 };
 
-const mapStateToProps = ({
-  genreList,
-  genreRemoved,
-  genreNews,
-  showErrors,
-  loader,
-}) => {
+const mapStateToProps = ({genreList, genreRemoved, genreNews, showErrors}) => {
   return {
     genreList,
     genreRemoved,
     genreNews,
     showErrors,
-    loader,
   };
 };
 

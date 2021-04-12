@@ -24,7 +24,7 @@ import {requestStart, requestEnd} from "../../../actions";
 // import {routers} from "../../../data/routers";
 // import $ from "jquery";
 
-const BookNews = ({loader, reqStart, reqEnd}) => {
+const BookNews = ({reqStart, reqEnd}) => {
   const [randomBook, setRandomBook] = useState([]);
 
   const recommendedBook = () => {
@@ -141,7 +141,8 @@ const BookNews = ({loader, reqStart, reqEnd}) => {
       </div>
 
       <BookNewsWrapper>
-        {loader && <Loader />}
+        <Loader />
+        {/* {loader && <Loader />} */}
         <TheBestBook thebest="thebest">
           <ImgBestBook src={`/assets/bookImages/book2.png`} alt="alt" />
           {randomBook.slice(0, 1).map((item) => (
@@ -193,15 +194,8 @@ const BookNews = ({loader, reqStart, reqEnd}) => {
 };
 
 BookNews.propTypes = {
-  loader: PropTypes.bool.isRequired,
   reqStart: PropTypes.func.isRequired,
   reqEnd: PropTypes.func.isRequired,
-};
-
-const mapStateToProps = ({loader}) => {
-  return {
-    loader,
-  };
 };
 
 const mapDispathToProps = (dispatch) => {
@@ -211,4 +205,4 @@ const mapDispathToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispathToProps)(BookNews);
+export default connect(null, mapDispathToProps)(BookNews);

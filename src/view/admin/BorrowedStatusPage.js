@@ -1,12 +1,24 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Input} from "../../components/atoms/Input/Input";
 import Heading from "../../components/atoms/Heading/Heading";
 import {connect} from "react-redux";
-import {searchEmailUser} from "../../actions";
+import {searchEmailUser, cleanErrors} from "../../actions";
 import PropTypes from "prop-types";
+import Button from "../../components/atoms/Button/Button";
+import BorrowedStatusList from "../../components/organisms/BorrowedStatusList/BorrowedStatusList";
+import Loader from "../../components/molecules/Loader/Loader";
 
-const BorrowedStatusPage = ({searchUsers, search}) => {
+const BorrowedStatusPage = ({
+  searchUsers,
+  search,
+  borrows = [],
+  showErrors,
+  clean,
+}) => {
   const [searchUser, setSearchUser] = useState("");
+  useEffect(() => {
+    return () => clean();
+  }, []);
 
   const handleSearchUser = (e) => {
     setSearchUser(e.target.value);
@@ -14,35 +26,48 @@ const BorrowedStatusPage = ({searchUsers, search}) => {
 
   const handleSearch = (e) => {
     e.preventDefault();
+    clean();
     search(searchUser);
+    setSearchUser("");
   };
+
   return (
     <>
       <Heading>Search user by email</Heading>
-      <form>
-        <Input onChange={handleSearchUser} value={searchUser} />
-        <button onClick={handleSearch}>szukaj</button>
-        {/* {searchUsers.map((item) => (
-        <div key={item.id}>{item.email}</div>
-      ))} */}
+      <form onSubmit={handleSearch}>
+        <Input onChange={handleSearchUser} value={searchUser} type="email" />
+        {searchUser.length > 0 && <Button>Search</Button>}
       </form>
-      {searchUsers.email}
+      <Loader />
+      {showErrors}
+      <Heading>
+        {searchUsers.firstName} {searchUsers.lastName}
+      </Heading>
+
+      {borrows.map((item) => (
+        <BorrowedStatusList key={item.id} {...item} />
+      ))}
     </>
   );
 };
 
 BorrowedStatusPage.propTypes = {
   searchUsers: PropTypes.array,
+  borrows: PropTypes.array,
   search: PropTypes.func.isRequired,
+  showErrors: PropTypes.any,
+  clean: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({searchUsers}) => {
-  return {searchUsers};
+const mapStateToProps = ({searchUsers, showErrors}) => {
+  const {borrows} = searchUsers;
+  return {searchUsers, borrows, showErrors};
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     search: (email) => dispatch(searchEmailUser(email)),
+    clean: () => dispatch(cleanErrors()),
   };
 };
 
