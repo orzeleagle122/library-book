@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import PropTypes from "prop-types";
 import {
   StatusWrapper,
@@ -18,8 +18,12 @@ import {
   Close,
 } from "./BorrowedStatusList.elements";
 import {Link} from "react-router-dom";
+import {connect} from "react-redux";
+import {changeStatus, searchEmailUser} from "../../../actions";
 
 const BorrowedStatusList = (props) => {
+  const {change, searchUsers, search} = props;
+  useEffect(() => {}, [searchUsers]);
   return (
     <>
       <StatusWrapper>
@@ -44,8 +48,22 @@ const BorrowedStatusList = (props) => {
               {props.status === "APPROVED" && "borrowed"}
             </CurrentStatus>
             <ChangeStatus>
-              <Ordered>complite order</Ordered>
-              <Close>close order</Close>
+              <Ordered
+                onClick={() => {
+                  change(props.id, "APPROVED");
+                  search(searchUsers.email);
+                }}
+              >
+                complite order
+              </Ordered>
+              <Close
+                onClick={() => {
+                  change(props.id, "DEVOTED");
+                  search(searchUsers.email);
+                }}
+              >
+                close order
+              </Close>
             </ChangeStatus>
           </Status>
         </BorrowWrapper>
@@ -62,6 +80,22 @@ BorrowedStatusList.propTypes = {
   book: PropTypes.any.isRequired,
   title: PropTypes.any.isRequired,
   id: PropTypes.number.isRequired,
+  change: PropTypes.func.isRequired,
+  search: PropTypes.func.isRequired,
+  searchUsers: PropTypes.any,
 };
 
-export default BorrowedStatusList;
+const mapStateToProps = ({searchUsers}) => {
+  return {
+    searchUsers,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    change: (id, status) => dispatch(changeStatus(id, status)),
+    search: (email) => dispatch(searchEmailUser(email)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(BorrowedStatusList);

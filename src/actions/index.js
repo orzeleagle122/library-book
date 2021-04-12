@@ -61,7 +61,17 @@ export const BOOK_BORROW_FAILURE = "BOOK_BORROW_FAILURE";
 export const USER_EMAIL_SEARCH_SUCCESS = "USER_EMAIL_SEARCH_SUCCESS";
 export const USER_EMAIL_SEARCH_FAILURE = "USER_EMAIL_SEARCH_FAILURE";
 
+export const CHANGE_BORROW_STATUS = "CHANGE_BORROW_STATUS";
+
 const API = "http://localhost:8080/api";
+
+export const changeStatus = (id, status) => async (dispatch) => {
+  dispatch({type: CHANGE_BORROW_STATUS});
+  return axios
+    .put(API + `/borrow/${id}?status=${status}`)
+    .then((payload) => console.log(payload))
+    .catch((err) => console.log(err.response));
+};
 
 export const borrowBook = (user, book) => async (dispatch) => {
   dispatch({
