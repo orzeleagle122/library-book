@@ -18,7 +18,7 @@ const BorrowedStatusPage = ({
   const [searchUser, setSearchUser] = useState("");
   useEffect(() => {
     return () => clean();
-  }, []);
+  }, [borrows]);
 
   const handleSearchUser = (e) => {
     setSearchUser(e.target.value);

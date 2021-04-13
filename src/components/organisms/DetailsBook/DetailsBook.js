@@ -52,6 +52,9 @@ const DetailsBook = ({
   // const bor = borrows.book;
   // console.log(bor);
   // const isBorrowed = book.findIndex((item2) => item2.id === id);
+  const isBorrowed = userinfo.borrows
+    .map((item) => item.book.id)
+    .findIndex((item2) => item2 === id);
 
   const [recommended, setRecommended] = useState([]);
 
@@ -64,6 +67,15 @@ const DetailsBook = ({
         setRecommended(payload.data);
       });
   };
+
+  let textButton = "";
+  if (isBorrowed < 0 && available >= 1) {
+    textButton = "Borrow Book";
+  } else if (isBorrowed >= 0 && available >= 1) {
+    textButton = "Borrowed";
+  } else {
+    textButton = "Not Avaiable";
+  }
 
   useEffect(() => {
     recommendedBook();
@@ -93,9 +105,13 @@ const DetailsBook = ({
               }}
               isLogin={isLogin}
               available={available >= 1}
+              textButton={textButton}
             >
               {/* {isBorrowed < 0 ? "niewypozyczona " : "wypozyczona "} */}
-              {available >= 1 ? "Borrow Book" : "Not available"}
+
+              {/* {isBorrowed < 0 ? "Borrow Book" : "Borrowed "}
+              {available >= 1 ? "Available" : "Not available"} */}
+              {textButton}
             </ButtonBB>
             <LikedButton isLogin={isLogin}>
               {isLiked < 0 ? (

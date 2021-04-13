@@ -29,6 +29,7 @@ import {
   removeFavorite,
   addFavorite,
   getUserLoginAction,
+  borrowBook,
 } from "../../../actions";
 
 const BookList = (props) => {
@@ -45,8 +46,9 @@ const BookList = (props) => {
     id_user,
     available,
     getUserLogin,
-    isFavorite,
     favoriteBooks,
+    borrow,
+    userinfo,
     // item,
   } = props;
   // useEffect jesli zalogowany to od nowa pobierz listę
@@ -54,8 +56,11 @@ const BookList = (props) => {
   // if (title.length > 5) {
   //   var smalltitle = title.substring(0, 5);
   // }
-  console.log(isFavorite);
   const isLiked = favoriteBooks.findIndex((item2) => item2.id === id);
+  const isBorrowed = userinfo.borrows
+    .map((item) => item.book.id)
+    .findIndex((item2) => item2 === id);
+
   const smalltitle = title.substring(0, 50);
   const smallauthor = author.substring(0, 50);
 
@@ -130,7 +135,7 @@ const BookList = (props) => {
             // borrowed={borrowed ? 0 : 1}
             available={available >= 1 ? true : false}
           >
-            Book
+            {isBorrowed < 0 ? "Borrow" : "Borrowed"}
           </BookOrderButtonMobile>
           <BookFavoriteMobile available={available >= 1 ? true : false}>
             {/* jeśli to serce znajduje sie u uzytkownika w mapstatetopropt to daj serce usunięte */}
@@ -148,8 +153,12 @@ const BookList = (props) => {
           </BookFavoriteMobile>
         </ButtonMobileWrapper>
       </BookContent>
-      <BookOrderButton isLogin={isLogin} available={available >= 1}>
-        <VerticalText>Borrow</VerticalText>
+      <BookOrderButton
+        isLogin={isLogin}
+        available={available >= 1}
+        onClick={() => borrow(userinfo, id)}
+      >
+        <VerticalText>{isBorrowed < 0 ? "Borrow" : "Borrowed"}</VerticalText>
       </BookOrderButton>
     </FavoriteItem>
   );
@@ -173,18 +182,22 @@ BookList.propTypes = {
   add: PropTypes.func.isRequired,
   genres: PropTypes.array,
   favoriteBooks: PropTypes.array,
+  userinfo: PropTypes.array,
   available: PropTypes.number,
   getUserLogin: PropTypes.func.isRequired,
+  borrow: PropTypes.func.isRequired,
   item: PropTypes.node,
   isFavorite: PropTypes.node,
 };
 
 const mapStateToProps = ({user}) => {
   const {id, favoriteBooks} = user.userinfo;
+  const {userinfo} = user;
   const id_user = id;
   return {
     id_user,
     favoriteBooks,
+    userinfo,
   };
 };
 
@@ -193,6 +206,7 @@ const mapDispatchToProps = (dispatch) => {
     remove: (user_id, book_id) => dispatch(removeFavorite(user_id, book_id)),
     add: (user_id, id) => dispatch(addFavorite(user_id, id)),
     getUserLogin: (token) => dispatch(getUserLoginAction(token)),
+    borrow: (user, book) => dispatch(borrowBook(user, book)),
   };
 };
 

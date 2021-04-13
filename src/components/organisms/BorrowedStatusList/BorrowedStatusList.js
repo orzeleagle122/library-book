@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import {
   StatusWrapper,
@@ -23,7 +23,6 @@ import {changeStatus, searchEmailUser} from "../../../actions";
 
 const BorrowedStatusList = (props) => {
   const {change, searchUsers, search} = props;
-  useEffect(() => {}, [searchUsers]);
   return (
     <>
       <StatusWrapper>
@@ -51,7 +50,6 @@ const BorrowedStatusList = (props) => {
               <Ordered
                 onClick={() => {
                   change(props.id, "APPROVED");
-                  search(searchUsers.email);
                 }}
               >
                 complite order

@@ -43,6 +43,7 @@ const initialStore = {
   totalbooks: 0,
   searchUsers: [],
   user: {
+    userborrowedbooks: [],
     userinfo: {
       id: 0,
       favoriteBooks: [],
@@ -235,6 +236,7 @@ export const reducer = (state = initialStore, action) => {
       ...state,
       succesMessage: `Welcome ${action.payload.data.firstName}!`,
       user: {
+        userborrowedbooks: action.payload.data.borrows,
         userinfo: action.payload.data,
         userToken: action.payload.data.id,
         isLogin: true,

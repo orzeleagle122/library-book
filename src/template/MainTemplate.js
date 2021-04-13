@@ -41,6 +41,7 @@ class MainTemplate extends React.Component {
       const {close} = this.props;
       close();
       // notification.style.display = "flex";
+      //tutaj dodajać czyszczenie błedów! a następnie usunąć ze wszystkich stron!
     };
     if (this.props.succesMessage) {
       setTimeout(changeDisplayNotification, 3000);

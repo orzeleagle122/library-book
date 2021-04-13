@@ -135,6 +135,19 @@ export const ButtonBB = styled(Button)`
         border: 5px solid #525356;
       }
     `}
+
+    ${({textButton}) =>
+    textButton === "Borrowed" &&
+    css`
+      cursor: not-allowed;
+      background-color: green;
+
+      &:hover {
+        background-color: green;
+        color: white;
+        border: 5px solid green;
+      }
+    `}
 `;
 
 export const Description = styled.div``;
