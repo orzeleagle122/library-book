@@ -1,33 +1,17 @@
-import React, {useEffect} from "react";
-// import styled from "styled-components";
-// import BookList from "../components/organisms/BookList/BookList";
-//redux connect
+import React from "react";
 import {connect} from "react-redux";
-import // GET_TOTALS,
-
-"../../actions";
-// import Loader from "../components/molecules/Loader/Loader";
 import PropTypes from "prop-types";
-
-// const BorrowedWrapper = styled.div`
-//   display: flex;
-//   flex-direction: row;
-//   justify-content: flex-start;
-//   flex-wrap: wrap;
-//   width: 100%;
-// `;
+import BorrowedStatusList from "../../components/organisms/BorrowedStatusList/BorrowedStatusList";
+import Heading from "../../components/atoms/Heading/Heading";
 
 const BorrowedPage = ({borrows = []}) => {
-  useEffect(() => {}, []);
-  console.log(borrows);
   return (
     <>
-      <h2>Number of all books: {borrows.length}</h2>
+      <Heading>Your borrowed book</Heading>
+      <h2>Number of borrows: {borrows.length}</h2>
+      <br />
       {borrows.map((item) => (
-        <div key={item.id}>
-          createdAt: {item.createdAt}, expired: {item.expired}, status:{" "}
-          {item.status}, book title: {item.book.title}
-        </div>
+        <BorrowedStatusList key={item.id} {...item} borrow />
       ))}
     </>
   );

@@ -48,10 +48,6 @@ const DetailsBook = ({
   // borrows,
 }) => {
   const isLiked = favoriteBooks.findIndex((item2) => item2.id === id);
-  // console.log(borrows);
-  // const bor = borrows.book;
-  // console.log(bor);
-  // const isBorrowed = book.findIndex((item2) => item2.id === id);
   const isBorrowed = userinfo.borrows
     .map((item) => item.book.id)
     .findIndex((item2) => item2 === id);
@@ -100,7 +96,7 @@ const DetailsBook = ({
           <ButtonsWrapper>
             <ButtonBB
               onClick={() => {
-                borrow(userinfo, id);
+                borrow(userinfo, id, title);
                 getUserLogin(localStorage.getItem("loginToken"));
               }}
               isLogin={isLogin}
@@ -115,12 +111,16 @@ const DetailsBook = ({
             </ButtonBB>
             <LikedButton isLogin={isLogin}>
               {isLiked < 0 ? (
-                <RiHeartAddFillIcon onClick={() => add(userinfo.id, id)} />
+                <RiHeartAddFillIcon
+                  onClick={() => {
+                    add(userinfo.id, id, title);
+                    getUserLogin(localStorage.getItem("loginToken"));
+                  }}
+                />
               ) : (
                 <IoHeartDislikeSharpIcon
                   onClick={() => {
                     remove(user_id, id);
-                    // zwracam liste aktualych
                     getUserLogin(localStorage.getItem("loginToken"));
                   }}
                 />
@@ -147,9 +147,8 @@ DetailsBook.propTypes = {
   author: PropTypes.string,
   publisher: PropTypes.string,
   genres: PropTypes.array,
-  userinfo: PropTypes.array,
+  userinfo: PropTypes.object,
   favoriteBooks: PropTypes.array,
-  // borrows: PropTypes.array,
   isLogin: PropTypes.bool,
   available: PropTypes.number,
   add: PropTypes.func.isRequired,
@@ -178,10 +177,10 @@ const mapStateToProps = ({user}) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    add: (user_id, id) => dispatch(addFavorite(user_id, id)),
+    add: (user_id, id, title) => dispatch(addFavorite(user_id, id, title)),
     remove: (user_id, book_id) => dispatch(removeFavorite(user_id, book_id)),
     getUserLogin: (token) => dispatch(getUserLoginAction(token)),
-    borrow: (user, book) => dispatch(borrowBook(user, book)),
+    borrow: (user, book, title) => dispatch(borrowBook(user, book, title)),
   };
 };
 

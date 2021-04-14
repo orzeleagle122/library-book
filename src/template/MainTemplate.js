@@ -26,7 +26,7 @@ import BookDetailsPage from "../view/user/BookDetailsPage";
 import AddGenre from "../view/admin/AddGenre";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
-import {closeSuccessMessage} from "../actions";
+import {closeSuccessMessage, getUserLoginAction} from "../actions";
 import {Link} from "react-router-dom";
 import SearchPage from "../view/user/SearchPage";
 import BorrowedStatusPage from "../view/admin/BorrowedStatusPage";
@@ -40,12 +40,15 @@ class MainTemplate extends React.Component {
       }
       const {close} = this.props;
       close();
+
       // notification.style.display = "flex";
       //tutaj dodajać czyszczenie błedów! a następnie usunąć ze wszystkich stron!
     };
     if (this.props.succesMessage) {
       setTimeout(changeDisplayNotification, 3000);
     }
+
+    // this.props.getUserLogin(localStorage.getItem("loginToken"));
   }
 
   render() {
@@ -101,8 +104,9 @@ class MainTemplate extends React.Component {
 }
 
 MainTemplate.propTypes = {
-  succesMessage: PropTypes.bool.isRequired,
+  succesMessage: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   close: PropTypes.func.isRequired,
+  getUserLogin: PropTypes.func.isRequired,
   isLogin: PropTypes.bool,
 };
 
@@ -118,6 +122,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     // add timeout?!
     close: () => dispatch(closeSuccessMessage()),
+    getUserLogin: (token) => dispatch(getUserLoginAction(token)),
   };
 };
 

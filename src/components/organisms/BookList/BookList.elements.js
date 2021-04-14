@@ -228,6 +228,19 @@ export const BookOrderButton = styled.button`
       `}
   }
 
+  ${({textButton}) =>
+    textButton === "Borrowed" &&
+    css`
+      cursor: not-allowed;
+      background-color: green;
+
+      &:hover {
+        background-color: green;
+        color: white;
+        border: 5px solid green;
+      }
+    `}
+
   @media screen and (max-width: 480px) {
     display: none;
   }
@@ -255,12 +268,6 @@ export const BookFavoriteMobile = styled.button`
     /* border-bottom-right-radius: 10px; */
     border-top-left-radius: 10px;
     /* border-bottom-left-radius: 10px; */
-
-    /* ${({borrowed}) =>
-      borrowed &&
-      css`
-        width: 100%;
-      `} */
   }
 `;
 
@@ -303,12 +310,20 @@ export const BookOrderButtonMobile = styled.button`
       css`
         background-color: #525356;
         cursor: not-allowed;
-      `}/* 
-    ${({borrowed}) =>
-      !borrowed &&
+      `}
+
+    ${({textButton}) =>
+      textButton === "Borrowed" &&
       css`
-        display: none;
-      `} */
+        cursor: not-allowed;
+        background-color: green;
+
+        &:hover {
+          background-color: green;
+          color: white;
+          border: 5px solid green;
+        }
+      `}
   }
 `;
 

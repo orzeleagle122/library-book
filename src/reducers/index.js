@@ -43,7 +43,6 @@ const initialStore = {
   totalbooks: 0,
   searchUsers: [],
   user: {
-    userborrowedbooks: [],
     userinfo: {
       id: 0,
       favoriteBooks: [],
@@ -97,24 +96,29 @@ export const reducer = (state = initialStore, action) => {
 
   if (action.type === ADD_FAVORITE) {
     // console.log(action.payload);
-    const lastLiked =
-      action.payload.data.favoriteBooks[
-        action.payload.data.favoriteBooks.length - 1
-      ];
+    // const lastLiked =
+    //   action.payload.data.favoriteBooks[
+    //     action.payload.data.favoriteBooks.length - 1
+    //   ];
+    // return {
+    //   ...state,
+    //   succesMessage: `${lastLiked.title} was liked!`,
+    //   user: {
+    //     userToken: action.payload.data.id,
+    //     isLogin: true,
+    //     userinfo: action.payload.data,
+    //   },
+    // };
+
     return {
       ...state,
-      succesMessage: `${lastLiked.title} was liked!`,
-      user: {
-        userToken: action.payload.data.id,
-        isLogin: true,
-        userinfo: action.payload.data,
-      },
+      succesMessage: `${action.title} was liked!`,
     };
   }
   if (action.type === BOOK_BORROW_SUCCESS) {
     return {
       ...state,
-      succesMessage: "The book has been borrowed!",
+      succesMessage: `${action.title} has been borrowed!`,
     };
   }
   if (action.type === FAILURE_MESSAGE) {
@@ -236,7 +240,6 @@ export const reducer = (state = initialStore, action) => {
       ...state,
       succesMessage: `Welcome ${action.payload.data.firstName}!`,
       user: {
-        userborrowedbooks: action.payload.data.borrows,
         userinfo: action.payload.data,
         userToken: action.payload.data.id,
         isLogin: true,

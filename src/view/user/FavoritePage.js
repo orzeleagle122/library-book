@@ -28,7 +28,6 @@ const FavoritePage = ({favoriteBooks}) => {
 
 FavoritePage.propTypes = {
   favoriteBooks: PropTypes.array,
-  getUserLogin: PropTypes.func.isRequired,
 };
 
 const mapStatetoProps = ({user}) => {
@@ -38,15 +37,9 @@ const mapStatetoProps = ({user}) => {
   };
 };
 
-//future - delete favorite book - should be in BookList component
 // const mapDispatchToProps=(dispatch,ownProps)=>{
 //     //ownProps - all props transferred to component
 //     // console.log(ownProps);
-//     const {id}=ownProps;
-//     return {
-//         //action creator
-//         remove:()=>dispatch(removeBook(id)),
-//     }
 // }
 
 export default connect(mapStatetoProps, null)(FavoritePage);

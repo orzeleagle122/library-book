@@ -3,6 +3,7 @@
 -loader https://reactjs.org/docs/concurrent-mode-suspense.html
 https://hashnode.com/post/how-to-add-loader-or-spinner-using-react-hooks-while-fetching-data-from-apis-ckhv38mr902kdgms100vh3u86
 
+- wyciagnąć w reducerze z uzytkownika borrowsy i favority
 
 
 -paginacja

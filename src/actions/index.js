@@ -47,6 +47,7 @@ export const ADD_GENRE = "ADD_GENRE";
 
 export const REMOVE_FAVORITE = "REMOVE_FAVORITE";
 export const ADD_FAVORITE = "ADD_FAVORITE";
+export const ADD_FAVORITE_REQ = "ADD_FAVORITE_REQ";
 
 export const FAILURE_MESSAGE = "FAILURE_MESSAGE";
 export const CLOSE_SUCCESS_MESSAGE = "CLOSE_SUCCESS_MESSAGE";
@@ -73,7 +74,7 @@ export const changeStatus = (id, status) => async (dispatch) => {
     .catch((err) => console.log(err.response));
 };
 
-export const borrowBook = (user, book) => async (dispatch) => {
+export const borrowBook = (user, book, title) => async (dispatch) => {
   dispatch({
     type: BOOK_BORROW_REQUEST,
   });
@@ -92,6 +93,7 @@ export const borrowBook = (user, book) => async (dispatch) => {
       dispatch({
         type: BOOK_BORROW_SUCCESS,
         payload,
+        title,
       });
     })
     .catch((err) => {
@@ -126,13 +128,17 @@ export const removeFavorite = (user_id, book_id) => async (dispatch) => {
   // });
 };
 
-export const addFavorite = (user_id, id) => async (dispatch) => {
+export const addFavorite = (user_id, id, title) => async (dispatch) => {
+  dispatch({
+    type: ADD_FAVORITE_REQ,
+  });
   return axios
     .put(API + `/user/favorite/add/${user_id}/${id}`)
     .then((payload) => {
       dispatch({
         type: ADD_FAVORITE,
         payload,
+        title,
       });
     })
     .catch((err) => {
@@ -326,30 +332,6 @@ export const removeBook = (id) => {
 //       });
 //     });
 // };
-export const getUserLoginAction = (token) => async (dispatch) => {
-  dispatch({
-    type: GET_CURRENT_USER_REQUEST,
-  });
-  return (
-    axios
-      .get(API + `/user/search/${token}`)
-      // .get(API + "/user/search", {params: {id: token}})
-      .then((payload) => {
-        // console.log(payload);
-        dispatch({
-          type: GET_CURRENT_USER_SUCCESS,
-          payload,
-        });
-      })
-      .catch((err) => {
-        console.log(err.response);
-        dispatch({
-          type: FAILURE_MESSAGE,
-          err,
-        });
-      })
-  );
-};
 
 export const authUser = (email, password) => async (dispatch) => {
   dispatch({
@@ -555,3 +537,28 @@ export const clearBookSearchList = () => {
 //         })
 //     })
 // }
+
+export const getUserLoginAction = (token) => async (dispatch) => {
+  dispatch({
+    type: GET_CURRENT_USER_REQUEST,
+  });
+  return (
+    axios
+      .get(API + `/user/search/${token}`)
+      // .get(API + "/user/search", {params: {id: token}})
+      .then((payload) => {
+        // console.log(payload);
+        dispatch({
+          type: GET_CURRENT_USER_SUCCESS,
+          payload,
+        });
+      })
+      .catch((err) => {
+        console.log(err.response);
+        dispatch({
+          type: FAILURE_MESSAGE,
+          err,
+        });
+      })
+  );
+};

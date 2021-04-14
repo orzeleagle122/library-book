@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {
   FavoriteItem,
   BookImages,
@@ -61,11 +61,22 @@ const BookList = (props) => {
     .map((item) => item.book.id)
     .findIndex((item2) => item2 === id);
 
+  useEffect(() => {});
+
   const smalltitle = title.substring(0, 50);
   const smallauthor = author.substring(0, 50);
 
+  let textButton = "";
+  if (isBorrowed < 0 && available >= 1) {
+    textButton = "Borrow Book";
+  } else if (isBorrowed >= 0 && available >= 1) {
+    textButton = "Borrowed";
+  } else {
+    textButton = "Not Avaiable";
+  }
+
   return (
-    <FavoriteItem available={available >= 1 ? true : false}>
+    <FavoriteItem available={available >= 1 ? 1 : 0}>
       <BookImages>
         <Link to={{pathname: `/book/${id}/${title}`, query: {...props}}}>
           <BookImage src={`/assets/bookImages/book2.png`} alt={title} />
@@ -82,26 +93,23 @@ const BookList = (props) => {
             {title.length > 50 ? `${smalltitle}...` : title}
           </Link>
           <FavoriteHearthAdd
-            add={
-              favoriteBooks.findIndex((item2) => item2.id === id) >= 0
-                ? true
-                : false
-            }
             onClick={() => {
-              add(id_user, id);
+              add(id_user, id, title);
+              getUserLogin(localStorage.getItem("loginToken"));
             }}
+            add={
+              favoriteBooks.findIndex((item2) => item2.id === id) >= 0 ? 1 : 0
+            }
           />
           <FavoriteHearthBroken
-            add={
-              favoriteBooks.findIndex((item2) => item2.id === id) >= 0
-                ? true
-                : false
-            }
             onClick={() => {
               remove(id_user, id);
               // zwracam liste aktualych
               getUserLogin(localStorage.getItem("loginToken"));
             }}
+            add={
+              favoriteBooks.findIndex((item2) => item2.id === id) >= 0 ? 1 : 0
+            }
           />
         </BookTitle>
         <Link to={{pathname: `/book/${id}/${title}`, query: {...props}}}>
@@ -132,15 +140,25 @@ const BookList = (props) => {
         </Link>
         <ButtonMobileWrapper>
           <BookOrderButtonMobile
-            // borrowed={borrowed ? 0 : 1}
-            available={available >= 1 ? true : false}
+            available={available >= 1 ? 1 : 0}
+            textButton={textButton}
+            onClick={() => {
+              borrow(userinfo, id, title);
+              // zwracam liste aktualych
+              getUserLogin(localStorage.getItem("loginToken"));
+            }}
           >
-            {isBorrowed < 0 ? "Borrow" : "Borrowed"}
+            {textButton}
           </BookOrderButtonMobile>
-          <BookFavoriteMobile available={available >= 1 ? true : false}>
+          <BookFavoriteMobile available={available >= 1 ? 1 : 0}>
             {/* jeśli to serce znajduje sie u uzytkownika w mapstatetopropt to daj serce usunięte */}
             {isLiked < 0 ? (
-              <RiHeartAddFillIcon onClick={() => add(id_user, id)} />
+              <RiHeartAddFillIcon
+                onClick={() => {
+                  add(id_user, id, title);
+                  getUserLogin(localStorage.getItem("loginToken"));
+                }}
+              />
             ) : (
               <IoHeartDislikeSharpIcon
                 onClick={() => {
@@ -156,9 +174,14 @@ const BookList = (props) => {
       <BookOrderButton
         isLogin={isLogin}
         available={available >= 1}
-        onClick={() => borrow(userinfo, id)}
+        onClick={() => {
+          borrow(userinfo, id, title);
+          // zwracam liste aktualych
+          getUserLogin(localStorage.getItem("loginToken"));
+        }}
+        textButton={textButton}
       >
-        <VerticalText>{isBorrowed < 0 ? "Borrow" : "Borrowed"}</VerticalText>
+        <VerticalText>{textButton}</VerticalText>
       </BookOrderButton>
     </FavoriteItem>
   );
@@ -182,7 +205,7 @@ BookList.propTypes = {
   add: PropTypes.func.isRequired,
   genres: PropTypes.array,
   favoriteBooks: PropTypes.array,
-  userinfo: PropTypes.array,
+  userinfo: PropTypes.object,
   available: PropTypes.number,
   getUserLogin: PropTypes.func.isRequired,
   borrow: PropTypes.func.isRequired,
@@ -204,9 +227,9 @@ const mapStateToProps = ({user}) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     remove: (user_id, book_id) => dispatch(removeFavorite(user_id, book_id)),
-    add: (user_id, id) => dispatch(addFavorite(user_id, id)),
+    add: (user_id, id, title) => dispatch(addFavorite(user_id, id, title)),
     getUserLogin: (token) => dispatch(getUserLoginAction(token)),
-    borrow: (user, book) => dispatch(borrowBook(user, book)),
+    borrow: (user, book, title) => dispatch(borrowBook(user, book, title)),
   };
 };
 

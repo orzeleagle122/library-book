@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, {css} from "styled-components";
 import Button from "../../../components/atoms/Button/Button";
 
 export const StatusWrapper = styled.div``;
@@ -8,6 +8,31 @@ export const BorrowWrapper = styled.div`
   align-items: center;
   gap: 20px;
   margin-bottom: 30px;
+  padding: 30px 20px;
+  border: 1px #d1d1d1 dotted;
+
+  ${({status}) =>
+    status === "NOT_APPROVED" &&
+    css`
+      background-color: #fffaeb;
+    `}
+  ${({status}) =>
+    status === "DEVOTED" &&
+    css`
+      background-color: #cccccc;
+    `}
+  ${({status}) =>
+    status === "APPROVED" &&
+    css`
+      background-color: #effaf5;
+    `}
+
+  @media screen and (max-width: 480px) {
+    flex-direction: column;
+    border: 1px #d1d1d1 dotted;
+    padding: 30px 20px;
+    justify-content: space-between;
+  }
 `;
 
 export const Date = styled.div`
@@ -37,10 +62,14 @@ export const BookInfo = styled.div`
   flex-direction: column;
   align-items: flex-start;
   width: 600px;
+
+  @media screen and (max-width: 480px) {
+    width: auto;
+  }
 `;
 
 export const BookTitle = styled.div`
-  font-weight: 700px;
+  font-weight: 700;
   font-size: 18px;
 `;
 export const Available = styled.div`
@@ -49,6 +78,12 @@ export const Available = styled.div`
   padding: 5px 10px;
   border-radius: 10px;
   color: white;
+
+  ${({borrow}) =>
+    borrow &&
+    css`
+      display: none;
+    `}
 `;
 export const ViewBookButton = styled(Button)`
   height: 100%;
@@ -68,12 +103,35 @@ export const WrapperBookButtons = styled.div`
   gap: 10px;
 `;
 
-export const CurrentStatus = styled.div`
-  /* background-color: #ffe08a; */
+export const CurrentStatus = styled.p`
+  text-transform: uppercase;
+  text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;
+
+  ${({status}) =>
+    status === "NOT_APPROVED" &&
+    css`
+      color: #ffe08a;
+    `}
+  ${({status}) =>
+    status === "DEVOTED" &&
+    css`
+      color: #363636;
+    `}
+  ${({status}) =>
+    status === "APPROVED" &&
+    css`
+      color: #257953;
+    `}
 `;
 export const ChangeStatus = styled.div`
   display: flex;
   gap: 10px;
+
+  ${({borrow}) =>
+    borrow &&
+    css`
+      display: none;
+    `}
 `;
 export const Ordered = styled.button`
   background-color: #48c78e;
