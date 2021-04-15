@@ -81,6 +81,7 @@ BorrowedStatusList.propTypes = {
   book: PropTypes.any.isRequired,
   title: PropTypes.string,
   id: PropTypes.number.isRequired,
+  available: PropTypes.number.isRequired,
   change: PropTypes.func.isRequired,
   search: PropTypes.func.isRequired,
   searchUsers: PropTypes.any,

@@ -1,9 +1,10 @@
-import React from "react";
+import React, {useEffect} from "react";
 import styled from "styled-components";
 import Heading from "../../components/atoms/Heading/Heading";
 import BookList from "../../components/organisms/BookList/BookList";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
+import {getUserLoginAction} from "../../actions";
 
 const FavoritePageWrapper = styled.div`
   display: flex;
@@ -12,28 +13,37 @@ const FavoritePageWrapper = styled.div`
   justify-content: space-around;
 `;
 
-const FavoritePage = ({favoriteBooks}) => {
+const FavoritePage = ({userFavorites, getUserLogin}) => {
+  useEffect(() => {
+    getUserLogin(localStorage.getItem("loginToken"));
+  }, []);
   return (
     <>
       <Heading>Favorite Books</Heading>
       <FavoritePageWrapper>
-        {favoriteBooks.map((item) => (
+        {userFavorites.map((item) => (
           <BookList key={item.id} {...item} isLogin={true} favorite />
         ))}
-        {favoriteBooks.length === 0 && <>You dont like any books yet!</>}
+        {userFavorites.length === 0 && <>You dont like any books yet!</>}
       </FavoritePageWrapper>
     </>
   );
 };
 
 FavoritePage.propTypes = {
-  favoriteBooks: PropTypes.array,
+  userFavorites: PropTypes.array,
+  getUserLogin: PropTypes.func.isRequired,
 };
 
-const mapStatetoProps = ({user}) => {
-  const {favoriteBooks} = user.userinfo;
+const mapStatetoProps = ({userFavorites}) => {
   return {
-    favoriteBooks,
+    userFavorites,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getUserLogin: (token) => dispatch(getUserLoginAction(token)),
   };
 };
 
@@ -42,4 +52,4 @@ const mapStatetoProps = ({user}) => {
 //     // console.log(ownProps);
 // }
 
-export default connect(mapStatetoProps, null)(FavoritePage);
+export default connect(mapStatetoProps, mapDispatchToProps)(FavoritePage);

@@ -17,6 +17,10 @@ import {
   StyledButton,
   SuccessMessage,
   SuccessMessageHeader,
+  AdminWrapper,
+  FaBookMedicalIcon,
+  GiCardExchangeIcon,
+  FaBookReaderIcon,
 } from "./MainTemplate.elements";
 import AddBook from "../view/admin/AddBook";
 import main_img from "../assets/layout/main_img.jpg";
@@ -30,6 +34,7 @@ import {closeSuccessMessage, getUserLoginAction} from "../actions";
 import {Link} from "react-router-dom";
 import SearchPage from "../view/user/SearchPage";
 import BorrowedStatusPage from "../view/admin/BorrowedStatusPage";
+import EditUserPage from "../view/user/EditUserPage";
 
 class MainTemplate extends React.Component {
   componentDidUpdate() {
@@ -52,6 +57,8 @@ class MainTemplate extends React.Component {
   }
 
   render() {
+    const isAdmin =
+      this.props.role === "MODERATOR" || this.props.role === "ADMIN";
     return (
       <>
         <MainTemplateWrapper>
@@ -77,6 +84,20 @@ class MainTemplate extends React.Component {
               )}
             </ImageTextContainer>
           </ImageWrapper>
+          {isAdmin && (
+            <AdminWrapper>
+              <Link to={routers.addBook}>
+                <FaBookMedicalIcon />
+              </Link>
+              <Link to={routers.changeStatus}>
+                <GiCardExchangeIcon />
+              </Link>
+              <Link to={routers.addGenre}>
+                <FaBookReaderIcon />
+              </Link>
+            </AdminWrapper>
+          )}
+
           <GridContainer>
             <MainContent>
               <Route path={routers.home} exact component={MainPage} />
@@ -90,6 +111,7 @@ class MainTemplate extends React.Component {
               <Route path={routers.book} exact component={BookDetailsPage} />
               <Route path={routers.user} exact component={AccountPage} />
               <Route path={routers.search} exact component={SearchPage} />
+              <Route path={routers.userEdit} exact component={EditUserPage} />
               <Route
                 path={routers.changeStatus}
                 exact
@@ -108,13 +130,16 @@ MainTemplate.propTypes = {
   close: PropTypes.func.isRequired,
   getUserLogin: PropTypes.func.isRequired,
   isLogin: PropTypes.bool,
+  role: PropTypes.string,
 };
 
 const mapStateToProps = ({succesMessage, user}) => {
   const {isLogin} = user;
+  const {role} = user.userinfo;
   return {
     succesMessage,
     isLogin,
+    role,
   };
 };
 

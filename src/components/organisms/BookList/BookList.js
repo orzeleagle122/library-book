@@ -25,12 +25,7 @@ import {
 import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {
-  removeFavorite,
-  addFavorite,
-  getUserLoginAction,
-  borrowBook,
-} from "../../../actions";
+import {removeFavorite, addFavorite, borrowBook} from "../../../actions";
 
 const BookList = (props) => {
   const {
@@ -45,10 +40,10 @@ const BookList = (props) => {
     remove,
     id_user,
     available,
-    getUserLogin,
-    favoriteBooks,
-    borrow,
+    userFavorites,
+    userBorrow,
     userinfo,
+    borrow,
     // item,
   } = props;
   // useEffect jesli zalogowany to od nowa pobierz listę
@@ -56,9 +51,9 @@ const BookList = (props) => {
   // if (title.length > 5) {
   //   var smalltitle = title.substring(0, 5);
   // }
-  const isLiked = favoriteBooks.findIndex((item2) => item2.id === id);
-  const isBorrowed = userinfo.borrows
-    .map((item) => item.book.id)
+  const isLiked = userFavorites.findIndex((item2) => item2.id === id);
+  const isBorrowed = userBorrow
+    .map((item) => item.id)
     .findIndex((item2) => item2 === id);
 
   useEffect(() => {});
@@ -94,21 +89,18 @@ const BookList = (props) => {
           </Link>
           <FavoriteHearthAdd
             onClick={() => {
-              add(id_user, id, title);
-              getUserLogin(localStorage.getItem("loginToken"));
+              add(id_user, props);
             }}
             add={
-              favoriteBooks.findIndex((item2) => item2.id === id) >= 0 ? 1 : 0
+              userFavorites.findIndex((item2) => item2.id === id) >= 0 ? 1 : 0
             }
           />
           <FavoriteHearthBroken
             onClick={() => {
-              remove(id_user, id);
-              // zwracam liste aktualych
-              getUserLogin(localStorage.getItem("loginToken"));
+              remove(id_user, props);
             }}
             add={
-              favoriteBooks.findIndex((item2) => item2.id === id) >= 0 ? 1 : 0
+              userFavorites.findIndex((item2) => item2.id === id) >= 0 ? 1 : 0
             }
           />
         </BookTitle>
@@ -143,9 +135,7 @@ const BookList = (props) => {
             available={available >= 1 ? 1 : 0}
             textButton={textButton}
             onClick={() => {
-              borrow(userinfo, id, title);
-              // zwracam liste aktualych
-              getUserLogin(localStorage.getItem("loginToken"));
+              borrow(userinfo, props);
             }}
           >
             {textButton}
@@ -155,16 +145,13 @@ const BookList = (props) => {
             {isLiked < 0 ? (
               <RiHeartAddFillIcon
                 onClick={() => {
-                  add(id_user, id, title);
-                  getUserLogin(localStorage.getItem("loginToken"));
+                  add(id_user, props);
                 }}
               />
             ) : (
               <IoHeartDislikeSharpIcon
                 onClick={() => {
-                  remove(id_user, id);
-                  // zwracam liste aktualych
-                  getUserLogin(localStorage.getItem("loginToken"));
+                  remove(id_user, props);
                 }}
               />
             )}
@@ -175,9 +162,7 @@ const BookList = (props) => {
         isLogin={isLogin}
         available={available >= 1}
         onClick={() => {
-          borrow(userinfo, id, title);
-          // zwracam liste aktualych
-          getUserLogin(localStorage.getItem("loginToken"));
+          borrow(userinfo, props);
         }}
         textButton={textButton}
       >
@@ -204,32 +189,32 @@ BookList.propTypes = {
   remove: PropTypes.func.isRequired,
   add: PropTypes.func.isRequired,
   genres: PropTypes.array,
-  favoriteBooks: PropTypes.array,
+  userFavorites: PropTypes.array,
+  userBorrow: PropTypes.array,
   userinfo: PropTypes.object,
   available: PropTypes.number,
-  getUserLogin: PropTypes.func.isRequired,
   borrow: PropTypes.func.isRequired,
   item: PropTypes.node,
   isFavorite: PropTypes.node,
 };
 
-const mapStateToProps = ({user}) => {
-  const {id, favoriteBooks} = user.userinfo;
+const mapStateToProps = ({user, userFavorites, userBorrow}) => {
+  const {id} = user.userinfo;
   const {userinfo} = user;
   const id_user = id;
   return {
     id_user,
-    favoriteBooks,
     userinfo,
+    userFavorites,
+    userBorrow,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    remove: (user_id, book_id) => dispatch(removeFavorite(user_id, book_id)),
-    add: (user_id, id, title) => dispatch(addFavorite(user_id, id, title)),
-    getUserLogin: (token) => dispatch(getUserLoginAction(token)),
-    borrow: (user, book, title) => dispatch(borrowBook(user, book, title)),
+    remove: (user_id, props) => dispatch(removeFavorite(user_id, props)),
+    add: (user_id, props) => dispatch(addFavorite(user_id, props)),
+    borrow: (user, props) => dispatch(borrowBook(user, props)),
   };
 };
 

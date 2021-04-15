@@ -20,36 +20,33 @@ import {
   RecomendedWrapper,
 } from "./DetailsBook.elements";
 import {connect} from "react-redux";
-import {
-  addFavorite,
-  getUserLoginAction,
-  removeFavorite,
-  borrowBook,
-} from "../../../actions";
+import {addFavorite, removeFavorite, borrowBook} from "../../../actions";
 import OneBook from "../../molecules/OneBook/OneBook";
 import axios from "axios";
+import {goTop} from "../../../data/function";
 
-const DetailsBook = ({
-  title,
-  author,
-  genres,
-  publisher,
-  available,
-  isLogin,
-  id,
-  add,
-  user_id,
-  favoriteBooks,
-  getUserLogin,
-  remove,
-  description,
-  borrow,
-  userinfo,
-  // borrows,
-}) => {
-  const isLiked = favoriteBooks.findIndex((item2) => item2.id === id);
-  const isBorrowed = userinfo.borrows
-    .map((item) => item.book.id)
+const DetailsBook = (props) => {
+  const {
+    title,
+    author,
+    genres,
+    publisher,
+    available,
+    isLogin,
+    id,
+    add,
+    user_id,
+    userFavorites,
+    remove,
+    description,
+    borrow,
+    userinfo,
+    userBorrow = [],
+  } = props;
+
+  const isLiked = userFavorites.findIndex((item2) => item2.id === id);
+  const isBorrowed = userBorrow
+    .map((item) => item.id)
     .findIndex((item2) => item2 === id);
 
   const [recommended, setRecommended] = useState([]);
@@ -75,6 +72,7 @@ const DetailsBook = ({
 
   useEffect(() => {
     recommendedBook();
+    goTop();
   }, []);
 
   return (
@@ -96,8 +94,7 @@ const DetailsBook = ({
           <ButtonsWrapper>
             <ButtonBB
               onClick={() => {
-                borrow(userinfo, id, title);
-                getUserLogin(localStorage.getItem("loginToken"));
+                borrow(userinfo, props);
               }}
               isLogin={isLogin}
               available={available >= 1}
@@ -113,15 +110,13 @@ const DetailsBook = ({
               {isLiked < 0 ? (
                 <RiHeartAddFillIcon
                   onClick={() => {
-                    add(userinfo.id, id, title);
-                    getUserLogin(localStorage.getItem("loginToken"));
+                    add(userinfo.id, props);
                   }}
                 />
               ) : (
                 <IoHeartDislikeSharpIcon
                   onClick={() => {
-                    remove(user_id, id);
-                    getUserLogin(localStorage.getItem("loginToken"));
+                    remove(user_id, props);
                   }}
                 />
               )}
@@ -148,7 +143,8 @@ DetailsBook.propTypes = {
   publisher: PropTypes.string,
   genres: PropTypes.array,
   userinfo: PropTypes.object,
-  favoriteBooks: PropTypes.array,
+  userFavorites: PropTypes.array,
+  userBorrow: PropTypes.array,
   isLogin: PropTypes.bool,
   available: PropTypes.number,
   add: PropTypes.func.isRequired,
@@ -158,29 +154,24 @@ DetailsBook.propTypes = {
   description: PropTypes.string,
 };
 
-const mapStateToProps = ({user}) => {
+const mapStateToProps = ({user, userFavorites, userBorrow}) => {
   const {isLogin, userinfo} = user;
-  const {
-    id,
-    favoriteBooks,
-    // borrows
-  } = user.userinfo;
+  const {id} = user.userinfo;
   const user_id = id;
   return {
     isLogin,
     user_id,
-    favoriteBooks,
+    userFavorites,
     userinfo,
-    // borrows,
+    userBorrow,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    add: (user_id, id, title) => dispatch(addFavorite(user_id, id, title)),
-    remove: (user_id, book_id) => dispatch(removeFavorite(user_id, book_id)),
-    getUserLogin: (token) => dispatch(getUserLoginAction(token)),
-    borrow: (user, book, title) => dispatch(borrowBook(user, book, title)),
+    add: (user_id, props) => dispatch(addFavorite(user_id, props)),
+    remove: (user_id, props) => dispatch(removeFavorite(user_id, props)),
+    borrow: (user, props) => dispatch(borrowBook(user, props)),
   };
 };
 

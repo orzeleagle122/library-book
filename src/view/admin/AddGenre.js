@@ -4,8 +4,10 @@ import GenreList from "../../components/organisms/GenreList/GenreList";
 import {connect} from "react-redux";
 import {addGenre} from "../../actions";
 import PropTypes from "prop-types";
+import {routers} from "../../data/routers";
+import {Redirect} from "react-router-dom";
 
-const AddGenre = ({genre}) => {
+const AddGenre = ({genre, role}) => {
   const [value, setValue] = useState("");
 
   const handleOnChangeValueForm = (e) => {
@@ -18,6 +20,11 @@ const AddGenre = ({genre}) => {
     genre(value);
     setValue("");
   };
+
+  const isAdmin = role === "MODERATOR" || role === "ADMIN";
+  if (!isAdmin) {
+    return <Redirect to={routers.home} />;
+  }
 
   return (
     <>
@@ -36,6 +43,14 @@ const AddGenre = ({genre}) => {
 
 AddGenre.propTypes = {
   genre: PropTypes.func.isRequired,
+  role: PropTypes.string,
+};
+
+const mapStateToProps = ({user}) => {
+  const {role} = user.userinfo;
+  return {
+    role,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -44,4 +59,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(AddGenre);
+export default connect(mapStateToProps, mapDispatchToProps)(AddGenre);

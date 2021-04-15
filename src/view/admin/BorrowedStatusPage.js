@@ -7,6 +7,8 @@ import PropTypes from "prop-types";
 import Button from "../../components/atoms/Button/Button";
 import BorrowedStatusList from "../../components/organisms/BorrowedStatusList/BorrowedStatusList";
 import Loader from "../../components/molecules/Loader/Loader";
+import {routers} from "../../data/routers";
+import {Redirect} from "react-router-dom";
 
 const BorrowedStatusPage = ({
   searchUsers,
@@ -14,6 +16,7 @@ const BorrowedStatusPage = ({
   borrows = [],
   showErrors,
   clean,
+  role,
 }) => {
   const [searchUser, setSearchUser] = useState("");
   useEffect(() => {
@@ -30,6 +33,11 @@ const BorrowedStatusPage = ({
     search(searchUser);
     setSearchUser("");
   };
+
+  const isAdmin = role === "MODERATOR" || role === "ADMIN";
+  if (!isAdmin) {
+    return <Redirect to={routers.home} />;
+  }
 
   return (
     <>
@@ -57,11 +65,13 @@ BorrowedStatusPage.propTypes = {
   search: PropTypes.func.isRequired,
   showErrors: PropTypes.any,
   clean: PropTypes.func.isRequired,
+  role: PropTypes.string,
 };
 
-const mapStateToProps = ({searchUsers, showErrors}) => {
+const mapStateToProps = ({searchUsers, showErrors, user}) => {
   const {borrows} = searchUsers;
-  return {searchUsers, borrows, showErrors};
+  const {role} = user.userinfo;
+  return {searchUsers, borrows, showErrors, role};
 };
 
 const mapDispatchToProps = (dispatch) => {

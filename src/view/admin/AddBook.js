@@ -8,6 +8,8 @@ import {Textarea} from "../../components/atoms/Textarea/Textarea";
 import Heading from "../../components/atoms/Heading/Heading";
 import Button from "../../components/atoms/Button/Button";
 import styled from "styled-components";
+import {routers} from "../../data/routers";
+import {Redirect} from "react-router-dom";
 
 const GenresButton = styled.button`
   margin-right: 10px;
@@ -42,6 +44,7 @@ const BookAdd = ({
   removeasadd,
   showErrors,
   clean,
+  role,
 }) => {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
@@ -84,6 +87,11 @@ const BookAdd = ({
     setGenres([]);
     fetch();
   };
+
+  const isAdmin = role === "MODERATOR" || role === "ADMIN";
+  if (!isAdmin) {
+    return <Redirect to={routers.home} />;
+  }
 
   return (
     <>
@@ -171,10 +179,12 @@ BookAdd.propTypes = {
   genreList: PropTypes.array,
   clean: PropTypes.func.isRequired,
   showErrors: PropTypes.node,
+  role: PropTypes.string,
 };
 
-const mapStateToProps = ({genreList, showErrors}) => {
-  return {genreList, showErrors};
+const mapStateToProps = ({genreList, showErrors, user}) => {
+  const {role} = user.userinfo;
+  return {genreList, showErrors, role};
 };
 
 const mapDispathToProps = (dispatch) => {

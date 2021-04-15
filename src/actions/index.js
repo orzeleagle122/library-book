@@ -74,33 +74,6 @@ export const changeStatus = (id, status) => async (dispatch) => {
     .catch((err) => console.log(err.response));
 };
 
-export const borrowBook = (user, book, title) => async (dispatch) => {
-  dispatch({
-    type: BOOK_BORROW_REQUEST,
-  });
-  const userObj = {
-    id: user.id,
-  };
-  const bookObj = {
-    id: book,
-  };
-  return axios
-    .post(API + "/borrow/add", {
-      user: userObj,
-      book: bookObj,
-    })
-    .then((payload) => {
-      dispatch({
-        type: BOOK_BORROW_SUCCESS,
-        payload,
-        title,
-      });
-    })
-    .catch((err) => {
-      console.log(err.response);
-    });
-};
-
 export const closeSuccessMessage = () => {
   return {
     type: CLOSE_SUCCESS_MESSAGE,
@@ -118,27 +91,53 @@ export const requestEnd = () => {
   };
 };
 
-export const removeFavorite = (user_id, book_id) => async (dispatch) => {
-  dispatch({
-    type: REMOVE_FAVORITE,
-  });
-  return axios.delete(API + `/user/favorite/subtract/${user_id}/${book_id}`);
-  // return axios.delete(API + "/user/favorite/subtract", {
-  //   params: {user_id, book_id},
-  // });
+export const removeFavorite = (user_id, props) => async (dispatch) => {
+  return axios
+    .delete(API + `/user/favorite/subtract/${user_id}/${props.id}`)
+    .then((payload) => {
+      dispatch({
+        type: REMOVE_FAVORITE,
+        payload,
+        props,
+      });
+    });
 };
 
-export const addFavorite = (user_id, id, title) => async (dispatch) => {
-  dispatch({
-    type: ADD_FAVORITE_REQ,
-  });
+export const addFavorite = (user_id, props) => async (dispatch) => {
   return axios
-    .put(API + `/user/favorite/add/${user_id}/${id}`)
+    .put(API + `/user/favorite/add/${user_id}/${props.id}`)
     .then((payload) => {
       dispatch({
         type: ADD_FAVORITE,
         payload,
-        title,
+        props,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+    });
+};
+
+export const borrowBook = (user, props) => async (dispatch) => {
+  dispatch({
+    type: BOOK_BORROW_REQUEST,
+  });
+  const userObj = {
+    id: user.id,
+  };
+  const bookObj = {
+    id: props.id,
+  };
+  return axios
+    .post(API + "/borrow/add", {
+      user: userObj,
+      book: bookObj,
+    })
+    .then((payload) => {
+      dispatch({
+        type: BOOK_BORROW_SUCCESS,
+        payload,
+        props,
       });
     })
     .catch((err) => {

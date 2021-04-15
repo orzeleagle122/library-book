@@ -10,6 +10,7 @@ import {faExclamationCircle} from "@fortawesome/free-solid-svg-icons";
 import Button from "../../components/atoms/Button/Button";
 import {Redirect} from "react-router-dom";
 import {routers} from "../../data/routers";
+import {Link} from "react-router-dom";
 
 const AccountWrapper = styled.div`
   display: flex;
@@ -38,6 +39,7 @@ const AccountPage = ({firstName, isLogin}) => {
           <Heading>{firstName} Lastname</Heading>
           email@email.com
           <Button>Edit profil</Button>
+          <Link to={routers.userEdit}>wejsc</Link>
         </InfoSection>
       </AccountWrapper>
       <div className="tabs is-boxed">

@@ -1,6 +1,9 @@
 import styled from "styled-components";
 import img from "../assets/layout/main_img.jpg";
 
+import {FaBookMedical, FaBookReader} from "react-icons/fa";
+import {GiCardExchange} from "react-icons/gi";
+
 export const MainTemplateWrapper = styled.div`
   position: relative;
 `;
@@ -115,4 +118,38 @@ export const SuccessMessageHeader = styled.div`
   width: 100%;
   border-radius: 20px;
   /* padding: 10px 70px; */
+`;
+
+export const AdminWrapper = styled.div`
+  position: absolute;
+  left: 50%;
+  height: 50px;
+  transform: translate(-50%, 0);
+  background-color: #2d3ddf;
+  z-index: 999999;
+  color: white;
+  border-top-left-radius: 50px;
+  border-top-right-radius: 50px;
+  border-bottom-left-radius: 50px;
+  border-bottom-right-radius: 50px;
+  padding: 10px 30px;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+`;
+
+export const FaBookMedicalIcon = styled(FaBookMedical)`
+  font-size: 24px;
+  text-decoration: none;
+  color: white;
+`;
+export const GiCardExchangeIcon = styled(GiCardExchange)`
+  font-size: 24px;
+  text-decoration: none;
+  color: white;
+`;
+export const FaBookReaderIcon = styled(FaBookReader)`
+  font-size: 24px;
+  text-decoration: none;
+  color: white;
 `;

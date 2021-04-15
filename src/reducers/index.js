@@ -30,6 +30,7 @@ import {
   BOOK_BORROW_SUCCESS,
   USER_EMAIL_SEARCH_SUCCESS,
   USER_EMAIL_SEARCH_FAILURE,
+  REMOVE_FAVORITE,
 } from "../actions";
 
 //initial store
@@ -42,6 +43,8 @@ const initialStore = {
   genreNews: [],
   totalbooks: 0,
   searchUsers: [],
+  userBorrow: [],
+  userFavorites: [],
   user: {
     userinfo: {
       id: 0,
@@ -95,30 +98,26 @@ export const reducer = (state = initialStore, action) => {
   }
 
   if (action.type === ADD_FAVORITE) {
-    // console.log(action.payload);
-    // const lastLiked =
-    //   action.payload.data.favoriteBooks[
-    //     action.payload.data.favoriteBooks.length - 1
-    //   ];
-    // return {
-    //   ...state,
-    //   succesMessage: `${lastLiked.title} was liked!`,
-    //   user: {
-    //     userToken: action.payload.data.id,
-    //     isLogin: true,
-    //     userinfo: action.payload.data,
-    //   },
-    // };
-
     return {
       ...state,
-      succesMessage: `${action.title} was liked!`,
+      succesMessage: `${action.props.title} was liked!`,
+      userFavorites: [...state.userFavorites, action.props],
+    };
+  }
+  if (action.type === REMOVE_FAVORITE) {
+    return {
+      ...state,
+      succesMessage: `${action.props.title} was disliked!`,
+      userFavorites: [
+        ...state.userFavorites.filter((item) => item.id !== action.props.id),
+      ],
     };
   }
   if (action.type === BOOK_BORROW_SUCCESS) {
     return {
       ...state,
-      succesMessage: `${action.title} has been borrowed!`,
+      succesMessage: `${action.props.title} has been borrowed!`,
+      userBorrow: [...state.userBorrow, action.props],
     };
   }
   if (action.type === FAILURE_MESSAGE) {
@@ -263,6 +262,7 @@ export const reducer = (state = initialStore, action) => {
     };
   }
   if (action.type === GET_CURRENT_USER_SUCCESS) {
+    const borrowedbooks = action.payload.data.borrows.map((item) => item.book);
     return {
       ...state,
       user: {
@@ -270,6 +270,8 @@ export const reducer = (state = initialStore, action) => {
         userToken: action.payload.data.id,
         isLogin: true,
       },
+      userBorrow: borrowedbooks,
+      userFavorites: action.payload.data.favoriteBooks,
     };
   }
   if (action.type === REGISTER_SUCCESS) {
