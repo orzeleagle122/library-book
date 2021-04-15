@@ -64,7 +64,23 @@ export const USER_EMAIL_SEARCH_FAILURE = "USER_EMAIL_SEARCH_FAILURE";
 
 export const CHANGE_BORROW_STATUS = "CHANGE_BORROW_STATUS";
 
+export const EDIT_USER_SUCCESS = "EDIT_USER_SUCCESS";
+export const EDIT_USER_FAILURE = "EDIT_USER_FAILURE";
+
 const API = "http://localhost:8080/api";
+
+export const editUser = (
+  id,
+  firstName,
+  lastName,
+  email,
+  password
+) => async () => {
+  return axios
+    .put(API + `/user/update/${id}`, {firstName, lastName, email, password})
+    .then((payload) => console.log(payload))
+    .catch((err) => console.log(err.response));
+};
 
 export const changeStatus = (id, status) => async (dispatch) => {
   dispatch({type: CHANGE_BORROW_STATUS});
@@ -444,10 +460,10 @@ export const bookRequest = (id, title) => async (dispatch) => {
 };
 
 export const searchBook = (phrase) => async (dispatch) => {
-  dispatch({
-    type: REQUEST_START,
-  });
   if (phrase.length >= 3) {
+    dispatch({
+      type: REQUEST_START,
+    });
     return axios
       .get(API + "/book/search", {params: {phrase}})
       .then((payload) => {
@@ -458,11 +474,17 @@ export const searchBook = (phrase) => async (dispatch) => {
           type: SEARCH_BOOK_SUCCESS,
           payload,
         });
+        dispatch({
+          type: REQUEST_END,
+        });
       })
       .catch((err) => {
         dispatch({
           type: SEARCH_BOOK_FAILURE,
           err,
+        });
+        dispatch({
+          type: REQUEST_END,
         });
       });
   }

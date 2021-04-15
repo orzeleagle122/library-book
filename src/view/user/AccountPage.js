@@ -38,8 +38,9 @@ const AccountPage = ({firstName, isLogin}) => {
         <InfoSection>
           <Heading>{firstName} Lastname</Heading>
           email@email.com
-          <Button>Edit profil</Button>
-          <Link to={routers.userEdit}>wejsc</Link>
+          <Link to={routers.userEdit}>
+            <Button>Edit profil</Button>
+          </Link>
         </InfoSection>
       </AccountWrapper>
       <div className="tabs is-boxed">

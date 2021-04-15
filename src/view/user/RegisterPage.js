@@ -114,6 +114,7 @@ const RegisterPage = ({register, isLogin, showErrors, clean}) => {
                       value={values.userpassword}
                       onChange={handleChange}
                       onBlur={handleBlur}
+                      autoComplete="new-password"
                     />
                   </div>
                 </div>
@@ -127,6 +128,7 @@ const RegisterPage = ({register, isLogin, showErrors, clean}) => {
                       value={values.repeatuserpassword}
                       onChange={handleChange}
                       onBlur={handleBlur}
+                      autoComplete="new-password"
                     />
                   </div>
                 </div>
