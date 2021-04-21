@@ -353,7 +353,7 @@ export const authUser = (email, password) => async (dispatch) => {
     type: AUTH_REQUEST,
   });
   return axios
-    .get(API + "/user/sign-in", {params: {email, password}})
+    .post(API + "/user/sign-in", {email, password})
     .then((payload) => {
       // console.log(payload);
       dispatch({
@@ -362,6 +362,7 @@ export const authUser = (email, password) => async (dispatch) => {
       });
     })
     .catch((err) => {
+      console.log(err.response);
       dispatch({
         type: FAILURE_MESSAGE,
         err,

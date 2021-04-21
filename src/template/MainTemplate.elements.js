@@ -6,6 +6,10 @@ import {GiCardExchange} from "react-icons/gi";
 
 export const MainTemplateWrapper = styled.div`
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const GridContainer = styled.div`
@@ -18,9 +22,17 @@ export const GridContainer = styled.div`
   justify-content: flex-start;
   min-height: 100vh;
   flex-wrap: nowrap;
-  margin-left: 87px;
   border-top-left-radius: 50px;
   border-top-right-radius: 50px;
+
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 1600px;
+  width: 100%;
+
+  @media screen and (max-width: 1774px) {
+    margin-left: 87px;
+  }
 
   @media screen and (max-width: 480px) {
     margin-left: 0px;
@@ -83,7 +95,7 @@ export const SpanText = styled.span`
 export const Image = styled.img`
   width: 100%;
   object-fit: cover !important;
-  height: 435px;
+  height: 100vh;
   position: fixed;
 `;
 
@@ -102,6 +114,7 @@ export const StyledButton = styled.button`
 export const SuccessMessage = styled.div`
   position: fixed;
   left: 50%;
+  top: 5%;
   transform: translate(-50%, 0);
   /* width: 400px; */
   z-index: 99999;
