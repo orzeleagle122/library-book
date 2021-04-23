@@ -258,6 +258,9 @@ export const reducer = (state = initialStore, action) => {
     return {
       ...state,
       succesMessage: `You have been logged out!`,
+      searchUsers: [],
+      userBorrow: [],
+      userFavorites: [],
       user: {
         userinfo: {
           id: 0,
