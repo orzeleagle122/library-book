@@ -6,7 +6,7 @@ export const BookNewsWrapper = styled.div`
   display: flex;
   gap: 10px;
   margin-bottom: 100px;
-  max-width: 2140px;
+  max-width: 1500px;
   position: relative;
 `;
 
