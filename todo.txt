@@ -1,5 +1,8 @@
 
 -nowa strona do szukania tak jak na allegro
+-logout czyści reducer!!
+-anulowanie zamówienia
+-edycja ksiązki
 
 -paginacja
 -rwd zawsze sprawdzać
