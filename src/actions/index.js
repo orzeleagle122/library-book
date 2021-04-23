@@ -67,7 +67,8 @@ export const CHANGE_BORROW_STATUS = "CHANGE_BORROW_STATUS";
 export const EDIT_USER_SUCCESS = "EDIT_USER_SUCCESS";
 export const EDIT_USER_FAILURE = "EDIT_USER_FAILURE";
 
-const API = "http://localhost:8080/api";
+// const API = "http://localhost:8080/api";
+export const API = "https://spring-react-library-service.herokuapp.com/api";
 
 export const editUser = (
   id,
@@ -83,9 +84,13 @@ export const editUser = (
 };
 
 export const changeStatus = (id, status) => async (dispatch) => {
+  const key = localStorage.getItem("loginToken");
+  const headers = {
+    Authorization: key,
+  };
   dispatch({type: CHANGE_BORROW_STATUS});
   return axios
-    .put(API + `/borrow/${id}?status=${status}`)
+    .put(API + `/borrow/auth/${id}?status=${status}`, {}, {headers})
     .then((payload) => console.log(payload))
     .catch((err) => console.log(err.response));
 };
@@ -108,20 +113,31 @@ export const requestEnd = () => {
 };
 
 export const removeFavorite = (user_id, props) => async (dispatch) => {
+  const key = localStorage.getItem("loginToken");
+  const headers = {
+    Authorization: key,
+  };
   return axios
-    .delete(API + `/user/favorite/subtract/${user_id}/${props.id}`)
+    .delete(API + `/user/auth/favorite/subtract/${user_id}/${props.id}`, {
+      headers,
+    })
     .then((payload) => {
       dispatch({
         type: REMOVE_FAVORITE,
         payload,
         props,
       });
-    });
+    })
+    .catch((err) => console.log(err.response));
 };
 
 export const addFavorite = (user_id, props) => async (dispatch) => {
+  const key = localStorage.getItem("loginToken");
+  const headers = {
+    Authorization: key,
+  };
   return axios
-    .put(API + `/user/favorite/add/${user_id}/${props.id}`)
+    .put(API + `/user/auth/favorite/add/${user_id}/${props.id}`, {}, {headers})
     .then((payload) => {
       dispatch({
         type: ADD_FAVORITE,
@@ -144,11 +160,20 @@ export const borrowBook = (user, props) => async (dispatch) => {
   const bookObj = {
     id: props.id,
   };
+  const key = localStorage.getItem("loginToken");
+  const headers = {
+    Authorization: key,
+  };
   return axios
-    .post(API + "/borrow/add", {
-      user: userObj,
-      book: bookObj,
-    })
+    .post(
+      API + "/borrow/auth/add",
+
+      {
+        user: userObj,
+        book: bookObj,
+      },
+      {headers}
+    )
     .then((payload) => {
       dispatch({
         type: BOOK_BORROW_SUCCESS,
@@ -199,7 +224,17 @@ export const removeGenre3 = (item) => {
 };
 
 export const removeaddfetchGenre = (idList, genres) => async (dispatch) => {
+  const key = localStorage.getItem("loginToken");
+  const headers = {
+    Authorization: key,
+  };
+  console.log(genres);
   const ids = idList.map((item) => item.id);
+  console.log(ids);
+  const config = {
+    headers,
+    data: {ids},
+  };
   dispatch({
     type: SEND_REMOVE_GENRELIST,
   });
@@ -210,19 +245,25 @@ export const removeaddfetchGenre = (idList, genres) => async (dispatch) => {
     type: REQUEST_START,
   });
   return axios
-    .delete(API + "/bookGenre/delete", {data: {ids}})
+    .delete(API + "/bookGenre/auth/delete", {...config})
     .then(async () => {
-      return axios.post(API + "/bookGenre/add", {
-        genres,
-      });
+      return axios.post(
+        API + "/bookGenre/auth/add",
+        {
+          genres,
+        },
+        {headers}
+      );
     })
     .then(async () => {
-      return axios.get(API + "/bookGenre/search/all").then((payload) => {
-        dispatch({
-          type: GET_GENRE_SUCCESS,
-          payload,
+      return axios
+        .get(API + "/bookGenre/auth/search/all", {headers})
+        .then((payload) => {
+          dispatch({
+            type: GET_GENRE_SUCCESS,
+            payload,
+          });
         });
-      });
     })
     .catch((err) => {
       dispatch({
@@ -237,22 +278,34 @@ export const removeaddfetchGenre = (idList, genres) => async (dispatch) => {
     );
 };
 
-export const sendRemoveListGenre = (idList) => async (dispatch) => {
-  const ids = idList.map((item) => item.id);
-  dispatch({
-    type: SEND_REMOVE_GENRELIST,
-  });
-  return axios.delete(API + "/bookGenre/delete", {data: {ids}});
-};
+// export const sendRemoveListGenre = (idList) => async (dispatch) => {
+//   const key = localStorage.getItem("loginToken");
+//   const headers = {
+//     Authorization: key,
+//   };
+//   const ids = idList.map((item) => item.id);
+//   dispatch({
+//     type: SEND_REMOVE_GENRELIST,
+//   });
+//   return axios.delete(API + "/bookGenre/auth/delete", {data: {ids}}, {headers});
+// };
 
 export const sendNewsListGenre = (genres) => async (dispatch) => {
+  const key = localStorage.getItem("loginToken");
+  const headers = {
+    Authorization: key,
+  };
   dispatch({
     type: SEND_ADD_GENRELIST,
   });
   return axios
-    .post(API + "/bookGenre/add", {
-      genres,
-    })
+    .post(
+      API + "/bookGenre/auth/add",
+      {
+        genres,
+      },
+      {headers}
+    )
     .then((payload) => {
       console.log(payload);
     })
@@ -262,11 +315,15 @@ export const sendNewsListGenre = (genres) => async (dispatch) => {
 };
 
 export const fetchGenres = () => async (dispatch) => {
+  const key = localStorage.getItem("loginToken");
+  const headers = {
+    Authorization: key,
+  };
   dispatch({
     type: REQUEST_START,
   });
   return axios
-    .get(API + "/bookGenre/search/all")
+    .get(API + "/bookGenre/auth/search/all", {headers})
     .then((payload) => {
       dispatch({
         type: GET_GENRE_SUCCESS,
@@ -300,6 +357,7 @@ export const fetchBooks = (number) => async (dispatch) => {
       });
     })
     .catch((err) => {
+      console.log(err.response);
       dispatch({
         type: FAILURE_MESSAGE,
         err,
@@ -378,18 +436,26 @@ export const addBook = (
   count,
   description
 ) => async (dispatch) => {
+  const key = localStorage.getItem("loginToken");
+  const headers = {
+    Authorization: key,
+  };
   dispatch({
     type: ADD_BOOK_REQUEST,
   });
   return axios
-    .post(API + "/book/add", {
-      title,
-      author,
-      publisher,
-      genres,
-      count,
-      description,
-    })
+    .post(
+      API + "/book/auth/add",
+      {
+        title,
+        author,
+        publisher,
+        genres,
+        count,
+        description,
+      },
+      {headers}
+    )
     .then((payload) => {
       dispatch({
         type: ADD_BOOK_SUCCESS,
@@ -498,11 +564,15 @@ export const searchBook = (phrase) => async (dispatch) => {
 
 export const searchEmailUser = (email) => async (dispatch) => {
   if (email.length >= 3) {
+    const key = localStorage.getItem("loginToken");
+    const headers = {
+      Authorization: key,
+    };
     dispatch({
       type: REQUEST_START,
     });
     return axios
-      .get(API + "/user/search", {params: {email}})
+      .get(API + `/user/auth/search?email=${email}`, {headers})
       .then((payload) => {
         dispatch({
           type: USER_EMAIL_SEARCH_SUCCESS,
@@ -560,13 +630,17 @@ export const clearBookSearchList = () => {
 //     })
 // }
 
-export const getUserLoginAction = (token) => async (dispatch) => {
+export const getUserLoginAction = (id) => async (dispatch) => {
+  const key = localStorage.getItem("loginToken");
+  const headers = {
+    Authorization: key,
+  };
   dispatch({
     type: GET_CURRENT_USER_REQUEST,
   });
   return (
     axios
-      .get(API + `/user/search/${token}`)
+      .get(API + `/user/auth/search/${id}`, {headers})
       // .get(API + "/user/search", {params: {id: token}})
       .then((payload) => {
         // console.log(payload);

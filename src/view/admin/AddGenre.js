@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 import {routers} from "../../data/routers";
 import {Redirect} from "react-router-dom";
 
-const AddGenre = ({genre, role}) => {
+const AddGenre = ({genre, rules}) => {
   const [value, setValue] = useState("");
 
   const handleOnChangeValueForm = (e) => {
@@ -21,7 +21,8 @@ const AddGenre = ({genre, role}) => {
     setValue("");
   };
 
-  const isAdmin = role === "MODERATOR" || role === "ADMIN";
+  const isAdmin =
+    rules?.toString() === "MODERATOR" || rules?.toString() === "ADMIN";
   if (!isAdmin) {
     return <Redirect to={routers.home} />;
   }
@@ -43,13 +44,14 @@ const AddGenre = ({genre, role}) => {
 
 AddGenre.propTypes = {
   genre: PropTypes.func.isRequired,
-  role: PropTypes.string,
+  rules: PropTypes.string,
 };
 
 const mapStateToProps = ({user}) => {
   const {role} = user.userinfo;
+  const rules = role?.map((item) => item.name);
   return {
-    role,
+    rules,
   };
 };
 

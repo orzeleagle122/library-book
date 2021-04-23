@@ -149,6 +149,7 @@ export const AdminWrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 40px;
+  top: 335px;
 `;
 
 export const FaBookMedicalIcon = styled(FaBookMedical)`

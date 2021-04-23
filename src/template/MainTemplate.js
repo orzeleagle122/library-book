@@ -58,7 +58,8 @@ class MainTemplate extends React.Component {
 
   render() {
     const isAdmin =
-      this.props.role === "MODERATOR" || this.props.role === "ADMIN";
+      this.props.rules?.toString() === "MODERATOR" ||
+      this.props.rules?.toString() === "ADMIN";
     return (
       <>
         <MainTemplateWrapper>
@@ -130,16 +131,17 @@ MainTemplate.propTypes = {
   close: PropTypes.func.isRequired,
   getUserLogin: PropTypes.func.isRequired,
   isLogin: PropTypes.bool,
-  role: PropTypes.string,
+  rules: PropTypes.string,
 };
 
 const mapStateToProps = ({succesMessage, user}) => {
   const {isLogin} = user;
   const {role} = user.userinfo;
+  const rules = role?.map((item) => item.name);
   return {
     succesMessage,
     isLogin,
-    role,
+    rules,
   };
 };
 

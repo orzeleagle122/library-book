@@ -7,7 +7,7 @@ import {getUserLoginAction} from "../../actions";
 
 const BorrowedPage = ({borrows = [], getUserLogin}) => {
   useEffect(() => {
-    getUserLogin(localStorage.getItem("loginToken"));
+    getUserLogin(localStorage.getItem("id"));
   }, []);
 
   const awaiting = borrows.filter((item) => item.status === "NOT_APPROVED");

@@ -11,7 +11,7 @@ import PropTypes from "prop-types";
 const App = ({getUserLogin}) => {
   useEffect(() => {
     if (localStorage.getItem("loginToken")) {
-      getUserLogin(localStorage.getItem("loginToken"));
+      getUserLogin(localStorage.getItem("id"));
     }
   }, [getUserLogin]);
 

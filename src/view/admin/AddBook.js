@@ -44,7 +44,7 @@ const BookAdd = ({
   removeasadd,
   showErrors,
   clean,
-  role,
+  rules,
 }) => {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
@@ -88,7 +88,8 @@ const BookAdd = ({
     fetch();
   };
 
-  const isAdmin = role === "MODERATOR" || role === "ADMIN";
+  const isAdmin =
+    rules?.toString() === "MODERATOR" || rules?.toString() === "ADMIN";
   if (!isAdmin) {
     return <Redirect to={routers.home} />;
   }
@@ -179,12 +180,13 @@ BookAdd.propTypes = {
   genreList: PropTypes.array,
   clean: PropTypes.func.isRequired,
   showErrors: PropTypes.node,
-  role: PropTypes.string,
+  rules: PropTypes.string,
 };
 
 const mapStateToProps = ({genreList, showErrors, user}) => {
   const {role} = user.userinfo;
-  return {genreList, showErrors, role};
+  const rules = role?.map((item) => item.name);
+  return {genreList, showErrors, rules};
 };
 
 const mapDispathToProps = (dispatch) => {

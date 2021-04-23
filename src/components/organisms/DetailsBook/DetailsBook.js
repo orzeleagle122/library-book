@@ -24,6 +24,7 @@ import {addFavorite, removeFavorite, borrowBook} from "../../../actions";
 import OneBook from "../../molecules/OneBook/OneBook";
 import axios from "axios";
 import {goTop} from "../../../data/function";
+import {API} from "../../../actions";
 
 const DetailsBook = (props) => {
   const {
@@ -53,7 +54,7 @@ const DetailsBook = (props) => {
 
   const recommendedBook = () => {
     axios
-      .get("http://localhost:8080/api/book/search/random", {
+      .get(API + "/book/search/random", {
         params: {number: 3},
       })
       .then((payload) => {

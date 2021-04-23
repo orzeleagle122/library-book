@@ -21,6 +21,7 @@ import PropTypes from "prop-types";
 import axios from "axios";
 import Loader from "../../molecules/Loader/Loader";
 import {requestStart, requestEnd} from "../../../actions";
+import {API} from "../../../actions";
 // import {routers} from "../../../data/routers";
 // import $ from "jquery";
 
@@ -30,7 +31,7 @@ const BookNews = ({reqStart, reqEnd}) => {
   const recommendedBook = () => {
     reqStart();
     axios
-      .get("http://localhost:8080/api/book/search/random", {
+      .get(API + "/book/search/random", {
         params: {number: 10},
       })
       .then((payload) => {

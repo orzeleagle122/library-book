@@ -50,7 +50,9 @@ const GenreList = ({
           <AcceptButton onClick={handleSubmitChanges}>
             Accept the changes
           </AcceptButton>
-          <CancelButton>Cancel</CancelButton>
+          <CancelButton onClick={() => alert("nie podpięte do zrobienia")}>
+            Cancel
+          </CancelButton>
         </>
       )}
 
