@@ -16,6 +16,11 @@ const AccountWrapper = styled.div`
   display: flex;
   gap: 40px;
   margin-bottom: 20px;
+
+  @media screen and (max-width: 480px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 const Img = styled.img`

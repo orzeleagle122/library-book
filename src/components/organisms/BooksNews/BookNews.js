@@ -22,6 +22,7 @@ import axios from "axios";
 import Loader from "../../molecules/Loader/Loader";
 import {requestStart, requestEnd} from "../../../actions";
 import {API} from "../../../actions";
+import img from "../../../assets/img/book2.png";
 // import {routers} from "../../../data/routers";
 // import $ from "jquery";
 
@@ -145,7 +146,7 @@ const BookNews = ({reqStart, reqEnd}) => {
         <Loader />
         {/* {loader && <Loader />} */}
         <TheBestBook thebest="thebest">
-          <ImgBestBook src={`/assets/bookImages/book2.png`} alt="alt" />
+          <ImgBestBook src={img} alt="alt" />
           {randomBook.slice(0, 1).map((item) => (
             <TheBestBookWrapperInfo key={item.id}>
               <TinyTittle>{item.title}</TinyTittle>
@@ -169,7 +170,7 @@ const BookNews = ({reqStart, reqEnd}) => {
               {/* <Link to={`/book/${item.id}/${item.title}`}> */}
               <BookWrapper>
                 <BookImg>
-                  <img src={`/assets/bookImages/book2.png`} alt={item.title} />
+                  <img src={img} alt="Book Awers" />
                 </BookImg>
                 <TinyTittle>{item.title}</TinyTittle>
                 <TinyAuthor>{item.author}</TinyAuthor>

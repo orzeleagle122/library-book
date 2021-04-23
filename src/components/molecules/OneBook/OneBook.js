@@ -15,6 +15,7 @@ import {bookRequest} from "../../../actions";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import {goTop} from "../../../data/function";
+import img from "../../../assets/img/book2.png";
 
 const OneBook = (props) => {
   const {bookInfo, recommendedBook} = props;
@@ -23,7 +24,7 @@ const OneBook = (props) => {
       <Book key={props.id}>
         <BookWrapper>
           <BookImg>
-            <img src={`/assets/bookImages/book2.png`} alt={props.title} />
+            <img src={img} alt="Book Awers" />
           </BookImg>
           <TinyTittle>{props.title}</TinyTittle>
           <TinyAuthor>{props.author}</TinyAuthor>
