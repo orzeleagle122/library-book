@@ -11,6 +11,7 @@ import Button from "../../components/atoms/Button/Button";
 import {Redirect} from "react-router-dom";
 import {routers} from "../../data/routers";
 import {Link} from "react-router-dom";
+import {logOut} from "../../actions";
 
 const AccountWrapper = styled.div`
   display: flex;
@@ -32,7 +33,7 @@ const InfoSection = styled.div`
   flex-direction: column;
 `;
 
-const AccountPage = ({firstName, isLogin, lastName, email}) => {
+const AccountPage = ({firstName, isLogin, lastName, email, out}) => {
   if (!isLogin) {
     return <Redirect to={routers.login} />;
   }
@@ -48,6 +49,13 @@ const AccountPage = ({firstName, isLogin, lastName, email}) => {
           <Link to={routers.userEdit}>
             <Button>Edit profil</Button>
           </Link>
+          <Button
+            onClick={() => {
+              out();
+            }}
+          >
+            Logout
+          </Button>
         </InfoSection>
       </AccountWrapper>
       <div className="tabs is-boxed">
@@ -114,10 +122,11 @@ const AccountPage = ({firstName, isLogin, lastName, email}) => {
 };
 
 AccountPage.propTypes = {
-  firstName: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
-  lastName: PropTypes.string.isRequired,
+  firstName: PropTypes.string,
+  email: PropTypes.string,
+  lastName: PropTypes.string,
   isLogin: PropTypes.bool.isRequired,
+  out: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({user}) => {
@@ -131,10 +140,10 @@ const mapStateToProps = ({user}) => {
   };
 };
 
-// const mapDispatchToProps=(dispatch)=>{
-//   return {
+const mapDispatchToProps = (dispatch) => {
+  return {
+    out: () => dispatch(logOut()),
+  };
+};
 
-//   }
-// }
-
-export default connect(mapStateToProps, null)(AccountPage);
+export default connect(mapStateToProps, mapDispatchToProps)(AccountPage);

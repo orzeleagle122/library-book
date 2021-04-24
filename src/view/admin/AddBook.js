@@ -187,7 +187,7 @@ BookAdd.propTypes = {
   genreList: PropTypes.array,
   clean: PropTypes.func.isRequired,
   showErrors: PropTypes.node,
-  rules: PropTypes.string,
+  rules: PropTypes.array,
 };
 
 const mapStateToProps = ({genreList, showErrors, user}) => {
