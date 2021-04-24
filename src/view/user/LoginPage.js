@@ -29,7 +29,10 @@ const LoginPage = ({auth, isLogin, showErrors, clean}) => {
         </div>
       )}
       <Formik
-        initialValues={{useremail: "", userpassword: ""}}
+        initialValues={{
+          useremail: "orzeleagle122@gmail.com",
+          userpassword: "zaq1@WSX",
+        }}
         onSubmit={({useremail, userpassword}) => {
           auth(useremail, userpassword);
         }}

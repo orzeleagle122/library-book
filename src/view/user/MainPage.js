@@ -91,10 +91,11 @@ const MainPage = ({searchbooks, search, isLogin, clean}) => {
             {bookPopular.map((item) => (
               <BookPopularWrapper key={item.id}>
                 <Link
-                  to={{
-                    pathname: `/book/${item.id}/${item.title}`,
-                    query: {...item},
-                  }}
+                  // to={{
+                  //   pathname: `/book/${item.id}/${item.title}`,
+                  //   query: {...item},
+                  // }}
+                  to="/"
                 >
                   <img style={{width: "100%"}} src={img} alt="Book Awers" />
                 </Link>

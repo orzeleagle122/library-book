@@ -32,7 +32,7 @@ const InfoSection = styled.div`
   flex-direction: column;
 `;
 
-const AccountPage = ({firstName, isLogin}) => {
+const AccountPage = ({firstName, isLogin, lastName, email}) => {
   if (!isLogin) {
     return <Redirect to={routers.login} />;
   }
@@ -41,8 +41,10 @@ const AccountPage = ({firstName, isLogin}) => {
       <AccountWrapper>
         <Img src={avatar} alt="avatar" />
         <InfoSection>
-          <Heading>{firstName} Lastname</Heading>
-          email@email.com
+          <Heading>
+            {firstName} {lastName}
+          </Heading>
+          {email}
           <Link to={routers.userEdit}>
             <Button>Edit profil</Button>
           </Link>
@@ -80,17 +82,19 @@ const AccountPage = ({firstName, isLogin}) => {
       </div>
       <Heading>Notifications</Heading>
       <div className="notification is-warning">
-        <FontAwesomeIcon icon={faExclamationCircle} /> Książka o tytule{" "}
-        <strong>TITLE</strong> musisz zwrócić do <strong>24.05.2021</strong>!
+        <FontAwesomeIcon icon={faExclamationCircle} /> Lorem ipsum dolor sit
+        amet, consectetur adipiscing elit. Nam vel nulla non ex dignissim
+        molestie. Mauris consectetur mollis blandit!
       </div>
       <div className="notification is-danger">
-        <FontAwesomeIcon icon={faExclamationCircle} /> <strong>TITLE</strong>{" "}
-        nie została zwrócona do księgarni, termin oddania:{" "}
-        <strong>24.05.2021</strong>!
+        <FontAwesomeIcon icon={faExclamationCircle} /> Lorem ipsum dolor sit
+        amet, consectetur adipiscing elit. Nam vel nulla non ex dignissim
+        molestie. Mauris consectetur mollis blandit!
       </div>
       <div className="notification is-info">
-        <FontAwesomeIcon icon={faExclamationCircle} /> Zauwazyliśmy, że książka{" "}
-        <strong>TITLE</strong> jest już dostępna! Możesz ją wypożyczyć!
+        <FontAwesomeIcon icon={faExclamationCircle} /> Lorem ipsum dolor sit
+        amet, consectetur adipiscing elit. Nam vel nulla non ex dignissim
+        molestie. Mauris consectetur mollis blandit!
       </div>
       <Heading>Your statistic</Heading>
       <AccountWrapper>
@@ -111,14 +115,18 @@ const AccountPage = ({firstName, isLogin}) => {
 
 AccountPage.propTypes = {
   firstName: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+  lastName: PropTypes.string.isRequired,
   isLogin: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = ({user}) => {
   const {isLogin} = user;
-  const {firstName} = user.userinfo;
+  const {firstName, lastName, email} = user.userinfo;
   return {
     firstName,
+    lastName,
+    email,
     isLogin,
   };
 };

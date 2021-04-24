@@ -26,6 +26,7 @@ import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {removeFavorite, addFavorite, borrowBook} from "../../../actions";
+import img from "../../../assets/img/book2.png";
 
 const BookList = (props) => {
   const {
@@ -74,7 +75,7 @@ const BookList = (props) => {
     <FavoriteItem available={available >= 1 ? 1 : 0}>
       <BookImages>
         <Link to={{pathname: `/book/${id}/${title}`, query: {...props}}}>
-          <BookImage src={`/assets/bookImages/book2.png`} alt={title} />
+          <BookImage src={img} alt={title} />
         </Link>
       </BookImages>
       <BookContent>
