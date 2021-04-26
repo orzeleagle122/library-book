@@ -15,7 +15,7 @@ const FavoritePageWrapper = styled.div`
 
 const FavoritePage = ({userFavorites, getUserLogin}) => {
   useEffect(() => {
-    getUserLogin(localStorage.getItem("loginToken"));
+    getUserLogin(localStorage.getItem("id"));
   }, []);
   return (
     <>
@@ -43,7 +43,7 @@ const mapStatetoProps = ({userFavorites}) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getUserLogin: (token) => dispatch(getUserLoginAction(token)),
+    getUserLogin: (id) => dispatch(getUserLoginAction(id)),
   };
 };
 

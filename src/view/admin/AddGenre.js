@@ -44,7 +44,7 @@ const AddGenre = ({genre, rules}) => {
 
 AddGenre.propTypes = {
   genre: PropTypes.func.isRequired,
-  rules: PropTypes.string,
+  rules: PropTypes.array,
 };
 
 const mapStateToProps = ({user}) => {

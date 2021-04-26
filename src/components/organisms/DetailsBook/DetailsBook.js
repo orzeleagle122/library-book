@@ -150,7 +150,7 @@ DetailsBook.propTypes = {
   available: PropTypes.number,
   add: PropTypes.func.isRequired,
   remove: PropTypes.func.isRequired,
-  getUserLogin: PropTypes.func.isRequired,
+  getUserLogin: PropTypes.func,
   borrow: PropTypes.func.isRequired,
   description: PropTypes.string,
 };

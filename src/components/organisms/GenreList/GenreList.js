@@ -77,11 +77,11 @@ const GenreList = ({
           <Heading>The list of genres prepared for removal:</Heading>
           <GenreListWrapper>
             {genreRemoved.map((item) => (
-              <Genre key={item.id} remove>
+              <Genre key={item.id} remove="true">
                 <Title>{item.name}</Title>
                 <DeleteButton onClick={() => remove2(item)}>
-                  <RiDeleteBin2FillIcon remove />
-                  <VscDebugStepOverIcon remove />
+                  <RiDeleteBin2FillIcon remove="true" />
+                  <VscDebugStepOverIcon remove="true" />
                 </DeleteButton>
               </Genre>
             ))}

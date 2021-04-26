@@ -131,7 +131,7 @@ MainTemplate.propTypes = {
   close: PropTypes.func.isRequired,
   getUserLogin: PropTypes.func.isRequired,
   isLogin: PropTypes.bool,
-  rules: PropTypes.string,
+  rules: PropTypes.array,
 };
 
 const mapStateToProps = ({succesMessage, user}) => {

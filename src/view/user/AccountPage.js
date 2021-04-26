@@ -11,11 +11,17 @@ import Button from "../../components/atoms/Button/Button";
 import {Redirect} from "react-router-dom";
 import {routers} from "../../data/routers";
 import {Link} from "react-router-dom";
+import {logOut} from "../../actions";
 
 const AccountWrapper = styled.div`
   display: flex;
   gap: 40px;
   margin-bottom: 20px;
+
+  @media screen and (max-width: 480px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 const Img = styled.img`
@@ -27,7 +33,7 @@ const InfoSection = styled.div`
   flex-direction: column;
 `;
 
-const AccountPage = ({firstName, isLogin}) => {
+const AccountPage = ({firstName, isLogin, lastName, email, out}) => {
   if (!isLogin) {
     return <Redirect to={routers.login} />;
   }
@@ -36,11 +42,20 @@ const AccountPage = ({firstName, isLogin}) => {
       <AccountWrapper>
         <Img src={avatar} alt="avatar" />
         <InfoSection>
-          <Heading>{firstName} Lastname</Heading>
-          email@email.com
+          <Heading>
+            {firstName} {lastName}
+          </Heading>
+          {email}
           <Link to={routers.userEdit}>
             <Button>Edit profil</Button>
           </Link>
+          <Button
+            onClick={() => {
+              out();
+            }}
+          >
+            Logout
+          </Button>
         </InfoSection>
       </AccountWrapper>
       <div className="tabs is-boxed">
@@ -75,17 +90,19 @@ const AccountPage = ({firstName, isLogin}) => {
       </div>
       <Heading>Notifications</Heading>
       <div className="notification is-warning">
-        <FontAwesomeIcon icon={faExclamationCircle} /> Książka o tytule{" "}
-        <strong>TITLE</strong> musisz zwrócić do <strong>24.05.2021</strong>!
+        <FontAwesomeIcon icon={faExclamationCircle} /> Lorem ipsum dolor sit
+        amet, consectetur adipiscing elit. Nam vel nulla non ex dignissim
+        molestie. Mauris consectetur mollis blandit!
       </div>
       <div className="notification is-danger">
-        <FontAwesomeIcon icon={faExclamationCircle} /> <strong>TITLE</strong>{" "}
-        nie została zwrócona do księgarni, termin oddania:{" "}
-        <strong>24.05.2021</strong>!
+        <FontAwesomeIcon icon={faExclamationCircle} /> Lorem ipsum dolor sit
+        amet, consectetur adipiscing elit. Nam vel nulla non ex dignissim
+        molestie. Mauris consectetur mollis blandit!
       </div>
       <div className="notification is-info">
-        <FontAwesomeIcon icon={faExclamationCircle} /> Zauwazyliśmy, że książka{" "}
-        <strong>TITLE</strong> jest już dostępna! Możesz ją wypożyczyć!
+        <FontAwesomeIcon icon={faExclamationCircle} /> Lorem ipsum dolor sit
+        amet, consectetur adipiscing elit. Nam vel nulla non ex dignissim
+        molestie. Mauris consectetur mollis blandit!
       </div>
       <Heading>Your statistic</Heading>
       <AccountWrapper>
@@ -105,23 +122,28 @@ const AccountPage = ({firstName, isLogin}) => {
 };
 
 AccountPage.propTypes = {
-  firstName: PropTypes.string.isRequired,
+  firstName: PropTypes.string,
+  email: PropTypes.string,
+  lastName: PropTypes.string,
   isLogin: PropTypes.bool.isRequired,
+  out: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({user}) => {
   const {isLogin} = user;
-  const {firstName} = user.userinfo;
+  const {firstName, lastName, email} = user.userinfo;
   return {
     firstName,
+    lastName,
+    email,
     isLogin,
   };
 };
 
-// const mapDispatchToProps=(dispatch)=>{
-//   return {
+const mapDispatchToProps = (dispatch) => {
+  return {
+    out: () => dispatch(logOut()),
+  };
+};
 
-//   }
-// }
-
-export default connect(mapStateToProps, null)(AccountPage);
+export default connect(mapStateToProps, mapDispatchToProps)(AccountPage);

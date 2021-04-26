@@ -17,6 +17,7 @@ import {Link} from "react-router-dom";
 import BookList from "../../components/organisms/BookList/BookList";
 import PropTypes from "prop-types";
 import BookNews from "../../components/organisms/BooksNews/BookNews";
+import img from "../../assets/img/book2.png";
 
 const BookPopularWrapper = styled.div`
   max-width: 200px;
@@ -90,16 +91,13 @@ const MainPage = ({searchbooks, search, isLogin, clean}) => {
             {bookPopular.map((item) => (
               <BookPopularWrapper key={item.id}>
                 <Link
-                  to={{
-                    pathname: `/book/${item.id}/${item.title}`,
-                    query: {...item},
-                  }}
+                  // to={{
+                  //   pathname: `/book/${item.id}/${item.title}`,
+                  //   query: {...item},
+                  // }}
+                  to="/"
                 >
-                  <img
-                    style={{width: "100%"}}
-                    src={`/assets/bookImages/${item.id}.jpg`}
-                    alt={item.title}
-                  />
+                  <img style={{width: "100%"}} src={img} alt="Book Awers" />
                 </Link>
               </BookPopularWrapper>
             ))}

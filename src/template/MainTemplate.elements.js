@@ -8,8 +8,8 @@ export const MainTemplateWrapper = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
 `;
 
 export const GridContainer = styled.div`
@@ -29,13 +29,17 @@ export const GridContainer = styled.div`
   margin-left: auto;
   max-width: 1600px;
   width: 100%;
+  padding-bottom: 100px;
 
   @media screen and (max-width: 1774px) {
     margin-left: 87px;
+    margin-right: 0;
+    width: calc(100% - 87px);
   }
 
   @media screen and (max-width: 480px) {
     margin-left: 0px;
+    width: 100%;
   }
 `;
 

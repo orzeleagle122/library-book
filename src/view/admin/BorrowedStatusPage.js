@@ -42,7 +42,8 @@ const BorrowedStatusPage = ({
 
   return (
     <>
-      <Heading>Search user by email</Heading>
+      <Heading>Change borrow book status</Heading>
+      <h2>Search user by email</h2>
       <form onSubmit={handleSearch}>
         <Input onChange={handleSearchUser} value={searchUser} type="email" />
         {searchUser.length > 0 && <Button>Search</Button>}
@@ -66,7 +67,7 @@ BorrowedStatusPage.propTypes = {
   search: PropTypes.func.isRequired,
   showErrors: PropTypes.any,
   clean: PropTypes.func.isRequired,
-  rules: PropTypes.string,
+  rules: PropTypes.array,
 };
 
 const mapStateToProps = ({searchUsers, showErrors, user}) => {

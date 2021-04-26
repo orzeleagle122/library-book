@@ -8,6 +8,7 @@ import {useEffect} from "react";
 import PropTypes from "prop-types";
 import {Input} from "../../components/atoms/Input/Input";
 import Button from "../../components/atoms/Button/Button";
+import {routers} from "../../data/routers";
 
 const RegisterWrapper = styled.div`
   /* margin-right: 500px;
@@ -15,10 +16,10 @@ const RegisterWrapper = styled.div`
     margin-top:30px; */
 `;
 
-const RegisterPage = ({register, isLogin, showErrors, clean}) => {
+const RegisterPage = ({register, registerSuccess, showErrors, clean}) => {
   useEffect(() => {
     return () => clean();
-  }, [isLogin]);
+  }, []);
 
   return (
     <RegisterWrapper>
@@ -44,7 +45,7 @@ const RegisterPage = ({register, isLogin, showErrors, clean}) => {
           // isSubmitting,
           /* and other goodies */
         }) => {
-          if (isLogin) {
+          if (registerSuccess) {
             return (
               <>
                 <article className="message is-info">
@@ -53,7 +54,7 @@ const RegisterPage = ({register, isLogin, showErrors, clean}) => {
                     successfully created.
                   </div>
                 </article>
-                <Link to="/">
+                <Link to={routers.login}>
                   <button className="button is-success is-rounded">
                     Continue
                   </button>
@@ -151,15 +152,14 @@ const RegisterPage = ({register, isLogin, showErrors, clean}) => {
 
 RegisterPage.propTypes = {
   register: PropTypes.func.isRequired,
-  isLogin: PropTypes.bool.isRequired,
+  registerSuccess: PropTypes.bool.isRequired,
   showErrors: PropTypes.node,
   clean: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({user, showErrors}) => {
-  const {isLogin} = user;
+const mapStateToProps = ({registerSuccess, showErrors}) => {
   return {
-    isLogin,
+    registerSuccess,
     showErrors,
   };
 };

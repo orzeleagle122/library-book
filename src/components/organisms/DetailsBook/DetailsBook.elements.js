@@ -154,4 +154,5 @@ export const Description = styled.div``;
 
 export const RecomendedWrapper = styled.div`
   display: flex;
+  flex-wrap: wrap;
 `;

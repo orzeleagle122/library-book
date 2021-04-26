@@ -18,18 +18,24 @@ const BorrowedPage = ({borrows = [], getUserLogin}) => {
     <>
       <Heading>Your borrowed book</Heading>
       <br />
-      <Heading>Books waiting for pick up ({awaiting.length})</Heading>
-      {awaiting.map((item) => (
-        <BorrowedStatusList key={item.id} {...item} borrow />
-      ))}
-      <Heading>Books borrowed ({borrowed.length})</Heading>
-      {borrowed.map((item) => (
-        <BorrowedStatusList key={item.id} {...item} borrow />
-      ))}
-      <Heading>Your history ({returned.length})</Heading>
-      {returned.map((item) => (
-        <BorrowedStatusList key={item.id} {...item} borrow />
-      ))}
+      {borrows.length === 0 ? (
+        "No borrowings"
+      ) : (
+        <>
+          <Heading>Books waiting for pick up ({awaiting.length})</Heading>
+          {awaiting.map((item) => (
+            <BorrowedStatusList key={item.id} {...item} borrow />
+          ))}
+          <Heading>Books borrowed ({borrowed.length})</Heading>
+          {borrowed.map((item) => (
+            <BorrowedStatusList key={item.id} {...item} borrow />
+          ))}
+          <Heading>Your history ({returned.length})</Heading>
+          {returned.map((item) => (
+            <BorrowedStatusList key={item.id} {...item} borrow />
+          ))}
+        </>
+      )}
     </>
   );
 };

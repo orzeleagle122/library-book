@@ -31,10 +31,17 @@ const GenresDiv = styled.div`
 const InputBook = styled(Input)`
   width: 400px;
   margin: 10px;
+  @media screen and (max-width: 480px) {
+    width: 100%;
+  }
 `;
 const TextareaBook = styled(Textarea)`
   width: 600px;
   margin: 10px;
+
+  @media screen and (max-width: 480px) {
+    width: 100%;
+  }
 `;
 
 const BookAdd = ({
@@ -180,7 +187,7 @@ BookAdd.propTypes = {
   genreList: PropTypes.array,
   clean: PropTypes.func.isRequired,
   showErrors: PropTypes.node,
-  rules: PropTypes.string,
+  rules: PropTypes.array,
 };
 
 const mapStateToProps = ({genreList, showErrors, user}) => {

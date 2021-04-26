@@ -67,8 +67,8 @@ export const CHANGE_BORROW_STATUS = "CHANGE_BORROW_STATUS";
 export const EDIT_USER_SUCCESS = "EDIT_USER_SUCCESS";
 export const EDIT_USER_FAILURE = "EDIT_USER_FAILURE";
 
-// const API = "http://localhost:8080/api";
-export const API = "https://spring-react-library-service.herokuapp.com/api";
+export const API = "http://localhost:8080/api";
+// export const API = "https://spring-react-library-service.herokuapp.com/api";
 
 export const editUser = (
   id,
@@ -77,10 +77,12 @@ export const editUser = (
   email,
   password
 ) => async () => {
-  return axios
-    .put(API + `/user/update/${id}`, {firstName, lastName, email, password})
-    .then((payload) => console.log(payload))
-    .catch((err) => console.log(err.response));
+  return axios.put(API + `/user/update/${id}`, {
+    firstName,
+    lastName,
+    email,
+    password,
+  });
 };
 
 export const changeStatus = (id, status) => async (dispatch) => {
@@ -89,10 +91,7 @@ export const changeStatus = (id, status) => async (dispatch) => {
     Authorization: key,
   };
   dispatch({type: CHANGE_BORROW_STATUS});
-  return axios
-    .put(API + `/borrow/auth/${id}?status=${status}`, {}, {headers})
-    .then((payload) => console.log(payload))
-    .catch((err) => console.log(err.response));
+  return axios.put(API + `/borrow/auth/${id}?status=${status}`, {}, {headers});
 };
 
 export const closeSuccessMessage = () => {
@@ -127,8 +126,7 @@ export const removeFavorite = (user_id, props) => async (dispatch) => {
         payload,
         props,
       });
-    })
-    .catch((err) => console.log(err.response));
+    });
 };
 
 export const addFavorite = (user_id, props) => async (dispatch) => {
@@ -144,9 +142,6 @@ export const addFavorite = (user_id, props) => async (dispatch) => {
         payload,
         props,
       });
-    })
-    .catch((err) => {
-      console.log(err.response);
     });
 };
 
@@ -180,9 +175,6 @@ export const borrowBook = (user, props) => async (dispatch) => {
         payload,
         props,
       });
-    })
-    .catch((err) => {
-      console.log(err.response);
     });
 };
 
@@ -228,9 +220,7 @@ export const removeaddfetchGenre = (idList, genres) => async (dispatch) => {
   const headers = {
     Authorization: key,
   };
-  console.log(genres);
   const ids = idList.map((item) => item.id);
-  console.log(ids);
   const config = {
     headers,
     data: {ids},
@@ -298,20 +288,13 @@ export const sendNewsListGenre = (genres) => async (dispatch) => {
   dispatch({
     type: SEND_ADD_GENRELIST,
   });
-  return axios
-    .post(
-      API + "/bookGenre/auth/add",
-      {
-        genres,
-      },
-      {headers}
-    )
-    .then((payload) => {
-      console.log(payload);
-    })
-    .catch((err) => {
-      console.log(err.response);
-    });
+  return axios.post(
+    API + "/bookGenre/auth/add",
+    {
+      genres,
+    },
+    {headers}
+  );
 };
 
 export const fetchGenres = () => async (dispatch) => {
@@ -350,14 +333,12 @@ export const fetchBooks = (number) => async (dispatch) => {
   return axios
     .get(API + "/book/search/random", {params: {number}})
     .then((payload) => {
-      // console.log(payload);
       dispatch({
         type: FETCH_BOOKS_SUCCESS,
         payload,
       });
     })
     .catch((err) => {
-      console.log(err.response);
       dispatch({
         type: FAILURE_MESSAGE,
         err,
@@ -413,14 +394,12 @@ export const authUser = (email, password) => async (dispatch) => {
   return axios
     .post(API + "/user/sign-in", {email, password})
     .then((payload) => {
-      // console.log(payload);
       dispatch({
         type: AUTH_SUCCESS,
         payload,
       });
     })
     .catch((err) => {
-      console.log(err.response);
       dispatch({
         type: FAILURE_MESSAGE,
         err,
@@ -463,7 +442,6 @@ export const addBook = (
       });
     })
     .catch((err) => {
-      console.log(err.response);
       dispatch({
         type: FAILURE_MESSAGE,
         err,
@@ -485,7 +463,6 @@ export const registerUser = (firstName, lastName, email, password) => async (
       password,
     })
     .then((payload) => {
-      // console.log(payload);
       dispatch({
         type: REGISTER_SUCCESS,
         payload,
@@ -518,7 +495,6 @@ export const bookRequest = (id, title) => async (dispatch) => {
       });
     })
     .catch((err) => {
-      console.log(err.response);
       dispatch({
         type: FAILURE_MESSAGE,
         err,
@@ -580,7 +556,6 @@ export const searchEmailUser = (email) => async (dispatch) => {
         });
       })
       .catch((err) => {
-        console.log(err.response);
         dispatch({
           type: USER_EMAIL_SEARCH_FAILURE,
           err,
@@ -643,14 +618,12 @@ export const getUserLoginAction = (id) => async (dispatch) => {
       .get(API + `/user/auth/search/${id}`, {headers})
       // .get(API + "/user/search", {params: {id: token}})
       .then((payload) => {
-        // console.log(payload);
         dispatch({
           type: GET_CURRENT_USER_SUCCESS,
           payload,
         });
       })
       .catch((err) => {
-        console.log(err.response);
         dispatch({
           type: FAILURE_MESSAGE,
           err,
