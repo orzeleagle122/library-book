@@ -50,7 +50,7 @@ const Sidebar = ({isLogin, out}) => {
               <NavLink exact to={routers.borrowed}>
                 <NavbarButton>
                   <BsFillBookmarkFillIcon />
-                  <SpanText>Borrowed</SpanText>
+                  <SpanText>Borrows</SpanText>
                 </NavbarButton>
               </NavLink>
             </ItemList>

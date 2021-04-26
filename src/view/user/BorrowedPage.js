@@ -22,15 +22,15 @@ const BorrowedPage = ({borrows = [], getUserLogin}) => {
         "No borrowings"
       ) : (
         <>
-          <Heading>Books waiting for pick up ({awaiting.length})</Heading>
+          <h2>Books waiting for pick up ({awaiting.length})</h2>
           {awaiting.map((item) => (
             <BorrowedStatusList key={item.id} {...item} borrow />
           ))}
-          <Heading>Books borrowed ({borrowed.length})</Heading>
+          <h2>Books borrowed ({borrowed.length})</h2>
           {borrowed.map((item) => (
             <BorrowedStatusList key={item.id} {...item} borrow />
           ))}
-          <Heading>Your history ({returned.length})</Heading>
+          <h2>Your history ({returned.length})</h2>
           {returned.map((item) => (
             <BorrowedStatusList key={item.id} {...item} borrow />
           ))}

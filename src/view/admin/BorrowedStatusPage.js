@@ -50,9 +50,9 @@ const BorrowedStatusPage = ({
       </form>
       <Loader />
       {showErrors}
-      <Heading>
+      <h2>
         {searchUsers.firstName} {searchUsers.lastName}
-      </Heading>
+      </h2>
 
       {borrows.map((item) => (
         <BorrowedStatusList key={item.id} {...item} />

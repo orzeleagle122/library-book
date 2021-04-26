@@ -88,7 +88,13 @@ const BookNews = ({reqStart, reqEnd}) => {
     <>
       <div className="tabs is-medium" id="tabs">
         <ul>
-          <li className="is-active" data-tab="1">
+          <li
+            className="is-active"
+            data-tab="1"
+            onClick={() => {
+              recommendedBook();
+            }}
+          >
             <a>Books</a>
           </li>
           <li

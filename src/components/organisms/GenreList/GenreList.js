@@ -58,7 +58,7 @@ const GenreList = ({
 
       {genreNews.length >= 1 && (
         <>
-          <Heading>The list of genres prepared for add:</Heading>
+          <h2>The list of genres prepared for add:</h2>
           <GenreListWrapper>
             {genreNews.map((item) => (
               <Genre key={item} news>
@@ -74,7 +74,7 @@ const GenreList = ({
 
       {genreRemoved.length >= 1 && (
         <>
-          <Heading>The list of genres prepared for removal:</Heading>
+          <h2>The list of genres prepared for removal:</h2>
           <GenreListWrapper>
             {genreRemoved.map((item) => (
               <Genre key={item.id} remove="true">

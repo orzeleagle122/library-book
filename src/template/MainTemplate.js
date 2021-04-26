@@ -35,6 +35,7 @@ import {Link} from "react-router-dom";
 import SearchPage from "../view/user/SearchPage";
 import BorrowedStatusPage from "../view/admin/BorrowedStatusPage";
 import EditUserPage from "../view/user/EditUserPage";
+import ReactTooltip from "react-tooltip";
 
 class MainTemplate extends React.Component {
   componentDidUpdate() {
@@ -87,14 +88,27 @@ class MainTemplate extends React.Component {
           </ImageWrapper>
           {isAdmin && (
             <AdminWrapper>
+              <ReactTooltip
+                id="tooltip"
+                getContent={(dataTip) => `${dataTip}`}
+              />
               <Link to={routers.addBook}>
-                <FaBookMedicalIcon />
+                <FaBookMedicalIcon
+                  data-for="tooltip"
+                  data-tip="Add new books"
+                />
               </Link>
               <Link to={routers.changeStatus}>
-                <GiCardExchangeIcon />
+                <GiCardExchangeIcon
+                  data-for="tooltip"
+                  data-tip="Change user borrow status"
+                />
               </Link>
               <Link to={routers.addGenre}>
-                <FaBookReaderIcon />
+                <FaBookReaderIcon
+                  data-for="tooltip"
+                  data-tip="Add new genres"
+                />
               </Link>
             </AdminWrapper>
           )}

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import PropTypes from "prop-types";
-import Heading from "../../atoms/Heading/Heading";
+// import Heading from "../../atoms/Heading/Heading";
 import img from "../../../assets/img/book2.png";
 import {
   DetailsWrapper,
@@ -83,7 +83,7 @@ const DetailsBook = (props) => {
           <ImgBook src={img} alt="img" />
         </BookImages>
         <BookContent>
-          <Heading>{title}</Heading>
+          <h2>{title}</h2>
           <HeadingAuthor>{author}</HeadingAuthor>
           <BookGenres>
             {genres.map((item) => (
@@ -126,7 +126,7 @@ const DetailsBook = (props) => {
         </BookContent>
       </DetailsWrapper>
       <Description>{description}</Description>
-      <Heading>Recommended:</Heading>
+      <h2>Recommended:</h2>
       <RecomendedWrapper>
         {recommended.map((item) => (
           <OneBook key={item.id} {...item} recommendedBook={recommendedBook} />

@@ -234,7 +234,7 @@ export const reducer = (state = initialStore, action) => {
     return {
       ...state,
       genreList: action.payload.data,
-      succesMessage: "Genre list updated!",
+      // succesMessage: "Genre list updated!",
     };
   }
   if (action.type === AUTH_SUCCESS) {

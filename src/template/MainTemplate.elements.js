@@ -113,6 +113,11 @@ export const StyledButton = styled.button`
   font-weight: 700;
   border-radius: 12px;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  cursor: pointer;
+
+  &:hover {
+    background: white;
+  }
 `;
 
 export const SuccessMessage = styled.div`
@@ -143,7 +148,7 @@ export const AdminWrapper = styled.div`
   height: 50px;
   transform: translate(-50%, 0);
   background-color: #2d3ddf;
-  z-index: 999999;
+  z-index: 999;
   color: white;
   border-top-left-radius: 50px;
   border-top-right-radius: 50px;
@@ -154,6 +159,15 @@ export const AdminWrapper = styled.div`
   align-items: center;
   gap: 40px;
   top: 335px;
+
+  &.extraClass {
+    font-size: 20px !important;
+    pointer-events: auto !important;
+    &:hover {
+      visibility: visible !important;
+      opacity: 1 !important;
+    }
+  }
 `;
 
 export const FaBookMedicalIcon = styled(FaBookMedical)`

@@ -21,6 +21,14 @@ const GlobalStyle = createGlobalStyle`
 
         /* scroll fix position fixed chrome */
         /* overflow:scroll; */
+        h2 {
+    font-size: 20px;
+    margin-top: 36px;
+    margin-bottom: 20px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    position: relative;
+  }
     }
 
     /* 

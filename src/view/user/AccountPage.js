@@ -22,6 +22,16 @@ const AccountWrapper = styled.div`
     flex-direction: column;
     align-items: center;
   }
+
+  h2 {
+    font-size: 30px;
+    margin-top: 36px;
+    margin-bottom: 20px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    position: relative;
+    text-align: center;
+  }
 `;
 
 const Img = styled.img`
@@ -42,9 +52,9 @@ const AccountPage = ({firstName, isLogin, lastName, email, out}) => {
       <AccountWrapper>
         <Img src={avatar} alt="avatar" />
         <InfoSection>
-          <Heading>
+          <h2>
             {firstName} {lastName}
-          </Heading>
+          </h2>
           {email}
           <Link to={routers.userEdit}>
             <Button>Edit profil</Button>

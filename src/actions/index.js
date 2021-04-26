@@ -67,8 +67,8 @@ export const CHANGE_BORROW_STATUS = "CHANGE_BORROW_STATUS";
 export const EDIT_USER_SUCCESS = "EDIT_USER_SUCCESS";
 export const EDIT_USER_FAILURE = "EDIT_USER_FAILURE";
 
-export const API = "http://localhost:8080/api";
-// export const API = "https://spring-react-library-service.herokuapp.com/api";
+// export const API = "http://localhost:8080/api";
+export const API = "https://spring-react-library-service.herokuapp.com/api";
 
 export const editUser = (
   id,
