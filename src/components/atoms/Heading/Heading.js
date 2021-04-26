@@ -3,7 +3,13 @@ import {StyledHeading} from "./Heading.elements";
 import PropTypes from "prop-types";
 
 const Heading = (props) => {
-  return <StyledHeading {...props}>{props.children}</StyledHeading>;
+  return (
+    <StyledHeading {...props}>
+      <span>
+        <h1>{props.children}</h1>
+      </span>
+    </StyledHeading>
+  );
 };
 
 Heading.propTypes = {
