@@ -51,7 +51,7 @@ const EditUserPage = ({edit, isLogin, showErrors, clean, userinfo}) => {
             <>
               <form className="box" onSubmit={handleSubmit} autoComplete="off">
                 <div className="field">
-                  <label className="label">Name</label>
+                  <label className="label">First name</label>
                   <div className="control">
                     <Input
                       type="text"
@@ -60,6 +60,7 @@ const EditUserPage = ({edit, isLogin, showErrors, clean, userinfo}) => {
                       onChange={handleChange}
                       onBlur={handleBlur}
                       autoComplete="off"
+                      required
                     />
                   </div>
                 </div>
@@ -73,6 +74,7 @@ const EditUserPage = ({edit, isLogin, showErrors, clean, userinfo}) => {
                       onChange={handleChange}
                       onBlur={handleBlur}
                       autoComplete="off"
+                      required
                     />
                   </div>
                 </div>
@@ -86,11 +88,12 @@ const EditUserPage = ({edit, isLogin, showErrors, clean, userinfo}) => {
                       onChange={handleChange}
                       onBlur={handleBlur}
                       autoComplete="off"
+                      required
                     />
                   </div>
                 </div>
                 <div className="field">
-                  <label className="label">Password</label>
+                  <label className="label">New Password</label>
                   <div className="control">
                     <Input
                       type="password"
@@ -99,6 +102,7 @@ const EditUserPage = ({edit, isLogin, showErrors, clean, userinfo}) => {
                       onChange={handleChange}
                       onBlur={handleBlur}
                       autoComplete="new-password"
+                      required
                     />
                   </div>
                 </div>

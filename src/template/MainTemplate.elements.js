@@ -20,16 +20,18 @@ export const GridContainer = styled.div`
   font-family: "Poppins", sans-serif;
   display: flex;
   justify-content: flex-start;
-  min-height: 100vh;
+  min-height: ${({footer}) => (footer ? "100px" : "100vh")};
   flex-wrap: nowrap;
   border-top-left-radius: 50px;
   border-top-right-radius: 50px;
+  border-bottom-left-radius: 50px;
+  border-bottom-right-radius: 50px;
 
   margin-right: auto;
   margin-left: auto;
   max-width: 1600px;
   width: 100%;
-  padding-bottom: 100px;
+  margin-bottom: 20px;
 
   @media screen and (max-width: 1774px) {
     margin-left: 87px;
@@ -184,4 +186,10 @@ export const FaBookReaderIcon = styled(FaBookReader)`
   font-size: 24px;
   text-decoration: none;
   color: white;
+`;
+
+export const Footer = styled.footer`
+  height: 300px;
+  background-color: red;
+  z-index: 99999999;
 `;

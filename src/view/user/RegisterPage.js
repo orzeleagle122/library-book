@@ -76,6 +76,7 @@ const RegisterPage = ({register, registerSuccess, showErrors, clean}) => {
                       value={values.name}
                       onChange={handleChange}
                       onBlur={handleBlur}
+                      required
                     />
                   </div>
                 </div>
@@ -89,6 +90,7 @@ const RegisterPage = ({register, registerSuccess, showErrors, clean}) => {
                       value={values.lastname}
                       onChange={handleChange}
                       onBlur={handleBlur}
+                      required
                     />
                   </div>
                 </div>
@@ -102,6 +104,7 @@ const RegisterPage = ({register, registerSuccess, showErrors, clean}) => {
                       value={values.useremail}
                       onChange={handleChange}
                       onBlur={handleBlur}
+                      required
                     />
                   </div>
                 </div>
@@ -116,6 +119,7 @@ const RegisterPage = ({register, registerSuccess, showErrors, clean}) => {
                       onChange={handleChange}
                       onBlur={handleBlur}
                       autoComplete="new-password"
+                      required
                     />
                   </div>
                 </div>
@@ -130,6 +134,7 @@ const RegisterPage = ({register, registerSuccess, showErrors, clean}) => {
                       onChange={handleChange}
                       onBlur={handleBlur}
                       autoComplete="new-password"
+                      required
                     />
                   </div>
                 </div>

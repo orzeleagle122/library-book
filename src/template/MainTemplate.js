@@ -112,7 +112,6 @@ class MainTemplate extends React.Component {
               </Link>
             </AdminWrapper>
           )}
-
           <GridContainer>
             <MainContent>
               <Route path={routers.home} exact component={MainPage} />
@@ -132,6 +131,23 @@ class MainTemplate extends React.Component {
                 exact
                 component={BorrowedStatusPage}
               />
+            </MainContent>
+          </GridContainer>
+          <GridContainer footer>
+            <MainContent>
+              <center>
+                <strong>
+                  &copy; 2021 Library Book: Frontend:{" "}
+                  <a href="https://github.com/orzeleagle122" rel="noreferrer">
+                    orzeleagle122
+                  </a>
+                  , Backend:{" "}
+                  <a href="https://github.com/Karetson" rel="noreferrer">
+                    Karetson
+                  </a>
+                  .
+                </strong>
+              </center>
             </MainContent>
           </GridContainer>
         </MainTemplateWrapper>

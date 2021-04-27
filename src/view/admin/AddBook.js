@@ -111,6 +111,7 @@ const BookAdd = ({
           name="title"
           value={title}
           onChange={handleChange}
+          required
         />
         <br />
         <InputBook
@@ -119,6 +120,7 @@ const BookAdd = ({
           name="author"
           value={author}
           onChange={handleChange}
+          required
         />
         <br />
         <InputBook
@@ -127,6 +129,7 @@ const BookAdd = ({
           name="publisher"
           value={publisher}
           onChange={handleChange}
+          required
         />
         <br />
         <GenresDiv>
@@ -150,12 +153,13 @@ const BookAdd = ({
           <br />
         </GenresDiv>
         <InputBook
-          placeholder="Amount *"
+          placeholder="Amount * (min 1)"
           type="number"
           name="amount"
           value={amount}
           onChange={handleChange}
           min="1"
+          required
         />
         <br />
         <TextareaBook
@@ -165,6 +169,7 @@ const BookAdd = ({
           value={description}
           onChange={handleChange}
           maxLength="1999"
+          required
         />
         <br />
         <Button type="submit" value="Submit">

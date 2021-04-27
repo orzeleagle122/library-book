@@ -64,6 +64,7 @@ const LoginPage = ({auth, isLogin, showErrors, clean}) => {
                     value={values.useremail}
                     onChange={handleChange}
                     onBlur={handleBlur}
+                    required
                   />
                 </div>
               </div>
@@ -79,6 +80,7 @@ const LoginPage = ({auth, isLogin, showErrors, clean}) => {
                     value={values.userpassword}
                     onChange={handleChange}
                     onBlur={handleBlur}
+                    required
                   />
                 </div>
               </div>
