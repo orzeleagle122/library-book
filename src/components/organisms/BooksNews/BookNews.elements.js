@@ -11,7 +11,7 @@ export const BookNewsWrapper = styled.div`
 `;
 
 export const TheBestBook = styled.div`
-  flex-basis: 200px;
+  min-width: 200px;
   background-color: #1172c4;
   color: white;
 

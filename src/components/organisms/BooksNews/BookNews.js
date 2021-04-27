@@ -33,7 +33,7 @@ const BookNews = ({reqStart, reqEnd}) => {
     reqStart();
     axios
       .get(API + "/book/search/random", {
-        params: {number: 10},
+        params: {number: 8},
       })
       .then((payload) => {
         setRandomBook(payload.data);
