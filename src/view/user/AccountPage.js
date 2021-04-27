@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import avatar from "../../assets/layout/avatar.svg";
 import stat from "../../assets/layout/stat.svg";
 import {connect} from "react-redux";
@@ -11,7 +11,7 @@ import Button from "../../components/atoms/Button/Button";
 import {Redirect} from "react-router-dom";
 import {routers} from "../../data/routers";
 import {Link} from "react-router-dom";
-import {logOut} from "../../actions";
+import {logOut, getUserLoginAction} from "../../actions";
 import $ from "jquery";
 
 const AccountWrapper = styled.div`
@@ -45,7 +45,7 @@ const InfoSection = styled.div`
   font-size: 18px;
 `;
 
-const SpanContent = styled.span`
+const SpanContent = styled.p`
   display: none;
 
   &.is-active {
@@ -55,13 +55,13 @@ const SpanContent = styled.span`
 
 $(document).ready(function () {
   $("#tabs li").on("click", function () {
-    var tab = $(this).data("tab");
+    var tabs = $(this).data("tabs");
 
     $("#tabs li").removeClass("is-active");
     $(this).addClass("is-active");
 
-    $("#tab-content span").removeClass("is-active");
-    $('span[data-content="' + tab + '"]').addClass("is-active");
+    $("#tabs-content p").removeClass("is-active");
+    $('p[data-content="' + tabs + '"]').addClass("is-active");
   });
 });
 
@@ -73,7 +73,11 @@ const AccountPage = ({
   out,
   userFavorites,
   userBorrow,
+  getUserLogin,
 }) => {
+  useEffect(() => {
+    getUserLogin(localStorage.getItem("id"));
+  }, []);
   if (!isLogin) {
     return <Redirect to={routers.login} />;
   }
@@ -100,12 +104,12 @@ const AccountPage = ({
       </AccountWrapper>
       <div className="tabs is-boxed" id="tabs">
         <ul>
-          <li className="is-active" data-tab="1">
+          <li className="is-active" data-tabs="1">
             <a>
               <span>Notifications</span>
             </a>
           </li>
-          <li data-tab="2">
+          <li data-tabs="2">
             <a>
               <span>Your statistic</span>
             </a>
@@ -128,7 +132,7 @@ const AccountPage = ({
           </li> */}
         </ul>
       </div>
-      <div id="tab-content">
+      <div id="tabs-content">
         <SpanContent className="is-active" data-content="1">
           <Heading>Notifications</Heading>
           <div className="notification is-warning">
@@ -174,6 +178,7 @@ AccountPage.propTypes = {
   lastName: PropTypes.string,
   isLogin: PropTypes.bool.isRequired,
   out: PropTypes.func.isRequired,
+  getUserLogin: PropTypes.func.isRequired,
   userFavorites: PropTypes.array,
   userBorrow: PropTypes.array,
 };
@@ -194,6 +199,7 @@ const mapStateToProps = ({user, userFavorites, userBorrow}) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     out: () => dispatch(logOut()),
+    getUserLogin: (id) => dispatch(getUserLoginAction(id)),
   };
 };
 

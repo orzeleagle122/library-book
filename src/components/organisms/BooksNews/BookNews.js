@@ -159,7 +159,9 @@ const BookNews = ({reqStart, reqEnd}) => {
               <TinyAuthor>{item.author}</TinyAuthor>
               <GenresWrapper>
                 {item.genres.map((item2) => (
-                  <Genre key={item2.id}>{item2.name}</Genre>
+                  <Genre key={item2.id} thebest>
+                    {item2.name}
+                  </Genre>
                 ))}
               </GenresWrapper>
               <ButtonWrapper>

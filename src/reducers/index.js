@@ -31,6 +31,7 @@ import {
   USER_EMAIL_SEARCH_SUCCESS,
   USER_EMAIL_SEARCH_FAILURE,
   REMOVE_FAVORITE,
+  EDIT_USER_SUCCESS,
 } from "../actions";
 
 //initial store
@@ -94,6 +95,12 @@ export const reducer = (state = initialStore, action) => {
     return {
       ...state,
       succesMessage: false,
+    };
+  }
+  if (action.type === EDIT_USER_SUCCESS) {
+    return {
+      ...state,
+      succesMessage: "User info was edited!",
     };
   }
   if (action.type === ADD_BOOK_SUCCESS) {

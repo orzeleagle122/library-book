@@ -13,7 +13,8 @@ export const MainTemplateWrapper = styled.div`
 `;
 
 export const GridContainer = styled.div`
-  background-color: white;
+  background-color: ${({footer}) => (footer ? "#2D3DDF" : "white")};
+
   z-index: 99;
   position: relative;
   bottom: -25px;
@@ -48,6 +49,13 @@ export const GridContainer = styled.div`
 export const MainContent = styled.div`
   padding: ${({footer}) => (footer ? "20px 0" : "43px 40px")};
   width: 100%;
+  a:link,
+  a:visited {
+    text-decoration: none;
+    color: white;
+    letter-spacing: 1px;
+    text-decoration: underline;
+  }
   /* max-width: 2560px; */
 `;
 
@@ -150,7 +158,7 @@ export const AdminWrapper = styled.div`
   height: 50px;
   transform: translate(-50%, 0);
   background-color: #2d3ddf;
-  z-index: 999;
+  z-index: 100;
   color: white;
   border-top-left-radius: 50px;
   border-top-right-radius: 50px;
@@ -188,8 +196,6 @@ export const FaBookReaderIcon = styled(FaBookReader)`
   color: white;
 `;
 
-export const Footer = styled.footer`
-  height: 300px;
-  background-color: red;
-  z-index: 99999999;
+export const Footer = styled.p`
+  color: white;
 `;

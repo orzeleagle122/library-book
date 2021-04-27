@@ -11,7 +11,9 @@ export const BookNewsWrapper = styled.div`
 `;
 
 export const TheBestBook = styled.div`
-  min-width: 200px;
+  min-width: 300px;
+  max-width: 300px;
+  width: 300px;
   background-color: #1172c4;
   color: white;
 
@@ -114,7 +116,7 @@ export const TinyAuthor = styled.p`
 
 export const GenresWrapper = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: ${({thebest}) => (thebest ? "column" : "row")};
   justify-content: flex-start;
   align-items: flex-start;
   width: 100%;
@@ -130,8 +132,8 @@ export const Genre = styled.div`
   border-bottom-right-radius: 10px;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
-  margin: 10px 10px;
-  width: 100%;
+  margin: ${({thebest}) => (thebest ? "10px 0px" : "10px 10px")};
+  width: ${({thebest}) => (thebest ? "80%" : "100%")};
   text-align: center;
 `;
 

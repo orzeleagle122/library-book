@@ -163,13 +163,12 @@ const BookAdd = ({
         />
         <br />
         <TextareaBook
-          placeholder="Description book *"
+          placeholder="Description book"
           type="text"
           name="description"
           value={description}
           onChange={handleChange}
           maxLength="1999"
-          required
         />
         <br />
         <Button type="submit" value="Submit">

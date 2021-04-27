@@ -21,6 +21,7 @@ import {
   FaBookMedicalIcon,
   GiCardExchangeIcon,
   FaBookReaderIcon,
+  Footer,
 } from "./MainTemplate.elements";
 import AddBook from "../view/admin/AddBook";
 import main_img from "../assets/layout/main_img.jpg";
@@ -87,30 +88,32 @@ class MainTemplate extends React.Component {
             </ImageTextContainer>
           </ImageWrapper>
           {isAdmin && (
-            <AdminWrapper>
+            <>
               <ReactTooltip
                 id="tooltip"
                 getContent={(dataTip) => `${dataTip}`}
               />
-              <Link to={routers.addBook}>
-                <FaBookMedicalIcon
-                  data-for="tooltip"
-                  data-tip="Add new books"
-                />
-              </Link>
-              <Link to={routers.changeStatus}>
-                <GiCardExchangeIcon
-                  data-for="tooltip"
-                  data-tip="Change user borrow status"
-                />
-              </Link>
-              <Link to={routers.addGenre}>
-                <FaBookReaderIcon
-                  data-for="tooltip"
-                  data-tip="Add new genres"
-                />
-              </Link>
-            </AdminWrapper>
+              <AdminWrapper>
+                <Link to={routers.addBook}>
+                  <FaBookMedicalIcon
+                    data-for="tooltip"
+                    data-tip="Add new books"
+                  />
+                </Link>
+                <Link to={routers.changeStatus}>
+                  <GiCardExchangeIcon
+                    data-for="tooltip"
+                    data-tip="Change user borrow status"
+                  />
+                </Link>
+                <Link to={routers.addGenre}>
+                  <FaBookReaderIcon
+                    data-for="tooltip"
+                    data-tip="Add new genres"
+                  />
+                </Link>
+              </AdminWrapper>
+            </>
           )}
           <GridContainer>
             <MainContent>
@@ -137,15 +140,17 @@ class MainTemplate extends React.Component {
             <MainContent footer>
               <center>
                 <strong>
-                  &copy; 2021 Library Book: Frontend:{" "}
-                  <a href="https://github.com/orzeleagle122" rel="noreferrer">
-                    orzeleagle122
-                  </a>
-                  , Backend:{" "}
-                  <a href="https://github.com/Karetson" rel="noreferrer">
-                    Karetson
-                  </a>
-                  .
+                  <Footer>
+                    &copy; 2021 Library services: Frontend:{" "}
+                    <a href="https://github.com/orzeleagle122" rel="noreferrer">
+                      orzeleagle122
+                    </a>
+                    , Backend:{" "}
+                    <a href="https://github.com/Karetson" rel="noreferrer">
+                      Karetson
+                    </a>
+                    .
+                  </Footer>
                 </strong>
               </center>
             </MainContent>
