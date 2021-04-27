@@ -49,8 +49,8 @@ export const GridContainer = styled.div`
 export const MainContent = styled.div`
   padding: ${({footer}) => (footer ? "20px 0" : "43px 40px")};
   width: 100%;
-  a:link,
-  a:visited {
+  &.afoot:link,
+  &.afoot:visited {
     text-decoration: none;
     color: white;
     letter-spacing: 1px;

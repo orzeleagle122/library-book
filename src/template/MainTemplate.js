@@ -142,11 +142,19 @@ class MainTemplate extends React.Component {
                 <strong>
                   <Footer>
                     &copy; 2021 Library services: Frontend:{" "}
-                    <a href="https://github.com/orzeleagle122" rel="noreferrer">
+                    <a
+                      className="afoot"
+                      href="https://github.com/orzeleagle122"
+                      rel="noreferrer"
+                    >
                       orzeleagle122
                     </a>
                     , Backend:{" "}
-                    <a href="https://github.com/Karetson" rel="noreferrer">
+                    <a
+                      className="afoot"
+                      href="https://github.com/Karetson"
+                      rel="noreferrer"
+                    >
                       Karetson
                     </a>
                     .
