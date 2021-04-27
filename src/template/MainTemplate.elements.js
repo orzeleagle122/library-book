@@ -20,12 +20,12 @@ export const GridContainer = styled.div`
   font-family: "Poppins", sans-serif;
   display: flex;
   justify-content: flex-start;
-  min-height: ${({footer}) => (footer ? "100px" : "100vh")};
+  min-height: ${({footer}) => (footer ? "50px" : "100vh")};
   flex-wrap: nowrap;
   border-top-left-radius: 50px;
   border-top-right-radius: 50px;
-  border-bottom-left-radius: 50px;
-  border-bottom-right-radius: 50px;
+  border-bottom-left-radius: ${({footer}) => (footer ? "0px" : "50px")};
+  border-bottom-right-radius: ${({footer}) => (footer ? "0px" : "50px")};
 
   margin-right: auto;
   margin-left: auto;
@@ -46,7 +46,7 @@ export const GridContainer = styled.div`
 `;
 
 export const MainContent = styled.div`
-  padding: 43px 40px;
+  padding: ${({footer}) => (footer ? "20px 0" : "43px 40px")};
   width: 100%;
   /* max-width: 2560px; */
 `;

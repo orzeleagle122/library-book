@@ -42,7 +42,7 @@ export const Book = styled.div`
   box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px,
     rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
 
-  @media screen and (max-width: 2044px) {
+  @media screen and (max-width: 1510px) {
     &:nth-last-child(8) {
       display: none;
     }
@@ -51,7 +51,7 @@ export const Book = styled.div`
     }
   }
 
-  @media screen and (max-width: 1643px) {
+  @media screen and (max-width: 1200px) {
     &:nth-last-child(6) {
       display: none;
     }

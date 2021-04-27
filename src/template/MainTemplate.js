@@ -134,7 +134,7 @@ class MainTemplate extends React.Component {
             </MainContent>
           </GridContainer>
           <GridContainer footer>
-            <MainContent>
+            <MainContent footer>
               <center>
                 <strong>
                   &copy; 2021 Library Book: Frontend:{" "}
