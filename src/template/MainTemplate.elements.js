@@ -43,20 +43,21 @@ export const GridContainer = styled.div`
   @media screen and (max-width: 480px) {
     margin-left: 0px;
     width: 100%;
+
+    margin-bottom: ${({footer}) => (footer ? "80px" : "inherit")};
+    margin-top: ${({footer}) => (footer ? "10px" : "inherit")};
+    border-bottom-left-radius: ${({footer}) => (footer ? "50px" : "50px")};
+    border-bottom-right-radius: ${({footer}) => (footer ? "50px" : "50px")};
   }
 `;
 
 export const MainContent = styled.div`
   padding: ${({footer}) => (footer ? "20px 0" : "43px 40px")};
   width: 100%;
-  &.afoot:link,
-  &.afoot:visited {
-    text-decoration: none;
-    color: white;
-    letter-spacing: 1px;
-    text-decoration: underline;
+
+  @media screen and (max-width: 790px) {
+    font-size: ${({footer}) => (footer ? "10px" : "inherit")};
   }
-  /* max-width: 2560px; */
 `;
 
 export const ImageWrapper = styled.div`
@@ -198,4 +199,19 @@ export const FaBookReaderIcon = styled(FaBookReader)`
 
 export const Footer = styled.p`
   color: white;
+`;
+
+export const Afoot = styled.a`
+  color: white;
+  text-decoration: none;
+
+  letter-spacing: 1px;
+  text-decoration: underline;
+  &:visited,
+  &:link {
+    text-decoration: none;
+    color: white;
+    letter-spacing: 1.5px;
+    text-decoration: underline;
+  }
 `;

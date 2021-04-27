@@ -22,6 +22,7 @@ import {
   GiCardExchangeIcon,
   FaBookReaderIcon,
   Footer,
+  Afoot,
 } from "./MainTemplate.elements";
 import AddBook from "../view/admin/AddBook";
 import main_img from "../assets/layout/main_img.jpg";
@@ -141,22 +142,17 @@ class MainTemplate extends React.Component {
               <center>
                 <strong>
                   <Footer>
-                    &copy; 2021 Library services: Frontend:{" "}
-                    <a
-                      className="afoot"
+                    &copy; 2021 Library services. Frontend:{" "}
+                    <Afoot
                       href="https://github.com/orzeleagle122"
                       rel="noreferrer"
                     >
                       orzeleagle122
-                    </a>
+                    </Afoot>
                     , Backend:{" "}
-                    <a
-                      className="afoot"
-                      href="https://github.com/Karetson"
-                      rel="noreferrer"
-                    >
+                    <Afoot href="https://github.com/Karetson" rel="noreferrer">
                       Karetson
-                    </a>
+                    </Afoot>
                     .
                   </Footer>
                 </strong>
