@@ -34,6 +34,11 @@ const FavoritePageWrapper = styled.div`
   justify-content: space-around;
 `;
 
+const SpanContent = styled.span`
+  height: 100% !important;
+  font-size: 20px;
+`;
+
 const MainPage = ({searchbooks, search, isLogin, clean}) => {
   const [searchFormValue, setSearchFormValue] = useState("");
   useEffect(() => {
@@ -65,9 +70,9 @@ const MainPage = ({searchbooks, search, isLogin, clean}) => {
             onChange={handleChangeSearchFormValue}
             value={searchFormValue}
           />
-          <span className="icon is-small is-left">
+          <SpanContent className="icon is-left">
             <FontAwesomeIcon icon={faSearch} />
-          </span>
+          </SpanContent>
         </p>
       </div>
       {loader && <Loader />}

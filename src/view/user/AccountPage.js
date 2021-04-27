@@ -12,6 +12,7 @@ import {Redirect} from "react-router-dom";
 import {routers} from "../../data/routers";
 import {Link} from "react-router-dom";
 import {logOut} from "../../actions";
+import $ from "jquery";
 
 const AccountWrapper = styled.div`
   display: flex;
@@ -41,9 +42,38 @@ const Img = styled.img`
 const InfoSection = styled.div`
   display: flex;
   flex-direction: column;
+  font-size: 18px;
 `;
 
-const AccountPage = ({firstName, isLogin, lastName, email, out}) => {
+const SpanContent = styled.span`
+  display: none;
+
+  &.is-active {
+    display: block;
+  }
+`;
+
+$(document).ready(function () {
+  $("#tabs li").on("click", function () {
+    var tab = $(this).data("tab");
+
+    $("#tabs li").removeClass("is-active");
+    $(this).addClass("is-active");
+
+    $("#tab-content span").removeClass("is-active");
+    $('span[data-content="' + tab + '"]').addClass("is-active");
+  });
+});
+
+const AccountPage = ({
+  firstName,
+  isLogin,
+  lastName,
+  email,
+  out,
+  userFavorites,
+  userBorrow,
+}) => {
   if (!isLogin) {
     return <Redirect to={routers.login} />;
   }
@@ -68,7 +98,7 @@ const AccountPage = ({firstName, isLogin, lastName, email, out}) => {
           </Button>
         </InfoSection>
       </AccountWrapper>
-      <div className="tabs is-boxed">
+      <div className="tabs is-boxed" id="tabs">
         <ul>
           <li className="is-active" data-tab="1">
             <a>
@@ -98,35 +128,42 @@ const AccountPage = ({firstName, isLogin, lastName, email, out}) => {
           </li> */}
         </ul>
       </div>
-      <Heading>Notifications</Heading>
-      <div className="notification is-warning">
-        <FontAwesomeIcon icon={faExclamationCircle} /> Lorem ipsum dolor sit
-        amet, consectetur adipiscing elit. Nam vel nulla non ex dignissim
-        molestie. Mauris consectetur mollis blandit!
+      <div id="tab-content">
+        <SpanContent className="is-active" data-content="1">
+          <Heading>Notifications</Heading>
+          <div className="notification is-warning">
+            <FontAwesomeIcon icon={faExclamationCircle} /> Lorem ipsum dolor sit
+            amet, consectetur adipiscing elit. Nam vel nulla non ex dignissim
+            molestie. Mauris consectetur mollis blandit!
+          </div>
+          <div className="notification is-danger">
+            <FontAwesomeIcon icon={faExclamationCircle} /> Lorem ipsum dolor sit
+            amet, consectetur adipiscing elit. Nam vel nulla non ex dignissim
+            molestie. Mauris consectetur mollis blandit!
+          </div>
+          <div className="notification is-info">
+            <FontAwesomeIcon icon={faExclamationCircle} /> Lorem ipsum dolor sit
+            amet, consectetur adipiscing elit. Nam vel nulla non ex dignissim
+            molestie. Mauris consectetur mollis blandit!
+          </div>
+        </SpanContent>
+        <SpanContent data-content="2">
+          {" "}
+          <Heading>Your statistic</Heading>
+          <AccountWrapper>
+            <Img src={stat} alt="stat" />
+            <InfoSection>
+              Favorites book: {userFavorites.length}
+              <br />
+              Borrowed book: {userBorrow.length}
+              {/* <br />
+              Borrowed so far: number
+              <br />
+              The best genre: genre 1, genre 2, genre 3<br /> */}
+            </InfoSection>
+          </AccountWrapper>
+        </SpanContent>
       </div>
-      <div className="notification is-danger">
-        <FontAwesomeIcon icon={faExclamationCircle} /> Lorem ipsum dolor sit
-        amet, consectetur adipiscing elit. Nam vel nulla non ex dignissim
-        molestie. Mauris consectetur mollis blandit!
-      </div>
-      <div className="notification is-info">
-        <FontAwesomeIcon icon={faExclamationCircle} /> Lorem ipsum dolor sit
-        amet, consectetur adipiscing elit. Nam vel nulla non ex dignissim
-        molestie. Mauris consectetur mollis blandit!
-      </div>
-      <Heading>Your statistic</Heading>
-      <AccountWrapper>
-        <Img src={stat} alt="stat" />
-        <InfoSection>
-          Favorites book: number
-          <br />
-          Active Borrowed book: number
-          <br />
-          Borrowed so far: number
-          <br />
-          The best genre: genre 1, genre 2, genre 3<br />
-        </InfoSection>
-      </AccountWrapper>
     </>
   );
 };
@@ -137,9 +174,11 @@ AccountPage.propTypes = {
   lastName: PropTypes.string,
   isLogin: PropTypes.bool.isRequired,
   out: PropTypes.func.isRequired,
+  userFavorites: PropTypes.array,
+  userBorrow: PropTypes.array,
 };
 
-const mapStateToProps = ({user}) => {
+const mapStateToProps = ({user, userFavorites, userBorrow}) => {
   const {isLogin} = user;
   const {firstName, lastName, email} = user.userinfo;
   return {
@@ -147,6 +186,8 @@ const mapStateToProps = ({user}) => {
     lastName,
     email,
     isLogin,
+    userFavorites,
+    userBorrow,
   };
 };
 

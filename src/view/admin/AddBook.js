@@ -57,7 +57,7 @@ const BookAdd = ({
   const [author, setAuthor] = useState("");
   const [publisher, setPublisher] = useState("");
   const [genres, setGenres] = useState([]);
-  const [amount, setAmount] = useState(1);
+  const [amount, setAmount] = useState();
   const [description, setDescription] = useState("");
 
   useEffect(() => {
@@ -90,7 +90,7 @@ const BookAdd = ({
     setAuthor("");
     setPublisher("");
     setDescription("");
-    setAmount(1);
+    setAmount();
     setGenres([]);
     fetch();
   };
@@ -106,7 +106,7 @@ const BookAdd = ({
       <Heading>Add Book</Heading>
       <form onSubmit={handleSubmit}>
         <InputBook
-          placeholder="Title"
+          placeholder="Title *"
           type="text"
           name="title"
           value={title}
@@ -114,7 +114,7 @@ const BookAdd = ({
         />
         <br />
         <InputBook
-          placeholder="Author"
+          placeholder="Author *"
           type="text"
           name="author"
           value={author}
@@ -122,7 +122,7 @@ const BookAdd = ({
         />
         <br />
         <InputBook
-          placeholder="Publisher"
+          placeholder="Publisher *"
           type="text"
           name="publisher"
           value={publisher}
@@ -130,7 +130,7 @@ const BookAdd = ({
         />
         <br />
         <GenresDiv>
-          Genres:{" "}
+          Genres: *{" "}
           {genres.map((item) => (
             <b key={item.id}>{item.name}, </b>
           ))}
@@ -150,7 +150,7 @@ const BookAdd = ({
           <br />
         </GenresDiv>
         <InputBook
-          placeholder="amount eg. 20"
+          placeholder="Amount *"
           type="number"
           name="amount"
           value={amount}
@@ -159,7 +159,7 @@ const BookAdd = ({
         />
         <br />
         <TextareaBook
-          placeholder="Description book"
+          placeholder="Description book *"
           type="text"
           name="description"
           value={description}

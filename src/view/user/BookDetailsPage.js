@@ -23,8 +23,6 @@ const BookDetails = ({location, bookInfo, bookDetails, showErrors, clean}) => {
     return (
       <>
         <DetailsBook {...query} />
-        <br />
-        *after Search form*
       </>
     );
   }
@@ -38,8 +36,6 @@ const BookDetails = ({location, bookInfo, bookDetails, showErrors, clean}) => {
       {bookDetails.id >= 1 ? (
         <>
           <DetailsBook {...bookDetails} />
-          <br />
-          *after Refresh*
         </>
       ) : (
         <>

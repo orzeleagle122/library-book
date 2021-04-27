@@ -10,7 +10,8 @@ const FavoritePageWrapper = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: flex-start;
+  gap: 10px;
 `;
 
 const FavoritePage = ({userFavorites, getUserLogin}) => {

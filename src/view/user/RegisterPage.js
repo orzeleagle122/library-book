@@ -67,7 +67,7 @@ const RegisterPage = ({register, registerSuccess, showErrors, clean}) => {
             <>
               <form className="box" onSubmit={handleSubmit}>
                 <div className="field">
-                  <label className="label">Name</label>
+                  <label className="label">First Name *</label>
                   <div className="control">
                     <Input
                       type="text"
@@ -80,7 +80,7 @@ const RegisterPage = ({register, registerSuccess, showErrors, clean}) => {
                   </div>
                 </div>
                 <div className="field">
-                  <label className="label">Last name</label>
+                  <label className="label">Last name *</label>
                   <div className="control">
                     <Input
                       type="text"
@@ -93,7 +93,7 @@ const RegisterPage = ({register, registerSuccess, showErrors, clean}) => {
                   </div>
                 </div>
                 <div className="field">
-                  <label className="label">Email</label>
+                  <label className="label">Email *</label>
                   <div className="control">
                     <Input
                       type="email"
@@ -106,7 +106,7 @@ const RegisterPage = ({register, registerSuccess, showErrors, clean}) => {
                   </div>
                 </div>
                 <div className="field">
-                  <label className="label">Password</label>
+                  <label className="label">Password *</label>
                   <div className="control">
                     <Input
                       type="password"
@@ -120,7 +120,7 @@ const RegisterPage = ({register, registerSuccess, showErrors, clean}) => {
                   </div>
                 </div>
                 <div className="field">
-                  <label className="label">Repeat password</label>
+                  <label className="label">Repeat password *</label>
                   <div className="control">
                     <Input
                       type="password"
