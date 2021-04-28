@@ -75,8 +75,9 @@ const MainPage = ({searchbooks, search, isLogin, clean}) => {
           </SpanContent>
         </p>
       </div>
-      {loader && <Loader />}
+
       <FavoritePageWrapper>
+        {loader && <Loader />}
         {searchbooks.map((item) => (
           <BookList key={item.id} {...item} isLogin={isLogin} />
         ))}

@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 const Loader = ({loader}) => {
   return (
     <>
-      {loader && (
+      {!loader && (
         <LoaderWrapper>
           <Book>
             <BookPage />

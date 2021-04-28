@@ -403,7 +403,7 @@ export const removeBook = (id) => {
 
 export const authUser = (email, password) => async (dispatch) => {
   dispatch({
-    type: AUTH_REQUEST,
+    type: REQUEST_START,
   });
   return axios
     .post(API + "/user/sign-in", {email, password})
@@ -417,6 +417,11 @@ export const authUser = (email, password) => async (dispatch) => {
       dispatch({
         type: FAILURE_MESSAGE,
         err,
+      });
+    })
+    .then(() => {
+      dispatch({
+        type: REQUEST_END,
       });
     });
 };
@@ -467,7 +472,7 @@ export const registerUser = (firstName, lastName, email, password) => async (
   dispatch
 ) => {
   dispatch({
-    type: REGISTER_REQUEST,
+    type: REQUEST_START,
   });
   return axios
     .post(API + "/user/sign-up", {
@@ -486,6 +491,11 @@ export const registerUser = (firstName, lastName, email, password) => async (
       dispatch({
         type: FAILURE_MESSAGE,
         err,
+      });
+    })
+    .then(() => {
+      dispatch({
+        type: REQUEST_END,
       });
     });
 };
