@@ -9,6 +9,7 @@ import PropTypes from "prop-types";
 import {Input} from "../../components/atoms/Input/Input";
 import Button from "../../components/atoms/Button/Button";
 import {routers} from "../../data/routers";
+import {goTop} from "../../data/function";
 
 const RegisterWrapper = styled.div`
   /* margin-right: 500px;
@@ -18,6 +19,7 @@ const RegisterWrapper = styled.div`
 
 const RegisterPage = ({register, registerSuccess, showErrors, clean}) => {
   useEffect(() => {
+    goTop();
     return () => clean();
   }, []);
 

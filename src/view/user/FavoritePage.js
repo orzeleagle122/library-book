@@ -5,6 +5,7 @@ import BookList from "../../components/organisms/BookList/BookList";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import {getUserLoginAction} from "../../actions";
+import {goTop} from "../../data/function";
 
 const FavoritePageWrapper = styled.div`
   display: flex;
@@ -16,6 +17,7 @@ const FavoritePageWrapper = styled.div`
 
 const FavoritePage = ({userFavorites, getUserLogin}) => {
   useEffect(() => {
+    goTop();
     getUserLogin(localStorage.getItem("id"));
   }, []);
   return (

@@ -4,12 +4,14 @@ import {bookRequest, cleanErrors} from "../../actions";
 import Loader from "../../components/molecules/Loader/Loader";
 import PropTypes from "prop-types";
 import DetailsBook from "../../components/organisms/DetailsBook/DetailsBook";
+import {goTop} from "../../data/function";
 
 const BookDetails = ({location, bookInfo, bookDetails, showErrors, clean}) => {
   const {query} = location;
   const url = location.pathname.split("/");
 
   useEffect(() => {
+    goTop();
     if (!query) {
       bookInfo(url[2], url[3]);
     }

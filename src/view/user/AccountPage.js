@@ -13,6 +13,7 @@ import {routers} from "../../data/routers";
 import {Link} from "react-router-dom";
 import {logOut, getUserLoginAction} from "../../actions";
 import $ from "jquery";
+import {goTop} from "../../data/function";
 
 const AccountWrapper = styled.div`
   display: flex;
@@ -76,6 +77,7 @@ const AccountPage = ({
   getUserLogin,
 }) => {
   useEffect(() => {
+    goTop();
     getUserLogin(localStorage.getItem("id"));
   }, []);
   if (!isLogin) {

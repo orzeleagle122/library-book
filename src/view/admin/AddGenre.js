@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Input} from "../../components/atoms/Input/Input";
 import GenreList from "../../components/organisms/GenreList/GenreList";
 import {connect} from "react-redux";
@@ -6,9 +6,14 @@ import {addGenre} from "../../actions";
 import PropTypes from "prop-types";
 import {routers} from "../../data/routers";
 import {Redirect} from "react-router-dom";
+import {goTop} from "../../data/function";
 
 const AddGenre = ({genre, rules}) => {
   const [value, setValue] = useState("");
+
+  useEffect(() => {
+    goTop();
+  }, []);
 
   const handleOnChangeValueForm = (e) => {
     setValue(e.target.value);

@@ -9,6 +9,7 @@ import BorrowedStatusList from "../../components/organisms/BorrowedStatusList/Bo
 import Loader from "../../components/molecules/Loader/Loader";
 import {routers} from "../../data/routers";
 import {Redirect} from "react-router-dom";
+import {goTop} from "../../data/function";
 
 const BorrowedStatusPage = ({
   searchUsers,
@@ -20,6 +21,7 @@ const BorrowedStatusPage = ({
 }) => {
   const [searchUser, setSearchUser] = useState("");
   useEffect(() => {
+    goTop();
     return () => clean();
   }, []);
 

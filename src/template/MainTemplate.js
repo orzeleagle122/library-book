@@ -142,7 +142,7 @@ class MainTemplate extends React.Component {
               <center>
                 <strong>
                   <Footer>
-                    &copy; 2021 Library services. Frontend:{" "}
+                    &copy; 2021 Library service. Frontend:{" "}
                     <Afoot
                       href="https://github.com/orzeleagle122"
                       rel="noreferrer"

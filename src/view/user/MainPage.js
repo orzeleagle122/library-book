@@ -18,6 +18,7 @@ import BookList from "../../components/organisms/BookList/BookList";
 import PropTypes from "prop-types";
 import BookNews from "../../components/organisms/BooksNews/BookNews";
 import img from "../../assets/img/book2.png";
+import {goTop} from "../../data/function";
 
 const BookPopularWrapper = styled.div`
   max-width: 200px;
@@ -42,6 +43,7 @@ const SpanContent = styled.span`
 const MainPage = ({searchbooks, search, isLogin, clean}) => {
   const [searchFormValue, setSearchFormValue] = useState("");
   useEffect(() => {
+    goTop();
     return () => clean();
   }, [searchFormValue]);
 

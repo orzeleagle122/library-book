@@ -4,9 +4,11 @@ import PropTypes from "prop-types";
 import BorrowedStatusList from "../../components/organisms/BorrowedStatusList/BorrowedStatusList";
 import Heading from "../../components/atoms/Heading/Heading";
 import {getUserLoginAction} from "../../actions";
+import {goTop} from "../../data/function";
 
 const BorrowedPage = ({borrows = [], getUserLogin}) => {
   useEffect(() => {
+    goTop();
     getUserLogin(localStorage.getItem("id"));
   }, []);
 

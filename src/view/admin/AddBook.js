@@ -10,6 +10,7 @@ import Button from "../../components/atoms/Button/Button";
 import styled from "styled-components";
 import {routers} from "../../data/routers";
 import {Redirect} from "react-router-dom";
+import {goTop} from "../../data/function";
 
 const GenresButton = styled.button`
   margin-right: 10px;
@@ -61,6 +62,7 @@ const BookAdd = ({
   const [description, setDescription] = useState("");
 
   useEffect(() => {
+    goTop();
     fetch();
     return () => clean();
   }, []);
@@ -111,7 +113,6 @@ const BookAdd = ({
           name="title"
           value={title}
           onChange={handleChange}
-          required
         />
         <br />
         <InputBook
@@ -120,7 +121,6 @@ const BookAdd = ({
           name="author"
           value={author}
           onChange={handleChange}
-          required
         />
         <br />
         <InputBook
@@ -129,7 +129,6 @@ const BookAdd = ({
           name="publisher"
           value={publisher}
           onChange={handleChange}
-          required
         />
         <br />
         <GenresDiv>
@@ -159,7 +158,6 @@ const BookAdd = ({
           value={amount}
           onChange={handleChange}
           min="1"
-          required
         />
         <br />
         <TextareaBook

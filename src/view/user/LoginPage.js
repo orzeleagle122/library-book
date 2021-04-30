@@ -9,6 +9,7 @@ import {routers} from "../../data/routers";
 import {Link} from "react-router-dom";
 import {Input} from "../../components/atoms/Input/Input";
 import Button from "../../components/atoms/Button/Button";
+import {goTop} from "../../data/function";
 
 const LoginWrapper = styled.div`
   /* margin-right: 200px;
@@ -18,6 +19,7 @@ const LoginWrapper = styled.div`
 
 const LoginPage = ({auth, isLogin, showErrors, clean}) => {
   useEffect(() => {
+    goTop();
     return () => clean();
   }, []);
 

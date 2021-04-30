@@ -10,6 +10,7 @@ import Button from "../../components/atoms/Button/Button";
 import {routers} from "../../data/routers";
 import {Link} from "react-router-dom";
 import {Redirect} from "react-router-dom";
+import {goTop} from "../../data/function";
 
 const RegisterWrapper = styled.div`
   /* margin-right: 500px;
@@ -26,6 +27,7 @@ const EditUserPage = ({
   succesMessage,
 }) => {
   useEffect(() => {
+    goTop();
     return () => clean();
   }, [isLogin]);
 
